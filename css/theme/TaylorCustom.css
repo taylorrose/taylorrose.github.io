@@ -99,7 +99,7 @@ body {
  * TABLE
  *********************************************/
 
-.reveal table {
+ table {
 
 margin: auto;
 margin-top: auto;
@@ -111,7 +111,7 @@ border-spacing: 0;
 
 }
 
-.reveal tr {
+ tr {
   border-bottom: 1px;
   border-color: #268bd2;
 }
