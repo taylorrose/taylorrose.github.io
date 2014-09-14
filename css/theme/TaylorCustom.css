@@ -105,6 +105,7 @@ body {
     margin: auto !important;
     border-collapse: collapse !important;
     border-spacing: 0 !important;
+    text-align: center !important;
 }
 /*********************************************
  * NAVIGATION CONTROLS
