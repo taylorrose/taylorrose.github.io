@@ -99,8 +99,7 @@ body {
  * TABLE
  *********************************************/
 
- th,
- td {
+ th {
     border-bottom: 1px solid #93a1a1 !important;
     margin: auto !important;
     border-collapse: collapse !important;
