@@ -102,9 +102,9 @@ body {
  th,
  td {
     border-bottom: 1px solid #93a1a1 !important;
-    margin: auto;
-    border-collapse: collapse;
-    border-spacing: 0;
+    margin: auto !important;
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
 }
 /*********************************************
  * NAVIGATION CONTROLS
