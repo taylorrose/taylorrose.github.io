@@ -99,21 +99,8 @@ body {
  * TABLE
  *********************************************/
 
- table {
-
-margin: auto;
-margin-top: auto;
-margin-right: auto;
-margin-bottom: auto;
-margin-left: auto;
-border-collapse: collapse;
-border-spacing: 0;
-
-}
-
- tr {
-  border-bottom: 1px;
-  border-color: #268bd2;
+ table, th, td {
+   border: 1px solid white;
 }
 /*********************************************
  * NAVIGATION CONTROLS
