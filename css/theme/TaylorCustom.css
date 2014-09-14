@@ -100,7 +100,7 @@ body {
  *********************************************/
 
 .reveal table {
-  
+
 margin: auto;
 margin-top: auto;
 margin-right: auto;
@@ -109,6 +109,11 @@ margin-left: auto;
 border-collapse: collapse;
 border-spacing: 0;
 
+}
+
+.reveal tr {
+  border-bottom: 1px;
+  border-color: #268bd2;
 }
 /*********************************************
  * NAVIGATION CONTROLS
