@@ -99,6 +99,7 @@ body {
  * TABLE
  *********************************************/
 
+ th,
  tr {
     border-bottom: 1px solid #93a1a1 !important;
 }
