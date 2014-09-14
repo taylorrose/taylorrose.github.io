@@ -31,6 +31,12 @@ body {
   letter-spacing: -0.02em;
   color: #93a1a1; }
 
+  .reveal .whiteBG {
+    color: white;
+  background: #fff;
+  text-shadow: none; 
+  }
+
 ::selection {
   color: white;
   background: #d33682;
