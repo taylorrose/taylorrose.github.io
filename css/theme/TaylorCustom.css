@@ -95,6 +95,21 @@ body {
   border-color: #268bd2;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.55); }
 
+  /*********************************************
+ * TABLE
+ *********************************************/
+
+.reveal table {
+  
+margin: auto;
+margin-top: auto;
+margin-right: auto;
+margin-bottom: auto;
+margin-left: auto;
+border-collapse: collapse;
+border-spacing: 0;
+
+}
 /*********************************************
  * NAVIGATION CONTROLS
  *********************************************/
