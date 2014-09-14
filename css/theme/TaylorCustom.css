@@ -29,12 +29,6 @@ body {
   letter-spacing: -0.02em;
   color: #93a1a1; }
 
-  .reveal .whiteBG {
-    color: #002b36;
-  background: #fff;
-  text-shadow: none; 
-  }
-
 ::selection {
   color: white;
   background: #d33682;
@@ -51,7 +45,7 @@ body {
 .reveal h6 {
   margin: 0 0 20px 0;
   color: #eee8d5;
-  font-family: "League Gothic", Impact, sans-serif;
+  font-family: "Avenir", sans-serif;
   line-height: 0.9em;
   letter-spacing: 0.02em;
   text-transform: uppercase;
