@@ -75,6 +75,12 @@ body {
   color: #fff;
   background: #1a6091; }
 
+  .reveal a .CTA {
+    margin: 1.5% !important;
+    border: 2px #268bd2 solid !important;
+    padding: 1.5% !important;
+  }
+
 /*********************************************
  * IMAGES
  *********************************************/
