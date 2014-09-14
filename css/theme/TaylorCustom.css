@@ -4,9 +4,7 @@
  * Author: Achim Staebler
  */
 @font-face {
-  font-family: 'League Gothic';
-  src: url("../../lib/font/league_gothic-webfont.eot");
-  src: url("../../lib/font/league_gothic-webfont.eot?#iefix") format("embedded-opentype"), url("../../lib/font/league_gothic-webfont.woff") format("woff"), url("../../lib/font/league_gothic-webfont.ttf") format("truetype"), url("../../lib/font/league_gothic-webfont.svg#LeagueGothicRegular") format("svg");
+  font-family: 'Avenir';
   font-weight: normal;
   font-style: normal; }
 
@@ -25,7 +23,7 @@ body {
   background-color: #002b36; }
 
 .reveal {
-  font-family: "Lato", sans-serif;
+  font-family: "Avenir", sans-serif;
   font-size: 36px;
   font-weight: normal;
   letter-spacing: -0.02em;
