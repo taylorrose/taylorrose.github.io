@@ -8,6 +8,7 @@
 
 		<link rel="stylesheet" href="../../css/reveal.min.css">
 		<link rel="stylesheet" href="../../css/theme/TaylorCustom.css" id="theme">
+		<link rel="stylesheet" href="../../css/theme/zenburn.css" id="theme">
 
 	</head>
 
@@ -54,15 +55,20 @@
 					</section>
 					</section>
 
-					<section>
-  <h2>And Some Code</h2>
-  <pre><code>
-    $(function () {
-      $('a').click(function(event) {
-        alert('Thanks for visiting!'');
-      });
-    });
-  </code></pre>
+<section>
+<h2>And Some Code</h2>
+<button class='run'>Run</button>
+<div class='ace'>
+var p = new Promise(
+  function(resolve, reject){
+    setTimeout(resolve, 1000);
+  }
+);
+
+p.then(function(){
+  alert('after 1 second');
+});
+</div>
 </section>
 
 			</div>
