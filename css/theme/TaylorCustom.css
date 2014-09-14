@@ -19,8 +19,8 @@ html * {
  * GLOBAL STYLES
  *********************************************/
 body {
-  background: #002b36;
-  background-color: #002b36; }
+  background: ##ff8200;
+  background-color: ##ff8200; }
 
 .reveal {
   font-family: "Avenir", sans-serif;
@@ -88,12 +88,6 @@ body {
   -ms-transition: all .2s linear;
   -o-transition: all .2s linear;
   transition: all .2s linear; }
-
-  .reveal section .simple img {
-  margin: 14px 0px;
-  background: none;
-  border: none;
-  box-shadow: none; }
 
 
 .reveal a:hover img {
