@@ -34,12 +34,13 @@ body {
   background: #d33682;
   text-shadow: none; }
 
-#NavBar {
+/*#NavBar {
   margin: auto;
   font-family:"Avenir",sans-serif;
   font-size: 24px;
   color: #eee8d5;
-}
+
+}*/
 /*********************************************
  * HEADERS
  *********************************************/
