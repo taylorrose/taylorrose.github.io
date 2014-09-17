@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>High Chart</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+
+
+</head>
+<body>
+<div id="container" style="height: 300px"></div>
+<div id="test">Test</div>
+
+<script type="text/javascript">
+	$("#test").html("Test Success")
+
+</script>
+	<script>
+		$(function () { 
+    $('#container').highcharts({
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Fruit Consumption'
+        },
+        xAxis: {
+            categories: ['Apples', 'Bananas', 'Oranges']
+        },
+        yAxis: {
+            title: {
+                text: 'Fruit eaten'
+            }
+        },
+        series: [{
+            name: 'Jane',
+            data: [1, 0, 4]
+        }, {
+            name: 'John',
+            data: [5, 7, 3]
+        }]
+    });
+});
+
+	</script>
+	<script type="text/javascript">
+
+	$( window ).load(function() {
+ $("[text-anchor='end']").hide();	</script>
+ });
+
+</body>
+</html>
