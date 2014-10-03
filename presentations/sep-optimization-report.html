@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>T1 Vivint Optimization </title>
+		<title>Vivint Optimization</title>
 
 		<link rel="stylesheet" href="../../css/reveal.min.css">
 		<link rel="stylesheet" href="../../css/theme/simple.css" id="theme">
@@ -137,106 +137,14 @@
 		</div>
 		<script type="text/javascript">
 
-		$(function () {
-    $('#container').highcharts({
-        chart: {
-            type: 'area',
-            height: '175'
-        },
-        legend: false,
-        plotOptions: {
-            series: {
-                point: {
-                    events: {
-                        click: function (e) {
-                           
-                            window.open(this.options.url);
-                        }
-                    }
-                }
-            }
-        },
-        title: {
-            text: false
-        },
-        xAxis: {
-            categories: ['04/17', '04/17', '04/17', '04/18', '04/19', '04/19', '04/20', '04/20', '04/21', '04/21']
-        },
-        yAxis: {
-            title: {
-                text: false
-            },
-            labels: {
-                formatter: function () {
-                    return '$' + (this.value).formatMoney(0);
-                }
-            },
-            alternateGridColor: '#f4f8f9',
-            gridLineColor: '#c4dce2',
-            min: 0
-        },
-        series: [{
-            name: 'Batch',
-            marker: {
-                fillColor: '#fff',
-                lineColor: '#9fd8b8',
-                lineWidth: 1
-            },
-            data: [{
-                y: 4375.48,
-                url: 'https://lh6.googleusercontent.com/-LtIyJip8Lg4/AAAAAAAAAAI/AAAAAAAAABA/2jOPeqA2Do0/photo.jpg'
-            }, {
-                y: 3599.39,
-                url: 'http://www.google.com/?test=4933'
-            }, {
-                y: 1278,
-                url: 'http://www.google.com/?test=4937'
-            }, {
-                y: 3950.12,
-                url: 'http://www.google.com/?test=4939'
-            }, {
-                y: 6579.65,
-                url: 'http://www.google.com/?test=4941'
-            }, {
-                y: 4582,
-                url: 'hhttp://www.google.com/?test=4943'
-            }, {
-                y: 1285.65,
-                url: 'http://www.google.com/?test=4945'
-            }, {
-                y: 8700.39,
-                url: 'http://www.google.com/?test=4947'
-            }, {
-                y: 500,
-                url: 'http://www.google.com/?test=4949'
-            }, {
-                y: 2917.27,
-                url: 'http://www.google.com/?test=4951'
-            }],
-            //[4375.48,'http://google.com'], [113599.39,'#sa'], [1278,'#sa'] , [83950.12,'#sa'], [6579.65,'#sa'], [94582,'#sa'], [1285.65,'#sa'], [48700.39,'#sa'], [500,'#sa'], [62917.27,'#sa']
-            //],
-            color: '#b8ecce'
-            //                data: [4375.48, 113599.39, 1278, 83950.12, 6579.65, 94582, 1285.65, 48700.39, 500, 62917.27],
-            //                color:'#98cdae'
-        }],
-        credits: false
-    });
-});
-Number.prototype.formatMoney = function (e) {
-    var t = this,
-        n = ".",
-        r = ",",
-        e = isNaN(e = Math.abs(e)) ? 2 : e,
-        i = t < 0 ? "-" : "",
-        s = parseInt(t = Math.abs(+t || 0).toFixed(e)) + "",
-        o = (o = s.length) > 3 ? o % 3 : 0;
-    return i + (o ? s.substr(0, o) + r : "") + s.substr(o).replace(/(\d{3})(?=\d)/g, "$1" + r) + (e ? n + Math.abs(t - s).toFixed(e).slice(2) : "")
-}
-
+	//START HIGHCHARTS.JS
+  //END HIGHCHARTS.JS
+  
 		</script>
 
-		<script type="text/javascript">
+		<script src="../../js/reveal.min.js"></script>
 
+		<script>
 
 			Reveal.initialize({
 
