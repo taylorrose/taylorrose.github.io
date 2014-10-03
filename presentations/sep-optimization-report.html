@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Taylor Rose</title>
+
+		<link rel="stylesheet" href="../../css/reveal.min.css">
+		<link rel="stylesheet" href="../../css/theme/simple.css" id="theme">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://code.highcharts.com/highcharts.js"></script>
+		<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+	</head>
+
+	<body>
+	<!--<a href="https://www.linkedin.com/in/taylorrose" target="blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://i1311.photobucket.com/albums/s674/colormerad1/linkedin_zps8e86b656.png" alt="Connect On LinkedIn"></a><<!-->
+<!--<div id="NavBar"> <a href="http://taylorrose.github.io/#/1">Multivariate Tests</a> | <a href="http://taylorrose.github.io/#/2">Google Charts</a> | <a href="http://taylorrose.github.io/#/3">Some Code</a><div> !-->
+		<div class="reveal"> 
+
+			<div class="slides">
+			<section>
+				<h3>Conversion Optimziation</h3>
+				<br>
+				<p>
+					<a target="blank" href="/">Taylor Rose </a>| 801.900.1456 | trrose10@gmail.com
+				</p>
+
+			</section>
+			
+			<section>
+
+				<section>
+					<h2>Multivariate Testing</h2>
+					<img src="http://i1311.photobucket.com/albums/s674/colormerad1/Vaderhater_zpsbd6b7405.png" border="0" alt="Dark Side"/>
+							<p>
+							Press or swipe <a href="#" class="navigate-down">down</a> to see fractional factorial testing example.
+						</p>
+				</section>
+					<section>
+
+					<p>4X3 balanced array allowed us to test 81 combinations of elemets with only 9 treatments</p>
+					<img src="/presentations/images/MVT_Treatments.png">
+					<!--<table>
+						<thead>
+							<tr>
+								<th>Elements</th>
+								<th>Variations</th>
+								<th>Experiences</th>
+								<th>Combinations</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>4</td>
+								<td>3</td>
+								<td>9</td>
+								<td>81</td>
+							</tr>
+						</tbody>
+					</table>!-->
+					<br>
+				</section>
+
+
+
+				<section>
+				<img src="/presentations/images/NerdChart.gif" border="0" alt="Nerd Chart photo NerdChart_zps7b985fa6.gif"/>
+				<p>We were able to take conversion rates from 4.5% to over 6%</p>
+				</section>
+</section>
+				<section>
+
+						<section>
+						<h2>Chart Tests</h2>
+						<img src="/presentations/images/Chart_Icon.png" border="0" alt="Charts photo Charts_zps1d2f350c.png"/>
+							<p>
+							Press <a href="#" class="navigate-down">down</a> to see chart examples.
+						</p>
+						</section>
+					
+					<section>
+					<h3>Google Chart<h3>
+					<iframe height="450" width="650" src="https://docs.google.com/spreadsheets/d/11az2JPcBNxHvLTanT_ihq6U8eYpNfzXnICVE9agFR3E/gviz/chartiframe?oid=1160651719" seamless="" frameborder="0" scrolling="no"></iframe>
+				</section>
+
+					<section>
+						<h3>High Charts</h3>
+						<div id="container" style="height: 400px"></div>
+
+
+					</section>
+					</section>
+
+						<section>
+	  <h2>And Some Code</h2>
+	  <pre><code>
+	    $(function () {
+	      $('a').click(function(event) {
+	        alert('Thanks for visiting!'');
+	      });
+	    });
+	  </code></pre>
+	</section>
+
+			</div>
+
+		</div>
+		<script type="text/javascript">
+
+		$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'area',
+            height: '175'
+        },
+        legend: false,
+        plotOptions: {
+            series: {
+                point: {
+                    events: {
+                        click: function (e) {
+                           
+                            window.open(this.options.url);
+                        }
+                    }
+                }
+            }
+        },
+        title: {
+            text: false
+        },
+        xAxis: {
+            categories: ['04/17', '04/17', '04/17', '04/18', '04/19', '04/19', '04/20', '04/20', '04/21', '04/21']
+        },
+        yAxis: {
+            title: {
+                text: false
+            },
+            labels: {
+                formatter: function () {
+                    return '$' + (this.value).formatMoney(0);
+                }
+            },
+            alternateGridColor: '#f4f8f9',
+            gridLineColor: '#c4dce2',
+            min: 0
+        },
+        series: [{
+            name: 'Batch',
+            marker: {
+                fillColor: '#fff',
+                lineColor: '#9fd8b8',
+                lineWidth: 1
+            },
+            data: [{
+                y: 4375.48,
+                url: 'https://lh6.googleusercontent.com/-LtIyJip8Lg4/AAAAAAAAAAI/AAAAAAAAABA/2jOPeqA2Do0/photo.jpg'
+            }, {
+                y: 3599.39,
+                url: 'http://www.google.com/?test=4933'
+            }, {
+                y: 1278,
+                url: 'http://www.google.com/?test=4937'
+            }, {
+                y: 3950.12,
+                url: 'http://www.google.com/?test=4939'
+            }, {
+                y: 6579.65,
+                url: 'http://www.google.com/?test=4941'
+            }, {
+                y: 4582,
+                url: 'hhttp://www.google.com/?test=4943'
+            }, {
+                y: 1285.65,
+                url: 'http://www.google.com/?test=4945'
+            }, {
+                y: 8700.39,
+                url: 'http://www.google.com/?test=4947'
+            }, {
+                y: 500,
+                url: 'http://www.google.com/?test=4949'
+            }, {
+                y: 2917.27,
+                url: 'http://www.google.com/?test=4951'
+            }],
+            //[4375.48,'http://google.com'], [113599.39,'#sa'], [1278,'#sa'] , [83950.12,'#sa'], [6579.65,'#sa'], [94582,'#sa'], [1285.65,'#sa'], [48700.39,'#sa'], [500,'#sa'], [62917.27,'#sa']
+            //],
+            color: '#b8ecce'
+            //                data: [4375.48, 113599.39, 1278, 83950.12, 6579.65, 94582, 1285.65, 48700.39, 500, 62917.27],
+            //                color:'#98cdae'
+        }],
+        credits: false
+    });
+});
+Number.prototype.formatMoney = function (e) {
+    var t = this,
+        n = ".",
+        r = ",",
+        e = isNaN(e = Math.abs(e)) ? 2 : e,
+        i = t < 0 ? "-" : "",
+        s = parseInt(t = Math.abs(+t || 0).toFixed(e)) + "",
+        o = (o = s.length) > 3 ? o % 3 : 0;
+    return i + (o ? s.substr(0, o) + r : "") + s.substr(o).replace(/(\d{3})(?=\d)/g, "$1" + r) + (e ? n + Math.abs(t - s).toFixed(e).slice(2) : "")
+}
+
+		</script>
+
+		<script type="text/javascript">
+/**
+ * Grid-light theme for Highcharts JS
+ * @author Torstein Honsi
+ */
+
+// Load the fonts
+Highcharts.createElement('link', {
+   href: 'http://fonts.googleapis.com/css?family=Dosis:400,600',
+   rel: 'stylesheet',
+   type: 'text/css'
+}, null, document.getElementsByTagName('head')[0]);
+
+Highcharts.theme = {
+   colors: ["#7cb5ec", "#f7a35c", "#90ee7e", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+      "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
+   chart: {
+      backgroundColor: null,
+      style: {
+         fontFamily: "Dosis, sans-serif"
+      }
+   },
+   title: {
+      style: {
+         fontSize: '16px',
+         fontWeight: 'bold',
+         textTransform: 'uppercase'
+      }
+   },
+   tooltip: {
+      borderWidth: 0,
+      backgroundColor: 'rgba(219,219,216,0.8)',
+      shadow: false
+   },
+   legend: {
+      itemStyle: {
+         fontWeight: 'bold',
+         fontSize: '13px'
+      }
+   },
+   xAxis: {
+      gridLineWidth: 1,
+      labels: {
+         style: {
+            fontSize: '15px'
+         }
+      }
+   },
+   yAxis: {
+      minorTickInterval: 'auto',
+      title: {
+         style: {
+            textTransform: 'uppercase',
+            fontSize: '20px'
+
+         }
+      },
+      labels: {
+         style: {
+            fontSize: '12px'
+         }
+      }
+   },
+   plotOptions: {
+      candlestick: {
+         lineColor: '#404048'
+      }
+   },
+
+
+   // General
+   background2: '#F0F0EA'
+   
+};
+
+// Apply the theme
+Highcharts.setOptions(Highcharts.theme);
+		</script>
+
+		<script src="../../js/reveal.min.js"></script>
+
+		<script>
+
+			Reveal.initialize({
+
+
+
+    // Display controls in the bottom right corner
+    controls: true,
+
+    // Display a presentation progress bar
+    progress: true,
+
+    // Display the page number of the current slide
+    slideNumber: true,
+
+    // Push each slide change to the browser history
+    history: true,
+
+    // Enable keyboard shortcuts for navigation
+    keyboard: true,
+
+    // Enable the slide overview mode
+    overview: true,
+
+    // Vertical centering of slides
+    center: true,
+
+    // Enables touch navigation on devices with touch input
+    touch: true,
+
+    // Loop the presentation
+    loop: true,
+
+    // Change the presentation direction to be RTL
+    rtl: false,
+
+    // Turns fragments on and off globally
+    fragments: true,
+
+    // Flags if the presentation is running in an embedded mode,
+    // i.e. contained within a limited portion of the screen
+    embedded: false,
+
+    // Number of milliseconds between automatically proceeding to the
+    // next slide, disabled when set to 0, this value can be overwritten
+    // by using a data-autoslide attribute on your slides
+    autoSlide: 0,
+
+    // Stop auto-sliding after user input
+    autoSlideStoppable: true,
+
+    // Enable slide navigation via mouse wheel
+    mouseWheel: false,
+
+    // Hides the address bar on mobile devices
+    hideAddressBar: true,
+
+    // Opens links in an iframe preview overlay
+    previewLinks: true,
+
+    // Transition style
+    transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+    // Transition speed
+    transitionSpeed: 'default', // default/fast/slow
+
+    // Transition style for full page slide backgrounds
+    backgroundTransition: 'default', // default/none/slide/concave/convex/zoom
+
+    // Number of slides away from the current that are visible
+    viewDistance: 3,
+
+    // Parallax background image
+    parallaxBackgroundImage: '', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+
+    // Parallax background size
+    parallaxBackgroundSize: '' // CSS syntax, e.g. "2100px 900px"
+
+
+});
+
+		</script>
+
+	</body>
+</html>
