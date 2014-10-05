@@ -351,7 +351,7 @@ body {
 
 .reveal table th,
 .reveal table td {
-	text-align: center;
+	text-align: left;
 	padding-right: .3em;
 	border-bottom: 1px solid #93a1a1;
 
