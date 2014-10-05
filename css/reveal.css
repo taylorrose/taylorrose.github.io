@@ -44,6 +44,10 @@ html, body, .reveal div, .reveal span, .reveal applet, .reveal object, .reveal i
  * GLOBAL STYLES
  *********************************************/
 
+ .reveal .green {
+ 	color:#50BF94;
+ }
+
 html,
 body {
 	width: 100%;
