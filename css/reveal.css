@@ -353,12 +353,13 @@ body {
 .reveal table td {
 	text-align: left;
 	padding-left: .3em;
-	border-bottom: 1px solid #93a1a1;
+	
 
 }
 
 .reveal table th {
 	font-weight: bold;
+	border-bottom: 1px solid #93a1a1;
 }
 
 .reveal sup {
