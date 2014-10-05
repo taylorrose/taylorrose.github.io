@@ -357,13 +357,16 @@ body {
 .reveal table td {
 	text-align: center;
 	padding-left: .3em;
-	border-collapse: collapse;
-	border-bottom: 1px solid #93a1a1;
+
 	font-size: 22px;
 	
 
 }
 
+.reveal table td{
+	border-collapse: collapse;
+	border: 1px solid #93a1a1;
+}
 
 .reveal table th {
 	font-weight: bold;
