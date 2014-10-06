@@ -181,70 +181,8 @@
 </section>
 <section>
     
-    <div id="closed-offer">
-  <span id="fixed-offer-text">Limited Time Offer!</span>
-  <span id="open-button"></span>
-</div>
-<div id="form-holder-2" class="open-offer" style="display:none;">
-  <span id='close-button'></span>
-  <div class="request-call-main form-home">
-  <div id="offer-intro">
-      <!--<p class="pone">Our Biggest Savings of the Summer</p>-->
-      <p class="ptwo"><strong>Limited Time Offer!</strong></p>
-      <h4 class="requestFormHeader">SAVE 50% OFF*</h4>
-      <p class="offer-emph">Activation</p>
-    </div>
-    <hr>
-    <div class="call-now">Call Now <span class="phone-icon"><a class="phone-number" href="tel:[[phone_sales]]">800.216.5232</a></span></div>
-    <div class="offer-or"><p>OR</p></div>
-    <div class="subtle_form_result ">
-      <div class="subtle_form_message hidden" data-done-path="{{ ty_path }}" path="{{ ty_path }}"></div>
-      <form action="/form/capture" method="post" class="subtle_form {{ form_class }}" novalidate>
-        <div class="controls controls-row">
-          <div>
-            <input class="i_text faasub_name_first" name="FaasSubmission[faasub_name_first]" placeholder="First Name" data-pp-field="pp_fname" type="text">
-          </div>
-          <div> 
-              <input class="i_text faasub_name_last" type="text" name="FaasSubmission[faasub_name_last]" placeholder="Last Name" data-pp-field="pp_lname">
-          </div>
-        </div>
-
-        <div class="controls controls-row">
-          <div>
-            <input class="i_text faasub_phone"  title="Enter your phone number. Please no dashes or spaces." name="FaasSubmission[faasub_phone]" placeholder="Phone" data-pp-field="pp_phone" type="tel"> 
-          </div>
-          <div>  
-              <input class="i_text faasub_postal"  name="FaasSubmission[faasub_postal]" placeholder="Zip" data-pp-field="pp_zip" type="text">
-          </div>
-        </div>
-        <div class="controls controls-row last">
-          <input class="i_text faasub_email" name="FaasSubmission[faasub_email]" placeholder="Email" data-pp-field="pp_email" type="email">  
-        </div>
-        <p class="submit-text text-03">By clicking this button, you consent for Vivint to use automated technology to contact you at the number provided. This consent is not required to make a purchase from us.</p> 
-        <div>
-          <button class="i_submit button-02" name="Submit" value="Request Quote" type="submit">Request Quote</button>
-        </div>
-
-        <input id="[[csrf_name]]" name="[[csrf_name]]" value="[[csrf_value]]" type="hidden">
-        <input class="faasub_send_to_sfdc" name="FaasSubmission[faasub_send_to_sfdc]" value="{{ sfdc }}" type="hidden">
-        <input class="faasub_send_to_elq" name="FaasSubmission[faasub_send_to_elq]" value="{{ elq }}" type="hidden">
-        <input type="hidden" class="faasub_thank_you_url" name="FaasSubmission[faasub_thank_you_url]" value='{{ ty_url }}'>
-        <input class="faasub_source_foid" name="FaasSubmission[faasub_source_foid]" id="source_foid" value="{% if foid != "" %} {{ foid }} {% else %} 26438 {% endif %}" type="hidden">
-        <input class="faasub_elq_efid" name="FaasSubmission[faasub_elq_efid]" value="sSContactUs" type="hidden">
-        <input class="faasub_elq_esid" name="FaasSubmission[faasub_elq_esid]" value="2984" type="hidden">
-        <input class="faasub_elq_ecid" name="FaasSubmission[faasub_elq_ecid]" value="0" type="hidden">
-        <input class="faasub_elq_ecaid" name="FaasSubmission[faasub_elq_ecaid]" value="{{ elq_ecaid }}" type="hidden">
-        <input class="faasub_elq_egid" name="FaasSubmission[faasub_elq_egid]" id="elq_egid" value="" type="hidden">
-        <input class="faasub_form_action" name="FaasSubmission[faasub_form_action]" value="{{ action }}" type="hidden">
-      </form>
-    </div>
-
-    <p class="formSecureTxt hideafter">
-      <img src="https://wwwassets.s3.amazonaws.com/global/vivint.com/home/white-lock.png"> Your information is secure
-    </p>          
-  </div>
-</div>
-
+    test
+    
 </section>
 
 	</section>
@@ -275,9 +213,6 @@ Reveal.initialize();
 <script type="text/javascript" src="/js/highchart-scripts/sep-SEO-highchart.js"></script>
 <script type="text/javascript" src="/js/highchart-scripts/camera-promo.js"></script>
 <!-- ------------- END HighCharts ------------ -!-->
-
-<script src="/js/banner-foot.js"></script>
-<link rel="stylesheet" href="/css/banner-head.css">
 
 <script src="../../js/reveal.min.js"></script>
 
