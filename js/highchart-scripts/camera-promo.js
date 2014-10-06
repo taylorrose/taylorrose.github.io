@@ -40,3 +40,5 @@ $(function () {
                    dashStyle: 'shortdash', color:'#F6DC85',
 
         }]
+    });
+});
