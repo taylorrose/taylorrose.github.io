@@ -1,6 +1,4 @@
-
-
-    $(function () {
+$(function () {
     $('#container2').highcharts({
         chart: {
             type: 'line'
@@ -21,7 +19,7 @@
             },labels: {
                 valueSuffix:"%"
             },
-        }
+        },
         plotOptions: {
             line: {
                 dataLabels: {
@@ -38,7 +36,7 @@
         }, {
             name: 'Control Dates',
             data: [4.05,3.83,3.83,3.32,3.21,4.39,4.10,4.05,3.83,3.83,3.32,3.21],
-                   dashStyle: 'shortdash', color:'#F6DC85'
+                   dashStyle: 'shortdash', color:'#F6DC85',
 
         }]
     });
