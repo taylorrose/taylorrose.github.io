@@ -21,7 +21,7 @@ Reveal.addEventListener( 'slidechanged', function( event ) {
             },labels: {
                 valueSuffix:"%"
             },
-        },
+        }
         plotOptions: {
             line: {
                 dataLabels: {
@@ -38,10 +38,8 @@ Reveal.addEventListener( 'slidechanged', function( event ) {
         }, {
             name: 'Control Dates',
             data: [4.05,3.83,3.83,3.32,3.21,4.39,4.10,4.05,3.83,3.83,3.32,3.21],
-                   dashStyle: 'shortdash', color:'#F6DC85',
+                   dashStyle: 'shortdash', color:'#F6DC85'
 
         }]
     });
 });
-
-})
