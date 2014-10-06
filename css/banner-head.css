@@ -1,0 +1,333 @@
+/* Form Styles ~ 200 */
+#form-holder-2 *{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#form-holder-2 {
+    max-width: 400px;
+    padding: 0 30px;
+    margin: 0 auto;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background: linear-gradient(to bottom,#3183FF 0%,#0066FF 100%) repeat scroll 0 0 rgba(0,0,0,0);
+    background-color: #0066FF;
+}
+
+#form-holder-2 div.request-call-main {
+    margin: 0 auto;
+    width: auto;
+    background: transparent;
+}
+
+#form-holder-2 div.request-call-main h4 {
+    color: #ffffff;
+    text-align: center;
+    text-transform: none;
+    margin-top: 20px;
+    font-size: 45px;
+}
+
+.cta-request {
+    color: #ffffff;
+    display: block;
+    font-family: 'Avenir';
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+#form-holder-2 .subtle_form_message {
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background: none;
+    border:none;
+    color: #ffffff;
+}
+
+#form-holder-2 .subtle_form_message h2 {
+    color: #ffffff;
+    text-align: center;
+}
+
+#form-holder-2 .subtle_form_message h3 {
+    text-align: center;
+    color: white;
+}
+
+#form-holder-2 .subtle_form_message p {
+    text-align: center;
+    color: #ffffff;
+}
+
+#form-holder-2 .subtle_form_message h3 a {
+    text-align: center;
+    color: #ffffff;
+    font-size: 20px;
+}
+
+.controls-row:first-child + .controls-row {
+    display: table;
+    width: 100%; 
+}
+
+.controls-row:first-child + .controls-row input {
+    width: 100%;
+    height: 41px;
+}
+
+.controls-row{
+    padding-right: 0px;
+}
+
+
+.controls-row:before, .controls-row:after {
+    content: "";
+    display: table;
+    line-height: 0;
+}
+
+.controls-row:after {
+    clear: both;
+}
+
+.controls-row {
+    display: table;
+    width: 100%;
+    padding-left: 0px;
+}
+
+.controls-row > div {
+    display: table-cell;
+    padding-right: 1px;
+    width: 50%;
+}
+
+form .last {
+    padding-right: 2px;
+    padding-left: 1px;
+}
+
+#form-holder-2 div.request-call-main input[type=text]:focus, #form-holder-2 div.request-call-main input[type=tel]:focus, 
+#form-holder-2 div.request-call-main input[type=email]:focus{
+    box-shadow: 0 1px 0 rgba(255,255,255,0.3), 
+    inset 0 1px 1px rgba(0,0,0,0.1), 0 0 0 3px rgba(255,255,255,0.15);
+    outline: none;
+}
+
+#form-holder-2 div.request-call-main input[type=text], #form-holder-2 div.request-call-main input[type=email], #form-holder-2 div.request-call-main input[type=tel] {
+    text-transform: none;
+    color: #666;
+    width: 100%;
+    font-size: 12px;
+    border:none;
+    padding: .5em 1em;
+    height: 40px;
+    margin-left: 0px;
+    margin-bottom: 1px;
+    -webkit-box-shadow: box-shadow: transparent;
+    -moz-box-shadow: box-shadow: transparent;
+    box-shadow: box-shadow: transparent;
+    -webkit-appearance: none;
+    border-radius: 0;
+}
+
+#form-holder-2 form.subtle_form p.text-03 {
+    display: block;
+    width: 900px;
+    max-width: 90%;
+    text-align: center;
+    margin: 10px auto;
+    color: #ffffff;
+    clear: both;
+    opacity: .5;
+}
+
+#form-holder-2 div.request-call-main form.subtle_form .button-02 {
+    max-width: 100% !important;
+    width: 500px;
+    margin: 0 auto;
+    border: none;
+    cursor: pointer;
+}
+
+#form-holder-2 p.text-02{
+    text-align: center;
+    color: #ffffff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#form-holder-2 p.text-02 a{
+    color: #ffffff;
+}
+
+.formSecureTxt.hideafter {
+    color: white;
+    text-align: center;
+}
+
+@media screen and (max-width: 968px) {
+    #form-holder-2 div.request-call-main input[type=text], #form-holder-2 div.request-call-main input[type=email], #form-holder-2 div.request-call-main input[type=tel] {
+        width: 100% !important;
+        max-width: inherit;
+        margin-left: 0px !important;
+    }
+
+    #form-holder-2 form.subtle_form input.i_text.faasub_email {
+        width: 100% !important;
+        margin-left: 0px !important;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #tag-wrap-form {
+        margin-top: 75px;
+        display: block;
+    }
+    #form-holder {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    #banner-header-text-form {
+    font-size: 30px;
+    }
+}
+
+
+
+/* BEGIN Window Anchored Modal - Closed*/
+#closed-offer{
+    width: 400px;
+    background-color: #3183FF;
+    color: #fff;
+    position: fixed;/*placeholder*/
+    bottom:0px;/*placeholder*/
+    right:30px;/*placeholder*/
+    border-radius: 5px 5px 0 0;
+    clear: both;
+    padding: 10px 0 0 0; 
+}
+ 
+#closed-offer #fixed-offer-text{
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;  
+    margin: 0 0 5px 10px;
+    display: inline-block;
+
+}
+
+#open-button{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-image: url(http://wwwassets.s3.amazonaws.com/global/vivint.com/global/icons/window-25px.png);
+    background-repeat: no-repeat;
+    /*background-position: 0 4px;*/
+    float: right;
+    margin: -2px 12px 0px 0;
+    /*position: relative;
+    right: -100px;  */
+}
+
+/* END Window Anchored Modal - Closed*/
+
+/* BEGIN Window Anchored Modal - Open*/
+
+.open-offer{
+    clear: both;
+    position: fixed;
+    bottom:0;
+    right: 30px;
+}
+
+#close-button{
+    background-image: url(http://wwwassets.s3.amazonaws.com/global/vivint.com/global/misc/close-10px.png);
+    display: inline-block;
+    height:10px;
+    width:10px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-repeat: no-repeat;
+}
+
+/********/
+#form-holder-2 div.request-call-main {
+    margin: 0 auto;
+    width: auto;
+    background: transparent;
+}
+
+#form-holder-2 div.request-call-main h4 {
+    color: #ffffff;
+    text-align: center;
+    text-transform: none;
+    margin-top: 20px;
+    font-size: 40px;
+}
+
+#form-holder-2 p {
+    color:#fff;
+    text-align: center;
+    margin: 25px auto;
+}
+
+#form-holder-2 p.pone{
+    font-size: 20px;
+}
+
+#form-holder-2 p.ptwo{
+    font-size: 25px;
+}
+
+#form-holder-2 p.offer-emph{
+    font-size: 30px;
+}
+
+#form-holder-2 .call-now{
+    color: #fff;
+    font-size: 30px;
+    text-align: center;
+    width: 100%;
+    margin: 10px auto;
+    padding-top: 7px;
+}
+
+#form-holder-2 .phone-icon{
+    background: url('http://wwwassets.s3.amazonaws.com/global/vivint.com/web/campaigns/ppc/phone-icon-white.png') no-repeat 0px 5px;
+    padding-left: 27px;
+}
+
+#form-holder-2 .phone-number{
+    color: #fff;
+    text-decoration: none;
+}
+
+#form-holder-2 .offer-or{
+    background-image: none;
+    width: 40px;
+    height: 40px;
+    margin: 0px auto;
+    background-color: #fff;
+    text-align: center;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border: 2px solid #fff;
+}
+
+#form-holder-2 .offer-or p{
+    color: #006c9a;
+    line-height: 40px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: -2px;
+}
+
