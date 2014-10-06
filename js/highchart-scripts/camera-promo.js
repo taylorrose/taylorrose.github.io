@@ -7,7 +7,7 @@ $(function () {
             text: 'Camera Promo'
         },
         subtitle: {
-            text: 'August 3, 2014 - August 14 2014'
+            text: 'September 3, 2014 - September 14 2014'
         },
         xAxis: {
             categories:['9/3','9/4','9/5','9/6','9/7','9/8','9/9','9/10','9/11','9/12','9/13','9/14']
