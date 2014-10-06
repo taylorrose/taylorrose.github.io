@@ -358,9 +358,8 @@ body {
 .reveal table th,
 .reveal table td {
 	text-align: center;
-	padding-left: .04em;
-	padding-right: .04em;
-	margin-left: .04em;
+	padding-left: 1em;
+	padding-right: 1em;
 	font-size: 22px;
 	border-collapse: collapse;
 	
