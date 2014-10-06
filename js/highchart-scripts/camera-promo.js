@@ -1,4 +1,6 @@
-$(function () {
+Reveal.addEventListener( 'slidechanged', function( event ) {
+
+    $(function () {
     $('#container2').highcharts({
         chart: {
             type: 'line'
@@ -40,4 +42,6 @@ $(function () {
 
         }]
     });
+});
+
 });
