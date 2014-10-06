@@ -258,6 +258,10 @@ Reveal.initialize();
 
 });
 
+Reveal.addEventListener( 'slidechanged', function( event ) {
+    chart.redraw()
+} );
+
 		</script>
 
 	</body>
