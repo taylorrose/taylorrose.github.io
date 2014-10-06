@@ -44,4 +44,4 @@ Reveal.addEventListener( 'slidechanged', function( event ) {
     });
 });
 
-});
+})
