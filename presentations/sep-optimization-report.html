@@ -122,13 +122,10 @@
 		</div>
 
     <script type="text/javascript">
-$( "#fire" ).toggle(function() {
+$( "#fire" ).click(function() {
   $('#catchFire').attr('data-background','/presentations/images/fire.gif');
-  Reveal.initialize();}, 
-  function(){
-$('#catchFire').removeAttr('data-background');
-Reveal.initialize();
-  });
+  Reveal.initialize();
+});
     </script>
 
 <!-- ------------- HighCharts.js ------------ -!-->
