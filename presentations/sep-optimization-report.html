@@ -122,20 +122,24 @@
 		</div>
 
     <script type="text/javascript">
-/*$( "#fire" ).click(function()
+$( "#fire" ).toggle(
+    function(){
+        $('#catchFire').attr('data-background','/presentations/images/fire.gif');
+        Reveal.initialize();
+    },function(){
+        $('#catchFire').removeAttr('data-background');
+        Reveal.initialize();
+    }
 
- { $('#catchFire').attr('data-background','/presentations/images/fire.gif');
- Reveal.initialize();
+    );
 
-});*/
-
-$( "#fire" ).toggle(function() {
+/*$( "#fire" ).toggle(function() {
   $('#catchFire').attr('data-background','/presentations/images/fire.gif');
   Reveal.initialize();}, 
   function(){
 $('#catchFire').removeAttr('data-background');
 Reveal.initialize();
-  });
+  });*/
     </script>
 
 <!-- ------------- HighCharts.js ------------ -!-->
