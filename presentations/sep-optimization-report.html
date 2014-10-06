@@ -122,12 +122,10 @@
 		</div>
 
     <script type="text/javascript">
-$( "#fire" ).toggle(function() {
-  $('#catchFire').attr('data-background','/presentations/images/fire.gif');
-  Reveal.initialize();}, function {
-  $('#catchFire')removeAttr('data-background');
-  Reveal.initialize();
-  });
+$( "#fire" ).toggle(
+function() { $('#catchFire').attr('data-background','/presentations/images/fire.gif');Reveal.initialize();},
+ function {$('#catchFire')removeAttr('data-background');Reveal.initialize();}
+ );
 
 /*$( "#fire" ).toggle(function() {
   $('#catchFire').attr('data-background','/presentations/images/fire.gif');
