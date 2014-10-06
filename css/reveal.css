@@ -46,6 +46,7 @@ html, body, .reveal div, .reveal span, .reveal applet, .reveal object, .reveal i
 
  .reveal .green {
  	color:#50BF94;
+ 	font-weight: bold;
  }
 
 html,
