@@ -1,4 +1,4 @@
-Reveal.addEventListener( 'slidechanged', function( event ) {
+
 
     $(function () {
     $('#container2').highcharts({
