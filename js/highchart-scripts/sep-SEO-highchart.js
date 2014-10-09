@@ -3,7 +3,8 @@ $(function () {
         chart: {
        
             type: 'area',
-            backgroundColor:'transparent'
+            backgroundColor:'transparent';
+            zoomType : 'x'
             
         },
         
