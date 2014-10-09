@@ -2,7 +2,8 @@ $(function () {
     $('#container').highcharts({
         chart: {
             type: 'area',
-            backgroundColor:'transparent'
+            backgroundColor:'transparent',
+            pinchType : 'x'
         },
         
         title: {
