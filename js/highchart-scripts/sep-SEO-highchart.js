@@ -3,8 +3,7 @@ $(function () {
         chart: {
        
             type: 'area',
-            backgroundColor:'transparent';,
-            zoomType : 'x'
+            backgroundColor:'transparent'
             
         },
         
@@ -163,3 +162,5 @@ $(function () {
     
 
 });
+
+  //END HIGHCHARTS.JS
