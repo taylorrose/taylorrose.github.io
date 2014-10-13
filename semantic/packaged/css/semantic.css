@@ -3462,6 +3462,7 @@ body > .ui.grid {
 .ui.celled.table th,
 .ui.celled.table td {
   border: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: middle;
 }
 /* Coupling with segment */
 .ui.celled.table.segment th:first-child,
