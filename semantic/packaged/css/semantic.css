@@ -4427,7 +4427,7 @@ i.massive.basic.icon {
 }
 
 .ui.backSection {
-  display: inline-block;
+  display: none;
   vertical-align: middle;
   min-height: 1em;
   outline: none;
