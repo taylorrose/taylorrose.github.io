@@ -3079,6 +3079,7 @@ body > .ui.grid {
 .ui.table {
   width: 100%;
   border-collapse: collapse;
+  margin-left: 50px;
 }
 /* Table Content */
 .ui.table th,
