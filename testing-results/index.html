@@ -12,6 +12,8 @@
 <body>
 	<div class="ui button">Follow</div>
 
+<div class="margins">
+
 <h3><strong>Metrics</strong></h3>
 
 <table class="ui celled table segment">
@@ -102,6 +104,7 @@
         <td class="tConf"></td>
     </tr>
 </table>
+</div>
 </body>
 <script>
 	//Assumptions
@@ -308,6 +311,10 @@ $(".exp2 td.tLift").html(lift(exp1tRR,exp2tRR)+"<div class='ci'> ("+lift(exp1Max
 $(".exp2 td.tConf").html((cumnormdist(zscore(exp2tRR,exp2Visitors,exp1tRR,exp1Visitors))*100).toFixed(2)+"%");
 </script>
 <style>
+.margins{
+    margin: 0px 50px 0px 50px;
+}
+
 table, tr, td, th {
     text-align: center;
     border-collapse: collapse;
