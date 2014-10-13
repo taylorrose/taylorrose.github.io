@@ -10,7 +10,7 @@
 
 </head>
 <body>
-	<div class="ui button">Follow</div>
+	
 
 <div class="margins">
 
@@ -39,6 +39,7 @@
         <td class="total"></td>
     </tr>
 </table>
+<div class="ui button">Calculate</div>
 
 <h3><strong>Outbound Leads (Forms)</strong></h3>
 
@@ -311,6 +312,9 @@ $(".exp2 td.tLift").html(lift(exp1tRR,exp2tRR)+"<div class='ci'> ("+lift(exp1Max
 $(".exp2 td.tConf").html((cumnormdist(zscore(exp2tRR,exp2Visitors,exp1tRR,exp1Visitors))*100).toFixed(2)+"%");
 </script>
 <style>
+div.ui.button{
+    margin:auto;
+}
 .margins{
     margin: 50px 100px 50px 100px;
     color:#5F5F5F;
