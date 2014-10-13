@@ -325,6 +325,10 @@ $(".exp2 td.tRR").html(exp2tRR_p + " " + ciDisplay(exp2Total_ci));
 $(".exp2 td.tRR").attr("title",exp2tRR_TT);
 $(".exp2 td.tLift").html(lift(exp1tRR,exp2tRR)+"<div class='ci'> ("+lift(exp1Max_t,exp2Min_t)+" to "+lift(exp1Min_t,exp2Max_t)+")</div>");
 $(".exp2 td.tConf").html((cumnormdist(zscore(exp2tRR,exp2Visitors,exp1tRR,exp1Visitors))*100).toFixed(2)+"%");
+
+$('.ui.dropdown')
+  .dropdown()
+;
 </script>
 <style>
 div.ui.button{
