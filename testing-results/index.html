@@ -312,5 +312,29 @@ $(".exp2 td.tRR").attr("title",exp2tRR_TT);
 $(".exp2 td.tLift").html(lift(exp1tRR,exp2tRR)+"<div class='ci'> ("+lift(exp1Max_t,exp2Min_t)+" to "+lift(exp1Min_t,exp2Max_t)+")</div>");
 $(".exp2 td.tConf").html((cumnormdist(zscore(exp2tRR,exp2Visitors,exp1tRR,exp1Visitors))*100).toFixed(2)+"%");
 </script>
-
+<style>
+table, tr, td {
+    border: 1px solid;
+    text-align: center;
+    border-collapse: collapse;
+    font-family:arial;
+}
+table {
+    width:100%;
+}
+h1, h2, h3, h4 {
+    text-align:center;
+    margin:5px;
+    font-family: arial;
+}
+div#test {
+    font-size:30px;
+}
+.ci {
+    position:relative;
+    float:right;
+    font-size:14px;
+    color:#666666;
+}
+</style>
 </html>
