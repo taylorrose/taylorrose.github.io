@@ -16,7 +16,7 @@
 <div class="margins">
 
 <div class="ui selection dropdown">
-  <input type="hidden" name="Percentile">
+  <input id="percentile" type="hidden" name="Percentile">
   <div class="default text">Select Level for Confidence Interval</div>
   <i class="dropdown icon"></i>
   <div class="menu">
@@ -129,7 +129,8 @@
 
 	//Assumptions
 $("#calculate").on("click",function(){
-var percentile = 3;
+var percentilSTN= $("#percentile").val();   
+var percentile = parseInt(percentilSTN);
 
 //Experience 1
 var exp1Name = $("#exp1-name").val();
