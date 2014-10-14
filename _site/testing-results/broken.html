@@ -42,14 +42,14 @@
         <td><div class="ui input"><input type="text" id="exp1-visitors" placeholder="Visitors"></div></td>
         <td><div class="ui input"><input type="text" id="exp1-forms" placeholder="Forms"></div></td>
         <td><div class="ui input"><input type="text" id="exp1-calls" placeholder="Calls"></div></td>
-        <td><div class="total"></div></td>
+        <td class="total"></td>
     </tr>
     <tr id = "metrics2" class="exp2">
         <td><div class="ui input"><input type="text" id="exp2-name" placeholder="Experience B"></div></td>
         <td><div class="ui input"><input type="text" id="exp2-visitors" placeholder="Visitors"></div></td>
         <td><div class="ui input"><input type="text" id="exp2-forms" placeholder="Forms"></div></td>
         <td><div class="ui input"><input type="text" id="exp2-calls" placeholder="Calls"></div></td>
-        <td ><div class="total"></div></td>
+        <td class="total"></td>
     </tr>
 </table>
 <div id="calculate" class="ui button">Calculate</div>
@@ -129,6 +129,7 @@
 
 	//Assumptions
 $("#calculate").on("click",function(){
+
 var percentilSTN= $("#percentile").val();   
 var percentile = parseInt(percentilSTN);
 
@@ -249,10 +250,10 @@ return num1.toFixed(2)+"%";
 function zscore (P,N,Pc,Nc){
     var Ac = Pc*(1-Pc);
     var Bc = Ac/Nc;
-    /********************/
+
     var A = P*(1-P);
     var B = A/N;
-    /******************/
+
     var C = B + Bc;
     var Numerator = P - Pc;
     var Denomninator = Math.sqrt(C);
@@ -332,13 +333,91 @@ $(".exp2 div.tRR").attr("title",exp2tRR_TT);
 $(".exp2 div.tLift").html(lift(exp1tRR,exp2tRR)+"<div class='ci'> ("+lift(exp1Max_t,exp2Min_t)+" to "+lift(exp1Min_t,exp2Max_t)+")</div>");
 $(".exp2 div.tConf").html((cumnormdist(zscore(exp2tRR,exp2Visitors,exp1tRR,exp1Visitors))*100).toFixed(2)+"%");
 
+var fConfidence = cumnormdist(zscore(exp2fRR,exp2Visitors,exp1fRR,exp1Visitors));
+var cConfidence = cumnormdist(zscore(exp2cRR,exp2Visitors,exp1cRR,exp1Visitors));
+var tConfidence = cumnormdist(zscore(exp2tRR,exp2Visitors,exp1tRR,exp1Visitors));
+
+if(fConfidence >= 0.95) {
+ $("#fConf-check").show();
+ $("#fConf-att").hide();
+
+} else if (fConfidence <=0.85) {
+     $("#fConf-check").hide();
+    $("#fConf-att").show();
+
+} else {
+ $("#fConf-check").hide();
+ $("#fConf-att").hide();
+
+};
+
+if(cConfidence >= 0.95) {
+ $("#cConf-check").show();
+ $("#cConf-att").hide();
+
+} else if (cConfidence <=0.85) {
+     $("#cConf-check").hide();
+    $("#cConf-att").show();
+
+} else {
+ $("#cConf-check").hide();
+ $("#cConf-att").hide();
+
+};
+
+if(tConfidence >= 0.95) {
+ $("#tConf-check").show();
+ $("#tConf-att").hide();
+
+} else if (tConfidence <=0.85) {
+     $("#tConf-check").hide();
+    $("#tConf-att").show();
+} else {
+ $("#tConf-check").hide();
+ $("#tConf-att").hide();
+};
+
+if (exp1tRR < exp2tRR) {
+$("#metrics2").attr("class","positive");
+$("#total2").attr("class","positive");
+$("#metrics1").removeClass("positive")
+$("#total1").removeClass("positive")
+
+} else {
+$("#metrics1").attr("class","positive");
+$("#total1").attr("class","positive");
+$("#metrics2").removeClass("positive")
+$("#total2").removeClass("positive")
+};
+
+if (exp1fRR < exp2fRR) {
+$("#forms2").attr("class","positive");
+$("#forms1").removeClass("positive")
+} else {
+$("#forms1").attr("class","positive");
+$("#forms2").removeClass("positive")
+};
+
+if (exp1cRR < exp2cRR) {
+$("#calls2").attr("class","positive");
+$("#calls1").removeClass("positive")
+} else {
+$("#calls1").attr("class","positive");
+$("#calls2").removeClass("positive")
+};
+
+
 $("div.ui.backSection").css("display","inline-block");
+
 
 });
 
+
 $('.ui.dropdown')
-  .dropdown()
+
+.dropdown()
 ;
+
 </script>
 <style>
 

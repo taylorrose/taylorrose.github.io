@@ -37,19 +37,19 @@
         <th>Calls</th>
         <th>Total Leads</th>
     </tr>
-    <tr class="exp1 positive">
+    <tr id = "metrics1" class="exp1">
         <td><div class="ui input"><input type="text" id="exp1-name" placeholder="Experience A [Control]"></div></td>
         <td><div class="ui input"><input type="text" id="exp1-visitors" placeholder="Visitors"></div></td>
         <td><div class="ui input"><input type="text" id="exp1-forms" placeholder="Forms"></div></td>
         <td><div class="ui input"><input type="text" id="exp1-calls" placeholder="Calls"></div></td>
-        <td class="total"></td>
+        <td><div class="total"></div></td>
     </tr>
-    <tr class="exp2">
+    <tr id = "metrics2" class="exp2">
         <td><div class="ui input"><input type="text" id="exp2-name" placeholder="Experience B"></div></td>
         <td><div class="ui input"><input type="text" id="exp2-visitors" placeholder="Visitors"></div></td>
         <td><div class="ui input"><input type="text" id="exp2-forms" placeholder="Forms"></div></td>
         <td><div class="ui input"><input type="text" id="exp2-calls" placeholder="Calls"></div></td>
-        <td class="total"></td>
+        <td ><div class="total"></div></td>
     </tr>
 </table>
 <div id="calculate" class="ui button">Calculate</div>
@@ -66,17 +66,17 @@
         <th>Lift %</th>
         <th>Confidence</th>
     </tr>
-    <tr class="exp1 positive">
-        <td class="experience"></td>
-        <td class="fRR"></td>
+    <tr id = "forms1" class="exp1">
+        <td><div class="experience"></div></td>
+        <td><div class="fRR"></div></td>
         <td class="fLift">-</td>
         <td class="fConf">-</td>
     </tr>
-    <tr class="exp2">
-        <td class="experience"></td>
-        <td class="fRR"></td>
-        <td class="fLift"></td>
-        <td class="fConf"><i class="icon checkmark"></i></td>
+    <tr id = "forms1" class="exp2">
+        <td><div class="experience"></div></td>
+        <td><div class="fRR"></div></td>
+        <td><div class="fLift"></div></td>
+        <td><i id="fConf-check" class="icon check"></i><i title="Confidence levels below 90% imply risk of false positives. More data should be collected." id="fConf-att" class="icon attention"></i><div class="fConf"></div></td>
     </tr>
 </table>
 <h3><strong>Inbound Leads (Calls)</strong></h3>
@@ -87,17 +87,17 @@
         <th>Lift %</th>
         <th>Confidence</th>
     </tr>
-    <tr class="exp1 positive">
-        <td class="experience"></td>
-        <td class="cRR"></td>
+    <tr id = "calls1" class="exp1">
+        <td ><div class="experience"></div></td>
+        <td ><div class="cRR"></div></td>
         <td class="cLift">-</td>
         <td class="cConf">-</td>
     </tr>
-    <tr class="exp2">
-        <td class="experience"></td>
-        <td class="cRR"></td>
-        <td class="cLift"></td>
-        <td class="cConf"></td>
+    <tr id = "calls2" class="exp2">
+        <td ><div class="experience"></div></td>
+        <td ><div class="cRR"></div></td>
+        <td ><div class="cLift"></div></td>
+        <td ><i id="cConf-check" class="icon check"></i><i title="Confidence levels below 90% imply risk of false positives. More data should be collected." id="cConf-att" class="icon attention"></i><div class="cConf"></div></td>
     </tr>
 </table>
 <h3><strong>Total Leads</strong></h3>
@@ -108,17 +108,17 @@
         <th>Lift %</th>
         <th>Confidence</th>
     </tr>
-    <tr class="exp1 positive">
-        <td class="experience"></td>
-        <td class="tRR"></td>
+    <tr id = "total1" class="exp1">
+        <td ><div class="experience"></div></td>
+        <td ><div class="tRR"></div></td>
         <td class="tLift">-</td>
         <td class="cConf">-</td>
     </tr>
-    <tr class="exp2">
-        <td class="experience"></td>
-        <td class="tRR"></td>
-        <td class="tLift"></td>
-        <td class="tConf"><i class="icon checkmark"></i></td>
+    <tr id = "total2" class="exp2">
+        <td ><div class="experience"></div></td>
+        <td ><div class="tRR"></div></td>
+        <td ><div class="tLift"></div></td>
+        <td ><i id="tConf-check" class="icon check"></i><i title="Confidence levels below 90% imply risk of false positives. More data should be collected." id="tConf-att" class="icon attention"></i><div class="tConf"></div></td>
     </tr>
 </table>
 </div>
@@ -291,46 +291,46 @@ function cumnormdist(x) {
 }
 
 //Populate Experience Names
-$(".exp1 td.experience").html(exp1Name + " [CONTROL]");
-$(".exp2 td.experience").html(exp2Name);
+$(".exp1 div.experience").html(exp1Name + " [CONTROL]");
+$(".exp2 div.experience").html(exp2Name);
 
 //Populate Metrics
-$(".exp1 td.visitors").html(exp1Visitors);
-$(".exp1 td.forms").html(exp1Forms);
-$(".exp1 td.calls").html(exp1Calls);
-$(".exp1 td.total").html(exp1Total);
+//$(".exp1 div.visitors").html(exp1Visitors);
+//$(".exp1 div.forms").html(exp1Forms);
+//$(".exp1 div.calls").html(exp1Calls);
+$(".exp1 div.total").html(exp1Total);
 
-$(".exp2 td.visitors").html(exp2Visitors);
-$(".exp2 td.forms").html(exp2Forms);
-$(".exp2 td.calls").html(exp2Calls);
-$(".exp2 td.total").html(exp2Total);
+$(".exp2 div.visitors").html(exp2Visitors);
+$(".exp2 div.forms").html(exp2Forms);
+$(".exp2 div.calls").html(exp2Calls);
+$(".exp2 div.total").html(exp2Total);
 
 //Populate Outbound Leads (Forms)
-$(".exp1 td.fRR").html(exp1fRR_p + " " + ciDisplay(exp1Forms_ci));
-$(".exp1 td.fRR").attr("title",exp1fRR_TT);
+$(".exp1 div.fRR").html(exp1fRR_p + " " + ciDisplay(exp1Forms_ci));
+$(".exp1 div.fRR").attr("title",exp1fRR_TT);
 
-$(".exp2 td.fRR").html(exp2fRR_p + " " + ciDisplay(exp2Forms_ci));
-$(".exp2 td.fRR").attr("title",exp2fRR_TT);
-$(".exp2 td.fLift").html(lift(exp1fRR,exp2fRR)+"<div class='ci'> ("+lift(exp1Max,exp2Min)+" to "+lift(exp1Min,exp2Max)+")</div>");
-$(".exp2 td.fConf").html((cumnormdist(zscore(exp2fRR,exp2Visitors,exp1fRR,exp1Visitors))*100).toFixed(2)+"%");
+$(".exp2 div.fRR").html(exp2fRR_p + " " + ciDisplay(exp2Forms_ci));
+$(".exp2 div.fRR").attr("title",exp2fRR_TT);
+$(".exp2 div.fLift").html(lift(exp1fRR,exp2fRR)+"<div class='ci'> ("+lift(exp1Max,exp2Min)+" to "+lift(exp1Min,exp2Max)+")</div>");
+$(".exp2 div.fConf").html((cumnormdist(zscore(exp2fRR,exp2Visitors,exp1fRR,exp1Visitors))*100).toFixed(2)+"%");
 
 //Populate Inbound Leads (Calls)
-$(".exp1 td.cRR").html(exp1cRR_p + " " + ciDisplay(exp1Calls_ci));
-$(".exp1 td.cRR").attr("title",exp1cRR_TT);
+$(".exp1 div.cRR").html(exp1cRR_p + " " + ciDisplay(exp1Calls_ci));
+$(".exp1 div.cRR").attr("title",exp1cRR_TT);
 
-$(".exp2 td.cRR").html(exp2cRR_p + " " + ciDisplay(exp2Calls_ci));
-$(".exp2 td.cRR").attr("title",exp2cRR_TT);
-$(".exp2 td.cLift").html(lift(exp1cRR,exp2cRR)+"<div class='ci'> ("+lift(exp1Max_c,exp2Min_c)+" to "+lift(exp1Min_c,exp2Max_c)+")</div>");
-$(".exp2 td.cConf").html((cumnormdist(zscore(exp2cRR,exp2Visitors,exp1cRR,exp1Visitors))*100).toFixed(2)+"%");
+$(".exp2 div.cRR").html(exp2cRR_p + " " + ciDisplay(exp2Calls_ci));
+$(".exp2 div.cRR").attr("title",exp2cRR_TT);
+$(".exp2 div.cLift").html(lift(exp1cRR,exp2cRR)+"<div class='ci'> ("+lift(exp1Max_c,exp2Min_c)+" to "+lift(exp1Min_c,exp2Max_c)+")</div>");
+$(".exp2 div.cConf").html((cumnormdist(zscore(exp2cRR,exp2Visitors,exp1cRR,exp1Visitors))*100).toFixed(2)+"%");
 
 //Populate Total Leads
-$(".exp1 td.tRR").html(exp1tRR_p + " " + ciDisplay(exp1Total_ci));
-$(".exp1 td.tRR").attr("title",exp1tRR_TT);
+$(".exp1 div.tRR").html(exp1tRR_p + " " + ciDisplay(exp1Total_ci));
+$(".exp1 div.tRR").attr("title",exp1tRR_TT);
 
-$(".exp2 td.tRR").html(exp2tRR_p + " " + ciDisplay(exp2Total_ci));
-$(".exp2 td.tRR").attr("title",exp2tRR_TT);
-$(".exp2 td.tLift").html(lift(exp1tRR,exp2tRR)+"<div class='ci'> ("+lift(exp1Max_t,exp2Min_t)+" to "+lift(exp1Min_t,exp2Max_t)+")</div>");
-$(".exp2 td.tConf").html((cumnormdist(zscore(exp2tRR,exp2Visitors,exp1tRR,exp1Visitors))*100).toFixed(2)+"%");
+$(".exp2 div.tRR").html(exp2tRR_p + " " + ciDisplay(exp2Total_ci));
+$(".exp2 div.tRR").attr("title",exp2tRR_TT);
+$(".exp2 div.tLift").html(lift(exp1tRR,exp2tRR)+"<div class='ci'> ("+lift(exp1Max_t,exp2Min_t)+" to "+lift(exp1Min_t,exp2Max_t)+")</div>");
+$(".exp2 div.tConf").html((cumnormdist(zscore(exp2tRR,exp2Visitors,exp1tRR,exp1Visitors))*100).toFixed(2)+"%");
 
 $("div.ui.backSection").css("display","inline-block");
 
@@ -341,8 +341,9 @@ $('.ui.dropdown')
 ;
 </script>
 <style>
-div.ui.button{
-    margin:auto;
+
+#fConf-check,#fConf-att,#cConf-check,#cConf-att,#tConf-check,#tConf-att{
+    float:left;
 }
 .margins{
     margin: 50px 100px 50px 100px;
