@@ -332,6 +332,51 @@ $(".exp2 div.tRR").attr("title",exp2tRR_TT);
 $(".exp2 div.tLift").html(lift(exp1tRR,exp2tRR)+"<div class='ci'> ("+lift(exp1Max_t,exp2Min_t)+" to "+lift(exp1Min_t,exp2Max_t)+")</div>");
 $(".exp2 div.tConf").html((cumnormdist(zscore(exp2tRR,exp2Visitors,exp1tRR,exp1Visitors))*100).toFixed(2)+"%");
 
+var fConfidence = cumnormdist(zscore(exp2fRR,exp2Visitors,exp1fRR,exp1Visitors));
+var cConfidence = cumnormdist(zscore(exp2cRR,exp2Visitors,exp1cRR,exp1Visitors));
+var tConfidence = cumnormdist(zscore(exp2tRR,exp2Visitors,exp1tRR,exp1Visitors));
+
+if(fConfidence >= 0.95) {
+ $("#fConf-check").show();
+ $("#fConf-att").hide();
+
+} else if (fConfidence <=0.85) {
+     $("#fConf-check").hide();
+    $("#fConf-att").show();
+
+} else {
+ $("#fConf-check").hide();
+ $("#fConf-att").hide();
+
+};
+
+if(cConfidence >= 0.95) {
+ $("#cConf-check").show();
+ $("#cConf-att").hide();
+
+} else if (cConfidence <=0.85) {
+     $("#cConf-check").hide();
+    $("#cConf-att").show();
+
+} else {
+ $("#cConf-check").hide();
+ $("#cConf-att").hide();
+
+};
+
+if(tConfidence >= 0.95) {
+ $("#tConf-check").show();
+ $("#tConf-att").hide();
+
+} else if (tConfidence <=0.85) {
+     $("#tConf-check").hide();
+    $("#tConf-att").show();
+} else {
+ $("#tConf-check").hide();
+ $("#tConf-att").hide();
+};
+
+
 $("div.ui.backSection").css("display","inline-block");
 
 });
