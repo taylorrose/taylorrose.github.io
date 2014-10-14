@@ -376,6 +376,11 @@ if(tConfidence >= 0.95) {
  $("#tConf-att").hide();
 };
 
+if (!(percentile >= 0)){
+$(".ui.selection.dropdown").addClass("error");
+}else{
+$(".ui.selection.dropdown").removeClass("error");
+}
 
 $("div.ui.backSection").css("display","inline-block");
 
