@@ -21,7 +21,7 @@
   <i class="dropdown icon"></i>
   <div class="menu">
     <div class="item" data-value="0">80%</div>
-    <div class="item" data-value="1">90%</div>
+    <div class="item" data-value="1"><strong>90% (recommended)</strong></div>
     <div class="item" data-value="2">95%</div>
     <div class="item" data-value="3">99%</div>
   </div>
@@ -76,7 +76,7 @@
         <td><div class="experience"></div></td>
         <td><div class="fRR"></div></td>
         <td><div class="fLift"></div></td>
-        <td><i id="fConf-check" class="icon check"></i><i title="Confidence levels below 90% imply risk of false positives. More data should be collected." id="fConf-att" class="icon attention"></i><div class="fConf"></div></td>
+        <td><i title="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="fConf-check" class="icon check"></i><i title="Confidence levels below 95% are not statistically significant and risk a false positive. More data should be collected for this test." id="fConf-att" class="icon attention"></i><div class="fConf"></div></td>
     </tr>
 </table>
 <h3><strong>Inbound Leads (Calls)</strong></h3>
@@ -97,7 +97,7 @@
         <td ><div class="experience"></div></td>
         <td ><div class="cRR"></div></td>
         <td ><div class="cLift"></div></td>
-        <td ><i id="cConf-check" class="icon check"></i><i title="Confidence levels below 90% imply risk of false positives. More data should be collected." id="cConf-att" class="icon attention"></i><div class="cConf"></div></td>
+        <td ><i title="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="cConf-check" class="icon check"></i><i title="Confidence levels below 95% are not statistically significant and risk a false positive. More data should be collected for this test." id="cConf-att" class="icon attention"></i><div class="cConf"></div></td>
     </tr>
 </table>
 <h3><strong>Total Leads</strong></h3>
@@ -118,7 +118,7 @@
         <td ><div class="experience"></div></td>
         <td ><div class="tRR"></div></td>
         <td ><div class="tLift"></div></td>
-        <td ><i id="tConf-check" class="icon check"></i><i title="Confidence levels below 90% imply risk of false positives. More data should be collected." id="tConf-att" class="icon attention"></i><div class="tConf"></div></td>
+        <td ><i title="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="tConf-check" class="icon check"></i><i title="Confidence levels below 95% are not statistically significant and risk a false positive in the test. More data should be collected." id="tConf-att" class="icon attention"></i><div class="tConf"></div></td>
     </tr>
 </table>
 </div>
@@ -381,6 +381,7 @@ $(".ui.selection.dropdown").addClass("error");
 }else{
 $(".ui.selection.dropdown").removeClass("error");
 }
+
 
 $("div.ui.backSection").css("display","inline-block");
 
