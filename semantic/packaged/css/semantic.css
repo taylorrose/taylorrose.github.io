@@ -9,6 +9,50 @@
  *
  */
 /*******************************
+        Taylor Added
+*******************************/
+ a.link {
+    
+font-family: arial;
+text-decoration: none;
+color: 666666;
+
+
+}
+i.lab.icon{
+    float:right;
+    margin-left: 7px;
+}
+
+#fConf-check,#fConf-att,#cConf-check,#cConf-att,#tConf-check,#tConf-att{
+    float:left;
+}
+.margins{
+    margin: 50px 100px 50px 100px;
+    color:#5F5F5F;
+    font-family:arial;
+}
+
+table, tr, td, th {
+    text-align: center;
+    border-collapse: collapse;
+    
+}
+
+
+h1, h2, h3, h4 {
+    text-align:center;
+    margin:3px 0px 1px 0px;
+    font-family: arial;
+}
+
+.ci {
+    position:relative;
+    float:right;
+    font-size:14px;
+    color:#666666;
+}
+/*******************************
            Breadcrumb
 *******************************/
 .ui.breadcrumb {

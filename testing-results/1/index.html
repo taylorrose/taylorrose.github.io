@@ -14,6 +14,14 @@
 	
 
 <div class="margins">
+<div class="ui icon buttons">
+  <div class="ui active button"><a class="link" href="#">1</a></div>
+  <div class="ui button">2</div>
+  <div class="ui button">3</div>
+  <div class="ui button">4</div>
+  <div class="ui button">5</div>
+  <div class="ui button">6</div>
+</div>
 
 <div class="ui selection dropdown">
   <input id="percentile" type="hidden" name="Percentile">
@@ -26,6 +34,8 @@
     <div class="item" data-value="3">99%</div>
   </div>
 </div>
+
+
 
 <h3 class="ui header"><strong>Metrics</strong></h3>
 
@@ -52,7 +62,7 @@
         <td ><div class="total"></div></td>
     </tr>
 </table>
-<div id="calculate" class="ui button">Calculate</div>
+<div id="calculate" class="ui button">Calculate<i class="lab icon"></i></div>
 
   <div class="ui divider"></div>
 
@@ -76,7 +86,7 @@
         <td><div class="experience"></div></td>
         <td><div class="fRR"></div></td>
         <td><div class="fLift"></div></td>
-        <td><i title="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="fConf-check" class="icon check"></i><i title="Confidence levels below 95% are not statistically significant and risk a false positive. More data should be collected for this test." id="fConf-att" class="icon attention"></i><div class="fConf"></div></td>
+        <td><i title="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="fConf-check" class="green icon check"></i><i title="Confidence levels below 95% are not statistically significant and risk a false positive. More data should be collected for this test." id="fConf-att" class="orange icon attention"></i><div class="fConf"></div></td>
     </tr>
 </table>
 <h3><strong>Inbound Leads (Calls)</strong></h3>
@@ -97,7 +107,7 @@
         <td ><div class="experience"></div></td>
         <td ><div class="cRR"></div></td>
         <td ><div class="cLift"></div></td>
-        <td ><i title="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="cConf-check" class="icon check"></i><i title="Confidence levels below 95% are not statistically significant and risk a false positive. More data should be collected for this test." id="cConf-att" class="icon attention"></i><div class="cConf"></div></td>
+        <td ><i title="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="cConf-check" class="green icon check"></i><i title="Confidence levels below 95% are not statistically significant and risk a false positive. More data should be collected for this test." id="cConf-att" class="orange icon attention"></i><div class="cConf"></div></td>
     </tr>
 </table>
 <h3><strong>Total Leads</strong></h3>
@@ -118,7 +128,7 @@
         <td ><div class="experience"></div></td>
         <td ><div class="tRR"></div></td>
         <td ><div class="tLift"></div></td>
-        <td ><i title="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="tConf-check" class="icon check"></i><i title="Confidence levels below 95% are not statistically significant and risk a false positive in the test. More data should be collected." id="tConf-att" class="icon attention"></i><div class="tConf"></div></td>
+        <td ><i title="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="tConf-check" class="green icon check"></i><i title="Confidence levels below 95% are not statistically significant and risk a false positive in the test. More data should be collected." id="tConf-att" class="orange icon attention"></i><div class="tConf"></div></td>
     </tr>
 </table>
 </div>
@@ -391,35 +401,5 @@ $('.ui.dropdown')
   .dropdown()
 ;
 </script>
-<style>
 
-#fConf-check,#fConf-att,#cConf-check,#cConf-att,#tConf-check,#tConf-att{
-    float:left;
-}
-.margins{
-    margin: 50px 100px 50px 100px;
-    color:#5F5F5F;
-    font-family:arial;
-}
-
-table, tr, td, th {
-    text-align: center;
-    border-collapse: collapse;
-    
-}
-
-
-h1, h2, h3, h4 {
-    text-align:center;
-    margin:3px 0px 1px 0px;
-    font-family: arial;
-}
-
-.ci {
-    position:relative;
-    float:right;
-    font-size:14px;
-    color:#666666;
-}
-</style>
 </html>
