@@ -568,18 +568,19 @@ $(function () {
         },
         plotOptions: {
             column: {
-                stacking: 'percent'
+                stacking: 'percent',
+                
             }
         },
         series: [{
             name: 'Forms',
             data: [TRtest1Forms, TRtest2Forms],
             
-            color:'#6ECFF5'
+            color:'#F05940'
         }, {
             name: 'Calls',
             data: [TRtest1Calls, TRtest2Calls],
-            color:'#F05940'
+            color:'#6ECFF5'
         }]
     });
 });
