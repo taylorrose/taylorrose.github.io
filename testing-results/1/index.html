@@ -77,8 +77,13 @@
   <div class="ui divider"></div>
 
   <!--*********** Charts ***************!-->
+   <div style="float:right;"> 
     
-  <div id="containerCum" class="highchartsDisplay" style="min-width: 350px; height: 300px; margin: 0px"></div>
+  
+   <div id="containerCum" class="highchartsDisplay" style="min-width: 350px; height: 300px; margin: 0px"></div>
+   <br>
+   <div id="containerRatio" class="highchartsDisplay" style="min-width: 350px; height: 180px; margin: 0px;"></div>
+   </div>
 
   <!--*********** Reults Table ***************!-->
 <div class="ui backSection">
@@ -148,8 +153,7 @@
 </table>
 </div>
 </div>
-<div id="containerCum" style="width: 400px; height: 400px; margin: 0 auto"></div>
-<div id="containerRatio" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
 </body>
 
 <script>
@@ -470,11 +474,15 @@ $(function () {
 
         chart: {
             type: 'columnrange',
-            inverted: false
+            inverted: false,
+              style: {
+            fontFamily: 'Arial, Helvetica, sans-serif'
+
+        }
         },
 
         title: {
-            text: 'Monthly Lead Increase (Range)'
+            text: '<strong>Monthly Lead Increase (Range)</strong>'
         },
 
         subtitle: {
@@ -530,6 +538,50 @@ $(function () {
 
     });
 
+});
+var TRtest1Calls = parseInt(exp1Calls);
+var TRtest2Calls = parseInt(exp2Calls);
+var TRtest1Forms = parseInt(exp1Forms);
+var TRtest2Forms = parseInt(exp2Forms);
+$(function () {
+    $('#containerRatio').highcharts({
+        chart: {
+            type: 'column',
+            inverted: true,
+            style:{
+                fontFamily:'Arial, Helvetica, sans-serif'
+
+            }
+        },
+        legend:'none',
+        title: {text:"<strong>Forms vs. Calls (% Total)</strong>"},
+        xAxis: {
+            categories: [exp1Name, exp2Name]
+        },
+        yAxis: {
+            min: 0,
+            title: 'none'
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Forms',
+            data: [TRtest1Forms, TRtest2Forms],
+            
+            color:'#6ECFF5'
+        }, {
+            name: 'Calls',
+            data: [TRtest1Calls, TRtest2Calls],
+            color:'#F05940'
+        }]
+    });
 });
 
 

@@ -28,9 +28,9 @@ i.lab.icon{
     float:left;
 }
 .margins{
-    margin: 50px 100px 50px 100px;
+    margin: 50px 100px 100px 100px;
     color:#5F5F5F;
-    font-family:arial;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 table, tr, td, th {
