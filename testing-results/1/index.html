@@ -43,7 +43,7 @@
 
 
 
-<h3 class="ui header"><strong>Metrics</strong></h3>
+<h3 class="ui header" style="display:inline-block;margin:0px;"><strong>Metrics:</strong></h3>
 
 <table class="ui celled table segment">
     <tr>
@@ -68,6 +68,8 @@
         <td ><div class="total"></div></td>
     </tr>
 </table>
+<h3 class="ui header" style="display:inline-block; margin-right:25px;">Number of Days In Test:</h3><div class="ui input" style="width:60px"><input type="text" id="daysInTest" placeholder="#"></div>
+<br>
 <div id="calculate" class="ui button">Calculate<i class="lab icon"></i></div>
 
   <div class="ui divider"></div>
@@ -412,7 +414,7 @@ $(".highchartsDisplay").css("display","inline-block");
 
 
 var visitsInTest = parseInt($("#exp1-visitors").val()) + parseInt($("#exp2-visitors").val());
-var daysInTest = 14;
+var daysInTest = $("#daysInTest").val();
 var monthlyEstimate = (visitsInTest / daysInTest) * 7 * 4.33333334;
 var test1Min = exp2Min_t;
 var ctl1Min = exp1Min_t;
@@ -470,7 +472,7 @@ $(function () {
         },
 
         title: {
-            text: 'Cumulative Monthly Lead Increase (Range)'
+            text: 'Monthly Lead Increase (Range)'
         },
 
         subtitle: {
