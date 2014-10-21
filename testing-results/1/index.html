@@ -554,9 +554,10 @@ $(function () {
             }
         },
         legend:'none',
-        title: {text:"<strong>Forms vs. Calls (% Total)</strong>"},
+        title: {text:"<strong>Calls vs. Forms (% Total)</strong>"},
         xAxis: {
-            categories: [exp1Name, exp2Name]
+            categories: [exp1Name, exp2Name],
+            tickLength:0
         },
         yAxis: {
             min: 0,
@@ -569,7 +570,7 @@ $(function () {
         plotOptions: {
             column: {
                 stacking: 'percent',
-                
+
             }
         },
         series: [{
