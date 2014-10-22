@@ -28,11 +28,17 @@ i.lab.icon{
     float:left;
 }
 .margins{
+    width:1043px;
     margin: 50px 100px 100px 100px;
     color:#5F5F5F;
     font-family:Arial, Helvetica, sans-serif;
 }
 
+body {
+
+  color:#5F5F5F;
+    font-family:Arial, Helvetica, sans-serif;
+}
 table, tr, td, th {
     text-align: center;
     border-collapse: collapse;
