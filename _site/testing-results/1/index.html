@@ -13,6 +13,8 @@
 <body>
 
 
+
+
 <div class="ui selection dropdown">
   <input id="percentile" type="hidden" name="Percentile">
   <div class="default text">90% Confidence Interval</div>
@@ -30,6 +32,7 @@
 
 
 <div class="margins">
+
 
     <h2 class="ui header"><strong>Testing Results Calculator</strong></h2>
 
@@ -74,9 +77,16 @@
 <h3 class="ui header" style="display:inline-block; margin-right:25px;">Number of Days In Test:</h3><div class="ui input" style="width:60px"><input type="text" id="daysInTest" placeholder="#"></div>
 <br>
 <div id="calculate" class="ui blue button">Calculate<i class="lab icon"></i></div>
+<br>
 
-  <div class="ui divider"></div>
-
+<div class="ui divider"></div>
+<div id="expandOptions"><i class="ui large icon Angle Down"></i><strong> Sales Assumptions (Optional)</strong></div>
+<div id="CloseRates">
+    <h4 class="ui header" style="display:inline-block; margin-right:25px;">Form Close Rate:</h4><div class="ui input" style="width:70px"><input type="text" id="formCloseRate" placeholder="%"></div>
+    <h4 class="ui header" style="display:inline-block;margin-left:25px; margin-right:25px;">Call Close Rate:</h4><div class="ui input" style="width:70px"><input type="text" id="callCloseRate" placeholder="%"></div>
+     <h4 class="ui header" style="display:inline-block;margin-left:25px; margin-right:25px;">Monthly Revenue From An Acquisition:</h4><div class="ui input" style="width:120px"><input type="text" id="installRev" placeholder="$"></div>
+</div>
+<div class="ui divider"></div>
   <!--*********** Charts ***************!-->
    <div style="float:right;"> 
     
@@ -153,7 +163,13 @@
     </tr>
 </table>
 </div>
+<br>
+<div id="result">
+<div style="font-size:20;">Additional Monthly Revenue</div>
+<div id="addRev"></div>
 </div>
+</div>
+
 
 </body>
 
@@ -165,6 +181,13 @@ $("#calculate").on("click",function(){
     var percentilSTN= parseInt($("#percentile").val());   
     var percentile = percentilSTN || 2;
 
+    var installRev = parseInt($("#installRev").val()) || 59;
+    var formCloseRate = parseInt($("#formCloseRate").val()) || 0.12;
+    var callCloseRate = parseInt($("#callCloseRate").val()) || 0.18;
+
+    $("installRev").html(
+        (installRev*formCloseRate*monthlyEstimate*exp2Min)+(installRev*callCloseRate*monthlyEstimate*exp2Min_c)
+            );
 
     //Experience 1
     var exp1Name = $("#exp1-name").val() || "Test A";
@@ -587,7 +610,28 @@ $("#calculate").on("click",function(){
             }]
         });
     });
+var minaddRev = Math.round((installRev*formCloseRate*monthlyEstimate*exp2Min)+(installRev*callCloseRate*monthlyEstimate*exp2Min_c)) - Math.round((installRev*formCloseRate*monthlyEstimate*exp1Max)+(installRev*callCloseRate*monthlyEstimate*exp1Max_c));
 
+var maxaddRev = Math.round((installRev*formCloseRate*monthlyEstimate*exp2Max)+(installRev*callCloseRate*monthlyEstimate*exp2Max_c)) - Math.round((installRev*formCloseRate*monthlyEstimate*exp1Min)+(installRev*callCloseRate*monthlyEstimate*exp1Min_c));
+var revSymbol1 = "";
+var revSymbol2 = "";
+
+if (minaddRev<0) {
+   revSymbol1 = "-$";
+}else{
+    revSymbol1="$";
+};
+
+if (maxaddRev<0) {
+   revSymbol2 = "-$";
+}else{
+    revSymbol2="$";
+};
+
+    $("#addRev").html(
+        revSymbol1+Math.abs(minaddRev).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+" <span style='font-size:28px;'>to</span> "+
+        revSymbol2+Math.abs(maxaddRev).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+            );
 
     $( document ).ready(function() {
         $( "text:contains('Highcharts.com')" ).hide();
@@ -599,7 +643,7 @@ $("#calculate").on("click",function(){
     delay:0
   })
   ;
-
+$("#result").show();x
 });
 
 </script>
@@ -609,6 +653,12 @@ $("#calculate").on("click",function(){
 $('.ui.dropdown')
   .dropdown()
 ;
+$("#expandOptions").on("click",function (){
+$("#CloseRates").toggle();
+$("#expandOptions").removeAttr("Class","Down").toogle();
+
+});
+
 
 </script>
 

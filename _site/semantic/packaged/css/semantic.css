@@ -11,7 +11,32 @@
 /*******************************
         Taylor Added
 *******************************/
+#result{
+  margin:30px;
+ text-align:center;
+ display: none;
+}
+
+#addRev{
+color: #08A2DF;
+font-size: 40;
+font-weight: bold;
+}
+
+h2#MonthlyRev{
+text-align: center;
+display: block;
+margin-top: 50px;
+}
+#expandOptions{
+  cursor: pointer;
+}
+#closeRates{
+  display: none;
+  
+}
  a.link {
+}
     
 font-family: arial;
 text-decoration: none;
