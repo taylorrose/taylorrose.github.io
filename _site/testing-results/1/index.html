@@ -610,9 +610,22 @@ $("#calculate").on("click",function(){
             }]
         });
     });
-var minaddRev = Math.round((installRev*formCloseRate*monthlyEstimate*exp2Min)+(installRev*callCloseRate*monthlyEstimate*exp2Min_c)) - Math.round((installRev*formCloseRate*monthlyEstimate*exp1Max)+(installRev*callCloseRate*monthlyEstimate*exp1Max_c));
 
-var maxaddRev = Math.round((installRev*formCloseRate*monthlyEstimate*exp2Max)+(installRev*callCloseRate*monthlyEstimate*exp2Max_c)) - Math.round((installRev*formCloseRate*monthlyEstimate*exp1Min)+(installRev*callCloseRate*monthlyEstimate*exp1Min_c));
+var minaddRev = Math.round( 
+    (
+      (installRev*formCloseRate*monthlyEstimate*exp2Min)+(installRev*callCloseRate*monthlyEstimate*exp2Min_c)//Minimum Experience 2 Rev
+    ) - (
+      (installRev*formCloseRate*monthlyEstimate*exp1Max)+(installRev*callCloseRate*monthlyEstimate*exp1Max_c)//Minus Maximum Experience 1 Rev
+        ) 
+    );
+
+var maxaddRev = Math.round(
+    (
+        (installRev*formCloseRate*monthlyEstimate*exp2Max)+(installRev*callCloseRate*monthlyEstimate*exp2Max_c)//Maximum Experience 2 Rev
+    ) - (
+        (installRev*formCloseRate*monthlyEstimate*exp1Min)+(installRev*callCloseRate*monthlyEstimate*exp1Min_c)//Minus Minimum Experience 1 Rev
+        )
+    );
 var revSymbol1 = "";
 var revSymbol2 = "";
 
@@ -643,7 +656,8 @@ if (maxaddRev<0) {
     delay:0
   })
   ;
-$("#result").show();x
+$("#result").show();
+$("html, body").animate({ scrollTop: $(document).height() }, "slow");
 });
 
 </script>

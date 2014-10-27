@@ -7,7 +7,7 @@
 		<title>SLTO - Call Tracking</title>
 
 		<link rel="stylesheet" href="../../css/reveal.css">
-		<link rel="stylesheet" href="../../css/theme/vivint.css" id="theme">
+		<link rel="stylesheet" href="../../css/theme/slto.css" id="theme">
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="http://code.highcharts.com/highcharts.js"></script>
 
@@ -40,41 +40,72 @@
        
 			</section>
 			
-			<section>
-        <section>
-          <h3>Response Rate Trends</h3>
-            <img src="/presentations/images/rr-trends.png" border="0" alt="Charts photo Charts_zps1d2f350c.png"/>
+			<section data-background="/presentations/images/slto-blur.jpg">
+        <section >
+
+          
+          <h2>Forms Vs. Calls</h2>
+           <!-- <img src="/presentations/images/rr-trends.png" border="0" alt="Charts photo Charts_zps1d2f350c.png"/>!-->
+       
              
         </section>
+                <section>
+                <h3>Easy to Optimize For Forms</h3>
+                <div class="whiteBlock">
+                <p>Dimensions and Segments to Optimize Against</p>
+                <p style="font-size:18px;">Include Screen grab of TnT Segments</p>
+                </div>
+                </section>
+
+                <section>
+                <h3>Soup or Salad?</h3>
+                <div class="whiteBlock">
+                <img style="margin-right:25px;"src="/presentations/images/soup.jpg" alt="soup">
+                <img style="margin-left:25px;"src="/presentations/images/salad.jpg" alt="soup">
+                <p style="font-size:24px;" class="fragment"><strong>Experience</strong> or <strong>Channel</strong>?</p>
+                <p style="font-size:24px;" class="fragment"><strong>Entry Page</strong> or <strong>Device Type</strong>?</p>
+                <p style="font-size:24px;"class="fragment"><strong>Returning</strong> or <strong>Behavioral Target</strong>?</p>
+                </div>
+                </section>
+
+                <section>
+                <h3>Call <span style="font-size:85px;"> &ne;</span> Forms</h3>
+                <div class="whiteBlock">
+                <p>Ratio of Forms to Calls</p>
+                <p style="font-size:18px;">Include Chart of Lead Volume by Inboud/Outbound</p>
+                </div>
+                </section>
+
+                <section>
+                <h3>Call <span style="font-size:85px;"> &ne;</span> Forms</h3>
+                <div class="whiteBlock">
+                <p>Quality/Performance of Forms Vs. Calls</p>
+                <p style="font-size:18px;">Include Chart of NIS Close Rates</p>
+                </div>
+                </section>
 
 				<section>
-
-            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div><br><br>
-            <p style="font-size:16px; text-align:left;">
-            <span style="color:#ff8200">&bull;</span> PPC call response rates in September <a href="http://img.pandawhale.com/107133-Jordan-Belfort-dancing-gif-Img-r8O2.gif" target="blank"> DOUBLED</a> since June <br>
-            <span style="color:#ff8200">&bull;</span> Labor Day and Camera Promotions were a major contributor to higher form and call response rates in September
-            </p>
- 
+            
+            <div class="whiteBlock">
+            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            <p style="font-size:12px;">NOTE: Individual data points have been obfuscated to keep proprietary informaiton on vivint.com web performance confidential</p>
+         
+            </div>
 				</section>
 					<section>
 
-   <div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-   <br><br>
-            <p style="font-size:16px; text-align:left;">
-            <span style="color:#ff8200">&bull;</span> Total SEO response rates increased <a href="http://i.imgur.com/JcgYyXe.gif" target="blank"> 41% </a> since July<br>
-            <span style="color:#ff8200">&bull;</span> Promotions accelerated conversion rate lifts
-            </p>
+                <div class="whiteBlock">
+                <h2>Place Holder</h2>
+                </div>
 					
 				</section>
 </section>
-				<section>
+				<section data-background="/presentations/images/slto-blur.jpg">
 
-						<section>
-						<h3>Test Results &amp; Learnings</h3>
-						<img src="/presentations/images/tests.png" border="0" alt="Charts photo Charts_zps1d2f350c.png"/>
-							<p>
-							Press <a href="#" class="navigate-down">down</a> to see results and learnings.
-						</p>
+						<section data-background="/presentations/images/matrix.gif">
+						<h2>Call Tracking</h2>
+
+
 						</section>
 					
 					<section>
@@ -226,7 +257,7 @@ Reveal.initialize();
     </script>
 
 <!-- ------------- HighCharts.js ------------ -!-->
-<script type="text/javascript" src="/js/highchart-scripts/sep-PPC-highchart.js"></script>
+<script type="text/javascript" src="/js/highchart-scripts/sep-slto-PPC-highchart.js"></script>
 <script type="text/javascript" src="/js/highchart-scripts/sep-SEO-highchart.js"></script>
 <script type="text/javascript" src="/js/highchart-scripts/camera-promo.js"></script>
 <!-- ------------- END HighCharts ------------ -!-->
@@ -313,6 +344,9 @@ Reveal.initialize();
 
 
 });
+$( document ).ready(function() {
+        $( "text:contains('Highcharts.com')" ).hide();
+    });
 
 		</script>
 	</body>
