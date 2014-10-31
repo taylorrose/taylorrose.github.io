@@ -1,0 +1,108 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Lead Mix Calculator</title>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" class="ui" href="/semantic/packaged/css/semantic.css">
+  <script src="/semantic/packaged/javascript/semantic.js"></script>
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+  <script src="http://code.highcharts.com/highcharts-more.js"></script>
+<style type="text/css">
+.input {
+    display:inline-block;
+}
+
+input1 {
+    margin:0 15px 0 5px;
+}
+.text {
+display:inline-block;
+margin: 15px;
+}
+#newResult{
+font-size: 54px;
+font-weight: bold;
+color: #08A2DF;
+margin: 0;
+text-align: center;
+}
+#newTitle{
+    text-align: center;
+    font-size: 23px;
+    display: none;
+}
+p{
+    font-size:22px;
+}
+</style>
+</head>
+
+<body>
+
+
+
+
+
+
+
+
+
+<div class="margins">
+
+<p id="expandSection"></i><strong>Assumptions</strong></p>
+<div id="optional">
+<div class="ui input"><div class="text">[OPTIONAL] NIS Call CR%:</div><input style="display:inline-block; float:right; width:75px;" type="text" id="ccr"  placeholder="18%"></div>
+</div>
+<br>
+<div class="ui input"><div class="text">[OPTIONAL] NIS Form CR%:</div><input style="display:inline-block; float:right; width:75px;" id="fcr" placeholder="12%"></div>
+<br><br>
+<p><strong>Metrics</strong></p>
+<div class="ui input"><div class="text">Calls:</div><input style="display:inline-block; float:right; width:75px;" id="calls" placeholder="#"></div>
+<br>
+
+<div class="ui input"><div class="text">Forms:</div><input style="display:inline-block; float:right; width:75px;" id="forms" placeholder="#"></div>
+<br>
+<div class="ui input"><div class="text"><strong>New Forms:</strong></div><input style="display:inline-block; float:right; width:75px;" id="newForms" placeholder="#"></div>
+<br><br>
+<div id="calculate" class="ui blue button">Calculate</div>
+<br>
+
+
+<div class="ui divider"></div>
+
+  <div id="newTitle">New Calls:</div>
+  <div id="newResult"></div>
+
+
+<script>
+
+	//Assumptions
+$("#calculate").on("click",function(){
+    var ccr = parseInt($("#ccr").val())/100 || 0.18;
+    var fcr = parseInt($("#fcr").val())/100 || 0.12;
+    var calls = $("#calls").val() || 500;
+    var forms = $("#forms").val() || 400;
+    var newForms = $("#newForms").val() || 200;
+
+    function calculate(ccr,fcr,calls,forms,newForms) {
+    var totalLeads = (ccr*calls)+(fcr*forms);
+    var neededCalls = (totalLeads - (newForms*fcr));
+    return Math.round((neededCalls / ccr)*10)/10;
+
+    }
+    var result = calculate(ccr,fcr,calls,forms,newForms);
+        
+       $("h1").html(calculate(ccr,fcr,calls,forms,newForms));
+        
+        $("#newResult").html(result);
+
+    $("#newTitle").show();
+
+
+});
+
+</script>
+
+</html>
+</html>
