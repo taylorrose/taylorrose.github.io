@@ -7,6 +7,24 @@
  * This theme modified 2014 by Taylor Rose from the Copyright (C) 2012 Owen Versteeg, https://github.com/StereotypicalApps. It is MIT licensed.
  * reveal.js is Copyright (C) 2011-2012 Hakim El Hattab, http://hakim.se
  */
+
+ /*********************************************
+ * Taylor ADDED
+ *********************************************/
+ .whiteBlock{
+  padding: 30px; 
+  background:rgba(255,255,255,0.8);
+  }
+
+  ul li {
+    color: #ff8200;
+    list-style-type: disc;
+    margin-left: 2em;
+}
+
+ul li span {
+    color: #5b5b5b;
+}
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
