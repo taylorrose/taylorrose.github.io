@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Repsonse Optimization</title>
+
+		<link rel="stylesheet" href="../../css/reveal.css">
+		<link rel="stylesheet" href="../../css/theme/vivint.css" id="theme">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://code.highcharts.com/highcharts.js"></script>
+
+        <style type="text/css">
+            p.trBullet {
+                font-size: 24px;
+                text-align: left;
+            }
+            #question div{
+                font-size: 70px;
+                text-align: center;
+                color:#ffffff;
+            }
+            
+        </style>
+
+
+	</head>
+
+	<body>
+  <img style="position: fixed; bottom:30px; left:45px; border:none; box-shadow:none; background:none;" src="/presentations/images/orange-logo.png">
+		<div class="reveal"> 
+
+			<div class="slides">
+			<section data-background="#ff8200">
+
+
+				
+			<img style="border:none; box-shadow:none; background:none;" src="/presentations/images/white-logo.png">
+      <br>
+
+        <!--<a href="#" class="navigate-right enabled">
+          <img style="border:none; box-shadow:none; background:none;" src="/presentations/images/nextButton.png">
+         </a>!-->
+         <br>
+        <span style="color:#ffffff;">
+        <p>Testing & Optimization 2015 Plan</p>
+        <p style="font-size:33px">Updated: November 3, 2014</p>
+        </span>       
+			</section>
+			
+			<section>
+        <section data-background="#2B9EA9">
+          
+              <div style="font-size:65px; color:#ffffff; line-height:61px">Q: How do we drive better response rates?</div>
+              <br><br>
+              <div class="fragment" style="font-size:65px; color:#ffffff; line-height:61px">A: We acquire data on what works and what doesn't.</div>
+
+      
+        </section>
+        <section>
+            <h3>Cold...Warmer...Warmer!</h3>
+            <img src="/presentations/images/hot-and-cold.jpg" alt="hot-and-cold">
+        </section>
+          <section data-background="#2B9EA9">
+          
+              <div style="font-size:70px; color:#ffffff; line-height:80px">Response rate improvements come from <em><u>accurate</u></em> information that is <em><u>repeatable</u></em>.</div>
+              <br><br>
+              <div class="fragment"  style="font-size:70px; color:#ffffff; line-height:80px">The only bad tests are tests that we can't learn from.</div>      
+        </section>
+        <section data-background="/presentations/images/kobe.jpg" style="font-size=65px;">
+        <div class="whiteBlock">
+        <h3>Kobe Bryant Principal</h3>
+            In 2006 Kobe Bryant scored 81 points against the Raptors.<br><br>
+            <div class="fragment">
+                <strong>This information is <em><u>accurate</u></em> but is it <em><u>repeatable</u></em>?</strong>
+            </div>
+        </div>
+        </section>
+        <section>
+
+        <div style="text-align:left;">
+
+            <strong>sig·nif·i·cant tests</strong><br>
+            <div style="font-size:25px;">/siɡˈnifikənt tests/<div>
+            </div>
+            <br>
+            <div style="font-size:35px; text-align:center;">Tests results that are statistically likely be driven by differences in experience and not by chance<span style="font-size:25px;"> ( 90-99% confidence level )</span>. </div>
+            <img style="border:none; box-shadow:none; margin-left:109px;"src="/presentations/images/empirical.jpg">
+        </section>
+         <section data-background="#2B9EA9">
+          
+              <div style="font-size:70px; color:#ffffff; line-height:80px">The more <em>Significant Tests</em> we execute, the more successful we'll be.</div>      
+        </section>
+        <section>
+            <h3>Significant Test Factors</h3>
+            <br><br>
+            <div style="text-align:left;">
+            <ul>
+                <li class="fragment"><span><strong>Minimal Detectable Effect (MDE) -</strong> How different is our treatment from our control?</span></li>
+                <br>
+                <li class="fragment"><span><strong>Sample Size -</strong> How many visits are included in our test? </span></li>
+            </ul>
+                
+            </div>
+        </section>
+        <section>
+                <h4>2014 Response Rate Improvements</h4>
+
+            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        </section>
+</section>
+<section>           <section data-background="#F5AA39">
+                        <div style="font-size:65px; color:#ffffff; line-height:61px">2014 Goals and Initiatives</div>
+                    </section>
+                    <section>
+                    <div><h3>Finish 2014 Strong</h3>
+                    <div><br>
+                        <div class="fragment">
+                    <table style="margin:auto;">
+                    <tr>
+                        <th>Year</th>
+                        <th>Total Tests</th>
+                        <th class="green">Significant Tests</th>
+                        <th>Ratio</th>
+                        
+                    </tr>
+                    <tr>
+                        <td>YTD 2014</td>
+                        <td>43</td>
+                        <td class="green">18</td>
+                        <td>40%</td>
+                    </tr>
+                    <tr>
+                        <td>Nov-Dec 2014 Goals</td>
+                        <td>4</td>
+                        <td class="green">2</td>
+                        <td>50%</td>
+                    </tr>
+                    </table>
+                    <br>
+                    
+                      <ul>
+                        <li><span><strong>Goal 1: </strong>Run promotion tests in November and December</span></li>
+                        <br>
+                    </ul>
+                    </div>
+                    <ul>
+                        <li class="fragment"><span><strong>Goal 2: </strong>Implement Invoca call tracking</span></li>
+                        <br>
+                        <li class="fragment"><span><strong>Goal 3: </strong>Implement home and package pages for new pricing launch</span></li>
+                       
+                    </ul>
+                    </section>
+                    <section>
+                    <h3 >Build Out Team Structure</h3>
+                    <img src="/presentations/images/talent-diagram.jpg" style="border:none; box-shadow:none;">
+                </section>
+</section>
+
+<section>
+                    <section data-background="#754555">
+                        <div style="font-size:65px; color:#ffffff; line-height:61px">2015 Goals and Initiatives</div>
+                    </section>
+					
+                    <section>
+                    <div><h3>2015 Goals</h3>
+                    <div><br>
+                    <div class="fragment">
+                    <table style="margin:auto;">
+                    <tr>
+                        <th>Year</th>
+                        <th>Total Tests</th>
+                        <th>Significant Tests</th>
+                        <th>Ratio</th>
+                    </tr>
+                    <tr>
+                        <td>YTD 2014</td>
+                        <td>43</td>
+                        <td>18</td>
+                        <td>40%</td>
+                    </tr>
+                    <tr>
+                        <td class="green">2015 Goals</td>
+                        <td class="green">58</td>
+                        <td class="green">24</td>
+                        <td class="green">40%</td>
+                    </tr>
+                    </table>
+                    <br>
+                    <ul>
+                        <li><span><strong>Goal 1: </strong>Increase the total number of tests we launch year-over-year by 35%</span></li>
+                        <br>
+                    </ul>
+                    </div>
+                    <ul>
+                        <li class="fragment"><span><strong>Goal 2: </strong>Maintain the ratio of significant tests to total tests</span></li>
+                        <br>
+                        <li class="fragment"><span><strong>Goal 3: </strong>Optimize for a <a href="/testing-results/lead-mix/" target="blank"> positive ratio</a> of inbound and outbound leads to best improve overall sales</span></li>
+                       
+                    </ul>
+                    </section>
+
+
+					
+                    <section>
+                    <h4>Cookie Crusade</h4>
+                    <img src="/presentations/images/cookie.jpg" border="0" alt="Charts photo Charts_zps1d2f350c.png"/>
+                                        <p class="trBullet">
+                        <span style="color:#ff8200">&bull;</span> Limit noise by only making response decisions on prospect behavior - exclude customers from tests <strong>( 70%+ on home page )</strong><br>
+                        <span style="color:#ff8200">&bull;</span> Cookie after support calls <br>
+                        <span style="color:#ff8200">&bull;</span> Model for Implied Customers
+                        <br>
+                        <span style="color:#ff8200">&bull;</span> Email strategies to cookie customers who respond to billing or customer nurture emails
+                    </p>
+    				</section>
+                    <section>
+                    <h4>Stark Database</h4>
+                    <img src="/presentations/images/stark.jpg" border="0" alt="Charts photo Charts_zps1d2f350c.png"/>
+                        <p class="trBullet">
+                            <span style="color:#ff8200">&bull;</span> Own data validity and run queries without affecting site performance
+                                <br>
+                            <span style="color:#ff8200">&bull;</span> Integrate real time <a href="/testing-results/1/" target="blank">tracking of test</a> with both form and call success metrics
+                        </p>
+                    </section>
+                    <section>
+                    <h4>Granular Segmentation of Success Metrics</h4><br><br>
+                        <p class="trBullet">
+                            <span style="color:#ff8200">&bull;</span> Channel / Source / Creative
+                                <br>
+                            <span style="color:#ff8200">&bull;</span> Device Type
+                                <br>
+                            <span style="color:#ff8200">&bull;</span> Persona (Cisero)
+                                <br>
+                             <span style="color:#ff8200">&bull;</span> <a href="/heat-maps/" target="blank"> Day Parting</a>
+                                <br>
+                             <span style="color:#ff8200">&bull;</span> Behavior
+                                <br>
+                             <span style="color:#ff8200">&bull;</span> User Type
+                                <br>
+                            <span style="color:#ff8200">&bull;</span> Geo
+                                <br>
+                            <span style="color:#ff8200">&bull;</span> Cluster
+                                <br>
+                        </p>
+                    </section>
+                     <section>
+                    <h4>Track Tests as Far Down Funnel as Possible</h4>
+                    <img src="/presentations/images/funnel.jpg" border="0" alt="Charts photo Charts_zps1d2f350c.png"/>
+                                        <p class="trBullet">
+                        <p class="trBullet">
+                            <span style="color:#ff8200">&bull;</span> Do more leads always mean more sales? <strong>Optimize to sales</strong>
+                                <br>
+                            <span style="color:#ff8200">&bull;</span> Do more sales always mean more revenue? <strong>Optimize to revenue</strong>
+                        </p>
+                    </section>
+                      <section>
+                    <h4>Dynamic Experience For Search Traffic</h4>
+                        <br><br>
+                        <p class="trBullet">
+                            <span style="color:#ff8200">&bull;</span> Mirror pre-click creative and post-click landing pages
+                                <br>
+                            <span style="color:#ff8200">&bull;</span> Adapt pages to search queries and keywords
+                                <br>
+                            <span style="color:#ff8200">&bull;</span> Individually optimize and target SEO pages
+                                <br>
+                        </p>
+                    </section>
+
+                        <section>
+                    <h4>Optimize beyond entry page</h4>
+                    <img src="/presentations/images/next-steps.png" border="0" alt="next steps"/>
+                        <p class="trBullet">
+                            <span style="color:#ff8200">&bull;</span> Multi-page optimization flows
+                                <br>
+                            <span style="color:#ff8200">&bull;</span> Drive relevant 'micro' conversions, e.g., video views
+                                <br>
+                            <span style="color:#ff8200">&bull;</span> Optimize against scroll depth. Is scrolling the new click?
+                                <br>
+                        </p>
+                    </section>
+                      <section>
+                    <h4>Expanded LP Portfolio for Affiliates</h4><br><br>
+                        <p class="trBullet">
+                            <span style="color:#ff8200">&bull;</span> Equip affiliates to test their own traffic against an assortment of landing pages they choose from</strong>
+                        </p>
+                    </section>
+
+</section>
+
+<section>
+    <section>
+	  <h3>Technology Roadmap</h3>
+      <a href="/documents/Technology-Roadmap.pdf" target="blank"><img src="/presentations/images/tech-rm.png" border="0" alt="next steps"/></a>
+        <p>
+              <a href="#" class="navigate-down">Click image</a> to see full roadmap.
+        </p>
+	 </section>
+    
+</section>
+
+			</div>
+
+		</div>
+
+    <script type="text/javascript">
+$( "#fire" ).click(function()
+
+ { $('#catchFire').attr('data-background','/presentations/images/fire.gif');
+ Reveal.initialize();
+
+});
+
+/*$( "#fire" ).toggle(function() {
+  $('#catchFire').attr('data-background','/presentations/images/fire.gif');
+  Reveal.initialize();}, 
+  function(){
+$('#catchFire').removeAttr('data-background');
+Reveal.initialize();
+  });*/
+    </script>
+
+<!-- ------------- HighCharts.js ------------ -!-->
+<script type="text/javascript" src="/js/highchart-scripts/ytd-2014.js"></script>
+<script type="text/javascript" src="/js/highchart-scripts/sep-SEO-highchart.js"></script>
+<script type="text/javascript" src="/js/highchart-scripts/camera-promo.js"></script>
+<!-- ------------- END HighCharts ------------ -!-->
+
+<script src="../../js/reveal.min.js"></script>
+
+<script>
+
+	Reveal.initialize({
+
+
+
+    // Display controls in the bottom right corner
+    controls: true,
+
+    // Display a presentation progress bar
+    progress: false,
+
+    // Display the page number of the current slide
+    slideNumber: true,
+
+    // Push each slide change to the browser history
+    history: true,
+
+    // Enable keyboard shortcuts for navigation
+    keyboard: true,
+
+    // Enable the slide overview mode
+    overview: true,
+
+    // Vertical centering of slides
+    center: true,
+
+    // Enables touch navigation on devices with touch input
+    touch: true,
+
+    // Loop the presentation
+    loop: false,
+
+    // Change the presentation direction to be RTL
+    rtl: false,
+
+    // Turns fragments on and off globally
+    fragments: true,
+
+    // Flags if the presentation is running in an embedded mode,
+    // i.e. contained within a limited portion of the screen
+    embedded: false,
+
+    // Number of milliseconds between automatically proceeding to the
+    // next slide, disabled when set to 0, this value can be overwritten
+    // by using a data-autoslide attribute on your slides
+    autoSlide: 0,
+
+    // Stop auto-sliding after user input
+    autoSlideStoppable: true,
+
+    // Enable slide navigation via mouse wheel
+    mouseWheel: false,
+
+    // Hides the address bar on mobile devices
+    hideAddressBar: true,
+
+    // Opens links in an iframe preview overlay
+    previewLinks: true,
+
+    // Transition style
+    transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+    // Transition speed
+    transitionSpeed: 'default', // default/fast/slow
+
+    // Transition style for full page slide backgrounds
+    backgroundTransition: 'default', // default/none/slide/concave/convex/zoom
+
+    // Number of slides away from the current that are visible
+    viewDistance: 3,
+
+    // Parallax background image
+    parallaxBackgroundImage: '', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+
+    // Parallax background size
+    parallaxBackgroundSize: '' // CSS syntax, e.g. "2100px 900px"
+
+
+});
+
+		</script>
+	</body>
+</html>
