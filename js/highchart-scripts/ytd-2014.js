@@ -28,7 +28,7 @@ $(function () {
                 text: 'Response Rate (%)'
             },
             labels: {
-                valueSuffix:"%"
+                '{value}%'
             }, tickInterval:1
         },
         tooltip: {
