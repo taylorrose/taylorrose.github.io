@@ -3,7 +3,7 @@ $(function () {
         chart: {
             type: 'area',
             backgroundColor:'transparent',
-            
+            //zoomType : 'x'
         },
         
         title: {
@@ -71,6 +71,13 @@ $(function () {
         chart = $('#container').highcharts();
     
 var addMonth = 31;
+
+         chart.xAxis[0].addPlotBand({
+                from: 196,
+                to: 365,
+                color: '#fff2d8',
+                id: 'plot-band-1'
+            });
     
 chart.xAxis[0].addPlotLine({
                 value: 10 + addMonth,
