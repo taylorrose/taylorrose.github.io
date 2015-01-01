@@ -1,13 +1,19 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Significance Calculator</title>
+	<title>Test</title>
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" class="ui" href="/semantic/packaged/css/semantic.css">
   <script src="/semantic/packaged/javascript/semantic.js"></script>
   <script src="http://code.highcharts.com/highcharts.js"></script>
   <script src="http://code.highcharts.com/highcharts-more.js"></script>
+  <style>
+    #linksy {
+        display: none;
+    }
+
+  </style>
 </head>
 
 <body>
@@ -167,8 +173,14 @@
 <div id="result">
 <div style="font-size:20;">Additional Monthly Revenue</div>
 <div id="addRev"></div>
+<div id="linksy" width="500px">
+<br>
+<a href="#" target="blank">Sharable Link</a>
 </div>
 </div>
+</div>
+<br>
+
 
 
 </body>
@@ -388,6 +400,23 @@ $("#calculate").on("click",function(){
     $(".exp2 div.tRR").attr("data-content",exp2tRR_TT);
     $(".exp2 div.tLift").html(lift(exp1tRR,exp2tRR)+"<div class='ci'> ("+lift(exp1Max_t,exp2Min_t)+" to "+lift(exp1Min_t,exp2Max_t)+")</div>");
     $(".exp2 div.tConf").html((cumnormdist(zscore(exp2tRR,exp2Visitors,exp1tRR,exp1Visitors))*100).toFixed(2)+"%");
+
+    //Populate URL
+    var embeddURL = 
+    "/testing-results/embedd/1/?name1=" + encodeURIComponent(exp1Name) + 
+    "&name2=" + encodeURIComponent(exp2Name) + 
+    "&visit1=" + exp1Visitors +
+    "&visit2=" + exp2Visitors +
+    "&form1=" + exp1Forms +
+    "&form2=" + exp2Forms +
+    "&call1=" + exp1Calls +
+    "&call2=" + exp2Calls +
+    "&confint=" + percentile +
+    "&instrev=" + installRev +
+    "&formcr=" + formCloseRate * 100 +
+    "&callcr=" + callCloseRate *100;
+    $("a").attr("href",embeddURL);
+    $("#linksy").show();
 
     var fConfidence = cumnormdist(zscore(exp2fRR,exp2Visitors,exp1fRR,exp1Visitors));
     var cConfidence = cumnormdist(zscore(exp2cRR,exp2Visitors,exp1cRR,exp1Visitors));

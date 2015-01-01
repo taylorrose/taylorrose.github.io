@@ -1,19 +1,13 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Test</title>
+	<title>Significance Calculator</title>
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" class="ui" href="/semantic/packaged/css/semantic.css">
   <script src="/semantic/packaged/javascript/semantic.js"></script>
   <script src="http://code.highcharts.com/highcharts.js"></script>
   <script src="http://code.highcharts.com/highcharts-more.js"></script>
-  <style>
-    #linksy {
-        display: none;
-    }
-
-  </style>
 </head>
 
 <body>
@@ -21,7 +15,7 @@
 
 
 
-<div class="ui selection dropdown">
+<!--<div class="ui selection dropdown">
   <input id="percentile" type="hidden" name="Percentile">
   <div class="default text">90% Confidence Interval</div>
   <i class="dropdown icon"></i>
@@ -31,7 +25,7 @@
     <div class="item" data-value="3">95% (Adobe Target)</div>
     <div class="item" data-value="4">99%</div>
   </div>
-</div>
+</div>!-->
 
 
 
@@ -40,7 +34,7 @@
 <div class="margins">
 
 
-    <h2 class="ui header"><strong>Testing Results Calculator</strong></h2>
+    <h2 class="ui header" id="header"><strong>Testing Results Calculator</strong></h2>
 
 <!--<<div class="ui icon buttons">
   <div class="ui active button"><a class="link" href="#">1</a></div>
@@ -55,7 +49,7 @@
 
 
 
-<h3 class="ui header" style="display:inline-block;margin:0px;"><strong>Metrics:</strong></h3>
+<!--<h3 class="ui header" style="display:inline-block;margin:0px;"><strong>Metrics:</strong></h3>!-->
 
 <table class="ui celled table segment">
     <tr>
@@ -66,33 +60,33 @@
         <th>Total Leads</th>
     </tr>
     <tr id = "metrics1" class="exp1">
-        <td><div class="ui input"><input type="text" id="exp1-name" placeholder="Experience A [Control]"></div></td>
-        <td><div class="ui input"><input type="text" id="exp1-visitors" placeholder="Visitors"></div></td>
-        <td><div class="ui input"><input type="text" id="exp1-forms" placeholder="Forms"></div></td>
-        <td><div class="ui input"><input type="text" id="exp1-calls" placeholder="Calls"></div></td>
+        <td><div class="ui input" id="exp1-name">Test</div></td>
+        <td><div class="ui input" id="exp1-visitors"></div></td>
+        <td><div class="ui input" id="exp1-forms"></div></td>
+        <td><div class="ui input" id="exp1-calls"></div></td>
         <td><div class="total"></div></td>
     </tr>
     <tr id = "metrics2" class="exp2">
-        <td><div class="ui input"><input type="text" id="exp2-name" placeholder="Experience B"></div></td>
-        <td><div class="ui input"><input type="text" id="exp2-visitors" placeholder="Visitors"></div></td>
-        <td><div class="ui input"><input type="text" id="exp2-forms" placeholder="Forms"></div></td>
-        <td><div class="ui input"><input type="text" id="exp2-calls" placeholder="Calls"></div></td>
+        <td><div class="ui input" id="exp2-name"></div></td>
+        <td><div class="ui input" id="exp2-visitors"></div></td>
+        <td><div class="ui input" id="exp2-forms"></div></td>
+        <td><div class="ui input" id="exp2-calls"></div></td>
         <td ><div class="total"></div></td>
     </tr>
 </table>
-<h3 class="ui header" style="display:inline-block; margin-right:25px;">Number of Days In Test:</h3><div class="ui input" style="width:60px"><input type="text" id="daysInTest" placeholder="#"></div>
-<br>
+<!--<h3 class="ui header" style="display:inline-block; margin-right:25px;">Number of Days In Test:</h3><div id="daysInTest" class="ui input" style="width:60px"></div>!-->
+<!--<br>
 <div id="calculate" class="ui blue button">Calculate<i class="lab icon"></i></div>
-<br>
+<br>!-->
 
-<div class="ui divider"></div>
+<!--<div class="ui divider"></div>
 <div id="expandOptions"><i class="ui large icon Angle Down"></i><strong> Sales Assumptions (Optional)</strong></div>
 <div id="CloseRates">
     <h4 class="ui header" style="display:inline-block; margin-right:25px;">Form Close Rate:</h4><div class="ui input" style="width:70px"><input type="text" id="formCloseRate" placeholder="%"></div>
     <h4 class="ui header" style="display:inline-block;margin-left:25px; margin-right:25px;">Call Close Rate:</h4><div class="ui input" style="width:70px"><input type="text" id="callCloseRate" placeholder="%"></div>
      <h4 class="ui header" style="display:inline-block;margin-left:25px; margin-right:25px;">Monthly Revenue From An Acquisition:</h4><div class="ui input" style="width:120px"><input type="text" id="installRev" placeholder="$"></div>
 </div>
-<div class="ui divider"></div>
+<div class="ui divider"></div>!-->
   <!--*********** Charts ***************!-->
    <div style="float:right;"> 
     
@@ -173,40 +167,48 @@
 <div id="result">
 <div style="font-size:20;">Additional Monthly Revenue</div>
 <div id="addRev"></div>
-<div id="linksy" width="500px">
-<br>
-<a href="#" target="blank">Sharable Link</a>
 </div>
 </div>
-</div>
-<br>
-
 
 
 </body>
 
 <script>
+//Get Param Function
+    function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 
 
 	//Assumptions
-$("#calculate").on("click",function(){
-    var percentilSTN= parseInt($("#percentile").val());   
-    var percentile = percentilSTN || 2;
 
-    var installRev = parseInt($("#installRev").val()) || 59;
-    var formCloseRate = parseInt($("#formCloseRate").val()) || 0.12;
-    var callCloseRate = parseInt($("#callCloseRate").val()) || 0.18;
+    var percentilSTN= getParameterByName("confint");
+    var percentile = parseInt(percentilSTN) || 2;
+
+    var installRev = parseInt(getParameterByName("instrev")) || 59;
+    var formCloseRate = parseInt(getParameterByName("formcr"))/100 || 0.12;
+    var callCloseRate = parseInt(getParameterByName("callcr"))/100 || 0.18;
 
     $("installRev").html(
         (installRev*formCloseRate*monthlyEstimate*exp2Min)+(installRev*callCloseRate*monthlyEstimate*exp2Min_c)
-            );
+    );
 
     //Experience 1
-    var exp1Name = $("#exp1-name").val() || "Test A";
-    var exp1Visitors = $("#exp1-visitors").val() || 1000;
-    var exp1Forms = $("#exp1-forms").val() || 50;
-    var exp1Calls = $("#exp1-calls").val() || 50;
+    var exp1Name = getParameterByName("name1") || "Test A";
+    var exp1Visitors = getParameterByName("visit1") || 1000;
+    var exp1Forms = getParameterByName("form1") || 50;
+    var exp1Calls = getParameterByName("call1") || 50;
     var exp1Total = parseInt(exp1Forms) + parseInt(exp1Calls);
+
+
+    $("#exp1-name").html(exp1Name);
+    $("#exp1-visitors").html(exp1Visitors);
+    $("#exp1-forms").html(exp1Forms);
+    $("#exp1-calls").html(exp1Calls);
+
 
     var exp1fRR = responseRate(exp1Visitors, exp1Forms);
     var exp1fRR_p = toPercent(exp1fRR, 2);
@@ -236,11 +238,16 @@ $("#calculate").on("click",function(){
     //------------------------------------
 
     //Experience 2
-    var exp2Name = $("#exp2-name").val() || "Test B";
-    var exp2Visitors = $("#exp2-visitors").val() || 1000;
-    var exp2Forms = $("#exp2-forms").val() || 70;
-    var exp2Calls = $("#exp2-calls").val() || 70;
+    var exp2Name = getParameterByName("name2") || "Test B";
+    var exp2Visitors = getParameterByName("visit2") || 1000;
+    var exp2Forms = getParameterByName("form2") || 70;
+    var exp2Calls = getParameterByName("call2") || 70;
     var exp2Total = parseInt(exp2Forms) + parseInt(exp2Calls);
+
+    $("#exp2-name").html(exp2Name);
+    $("#exp2-visitors").html(exp2Visitors);
+    $("#exp2-forms").html(exp2Forms);
+    $("#exp2-calls").html(exp2Calls);
 
     var exp2fRR = responseRate(exp2Visitors, exp2Forms);
     var exp2fRR_p = toPercent(exp2fRR, 2);
@@ -400,23 +407,6 @@ $("#calculate").on("click",function(){
     $(".exp2 div.tRR").attr("data-content",exp2tRR_TT);
     $(".exp2 div.tLift").html(lift(exp1tRR,exp2tRR)+"<div class='ci'> ("+lift(exp1Max_t,exp2Min_t)+" to "+lift(exp1Min_t,exp2Max_t)+")</div>");
     $(".exp2 div.tConf").html((cumnormdist(zscore(exp2tRR,exp2Visitors,exp1tRR,exp1Visitors))*100).toFixed(2)+"%");
-
-    //Populate URL
-    var embeddURL = 
-    "/testing-results/embedd/1/?name1=" + encodeURIComponent(exp1Name) + 
-    "&name2=" + encodeURIComponent(exp2Name) + 
-    "&visit1=" + exp1Visitors +
-    "&visit2=" + exp2Visitors +
-    "&form1=" + exp1Forms +
-    "&form2=" + exp2Forms +
-    "&call1=" + exp1Calls +
-    "&call2=" + exp2Calls +
-    "&confint=" + percentile +
-    "&instrev=" + installRev +
-    "&formcr=" + formCloseRate * 100 +
-    "&callcr=" + callCloseRate *100;
-    $("a").attr("href",embeddURL);
-    $("#linksy").show();
 
     var fConfidence = cumnormdist(zscore(exp2fRR,exp2Visitors,exp1fRR,exp1Visitors));
     var cConfidence = cumnormdist(zscore(exp2cRR,exp2Visitors,exp1cRR,exp1Visitors));
@@ -640,35 +630,35 @@ $("#calculate").on("click",function(){
         });
     });
 
-var minaddRev = Math.round( 
-    (
-      (installRev*formCloseRate*monthlyEstimate*exp2Min)+(installRev*callCloseRate*monthlyEstimate*exp2Min_c)//Minimum Experience 2 Rev
-    ) - (
-      (installRev*formCloseRate*monthlyEstimate*exp1Max)+(installRev*callCloseRate*monthlyEstimate*exp1Max_c)//Minus Maximum Experience 1 Rev
-        ) 
-    );
+    var minaddRev = Math.round( 
+        (
+          (installRev*formCloseRate*monthlyEstimate*exp2Min)+(installRev*callCloseRate*monthlyEstimate*exp2Min_c)//Minimum Experience 2 Rev
+        ) - (
+          (installRev*formCloseRate*monthlyEstimate*exp1Max)+(installRev*callCloseRate*monthlyEstimate*exp1Max_c)//Minus Maximum Experience 1 Rev
+            ) 
+        );
 
-var maxaddRev = Math.round(
+    var maxaddRev = Math.round(
     (
         (installRev*formCloseRate*monthlyEstimate*exp2Max)+(installRev*callCloseRate*monthlyEstimate*exp2Max_c)//Maximum Experience 2 Rev
     ) - (
         (installRev*formCloseRate*monthlyEstimate*exp1Min)+(installRev*callCloseRate*monthlyEstimate*exp1Min_c)//Minus Minimum Experience 1 Rev
         )
     );
-var revSymbol1 = "";
-var revSymbol2 = "";
+    var revSymbol1 = "";
+    var revSymbol2 = "";
 
-if (minaddRev<0) {
-   revSymbol1 = "-$";
-}else{
-    revSymbol1="$";
-};
+    if (minaddRev<0) {
+       revSymbol1 = "-$";
+    }else{
+        revSymbol1="$";
+    };
 
-if (maxaddRev<0) {
-   revSymbol2 = "-$";
-}else{
-    revSymbol2="$";
-};
+    if (maxaddRev<0) {
+       revSymbol2 = "-$";
+    }else{
+        revSymbol2="$";
+    };
 
     $("#addRev").html(
         revSymbol1+Math.abs(minaddRev).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+" <span style='font-size:28px;'>to</span> "+
@@ -685,9 +675,9 @@ if (maxaddRev<0) {
     delay:0
   })
   ;
-$("#result").show();
-$("html, body").animate({ scrollTop: $(document).height() }, "slow");
-});
+    $("#result").show();
+   // $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+
 
 </script>
 
