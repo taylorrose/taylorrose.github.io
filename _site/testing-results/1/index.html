@@ -86,13 +86,13 @@
 <br>
 
 <div class="ui divider"></div>
-<div id="expandOptions"><i class="ui large icon Angle Down"></i><strong> Sales Assumptions (Optional)</strong></div>
+<!--<div id="expandOptions"><i class="ui large icon Angle Down"></i><strong> Sales Assumptions (Optional)</strong></div>
 <div id="CloseRates">
     <h4 class="ui header" style="display:inline-block; margin-right:25px;">Form Close Rate:</h4><div class="ui input" style="width:70px"><input type="text" id="formCloseRate" placeholder="%"></div>
     <h4 class="ui header" style="display:inline-block;margin-left:25px; margin-right:25px;">Call Close Rate:</h4><div class="ui input" style="width:70px"><input type="text" id="callCloseRate" placeholder="%"></div>
      <h4 class="ui header" style="display:inline-block;margin-left:25px; margin-right:25px;">Monthly Revenue From An Acquisition:</h4><div class="ui input" style="width:120px"><input type="text" id="installRev" placeholder="$"></div>
 </div>
-<div class="ui divider"></div>
+<div class="ui divider"></div>!-->
   <!--*********** Charts ***************!-->
    <div style="float:right;"> 
     
@@ -171,9 +171,9 @@
 </div>
 <br>
 <div id="result">
-<div style="font-size:20;">Additional Monthly Revenue</div>
+<!--<div style="font-size:20;">Additional Monthly Revenue</div>
 <div id="addRev"></div>
-<div id="linksy" width="500px">
+<div id="linksy" width="500px">!-->
 <br>
 
 <a href="#" target="blank">
@@ -189,6 +189,29 @@
 </body>
 
 <script>
+
+//Get Param Function
+    function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+
+$("#exp1-name").attr("value",getParameterByName("name1"));
+$("#exp2-name").attr("value",getParameterByName("name2"));
+
+$("#exp1-visitors").attr("value",getParameterByName("visit1"));
+$("#exp2-visitors").attr("value",getParameterByName("visit2"));
+
+$("#exp1-forms").attr("value",getParameterByName("form1"));
+$("#exp2-forms").attr("value",getParameterByName("form2"));
+
+$("#exp1-calls").attr("value",getParameterByName("call1"));
+$("#exp2-calls").attr("value",getParameterByName("call2"));
+
+
 
 
 	//Assumptions

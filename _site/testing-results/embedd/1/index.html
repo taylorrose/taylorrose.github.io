@@ -164,8 +164,8 @@
 </div>
 <br>
 <div id="result">
-<div style="font-size:20;">Additional Monthly Revenue</div>
-<div id="addRev"></div>
+<!--<div style="font-size:20;">Additional Monthly Revenue</div>
+<div id="addRev"></div>!-->
 <br>
 <a href="/testing-results/1/">
 <div class="ui icon button">
@@ -184,6 +184,13 @@
 </body>
 
 <script>
+
+ var url_regex = /\?(.*)/g;
+ var page_url = document.URL;
+ var url_extract = url_regex.exec(page_url);
+ var edit_link_url = "/testing-results/1/"+"?"+url_extract[1];
+ $("a").attr("href",edit_link_url);
+
 //Get Param Function
     function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
