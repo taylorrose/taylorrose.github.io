@@ -81,6 +81,12 @@
     </tr>
 </table>
 <h3 class="ui header" style="display:inline-block; margin-right:25px;">Number of Days In Test:</h3><div class="ui input" style="width:60px"><input type="text" id="daysInTest" placeholder="#"></div>
+
+<br>
+<h3 class="ui header" style="display:inline-block; margin-right:25px;">Screen Grabs:</h3>
+<h4 class="ui header" style="display:inline-block; margin-right:25px;"><div class="ui input"><input type="text" id="pic1" placeholder="Experience A Image"></div></h4>
+<h4 class="ui header" style="display:inline-block; margin-right:25px;"><div class="ui input"><input type="text" id="pic2" placeholder="Experience B Image"></div></h4>
+
 <br>
 <div id="calculate" class="ui blue button">Calculate<i class="lab icon"></i></div>
 <br>
@@ -213,6 +219,9 @@ $("#exp1-calls").attr("value",getParameterByName("call1"));
 $("#exp2-calls").attr("value",getParameterByName("call2"));
 
 $("#daysInTest").attr("value",getParameterByName("days"));
+
+$("#pic1").attr("value",getParameterByName("pic1"));
+$("#pic2").attr("value",getParameterByName("pic2"));
 
 
 
@@ -434,6 +443,10 @@ $("#calculate").on("click",function(){
     $(".exp2 div.tLift").html(lift(exp1tRR,exp2tRR)+"<div class='ci'> ("+lift(exp1Max_t,exp2Min_t)+" to "+lift(exp1Min_t,exp2Max_t)+")</div>");
     $(".exp2 div.tConf").html((cumnormdist(zscore(exp2tRR,exp2Visitors,exp1tRR,exp1Visitors))*100).toFixed(2)+"%");
 
+    //Capture Images
+    var pic1 = $("#pic1").val();
+    var pic2 = $("#pic2").val();
+
     //Populate URL
     var daysInTest = $("#daysInTest").val() || 14;
     var date = new Date();
@@ -448,6 +461,8 @@ $("#calculate").on("click",function(){
     "&call1=" + exp1Calls +
     "&call2=" + exp2Calls +
     "&days="  + daysInTest +
+    "&pic1="  + encodeURIComponent(pic1) +
+    "&pic2="  + encodeURIComponent(pic2) +
     "&confint=" + percentile +
     "&instrev=" + installRev +
     "&formcr=" + formCloseRate * 100 +

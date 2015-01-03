@@ -60,7 +60,7 @@
         <th>Total Leads</th>
     </tr>
     <tr id = "metrics1" class="exp1">
-        <td><div class="ui input" id="exp1-name">Test</div></td>
+        <td><div class="ui input" id="exp1-name"></div></td>
         <td><div class="ui input" id="exp1-visitors"></div></td>
         <td><div class="ui input" id="exp1-forms"></div></td>
         <td><div class="ui input" id="exp1-calls"></div></td>
@@ -177,6 +177,18 @@
 
 
 
+<div class="ui segment">
+<div id="test1_image_name"></div><br>
+  <img class="ui centered image" id="test1_image" src="">
+</div>
+
+<div class="ui divider visible"></div>
+
+<div class="ui segment">
+<div id="test2_image_name"></div><br>
+  <img class="ui centered image" id="test2_image" src="">
+</div>
+
 
 
 </div>
@@ -204,6 +216,12 @@
     function numberWithCommas(numberToAddComma) {
         return numberToAddComma.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
+
+    //Images
+    var pic1 = getParameterByName("pic1") || "";
+    var pic2 = getParameterByName("pic2") || "";
+    $("#test1_image").attr("src","/images/"+pic1);
+    $("#test2_image").attr("src","/images/"+pic2);
 
     //Title
     var testTitle = getParameterByName("title");
@@ -242,6 +260,9 @@
     $("#exp1-visitors").html(vists1_comma);
     $("#exp1-forms").html(forms1_comma);
     $("#exp1-calls").html(calls1_comma);
+
+    $("#test1_image_name").html("<strong>"+exp1Name+"</strong>"+" Screen Grab:")
+
 
 
     var exp1fRR = responseRate(exp1Visitors, exp1Forms);
@@ -286,6 +307,8 @@
     $("#exp2-visitors").html(vists2_comma);
     $("#exp2-forms").html(forms2_comma);
     $("#exp2-calls").html(calls2_comma);
+
+    $("#test2_image_name").html("<strong>"+exp2Name+"</strong>"+" Screen Grab:")
 
     var exp2fRR = responseRate(exp2Visitors, exp2Forms);
     var exp2fRR_p = toPercent(exp2fRR, 2);
