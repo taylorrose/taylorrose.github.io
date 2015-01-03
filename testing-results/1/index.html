@@ -40,7 +40,7 @@
 <div class="margins">
 
 
-    <h2 class="ui header"><strong>Testing Results Calculator</strong></h2>
+    <h2 class="ui header"><div class="ui input"><input type="text" id="test_title" placeholder="Title of Experiment"></div></h2>
 
 <!--<<div class="ui icon buttons">
   <div class="ui active button"><a class="link" href="#">1</a></div>
@@ -198,6 +198,7 @@
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
+$("#test_title").attr("value",getParameterByName("title"));
 
 $("#exp1-name").attr("value",getParameterByName("name1"));
 $("#exp2-name").attr("value",getParameterByName("name2"));
@@ -210,6 +211,10 @@ $("#exp2-forms").attr("value",getParameterByName("form2"));
 
 $("#exp1-calls").attr("value",getParameterByName("call1"));
 $("#exp2-calls").attr("value",getParameterByName("call2"));
+
+$("#daysInTest").attr("value",getParameterByName("days"));
+
+
 
 
 
@@ -226,6 +231,8 @@ $("#calculate").on("click",function(){
     $("installRev").html(
         (installRev*formCloseRate*monthlyEstimate*exp2Min)+(installRev*callCloseRate*monthlyEstimate*exp2Min_c)
             );
+    //Experiment Title
+    var testTitle = $("#test_title").val() || "Test Results";
 
     //Experience 1
     var exp1Name = $("#exp1-name").val() || "Test A";
@@ -428,8 +435,11 @@ $("#calculate").on("click",function(){
     $(".exp2 div.tConf").html((cumnormdist(zscore(exp2tRR,exp2Visitors,exp1tRR,exp1Visitors))*100).toFixed(2)+"%");
 
     //Populate URL
+    var daysInTest = $("#daysInTest").val() || 14;
+    var date = new Date();
     var embeddURL = 
-    "/testing-results/embedd/1/?name1=" + encodeURIComponent(exp1Name) + 
+    "/testing-results/embedd/1/?title="+ encodeURIComponent(testTitle)+
+    "&name1=" + encodeURIComponent(exp1Name) + 
     "&name2=" + encodeURIComponent(exp2Name) + 
     "&visit1=" + exp1Visitors +
     "&visit2=" + exp2Visitors +
@@ -437,10 +447,12 @@ $("#calculate").on("click",function(){
     "&form2=" + exp2Forms +
     "&call1=" + exp1Calls +
     "&call2=" + exp2Calls +
+    "&days="  + daysInTest +
     "&confint=" + percentile +
     "&instrev=" + installRev +
     "&formcr=" + formCloseRate * 100 +
-    "&callcr=" + callCloseRate *100;
+    "&callcr=" + callCloseRate *100 +
+     "&date="+encodeURIComponent(date.toLocaleString());
     $("a").attr("href",embeddURL);
     $("#linksy").show();
 
@@ -500,7 +512,6 @@ $("#calculate").on("click",function(){
 
 
     var visitsInTest = parseInt($("#exp1-visitors").val()) + parseInt($("#exp2-visitors").val()) || 2000;
-    var daysInTest = $("#daysInTest").val() || 14;
     var monthlyEstimate = (visitsInTest / daysInTest) * 7 * 4.33333334;
     var test1Min = exp2Min_t;
     var ctl1Min = exp1Min_t;

@@ -29,11 +29,12 @@
 
 
 
-
+<div id="results_date"></div>
 <div class="margins">
 
 
-    <h2 class="ui header" id="header"><strong>Testing Results Calculator</strong></h2>
+    <h2 class="ui header" id="header"><strong><div id="test_title">Test Results</div></strong></h2>
+
 
 <!--<<div class="ui icon buttons">
   <div class="ui active button"><a class="link" href="#">1</a></div>
@@ -199,6 +200,17 @@
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
+    //Add comma to number function
+    function numberWithCommas(numberToAddComma) {
+        return numberToAddComma.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    //Title
+    var testTitle = getParameterByName("title");
+    $("#test_title").html(testTitle);
+
+    var resultsDate = "Updated: "+ getParameterByName("date");
+    $("#results_date").html(resultsDate);
 
 	//Assumptions
 
@@ -209,22 +221,27 @@
     var formCloseRate = parseInt(getParameterByName("formcr"))/100 || 0.12;
     var callCloseRate = parseInt(getParameterByName("callcr"))/100 || 0.18;
 
+
     $("installRev").html(
         (installRev*formCloseRate*monthlyEstimate*exp2Min)+(installRev*callCloseRate*monthlyEstimate*exp2Min_c)
     );
 
     //Experience 1
-    var exp1Name = getParameterByName("name1") || "Test A";
-    var exp1Visitors = getParameterByName("visit1") || 1000;
-    var exp1Forms = getParameterByName("form1") || 50;
-    var exp1Calls = getParameterByName("call1") || 50;
+    var exp1Name = getParameterByName("name1");
+    var exp1Visitors = getParameterByName("visit1");
+    var exp1Forms = getParameterByName("form1");
+    var exp1Calls = getParameterByName("call1");
     var exp1Total = parseInt(exp1Forms) + parseInt(exp1Calls);
+
+    var vists1_comma = numberWithCommas(exp1Visitors);
+    var forms1_comma = numberWithCommas(exp1Forms);
+    var calls1_comma = numberWithCommas(exp1Calls);
 
 
     $("#exp1-name").html(exp1Name);
-    $("#exp1-visitors").html(exp1Visitors);
-    $("#exp1-forms").html(exp1Forms);
-    $("#exp1-calls").html(exp1Calls);
+    $("#exp1-visitors").html(vists1_comma);
+    $("#exp1-forms").html(forms1_comma);
+    $("#exp1-calls").html(calls1_comma);
 
 
     var exp1fRR = responseRate(exp1Visitors, exp1Forms);
@@ -255,16 +272,20 @@
     //------------------------------------
 
     //Experience 2
-    var exp2Name = getParameterByName("name2") || "Test B";
-    var exp2Visitors = getParameterByName("visit2") || 1000;
-    var exp2Forms = getParameterByName("form2") || 70;
-    var exp2Calls = getParameterByName("call2") || 70;
+    var exp2Name = getParameterByName("name2");
+    var exp2Visitors = getParameterByName("visit2");
+    var exp2Forms = getParameterByName("form2");
+    var exp2Calls = getParameterByName("call2");
     var exp2Total = parseInt(exp2Forms) + parseInt(exp2Calls);
 
+    var vists2_comma = numberWithCommas(exp2Visitors);
+    var forms2_comma = numberWithCommas(exp2Forms);
+    var calls2_comma = numberWithCommas(exp2Calls);
+
     $("#exp2-name").html(exp2Name);
-    $("#exp2-visitors").html(exp2Visitors);
-    $("#exp2-forms").html(exp2Forms);
-    $("#exp2-calls").html(exp2Calls);
+    $("#exp2-visitors").html(vists2_comma);
+    $("#exp2-forms").html(forms2_comma);
+    $("#exp2-calls").html(calls2_comma);
 
     var exp2fRR = responseRate(exp2Visitors, exp2Forms);
     var exp2fRR_p = toPercent(exp2fRR, 2);
@@ -391,12 +412,16 @@
     //$(".exp1 div.visitors").html(exp1Visitors);
     //$(".exp1 div.forms").html(exp1Forms);
     //$(".exp1 div.calls").html(exp1Calls);
-    $(".exp1 div.total").html(exp1Total);
+
+    var total1_comma = numberWithCommas(exp1Total);
+    $(".exp1 div.total").html(total1_comma);
 
     $(".exp2 div.visitors").html(exp2Visitors);
     $(".exp2 div.forms").html(exp2Forms);
     $(".exp2 div.calls").html(exp2Calls);
-    $(".exp2 div.total").html(exp2Total);
+
+    var total2_comma = numberWithCommas(exp2Total);
+    $(".exp2 div.total").html(total2_comma);
 
     //Populate Outbound Leads (Forms)
     $(".exp1 div.fRR").html(exp1fRR_p + " " + ciDisplay(exp1Forms_ci));
@@ -481,7 +506,7 @@
 
 
     var visitsInTest = parseInt($("#exp1-visitors").val()) + parseInt($("#exp2-visitors").val()) || 2000;
-    var daysInTest = $("#daysInTest").val() || 14;
+    var daysInTest = parseInt(getParameterByName("days")) || 14;
     var monthlyEstimate = (visitsInTest / daysInTest) * 7 * 4.33333334;
     var test1Min = exp2Min_t;
     var ctl1Min = exp1Min_t;
