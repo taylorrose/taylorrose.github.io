@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Repsonse Optimization</title>
+
+		<link rel="stylesheet" href="../../css/reveal.css">
+        <link rel="stylesheet" type="text/css" class="ui" href="/semantic/packaged/css/semantic.css">
+		<link rel="stylesheet" href="../../css/theme/vivint.css" id="theme">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://code.highcharts.com/highcharts.js"></script>
+        <script src="/semantic/packaged/javascript/semantic.js"></script>
+
+        <style type="text/css">
+            p.trBullet {
+                font-size: 24px;
+                text-align: left;
+            }
+            #question div{
+                font-size: 70px;
+                text-align: center;
+                color:#ffffff;
+            }
+            section div.secHeader {
+                color:#BEBEBE;
+                position: relative;
+                text-align: left;
+                margin-bottom: 35px;
+            }
+            
+        </style>
+
+
+	</head>
+
+	<body>
+  <img style="position: fixed; bottom:30px; left:45px; border:none; box-shadow:none; background:none;" src="/presentations/images/orange-logo.png">
+		<div class="reveal"> 
+
+			<div class="slides">
+			<section data-background="#ff8200">
+
+
+				
+			<img style="border:none; box-shadow:none; background:none;" src="/presentations/images/white-logo.png">
+      <br>
+
+        <!--<a href="#" class="navigate-right enabled">
+          <img style="border:none; box-shadow:none; background:none;" src="/presentations/images/nextButton.png">
+         </a>!-->
+         <br>
+        <span style="color:#ffffff;">
+        <p>Testing & Optimization 2015 Plan</p>
+        <p style="font-size:33px">Updated: November 7, 2014</p>
+        </span>       
+			</section>
+			
+			<section>
+       
+        <section>
+
+        <div style="text-align:left;">
+
+            
+            
+            </div>
+           <div>Assuming <strong>inbound CR</strong> is
+            <div  style="width:150px;" class="ui input"><input type="text" id="call_CR" placeholder="19%"></div>
+           </div> and <br> <strong>outbound CR</strong> is <div  style="width:150px;" class="ui input"><input type="text" id="form_CR" placeholder="12%"></div>
+            <br><br><br>
+            <div id="sentance" style="font-size:44px; text-align:center; line-height:60px">then for each <span id="call_percent" style="font-weight: bold; color:#ff8200;">5%</span> increase in calls, we can decrease form submits by <span style="font-weight: bold; color:#ff8200;" id="form_percent">8%</span>.</div><br><br>
+            <div id="calculate" class="ui grey button">Recalculate</div>
+        
+        </section>
+         <section data-background="#2B9EA9">
+          
+              <div style="font-size:70px; color:#ffffff; line-height:80px">The more <em>Significant Tests</em> we execute, the more successful we'll be.</div>      
+        </section>
+        <section>
+            <h3>Significant Test Factors</h3>
+            <br><br>
+            <div style="text-align:left;">
+            <ul>
+                <li class="fragment"><span><strong>Minimal Detectable Effect (MDE) -</strong> How different is our treatment from our control?</span></li>
+                <br>
+                <li class="fragment"><span><strong>Sample Size -</strong> How many visits are included in our test? </span></li>
+            </ul>
+                
+            </div>
+        </section>
+        <section>
+                <h4>2014 Response Rate Improvements</h4>
+
+
+            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto">
+               
+            </div>
+            <br> 
+            <ul>
+            <li class="fragment"><span>Call RR increased from <strong>1.07%</strong> to <strong>2.41%</strong></span></li>
+            <li class="fragment"><span><strong>+134 Basis Points (BPS)</strong></span></li>
+            </ul>
+        </section>
+        <section>
+        <h4>Value of Each Basis Point - Calls</h4>
+       <table class="fragment" style="margin:auto;">
+                <tr>
+                    <th>NIS Call CR%</th>
+                    <th>Account Length</th>
+                    <th>NPV</th>
+                    <th>Daily Visitors</th>
+                </tr>
+                 <tr>
+                    <td>19%</td>
+                    <td>60 Months</td>
+                    <td>$2,277.85</td>
+                    <td>15,343</td>
+                </tr>
+            </table>
+            <table class="fragment" style="margin:auto;">
+                <tr>
+                    <th>Basis Point Increase</th>
+                    <th>Monthly Accounts</th>
+                    <th>Monthly NPV</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td style="color:#ff8200"><strong>+8.84</strong></td>
+                    <td class="green">+$20,142</td>
+                </tr>
+            </table>
+            <br>
+            <div class="fragment" id="containerBPS" style="width:750px; height: 295px; margin: 0 auto; border:1px; border-color:5b5b5b;"></div>
+            <br>
+            <ul>
+            <li class="fragment"><span><strong>~1,185</strong> additional accounts per month</span></li>
+            <li class="fragment"><span><strong>~$2.7 million</strong> in additional NPV per month</span></li>
+            </ul>
+        </section>
+</section>
+<section>           <section data-background="#F5AA39">
+                        <div style="font-size:65px; color:#ffffff; line-height:61px">2014 GOALS & INITIATIVES</div>
+                    </section>
+                    <section>
+                    <div><h3>Finish 2014 Strong</h3>
+                    <div><br>
+                        <div class="fragment">
+                    <table style="margin:auto;">
+                    <tr>
+                        <th>Year</th>
+                        <th>Total Tests</th>
+                        <th class="green">Significant Tests</th>
+                        <th>Ratio</th>
+                        
+                    </tr>
+                    <tr>
+                        <td>YTD 2014</td>
+                        <td>43</td>
+                        <td class="green">18</td>
+                        <td>40%</td>
+                    </tr>
+                    <tr>
+                        <td>Nov-Dec 2014 Goals</td>
+                        <td>4</td>
+                        <td class="green">2</td>
+                        <td>50%</td>
+                    </tr>
+                    </table>
+                    <br>
+                    
+                      <ul>
+                        <li><span><strong>Goal 1: </strong>Run promotion tests in November and December</span></li>
+                        <br>
+                    </ul>
+                    </div>
+                    <ul>
+                        <li class="fragment"><span><strong>Goal 2: </strong>Implement Invoca call tracking</span></li>
+                        <br>
+                        <li class="fragment"><span><strong>Goal 3: </strong>Implement home and package pages for new pricing launch</span></li>
+                       
+                    </ul>
+                    </section>
+                    <section >
+
+                    
+                    <h3 >Build Out Team Structure</h3>
+                    <img src="/presentations/images/talent-diagram.png" style="border:none; box-shadow:none;">
+                    
+                </section>
+</section>
+
+<section>
+                    <section data-background="#754555">
+                        <div style="font-size:65px; color:#ffffff; line-height:61px">2015 GOALS & INITIATIVES</div>
+                    </section>
+					
+                    <section>
+                    <div><h3>2015 Goals</h3>
+                    <div><br>
+                    <div class="fragment">
+                    <table style="margin:auto;">
+                    <tr>
+                        <th>Year</th>
+                        <th>Total Tests</th>
+                        <th>Significant Tests</th>
+                        <th>Ratio</th>
+                    </tr>
+                    <tr>
+                        <td>YTD 2014</td>
+                        <td>43</td>
+                        <td>18</td>
+                        <td>40%</td>
+                    </tr>
+                    <tr>
+                        <td class="green">2015 Goals</td>
+                        <td class="green">58</td>
+                        <td class="green">24</td>
+                        <td class="green">40%</td>
+                    </tr>
+                    </table>
+                    <br>
+                    <ul>
+                        <li><span><strong>Goal 1: </strong>Increase the total number of tests we launch year-over-year by 35%</span></li>
+                        <br>
+                    </ul>
+                    </div>
+                    <ul>
+                        <li class="fragment"><span><strong>Goal 2: </strong>Maintain the ratio of significant tests to total tests</span></li>
+                        <br>
+                        <li class="fragment"><span><strong>Goal 3: </strong>Optimize for a <a href="/testing-results/lead-mix/" target="blank"> positive ratio</a> of inbound and outbound leads to best improve overall sales</span></li>
+                       
+                    </ul>
+                    </section>
+                    <section data-background="#754555">
+                        <div style="font-size:65px; color:#ffffff; line-height:61px">
+                            <span>2015 INITIATIVES</span><br><br><br>
+                            <span class="fragment"> &bull; Acquire Accurate Data</span><br><br>
+                            <span class="fragment"> &bull; Launch Significant Tests</span>
+
+                        </div>
+                    </section>
+                    <section data-background="/presentations/images/cookies.jpg">
+                        <div class="secHeader">Acquire Accurate Data - Initiative 1</div>
+                        <div class="whiteBlock fragment">
+                            <h3>Cookie Crusade</h3><br>
+                            <ul>
+                                <li class="fragment"><span> Exclude customers from acquisition testing</span></li>
+                                <li class="fragment"><span>Cookie after support calls</span></li>
+                                <li class="fragment"><span>Model for Implied Customers</span></li>
+                                <li class="fragment"><span>Customer email strategies</span></li>
+                            </ul>
+                        </div>
+                    </section>
+					
+                    <section data-background="/presentations/images/tony-stark.jpg">
+                        <div class="secHeader">Acquire Accurate Data - Initiative 2</div>
+                         <div class="whiteBlock fragment">
+                            <h3>Stark Database</h3><br>
+                            <ul>
+                                <li class="fragment"><span> Own data validity and run queries without affecting site performance</span></li>
+                                
+                                <li class="fragment"><span>Integrate real time <a href="/testing-results/1/" target="blank">tracking of test</a> with both form and call success metrics</span></li>
+                            </ul>
+                        </div>
+                    
+    				</section>
+
+                     <section data-background="/presentations/images/sales-funnel.jpg">
+                        <div class="secHeader">Acquire Accurate Data - Initiative 3</div>
+                        <div class="whiteBlock fragment">
+                            <h3>Track Tests Down Funnel</h3><br>
+                            <ul>
+                                <li class="fragment"><span> Do more leads always mean more accounts? <br><strong class="fragment">optimize to accounts</strong></span></li>
+                                <li class="fragment"><span>Do more accounts always mean more revenue?<br> <strong class="fragment">optimize to reveunue</strong></span></li>
+                            </ul>
+                        </div>
+                    </section>
+                    <section data-background="/presentations/images/data.jpg">
+                        <div class="secHeader">Launch Significant Tests- Initiative 1</div>
+                            <div class="whiteBlock fragment">
+                                <h3>Segmentation & Targeting</h3><br>
+                                <ul>
+                                    <li class="fragment"><span> Channel / Source / Creative</span></li>
+                                    <li class="fragment"><span> Device Type</span></li>
+                                    <li class="fragment"><span> Persona (Cicero)</span></li>
+                                    <li class="fragment"><span> <a href="/heat-maps/" target="blank"> Day Parting</a></span></li>
+                                    <li class="fragment"><span> Behavior</span></li>
+                                    <li class="fragment"><span> User Type</span></li>
+                                    <li class="fragment"><span> Geo</span></li>
+                                    <li class="fragment"><span> Cluster</span></li>
+                                    
+                                </ul>
+                            </div>
+                    </section>
+                    <section data-background="/presentations/images/google.jpg">
+                    <div class="secHeader">Launch Significant Tests- Initiative 2</div>
+                    <div class="whiteBlock fragment">
+                        <h3>Tailored User Experiences</h3><br>
+                                <ul>
+                                    <li class="fragment"><span> Mirror ad creative and LP creative</span></li>
+                                    <li class="fragment"><span> Adapt pages to search queries and keywords </span></li>
+                                    <li class="fragment"><span> Individually optimize and target SEO pages</span></li>
+                                    <li class="fragment"><span> Expand LP portfolio for affiliates</span></li>
+                                </ul>
+                    </div>
+                    </section>
+                    <section data-background="/presentations/images/subway.jpg">
+                    <div class="secHeader">Launch Significant Tests- Initiative 3</div>
+                        <div class="whiteBlock fragment">
+                        <h3>Optimize Beyond Entry Page</h3><br>
+                                <ul>
+                                    <li class="fragment"><span>Multi-page optimization flows</span></li>
+                                    <li class="fragment"><span> Drive relevant 'micro' conversions, e.g., video views</span></li>
+                                    <li class="fragment"><span> Optimize against scroll depth. Is scrolling the new click?</span>
+                                </ul>
+                    </div>                        
+                    </section>
+
+</section>
+
+			</div>
+
+		</div>
+
+    <script type="text/javascript">
+$( "#fire" ).click(function()
+
+ { $('#catchFire').attr('data-background','/presentations/images/fire.gif');
+ Reveal.initialize();
+
+});
+
+/*$( "#fire" ).toggle(function() {
+  $('#catchFire').attr('data-background','/presentations/images/fire.gif');
+  Reveal.initialize();}, 
+  function(){
+$('#catchFire').removeAttr('data-background');
+Reveal.initialize();
+  });*/
+    </script>
+
+<!-- ------------- HighCharts.js ------------ -!-->
+<script type="text/javascript" src="/js/highchart-scripts/ytd-2014.js"></script>
+<script type="text/javascript" src="/js/highchart-scripts/call-bps.js"></script>
+<!-- ------------- END HighCharts ------------ -!-->
+
+<script src="../../js/reveal.min.js"></script>
+<script type="text/javascript" src="/presentations/jan-plan/js/leadmix.js"></script>
+
+<script>
+
+	Reveal.initialize({
+
+
+
+    // Display controls in the bottom right corner
+    controls: true,
+
+    // Display a presentation progress bar
+    progress: false,
+
+    // Display the page number of the current slide
+    slideNumber: true,
+
+    // Push each slide change to the browser history
+    history: true,
+
+    // Enable keyboard shortcuts for navigation
+    keyboard: true,
+
+    // Enable the slide overview mode
+    overview: true,
+
+    // Vertical centering of slides
+    center: true,
+
+    // Enables touch navigation on devices with touch input
+    touch: true,
+
+    // Loop the presentation
+    loop: false,
+
+    // Change the presentation direction to be RTL
+    rtl: false,
+
+    // Turns fragments on and off globally
+    fragments: true,
+
+    // Flags if the presentation is running in an embedded mode,
+    // i.e. contained within a limited portion of the screen
+    embedded: false,
+
+    // Number of milliseconds between automatically proceeding to the
+    // next slide, disabled when set to 0, this value can be overwritten
+    // by using a data-autoslide attribute on your slides
+    autoSlide: 0,
+
+    // Stop auto-sliding after user input
+    autoSlideStoppable: true,
+
+    // Enable slide navigation via mouse wheel
+    mouseWheel: false,
+
+    // Hides the address bar on mobile devices
+    hideAddressBar: true,
+
+    // Opens links in an iframe preview overlay
+    previewLinks: true,
+
+    // Transition style
+    transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+    // Transition speed
+    transitionSpeed: 'default', // default/fast/slow
+
+    // Transition style for full page slide backgrounds
+    backgroundTransition: 'default', // default/none/slide/concave/convex/zoom
+
+    // Number of slides away from the current that are visible
+    viewDistance: 3,
+
+    // Parallax background image
+    parallaxBackgroundImage: '', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+
+    // Parallax background size
+    parallaxBackgroundSize: '' // CSS syntax, e.g. "2100px 900px"
+
+
+});
+
+		</script>
+	</body>
+</html>
