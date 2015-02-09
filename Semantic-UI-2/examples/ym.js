@@ -20,3 +20,4 @@ $("#home > div.ui.inverted.masthead.segment > div > div > div.ui.transition.info
 $("#home > div.ui.inverted.masthead.segment > div > div > img").attr('src','images/cat2.png');
 
 
+ 
