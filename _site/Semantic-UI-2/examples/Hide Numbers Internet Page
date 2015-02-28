@@ -1,0 +1,3 @@
+$("body > main > section.featured-wireless.section1 > div > div").hide();
+$("#main-nav > div.main-nav-right > a > span.quote-btn-full").hide();
+$("#wide-form > div > p.form-subtext.hideafter").html("Fill out the form below to see if we have services in your area.");
