@@ -1,77 +1,222 @@
-<!doctype html>
-<html lang="en">
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Significance Calculator</title>
 
-    <head>
-        <meta charset="utf-8">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" class="ui" href="js/semantic/packaged/css/semantic.css">
+  <script src="js/semantic/packaged/javascript/semantic.js"></script>
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+  <script src="http://code.highcharts.com/highcharts-more.js"></script>
+</head>
 
-        <title>Repsonse Optimization</title>
+<body>
+    <div class="ui selection dropdown">
+      <input id="percentile" type="hidden" name="Percentile">
+      <div class="default text">90% Confidence Interval</div>
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <div class="item" data-value="1">80%</div>
+        <div class="item" data-value="2"><strong>90% (default)</strong></div>
+        <div class="item" data-value="3">95% (Adobe Target)</div>
+        <div class="item" data-value="4">99%</div>
+      </div>
+    </div>
 
+    <div class="margins">
+        <h2 class="ui header"><strong>Testing Results Calculator</strong></h2> 
+        <h3 class="ui header" style="display:inline-block;margin:0px;"><strong>Metrics:</strong></h3>
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="http://code.highcharts.com/highcharts.js"></script>
-        <script src="http://code.highcharts.com/highcharts-more.js"></script>
+        <table class="ui celled table segment">
+            <tr>
+                <th>Experience</th>
+                <th>Visitors</th>
+                <th>Forms</th>
+                <th>Calls</th>
+                <th>Total Leads</th>
+            </tr>
+            <tr id = "metrics1" class="exp1 metrics">
+                <td>
+                    <div class="ui input">
+                        <input type="text" id="exp1-name" class="name" placeholder="Experience A [Control]">
+                    </div>
+                </td>
+                <td>
+                    <div class="ui input">
+                        <input type="text" id="exp1-visitors" class="visitors" placeholder="Visitors">
+                    </div>
+                </td>
+                <td>
+                    <div class="ui input">
+                        <input type="text" id="exp1-forms" class="forms" placeholder="Forms">
+                    </div>
+                </td>
+                <td>
+                    <div class="ui input">
+                        <input type="text" id="exp1-calls" class="calls" placeholder="Calls">
+                    </div>
+                </td>
+                <td>
+                    <div class="total"></div>
+                </td>
+            </tr>
+            <tr id = "metrics2" class="exp2 metrics">
+                <td>
+                    <div class="ui input">
+                        <input type="text" id="exp2-name" class="name" placeholder="Experience B">
+                    </div>
+                </td>
+                <td>
+                    <div class="ui input">
+                        <input type="text" id="exp2-visitors"  class="visitors" placeholder="Visitors">
+                    </div>
+                </td>
+                <td>
+                    <div class="ui input">
+                        <input type="text" id="exp2-forms" class="forms" placeholder="Forms">
+                    </div>
+                </td>
+                <td>
+                    <div class="ui input">
+                        <input type="text" id="exp2-calls" class="calls" placeholder="Calls">
+                    </div>
+                </td>
+                <td >
+                    <div class="total"></div>
+                </td>
+            </tr>
+            <tr id = "metrics3" class="exp2 metrics">
+                <td>
+                    <div class="ui input">
+                        <input type="text" id="exp3-name" class="name" placeholder="Experience C">
+                    </div>
+                </td>
+                <td>
+                    <div class="ui input">
+                        <input type="text" id="exp3-visitors"  class="visitors" placeholder="Visitors">
+                    </div>
+                </td>
+                <td>
+                    <div class="ui input">
+                        <input type="text" id="exp3-forms" class="forms" placeholder="Forms">
+                    </div>
+                </td>
+                <td>
+                    <div class="ui input">
+                        <input type="text" id="exp3-calls" class="calls" placeholder="Calls">
+                    </div>
+                </td>
+                <td >
+                    <div class="total"></div>
+                </td>
+            </tr>
+        </table>
 
+        <h3 class="ui header" style="display:inline-block; margin-right:25px;">Number of Days In Test:</h3>
+        <div class="ui input" style="width:60px"><input type="text" id="daysInTest" placeholder="#"></div>
+        <br>
+        <div id="calculate" class="ui blue button">Calculate<i class="lab icon"></i></div>
+        <br>
 
+    <!-- <div class="ui divider"></div>
+    <div id="expandOptions"><i class="ui large icon Angle Down"></i><strong> Sales Assumptions (Optional)</strong></div>
+    <div id="CloseRates">
+        <h4 class="ui header" style="display:inline-block; margin-right:25px;">Form Close Rate:</h4><div class="ui input" style="width:70px"><input type="text" id="formCloseRate" placeholder="%"></div>
+        <h4 class="ui header" style="display:inline-block;margin-left:25px; margin-right:25px;">Call Close Rate:</h4><div class="ui input" style="width:70px"><input type="text" id="callCloseRate" placeholder="%"></div>
+         <h4 class="ui header" style="display:inline-block;margin-left:25px; margin-right:25px;">Monthly Revenue From An Acquisition:</h4><div class="ui input" style="width:120px"><input type="text" id="installRev" placeholder="$"></div>
+    </div> -->
 
+    <!---BEGIN RESULTS --> 
+        <div class="ui divider"></div>
+      <!--*********** Charts ***************!-->
+        <div style="float:right;"> 
+            <div id="containerCum" class="highchartsDisplay" style="min-width: 350px; height: 300px; margin: 0px"></div>
+            <br>
+            <div id="containerRatio" class="highchartsDisplay" style="min-width: 350px; height: 180px; margin: 0px;"></div>
+        </div>
+        <!--*********** Reults Table ***************!-->
+        <div class="ui backSection">
+            <h3><strong>Outbound Leads (Forms)</strong></h3>
+            <table class="ui celled table segment">
+                <tr>
+                    <th>Experience</th>
+                    <th>Response Rate%</th>
+                    <th>Lift %</th>
+                    <th>Confidence</th>
+                </tr>
+                <tr id = "forms1" class="exp1">
+                    <td><div class="experience"></div></td>
+                    <td><div class="ui fRR"></div></td>
+                    <td class="fLift">-</td>
+                    <td class="fConf">-</td>
+                </tr>
+                <tr id = "forms1" class="exp2">
+                    <td><div class="experience"></div></td>
+                    <td><div class="ui fRR"></div></td>
+                    <td><div class="fLift"></div></td>
+                    <td><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="fConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive. More data should be collected for this test." id="fConf-att" class="ui orange icon attention"></i><div class="fConf"></div></td>
+                </tr>
+            </table>
+            <h3><strong>Inbound Leads (Calls)</strong></h3>
+            <table class="ui celled table segment">
+                <tr>
+                    <th>Experience</th>
+                    <th>Response Rate%</th>
+                    <th>Lift %</th>
+                    <th>Confidence</th>
+                </tr>
+                <tr id = "calls1" class="exp1">
+                    <td ><div class="experience"></div></td>
+                    <td ><div class="ui cRR"></div></td>
+                    <td class="cLift">-</td>
+                    <td class="cConf">-</td>
+                </tr>
+                <tr id = "calls2" class="exp2">
+                    <td ><div class="experience"></div></td>
+                    <td ><div class="ui cRR"></div></td>
+                    <td ><div class="cLift"></div></td>
+                    <td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="cConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive. More data should be collected for this test." id="cConf-att" class="ui orange icon attention"></i><div class="cConf"></div></td>
+                </tr>
+            </table>
+            <h3><strong>Total Leads</strong></h3>
+            <table class="ui celled table segment">
+                <tr>
+                    <th>Experience</th>
+                    <th>Response Rate%</th>
+                    <th>Lift %</th>
+                    <th>Confidence</th>
+                </tr>
+                <tr id = "total1" class="exp1">
+                    <td ><div class="experience"></div></td>
+                    <td ><div class="ui tRR"></div></td>
+                    <td class="tLift">-</td>
+                    <td class="cConf">-</td>
+                </tr>
+                <tr id = "total2" class="exp2">
+                    <td ><div class="experience"></div></td>
+                    <td ><div class="ui tRR"></div></td>
+                    <td ><div class="tLift"></div></td>
+                    <td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="tConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive in the test. More data should be collected." id="tConf-att" class="ui orange icon attention"></i><div class="tConf"></div></td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <div id="result">
+            <div style="font-size:20;">Additional Monthly Revenue</div>
+            <div id="addRev"></div>
+        </div>
+    </div>
+</body>
 
-    </head>
-
-    <body>
-  
-
-<div id="containerRatio" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-<input id="test"></input>
-<button>Calculate</button>
-
-<!-- ------------- HighCharts.js ------------ -!-->
-<script type="text/javascript" src="/js/highchart-scripts/ratios.js"></script>
+<script src="js/calculations.js"></script>
 
 <script type="text/javascript">
 
-    $(function () {
-    $('#container').highcharts({
-        title: {
-            text: 'Monthly Average Temperature',
-            x: -20 //center
-        },
-        subtitle: {
-            text: 'Source: WorldClimate.com',
-            x: -20
-        },
-        xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        },
-        yAxis: {
-            title: {
-                text: 'Temperature (°C)'
-            },
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
-        },
-        tooltip: {
-            valueSuffix: '°C'
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle',
-            borderWidth: 0
-        },
-        series: [{
-            name: 'Tokyo',
-            data: [test, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-        }]
-    });
-
-
-}); // end on click
-
+$('.ui.dropdown').dropdown();
+$("#expandOptions").on("click",function (){
+    $("#CloseRates").toggle();
+    $("#expandOptions").removeAttr("Class","Down").toggle();
+});
 </script>
-<!-- ------------- END HighCharts ------------ -!-->
 
-    </body>
 </html>
