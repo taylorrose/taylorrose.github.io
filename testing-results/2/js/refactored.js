@@ -1,4 +1,12 @@
-//Pre Calculations - Get all data accessible
+/* 
+I envision this in three sections:
+  1. Collect - get all inputs into an easily workable form
+  2. Calculate - perform neccesary calculations on data
+  3. Populate - populate data onto the page so users can interpret it. 
+*/
+
+
+//1. Collect:
  
 // get each experience, put in an array.
 var allMetrics = document.getElementsByClassName('metrics');
@@ -25,56 +33,87 @@ for (var j = 0; j < allMetrics.length; j++) {
     metrics.push(tempObj);
 }
 
+
 /* 
 
 After this step, all metrics are available as properties on each object in the metrics array.
-	* Experience 1 is in metrics[0], Experience 2 is in metrics[1], experience n is in metrics[n-1]
-	* each property is named by its class in the html (name, calls, forms, etc), and is accessible by calling it as a property
-		ex: 
-			to get calls for experience 1:
-			"metrics[0].calls"
+    * Experience 1 is in metrics[0], Experience 2 is in metrics[1], experience n is in metrics[n-1]
+    * each property is named by its class in the html (name, calls, forms, etc), and is accessible by calling it as a property
+        ex: 
+            to get calls for experience 1:
+            "metrics[0].calls"
 */
 
 
-//Functions - I've largely kept Taylor's functions as is. 
+////////////////////
 
- //simple response rate (amount of responses divided by number of visitors)
-    function responseRate(visitors, conversions) {
-        return (conversions / visitors);
+// 2. Calculations:
+
+// First, create function to do all calculations, then run write loop to run all experiences through it. 
+    //get response rate (visitors, conversion)
+        //get it as a percentage - consider moving to populations section
+    //get standard error 
+    //get confidence interval (standard error, sigma)
+    //get minimum - consider moving to populations section
+    //get maximum - consider moving to populations section
+
+function testCalculations (experience, sig){
+    var perctl, visits = experience.visitors
+    //response rate
+    experience.responseForms = (experience.forms / visits);
+    experience.responseCalls = (experience.calls / visits);
+    experience.responseTotal = (experience.total / visits);
+
+    //standard error
+    experience.seForms = Math.sqrt(experience.responseForms * (1 - experience.responseForms)/visits);
+    experience.seCalls = Math.sqrt(experience.responseCalls * (1 - experience.responseCalls)/visits);
+    experience.seTotal = Math.sqrt(experience.responseForms * (1 - experience.responseForms)/visits);
+
+    //confidence level
+    switch (sig) {
+        case 1:
+            perctl = 1.28;
+            break;
+        case 2:
+            perctl = 1.65;
+            break;
+        case 3:
+            perctl = 1.96;
+            break;
+        case 4:
+            perctl = 2.58;
+            break;
     }
 
+    //confidence interval
+    experience.confForms = experience.seForms * perctl;
+    experience.confCalls = experience.seCalls * perctl;
+    experience.confTotal = experience.seTotal * perctl;
+}
+
+for (var i = 0; i < metrics.length; i++) {
+    testCalculations(metrics[i]);
+};
+
+
+//3. Populate
+
+    //show confidence interval
+        //calc mins and maxs
+    //show response as percent
+
+
+
+
+
+//Functions - I've integrated a number of Taylor's functions into the "testCalculations" function. 
+// anything below are functions I've not yet integrated. 
+
     //convert decimal to a percent, give number of decimal places to include. RETURNS AS A STRING.
+    // CONSIDER MOVING TO POPULATE PHASE
     function toPercent(toConvert, decimal) {
         var num = toConvert*100;
         return num.toFixed(decimal) + "%";
-    }
-
-    //calculates the standard error 
-    function se(conversions, visitors) {
-        var p = conversions / visitors;
-        var a = p * (1 - p);
-        var b = a / visitors;
-        var standerr = Math.sqrt(b);
-        return standerr;
-    }
-
-    function confInt(standerr, sig) {
-        var perctl;
-        switch (sig) {
-            case 1:
-                perctl = 1.28;
-                break;
-            case 2:
-                perctl = 1.65;
-                break;
-            case 3:
-                perctl = 1.96;
-                break;
-            case 4:
-                perctl = 2.58;
-                break;
-        }
-        return standerr * perctl;
     }
     
     function ciDisplay(input){
@@ -100,6 +139,8 @@ After this step, all metrics are available as properties on each object in the m
       
         return Numerator/Denomninator;
     }
+    //
+
 
     function cumnormdist(x) {
         var b1 = 0.319381530;
@@ -130,24 +171,6 @@ After this step, all metrics are available as properties on each object in the m
             return 1 - taylor;
         }
     }
-
-//Calculations - Here I'll take all the data from the pre-cal section, and then perform all the calculations on it. 
-
-// First, create function to do all calculations, then run write loop to run all experiences through it. 
-	//get response rate (visitors, conversion)
-		//get it as a percentage
-	//get standard error 
-	//get confidence interval (standard error, sigma)
-	//get minimum
-	//get maximum
-
-function testCalculations (visit, conver){
-	var respRate = responseRate(visit,conver)
-	var respRatePercent = toPercent(respRate, 2);
-	var confidenceInterval = confInt(se(conver, visit), percentile);
-
-	return "(" + respRate + "," + respRatePercent + "," + confidenceInterval +")";
-}	
 
 
 
@@ -208,4 +231,16 @@ function testCalculations (visit, conver){
 // 	var inputObj = {};
 // 	inputObj[elementID] = elementInput.value;
 // 	return inputArray.push(inputObj);
+// }
+
+// function testCalculations (visit, conver){
+//     var respRate = responseRate(visit,conver)
+//     var respRatePercent = toPercent(respRate, 2);
+//     var confidenceInterval = confInt(se(conver, visit), percentile);
+
+//     return "(" + respRate + "," + respRatePercent + "," + confidenceInterval +")";
+// }   
+
+// function testCalculations (visitors, conversions){
+//     return ((conversions/visitors)*100).toFixed(2)+'%'
 // }
