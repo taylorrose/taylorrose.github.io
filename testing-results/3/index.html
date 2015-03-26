@@ -1,0 +1,838 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Significance Calculator</title>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" class="ui" href="/semantic/packaged/css/semantic.css">
+  <script src="/semantic/packaged/javascript/semantic.js"></script>
+  <!--<link rel="stylesheet" type="text/css" class="ui" href="/Semantic-UI-2/dist/semantic.css">
+  <script src="/Semantic-UI-2/dist/semantic.js"></script>!-->
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+  <script src="http://code.highcharts.com/highcharts-more.js"></script>
+  <style>
+    #linksy , #removeLastExperiece , #resetExperiece {
+        display: none;
+    }
+
+  </style>
+</head>
+
+<body>
+
+
+
+
+<div class="ui selection dropdown">
+  <input id="percentile" type="hidden" name="Percentile">
+  <div class="default text">90% Confidence Interval</div>
+  <i class="dropdown icon"></i>
+  <div class="menu">
+    <div class="item" data-value="1">80%</div>
+    <div class="item" data-value="2"><strong>90% (default)</strong></div>
+    <div class="item" data-value="3">95% (Adobe Target)</div>
+    <div class="item" data-value="4">99%</div>
+  </div>
+</div>
+
+
+
+
+
+<div class="margins">
+
+
+    <h2 class="ui header"><div class="ui input"><input type="text" id="test_title" placeholder="Title of Experiment"></div></h2>
+
+<!--<<div class="ui icon buttons">
+  <div class="ui active button"><a class="link" href="#">1</a></div>
+  <div class="ui button">2</div>
+  <div class="ui button">3</div>
+  <div class="ui button">4</div>
+  <div class="ui button">5</div>
+  <div class="ui button">6</div>
+</div>
+
+-->
+
+
+
+<h3 class="ui header" style="display:inline-block;margin:0px;"><strong>Metrics:</strong></h3>
+
+<table id="myTable" class="ui celled table segment">
+    <tr>
+        <th>Experience</th>
+        <th>Visitors</th>
+        <th>Forms</th>
+        <th>Calls</th>
+        <th>Total Leads</th>
+    </tr>
+    <tr id = "metrics1" class="exp1">
+        <td><div class="ui input"><input type="text" id="exp1-name" placeholder="Experience A [Control]"></div></td>
+        <td><div class="ui input"><input type="text" id="exp1-visitors" placeholder="Visitors"></div></td>
+        <td><div class="ui input"><input type="text" id="exp1-forms" placeholder="Forms"></div></td>
+        <td><div class="ui input"><input type="text" id="exp1-calls" placeholder="Calls"></div></td>
+        <td><div class="total"></div></td>
+    </tr>
+    <tr id = "metrics2" class="exp2">
+        <td><div class="ui input"><input type="text" id="exp2-name" placeholder="Experience B"></div></td>
+        <td><div class="ui input"><input type="text" id="exp2-visitors" placeholder="Visitors"></div></td>
+        <td><div class="ui input"><input type="text" id="exp2-forms" placeholder="Forms"></div></td>
+        <td><div class="ui input"><input type="text" id="exp2-calls" placeholder="Calls"></div></td>
+        <td ><div class="total"></div></td>
+    </tr>
+</table>
+<div id="AddExperience" class="mini ui button">
+<i class="plus icon"></i> Add Experience
+</div>
+<div id="removeLastExperiece" class="mini ui button">
+<i class="minus icon"></i> Remove Last Experience
+</div>
+<div id="resetExperiece" class="mini ui button">
+<i class="remove icon"></i> Reset
+</div>
+<br>
+<h3 class="ui header" style="display:inline-block; margin-right:25px;">Number of Days In Test:</h3><div class="ui input" style="width:60px"><input type="text" id="daysInTest" placeholder="#"></div>
+
+<br>
+<h3 class="ui header" style="display:inline-block; margin-right:25px;">Screen Grabs:</h3>
+<h4 class="ui header" style="display:inline-block; margin-right:25px;"><div class="ui input"><input type="text" id="pic1" placeholder="Experience A Image"></div></h4>
+<h4 class="ui header" style="display:inline-block; margin-right:25px;"><div class="ui input"><input type="text" id="pic2" placeholder="Experience B Image"></div></h4>
+
+<br id="addPics">
+<div id="calculate" class="ui blue button">Calculate<i class="lab icon"></i></div>
+<br>
+
+<div class="ui divider"></div>
+<!--<div id="expandOptions"><i class="ui large icon Angle Down"></i><strong> Sales Assumptions (Optional)</strong></div>
+<div id="CloseRates">
+    <h4 class="ui header" style="display:inline-block; margin-right:25px;">Form Close Rate:</h4><div class="ui input" style="width:70px"><input type="text" id="formCloseRate" placeholder="%"></div>
+    <h4 class="ui header" style="display:inline-block;margin-left:25px; margin-right:25px;">Call Close Rate:</h4><div class="ui input" style="width:70px"><input type="text" id="callCloseRate" placeholder="%"></div>
+     <h4 class="ui header" style="display:inline-block;margin-left:25px; margin-right:25px;">Monthly Revenue From An Acquisition:</h4><div class="ui input" style="width:120px"><input type="text" id="installRev" placeholder="$"></div>
+</div>
+<div class="ui divider"></div>!-->
+  <!--*********** Charts ***************!-->
+   <div style="float:right;"> 
+    
+  
+   <div id="containerCum" class="highchartsDisplay" style="min-width: 350px; height: 300px; margin: 0px"></div>
+   <br>
+   <div id="containerRatio" class="highchartsDisplay" style="min-width: 350px; height: 180px; margin: 0px;"></div>
+   </div>
+
+  <!--*********** Reults Table ***************!-->
+<div class="ui backSection">
+<h3><strong>Outbound Leads (Forms)</strong></h3>
+
+<table id="tableForms" class="ui celled table segment">
+    <tr>
+        <th>Experience</th>
+        <th>Response Rate%</th>
+        <th>Lift %</th>
+        <th>Confidence</th>
+    </tr>
+    <tr id = "forms1" class="exp1">
+        <td><div class="experience"></div></td>
+        <td><div class="ui fRR"></div></td>
+        <td class="fLift">-</td>
+        <td class="fConf">-</td>
+    </tr>
+    <tr id = "forms1" class="exp2">
+        <td><div class="experience"></div></td>
+        <td><div class="ui fRR"></div></td>
+        <td><div class="fLift"></div></td>
+        <td><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="fConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive. More data should be collected for this test." id="fConf-att" class="ui orange icon attention"></i><div class="fConf"></div></td>
+    </tr>
+</table>
+<h3><strong>Inbound Leads (Calls)</strong></h3>
+<table id="tableCalls" class="ui celled table segment">
+    <tr>
+        <th>Experience</th>
+        <th>Response Rate%</th>
+        <th>Lift %</th>
+        <th>Confidence</th>
+    </tr>
+    <tr id = "calls1" class="exp1">
+        <td ><div class="experience"></div></td>
+        <td ><div class="ui cRR"></div></td>
+        <td class="cLift">-</td>
+        <td class="cConf">-</td>
+    </tr>
+    <tr id = "calls2" class="exp2">
+        <td ><div class="experience"></div></td>
+        <td ><div class="ui cRR"></div></td>
+        <td ><div class="cLift"></div></td>
+        <td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="cConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive. More data should be collected for this test." id="cConf-att" class="ui orange icon attention"></i><div class="cConf"></div></td>
+    </tr>
+</table>
+<h3><strong>Total Leads</strong></h3>
+<table id="tableTotals"class="ui celled table segment">
+    <tr>
+        <th>Experience</th>
+        <th>Response Rate%</th>
+        <th>Lift %</th>
+        <th>Confidence</th>
+    </tr>
+    <tr id = "total1" class="exp1">
+        <td ><div class="experience"></div></td>
+        <td ><div class="ui tRR"></div></td>
+        <td class="tLift">-</td>
+        <td class="cConf">-</td>
+    </tr>
+    <tr id = "total2" class="exp2">
+        <td ><div class="experience"></div></td>
+        <td ><div class="ui tRR"></div></td>
+        <td ><div class="tLift"></div></td>
+        <td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="tConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive in the test. More data should be collected." id="tConf-att" class="ui orange icon attention"></i><div class="tConf"></div></td>
+    </tr>
+</table>
+</div>
+<br>
+<div id="result">
+<!--<div style="font-size:20;">Additional Monthly Revenue</div>
+<div id="addRev"></div>
+<div id="linksy" width="500px">!-->
+<br>
+
+<a href="#" target="blank">
+<div class="ui icon button">
+<i class="right arrow icon"></i> Sharable Link</div></a>
+</div>
+</div>
+</div>
+
+
+
+
+</body>
+
+<script type="text/javascript">
+//Show the backsection, which normally is hidden - !! For Troubleshooting only !!
+    $("div.ui.backSection").css("display","inline-block");
+
+
+//Add Experiences Button Click
+    $('#AddExperience').on('click' , function () {
+            //First Capture the ID of last Row --> 'metrics2'
+            var id_Metrics = $("#myTable tr:last").attr("id");
+                //Pull out the '2' in 'metrics2' using regex
+            var getID_MetricsNum = id_Metrics.match(/(\d+)/);
+                //Make pulled number, e.g., '2', a number and increment. This returns the number of experiences in experiment
+            var experienceNumber = parseInt(getID_MetricsNum[1],10) + 1;
+                //An array to convert numbers into letters - to populate later in field placeholder, e.g., [Experience C]
+            var LetterArray = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","AA","AB","AC","AD","AE","AF","AG","AH","AI","AJ","AK","AL","AM","AN","AO","AP","AQ","AR","AS","AT","AU","AV","AW","AX","AY","AZ"];
+            //Add a row to end of Metrics table
+                //Include a unique ID and placeholder attributes in adding in the number of experiments
+                    //Includes a class of 'lastRow' so it can easily be targeted
+            $("#myTable tr:last").after('<tr id="metrics' + experienceNumber + '" class="metrics lastRow"><td><div class="ui input"><input type="text" class="name" placeholder="Experience ' + LetterArray[experienceNumber-1] + '"></div></td><td><div class="ui input"><input type="text" class="visitors" placeholder="Visitors"></div></td><td><div class="ui input"><input type="text" class="forms" placeholder="Forms"></div></td><td><div class="ui input"><input type="text" class="calls" placeholder="Calls"></div></td><td><div class="total"></div></td></tr>');
+            //Added ID to <br> tag (I know...) so that I could place additional picture fields before the 'Calculate' button
+                //Includes a class of 'lastRow' so it can easily be targeted
+            $("#addPics").before('<h4 class="ui header lastRow" style="display:inline-block; margin-right:25px;"><div class="ui input"><input type="text" id="pic'+experienceNumber+'" placeholder="Experience '+LetterArray[experienceNumber-1]+' Image"></div></h4>');
+            //Add a row to end of Totals table
+                //Include a unique ID and class attributes in adding in the number of experiments
+                    //Includes a class of 'lastRow' so it can easily be targeted
+            $("#tableTotals tr:last").after('<tr id = "total'+experienceNumber+'" class="exp'+experienceNumber+'  lastRow"><td ><div class="experience"></div></td><td ><div class="ui tRR"></div></td><td ><div class="tLift"></div></td><td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="tConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive in the test. More data should be collected." id="tConf-att" class="ui orange icon attention"></i><div class="tConf"></div></td></tr>');
+            //Add a row to end of Calls table
+                //Include a unique ID and class attributes in adding in the number of experiments
+                    //Includes a class of 'lastRow' so it can easily be targeted
+            $("#tableCalls tr:last").after('<tr id = "calls'+experienceNumber+'" class="exp'+experienceNumber+' lastRow"><td ><div class="experience"></div></td><td ><div class="ui tRR"></div></td><td ><div class="tLift"></div></td><td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="tConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive in the test. More data should be collected." id="tConf-att" class="ui orange icon attention"></i><div class="tConf"></div></td></tr>');
+            //Add a row to end of Forms table
+                //Include a unique ID and class attributes in adding in the number of experiments
+                    //Includes a class of 'lastRow' so it can easily be targeted
+            $("#tableForms tr:last").after('<tr id = "forms'+experienceNumber+'" class="exp'+experienceNumber+' lastRow"><td ><div class="experience"></div></td><td ><div class="ui tRR"></div></td><td ><div class="tLift"></div></td><td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="tConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive in the test. More data should be collected." id="tConf-att" class="ui orange icon attention"></i><div class="tConf"></div></td></tr>');
+
+            //Show the 'Remove Last Experience' button
+            $('#removeLastExperiece').attr("style","display:inline-block");
+            //Show the 'Reset' button
+            $('#resetExperiece').attr("style","display:inline-block");
+    });
+
+    //Remove Experience Button Click
+    $("#removeLastExperiece").on("click", function () {
+        //Remove Last Row of Metrics, Totals, Calls, and Forms tables - Will only remove if class of 'lastRow' is present
+            //Metrics Table
+            $("#myTable tr.lastRow:last").remove();
+            //Totals Table
+            $("#tableTotals tr.lastRow:last").remove();
+            //Calls Table
+            $("#tableCalls tr.lastRow:last").remove();
+            //Forms Table
+            $("#tableForms tr.lastRow:last").remove();
+            //Picture Fields
+            $("#addPics").prev(".lastRow").remove();
+    });
+
+    //Reset Button Click
+    $("#resetExperiece").on("click", function () {
+        //Remove all elements with 'lastRow' class
+        $(".lastRow").remove();
+        //Remove 'Remove Last Experience' and 'Reset' Buttons
+        $('#removeLastExperiece').hide();
+        $('#resetExperiece').hide();
+    });
+</script>
+
+<script>
+
+//Get Param Function
+    function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+$("#test_title").attr("value",getParameterByName("title"));
+
+$("#exp1-name").attr("value",getParameterByName("name1"));
+$("#exp2-name").attr("value",getParameterByName("name2"));
+
+$("#exp1-visitors").attr("value",getParameterByName("visit1"));
+$("#exp2-visitors").attr("value",getParameterByName("visit2"));
+
+$("#exp1-forms").attr("value",getParameterByName("form1"));
+$("#exp2-forms").attr("value",getParameterByName("form2"));
+
+$("#exp1-calls").attr("value",getParameterByName("call1"));
+$("#exp2-calls").attr("value",getParameterByName("call2"));
+
+$("#daysInTest").attr("value",getParameterByName("days"));
+
+$("#pic1").attr("value",getParameterByName("pic1"));
+$("#pic2").attr("value",getParameterByName("pic2"));
+
+
+
+
+
+
+	//Assumptions
+$("#calculate").on("click",function(){
+    var percentilSTN= parseInt($("#percentile").val());   
+    var percentile = percentilSTN || 2;
+
+    var installRev = parseInt($("#installRev").val()) || 59;
+    var formCloseRate = parseInt($("#formCloseRate").val()) || 0.12;
+    var callCloseRate = parseInt($("#callCloseRate").val()) || 0.18;
+
+    $("installRev").html(
+        (installRev*formCloseRate*monthlyEstimate*exp2Min)+(installRev*callCloseRate*monthlyEstimate*exp2Min_c)
+            );
+    //Experiment Title
+    var testTitle = $("#test_title").val() || "Test Results";
+
+    //Experience 1
+    var exp1Name = $("#exp1-name").val() || "Test A";
+    var exp1Visitors = $("#exp1-visitors").val() || 1000;
+    var exp1Forms = $("#exp1-forms").val() || 50;
+    var exp1Calls = $("#exp1-calls").val() || 50;
+    var exp1Total = parseInt(exp1Forms) + parseInt(exp1Calls);
+
+    var exp1fRR = responseRate(exp1Visitors, exp1Forms);
+    var exp1fRR_p = toPercent(exp1fRR, 2);
+    var exp1Forms_se = se(exp1Forms,exp1Visitors);
+    var exp1Forms_ci = confInt(exp1Forms_se,percentile);
+    var exp1Min = exp1fRR - exp1Forms_ci;
+    var exp1Max = exp1fRR + exp1Forms_ci;
+    var exp1fRR_TT = ((exp1fRR-exp1Forms_ci)*100).toFixed(2)+"% to "+((exp1fRR+exp1Forms_ci)*100).toFixed(2)+"%";
+
+    var exp1cRR = responseRate(exp1Visitors, exp1Calls);
+    var exp1cRR_p = toPercent(exp1cRR, 2);
+    var exp1Calls_se = se(exp1Calls,exp1Visitors);
+    var exp1Calls_ci = confInt(exp1Calls_se,percentile);
+    var exp1Min_c = exp1cRR - exp1Calls_ci;
+    var exp1Max_c = exp1cRR + exp1Calls_ci;
+    var exp1cRR_TT = ((exp1cRR-exp1Calls_ci)*100).toFixed(2)+"% to "+((exp1cRR+exp1Calls_ci)*100).toFixed(2)+"%";
+
+    var exp1tRR = responseRate(exp1Visitors, exp1Total);
+    var exp1tRR_p = toPercent(exp1tRR, 2);
+    var exp1Total_se = se(exp1Total,exp1Visitors);
+    var exp1Total_ci = confInt(exp1Total_se,percentile);
+    var exp1Min_t = exp1tRR - exp1Total_ci;
+    var exp1Max_t = exp1tRR + exp1Total_ci;
+    var exp1tRR_TT = ((exp1tRR-exp1Total_ci)*100).toFixed(2)+"% to "+((exp1tRR+exp1Total_ci)*100).toFixed(2)+"%";
+
+
+    //------------------------------------
+
+    //Experience 2
+    var exp2Name = $("#exp2-name").val() || "Test B";
+    var exp2Visitors = $("#exp2-visitors").val() || 1000;
+    var exp2Forms = $("#exp2-forms").val() || 70;
+    var exp2Calls = $("#exp2-calls").val() || 70;
+    var exp2Total = parseInt(exp2Forms) + parseInt(exp2Calls);
+
+    var exp2fRR = responseRate(exp2Visitors, exp2Forms);
+    var exp2fRR_p = toPercent(exp2fRR, 2);
+    var exp2Forms_se = se(exp2Forms,exp2Visitors);
+    var exp2Forms_ci = confInt(exp2Forms_se,percentile);
+    var exp2Min = exp2fRR - exp2Forms_ci;
+    var exp2Max = exp2fRR + exp2Forms_ci;
+    var exp2fRR_TT = ((exp2fRR-exp2Forms_ci)*100).toFixed(2)+"% to "+((exp2fRR+exp2Forms_ci)*100).toFixed(2)+"%";
+
+    var exp2cRR = responseRate(exp2Visitors, exp2Calls);
+    var exp2cRR_p = toPercent(exp2cRR, 2);
+    var exp2Calls_se = se(exp2Calls,exp2Visitors);
+    var exp2Calls_ci = confInt(exp2Calls_se,percentile);
+    var exp2Min_c = exp2cRR - exp2Calls_ci;
+    var exp2Max_c = exp2cRR + exp2Calls_ci;
+    var exp2cRR_TT = ((exp2cRR-exp2Calls_ci)*100).toFixed(2)+"% to "+((exp2cRR+exp2Calls_ci)*100).toFixed(2)+"%";
+
+    var exp2tRR = responseRate(exp2Visitors, exp2Total);
+    var exp2tRR_p = toPercent(exp2tRR, 2);
+    var exp2Total_se = se(exp2Total,exp2Visitors);
+    var exp2Total_ci = confInt(exp2Total_se,percentile);
+    var exp2Min_t = exp2tRR - exp2Total_ci;
+    var exp2Max_t = exp2tRR + exp2Total_ci;
+    var exp2tRR_TT = ((exp2tRR-exp2Total_ci)*100).toFixed(2)+"% to "+((exp2tRR+exp2Total_ci)*100).toFixed(2)+"%";
+
+    
+
+
+
+    //Calculations
+    function responseRate(visitors, conversions) {
+        return (conversions / visitors);
+    }
+
+    function toPercent(toConvert, decimal) {
+        var num = toConvert*100;
+        return num.toFixed(decimal) + "%";
+    }
+
+    function se(conversions, visitors) {
+        var p = conversions / visitors;
+        var a = p * (1 - p);
+        var b = a / visitors;
+        var standerr = Math.sqrt(b);
+        return standerr;
+    }
+
+    function confInt(standerr, sig) {
+        var perctl;
+        switch (sig) {
+            case 1:
+                perctl = 1.28;
+                break;
+            case 2:
+                perctl = 1.65;
+                break;
+            case 3:
+                perctl = 1.96;
+                break;
+            case 4:
+                perctl = 2.58;
+                break;
+        }
+        return standerr * perctl;
+    }
+    function ciDisplay(input){
+    var ci = input * 100;
+    return "<div class='ci'>&plusmn"+ci.toFixed(2)+"%</div>";
+    }
+
+    function lift (rrControl,rr2){
+    var num1 = ((rr2 - rrControl) / rrControl)*100;
+    return num1.toFixed(2)+"%";
+    }
+    function zscore (P,N,Pc,Nc){
+        var Ac = Pc*(1-Pc);
+        var Bc = Ac/Nc;
+        /********************/
+        var A = P*(1-P);
+        var B = A/N;
+        /******************/
+        var C = B + Bc;
+        var Numerator = P - Pc;
+        var Denomninator = Math.sqrt(C);
+      
+        
+    return Numerator/Denomninator;
+    }
+    function cumnormdist(x) {
+        var b1 = 0.319381530;
+        var b2 = -0.356563782;
+        var b3 = 1.781477937;
+        var b4 = -1.821255978;
+        var b5 = 1.330274429;
+        var p = 0.2316419;
+        var c = 0.39894228;
+        var t;
+        var taylor;
+        var package;
+        var exponent1;
+
+        if (x >= 0) {
+
+            t = 1.0 / (1.0 + p * x);
+            exponent1 =  (-x * x) / 2.0;
+            package = ( t *( t * ( t * ( t * b5 + b4 ) + b3 ) + b2 ) + b1 );
+            taylor = 1.0 - c * Math.exp(exponent1) * t * package;
+            return taylor;
+
+        } else {
+             t = 1.0 / (1.0 - p * x);
+            exponent1 =  -x * x / 2.0;
+            package = ( t *( t * ( t * ( t * b5 + b4 ) + b3 ) + b2 ) + b1 );
+            taylor = (c * Math.exp(exponent1)) * t * package;
+            return 1 - taylor;
+        }
+    }
+
+    //Populate Experience Names
+    $(".exp1 div.experience").html(exp1Name + " [CONTROL]");
+    $(".exp2 div.experience").html(exp2Name);
+
+    //Populate Metrics
+    //$(".exp1 div.visitors").html(exp1Visitors);
+    //$(".exp1 div.forms").html(exp1Forms);
+    //$(".exp1 div.calls").html(exp1Calls);
+    $(".exp1 div.total").html(exp1Total);
+
+    $(".exp2 div.visitors").html(exp2Visitors);
+    $(".exp2 div.forms").html(exp2Forms);
+    $(".exp2 div.calls").html(exp2Calls);
+    $(".exp2 div.total").html(exp2Total);
+
+    //Populate Outbound Leads (Forms)
+    $(".exp1 div.fRR").html(exp1fRR_p + " " + ciDisplay(exp1Forms_ci));
+    $(".exp1 div.fRR").attr("data-content",exp1fRR_TT);
+
+    $(".exp2 div.fRR").html(exp2fRR_p + " " + ciDisplay(exp2Forms_ci));
+    $(".exp2 div.fRR").attr("data-content",exp2fRR_TT);
+    $(".exp2 div.fLift").html(lift(exp1fRR,exp2fRR)+"<div class='ci'> ("+lift(exp1Max,exp2Min)+" to "+lift(exp1Min,exp2Max)+")</div>");
+    $(".exp2 div.fConf").html((cumnormdist(zscore(exp2fRR,exp2Visitors,exp1fRR,exp1Visitors))*100).toFixed(2)+"%");
+
+    //Populate Inbound Leads (Calls)
+    $(".exp1 div.cRR").html(exp1cRR_p + " " + ciDisplay(exp1Calls_ci));
+    $(".exp1 div.cRR").attr("data-content",exp1cRR_TT);
+
+    $(".exp2 div.cRR").html(exp2cRR_p + " " + ciDisplay(exp2Calls_ci));
+    $(".exp2 div.cRR").attr("data-content",exp2cRR_TT);
+    $(".exp2 div.cLift").html(lift(exp1cRR,exp2cRR)+"<div class='ci'> ("+lift(exp1Max_c,exp2Min_c)+" to "+lift(exp1Min_c,exp2Max_c)+")</div>");
+    $(".exp2 div.cConf").html((cumnormdist(zscore(exp2cRR,exp2Visitors,exp1cRR,exp1Visitors))*100).toFixed(2)+"%");
+
+    //Populate Total Leads
+    $(".exp1 div.tRR").html(exp1tRR_p + " " + ciDisplay(exp1Total_ci));
+    $(".exp1 div.tRR").attr("data-content",exp1tRR_TT);
+
+    $(".exp2 div.tRR").html(exp2tRR_p + " " + ciDisplay(exp2Total_ci));
+    $(".exp2 div.tRR").attr("data-content",exp2tRR_TT);
+    $(".exp2 div.tLift").html(lift(exp1tRR,exp2tRR)+"<div class='ci'> ("+lift(exp1Max_t,exp2Min_t)+" to "+lift(exp1Min_t,exp2Max_t)+")</div>");
+    $(".exp2 div.tConf").html((cumnormdist(zscore(exp2tRR,exp2Visitors,exp1tRR,exp1Visitors))*100).toFixed(2)+"%");
+
+    //Capture Images
+    var pic1 = $("#pic1").val();
+    var pic2 = $("#pic2").val();
+
+    //Populate URL
+    var daysInTest = $("#daysInTest").val() || 14;
+    var date = new Date();
+    var embeddURL = 
+    "/testing-results/embedd/1/?title="+ encodeURIComponent(testTitle)+
+    "&name1=" + encodeURIComponent(exp1Name) + 
+    "&name2=" + encodeURIComponent(exp2Name) + 
+    "&visit1=" + exp1Visitors +
+    "&visit2=" + exp2Visitors +
+    "&form1=" + exp1Forms +
+    "&form2=" + exp2Forms +
+    "&call1=" + exp1Calls +
+    "&call2=" + exp2Calls +
+    "&days="  + daysInTest +
+    "&pic1="  + encodeURIComponent(pic1) +
+    "&pic2="  + encodeURIComponent(pic2) +
+    "&confint=" + percentile +
+    "&instrev=" + installRev +
+    "&formcr=" + formCloseRate * 100 +
+    "&callcr=" + callCloseRate *100 +
+     "&date="+encodeURIComponent(date.toLocaleString());
+    $("a").attr("href",embeddURL);
+    $("#linksy").show();
+
+    var fConfidence = cumnormdist(zscore(exp2fRR,exp2Visitors,exp1fRR,exp1Visitors));
+    var cConfidence = cumnormdist(zscore(exp2cRR,exp2Visitors,exp1cRR,exp1Visitors));
+    var tConfidence = cumnormdist(zscore(exp2tRR,exp2Visitors,exp1tRR,exp1Visitors));
+
+    if(fConfidence >= 0.95) {
+     $("#fConf-check").show();
+     $("#fConf-att").hide();
+
+    } else if (fConfidence <=0.85) {
+         $("#fConf-check").hide();
+        $("#fConf-att").show();
+
+    } else {
+     $("#fConf-check").hide();
+     $("#fConf-att").hide();
+
+    };
+
+    if(cConfidence >= 0.95) {
+     $("#cConf-check").show();
+     $("#cConf-att").hide();
+
+    } else if (cConfidence <=0.85) {
+         $("#cConf-check").hide();
+        $("#cConf-att").show();
+
+    } else {
+     $("#cConf-check").hide();
+     $("#cConf-att").hide();
+
+    };
+
+    if(tConfidence >= 0.95) {
+     $("#tConf-check").show();
+     $("#tConf-att").hide();
+
+    } else if (tConfidence <=0.85) {
+         $("#tConf-check").hide();
+        $("#tConf-att").show();
+    } else {
+     $("#tConf-check").hide();
+     $("#tConf-att").hide();
+    };
+
+    if (!(percentile >= 0)){
+    $(".ui.selection.dropdown").addClass("error");
+    }else{
+    $(".ui.selection.dropdown").removeClass("error");
+    }
+
+
+    $("div.ui.backSection").css("display","inline-block");
+    $(".highchartsDisplay").css("display","inline-block");
+
+
+    var visitsInTest = parseInt($("#exp1-visitors").val()) + parseInt($("#exp2-visitors").val()) || 2000;
+    var monthlyEstimate = (visitsInTest / daysInTest) * 7 * 4.33333334;
+    var test1Min = exp2Min_t;
+    var ctl1Min = exp1Min_t;
+    var test1Max = exp2Max_t;
+    var ctlRRMax = exp1Max_t;
+
+
+    var minMaxArr = [Math.round((test1Min * monthlyEstimate) - (ctlRRMax * monthlyEstimate)),Math.round((test1Max * monthlyEstimate) - (ctl1Min * monthlyEstimate))];
+
+    var cumMonLead =[
+        [minMaxArr[0]*(1),minMaxArr[1]*(1)],
+        [minMaxArr[0]*(2),minMaxArr[1]*(2)],
+        [minMaxArr[0]*(3),minMaxArr[1]*(3)],
+        [minMaxArr[0]*(4),minMaxArr[1]*(4)],
+        [minMaxArr[0]*(5),minMaxArr[1]*(5)],
+        [minMaxArr[0]*(6),minMaxArr[1]*(6)]
+    ];
+    
+
+    //*********************************
+    var winningTest = "<em>"+exp2Name+"</em>";
+    var today = new Date();
+    var currentMonth = today.getMonth();
+    var currentYear = parseInt(today.getFullYear().toString().substring(2));
+
+
+    function monthStr(month, addition) {
+        var montharr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        var addMonth = month + addition;
+        var monthadj = addMonth - 12;
+        if (addMonth > 11) {
+            return montharr[monthadj]+" '"+(currentYear+1);
+        } else {
+            return montharr[addMonth]+" '"+(currentYear+0);
+        }
+    }
+
+    var nextSixMonths = [];
+
+    for (i = 1; i < 7; i++) {
+        nextSixMonths.push( monthStr(currentMonth, i));
+    };
+
+    /**************************************************
+    ***************************************************
+    ***************************************************/
+
+    $(function () {
+
+        $('#containerCum').highcharts({
+
+            chart: {
+                type: 'columnrange',
+                inverted: false,
+                  style: {
+                fontFamily: 'Arial, Helvetica, sans-serif'
+
+            }
+            },
+
+            title: {
+                text: '<strong>Monthly Lead Increase (Range)</strong>'
+            },
+
+            subtitle: {
+                text: 'Experience: '+winningTest
+            },
+
+            xAxis: {
+                categories: nextSixMonths
+                
+            },
+
+            yAxis: {
+                title: {
+                   text: 'Additional Leads'
+                },
+                gridLineWidth: 1,
+                tickLength: 8,
+            tickWidth: 1,
+            tickPosition: 'outside',
+             /*plotLines : [{
+                        value : -13,
+                        color : 'red',
+                        dashStyle : 'shortdash',
+                        width : 1,
+                        
+                    }]*/
+            },
+
+            tooltip: {
+                //valueSuffix: '°C'
+            },
+
+            plotOptions: {
+                columnrange: {
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                           return this.y;
+                        }
+                    }
+                }
+            },
+
+            legend: {
+                enabled: false
+            },
+
+            series: [{
+                name: 'Leads',
+                data: cumMonLead,
+                color:"#A1CF64"
+            }]
+
+        });
+
+    });
+    var TRtest1Calls = parseInt(exp1Calls);
+    var TRtest2Calls = parseInt(exp2Calls);
+    var TRtest1Forms = parseInt(exp1Forms);
+    var TRtest2Forms = parseInt(exp2Forms);
+    $(function () {
+        $('#containerRatio').highcharts({
+            chart: {
+                type: 'column',
+                inverted: true,
+                style:{
+                    fontFamily:'Arial, Helvetica, sans-serif'
+
+                }
+            },
+            legend:'none',
+            title: {text:"<strong>Calls vs. Forms (% Total)</strong>"},
+            xAxis: {
+                categories: [exp1Name, exp2Name],
+                tickLength:0
+            },
+            yAxis: {
+                min: 0,
+                title: 'none'
+            },
+            tooltip: {
+                pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+                shared: true
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'percent',
+
+                }
+            },
+            series: [{
+                name: 'Forms',
+                data: [TRtest1Forms, TRtest2Forms],
+                
+                color:'#F05940'
+            }, {
+                name: 'Calls',
+                data: [TRtest1Calls, TRtest2Calls],
+                color:'#6ECFF5'
+            }]
+        });
+    });
+
+var minaddRev = Math.round( 
+    (
+      (installRev*formCloseRate*monthlyEstimate*exp2Min)+(installRev*callCloseRate*monthlyEstimate*exp2Min_c)//Minimum Experience 2 Rev
+    ) - (
+      (installRev*formCloseRate*monthlyEstimate*exp1Max)+(installRev*callCloseRate*monthlyEstimate*exp1Max_c)//Minus Maximum Experience 1 Rev
+        ) 
+    );
+
+var maxaddRev = Math.round(
+    (
+        (installRev*formCloseRate*monthlyEstimate*exp2Max)+(installRev*callCloseRate*monthlyEstimate*exp2Max_c)//Maximum Experience 2 Rev
+    ) - (
+        (installRev*formCloseRate*monthlyEstimate*exp1Min)+(installRev*callCloseRate*monthlyEstimate*exp1Min_c)//Minus Minimum Experience 1 Rev
+        )
+    );
+var revSymbol1 = "";
+var revSymbol2 = "";
+
+if (minaddRev<0) {
+   revSymbol1 = "-$";
+}else{
+    revSymbol1="$";
+};
+
+if (maxaddRev<0) {
+   revSymbol2 = "-$";
+}else{
+    revSymbol2="$";
+};
+
+    $("#addRev").html(
+        revSymbol1+Math.abs(minaddRev).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+" <span style='font-size:28px;'>to</span> "+
+        revSymbol2+Math.abs(maxaddRev).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+            );
+
+    $( document ).ready(function() {
+        $( "text:contains('Highcharts.com')" ).hide();
+    });
+
+    $('.ui')
+  .popup({
+    position: 'left center',
+    delay:0
+  })
+  ;
+$("#result").show();
+$("html, body").animate({ scrollTop: $(document).height() }, "slow");
+});
+
+</script>
+
+<script type="text/javascript">
+
+$('.ui.dropdown')
+  .dropdown()
+;
+$("#expandOptions").on("click",function (){
+$("#CloseRates").toggle();
+$("#expandOptions").removeAttr("Class","Down").toogle();
+
+});
+
+
+</script>
+
+</html>
