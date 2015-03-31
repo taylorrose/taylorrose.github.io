@@ -127,7 +127,7 @@
 <i class="minus icon"></i> Remove Last Experience
 </div>
 <div id="resetExperiece" class="mini ui button">
-<i class="remove icon"></i> Reset
+<i class="remove icon"></i> Remove All
 </div>
 <br>
 <h3 class="ui header" style="display:inline-block; margin-right:25px;">Number of Days In Test:</h3><div class="ui input" style="width:60px"><input type="text" id="daysInTest" placeholder="#"></div>
@@ -248,6 +248,29 @@
 
 </body>
 
+<script type="text/javascript">
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+var fillForms = getParameterByName("forms").split(",").map(function(item) {
+    return parseInt(item, 10);
+});
+var fillCalls = getParameterByName("calls").split(",").map(function(item) {
+    return parseInt(item, 10);
+});
+var fillVisitors = getParameterByName("visit").split(",").map(function(item) {
+    return parseInt(item, 10);
+});
+
+var fillNames = getParameterByName("names").split(",");
+
+    
+
+</script>
 
 
 
@@ -307,6 +330,16 @@ var experienceNumber = 2;
             $("#tableForms tr.lastRow:last").remove();
             //Picture Fields
             $("#addPics").prev(".lastRow").remove();
+
+
+            var id_Metrics = $("#myTable tr:last").attr("id");
+            var getID_MetricsNum = id_Metrics.match(/(\d+)/);
+             experienceNumber = parseInt(getID_MetricsNum[1],10) + 1;
+
+            if(experienceNumber<=3){
+                $('#removeLastExperiece').hide();
+                $('#resetExperiece').hide();
+            };
     });
 
     //Reset Button Click
@@ -321,14 +354,23 @@ var experienceNumber = 2;
 
 <script type="text/javascript">
 //Teporary Story responseRateObj globally for QA purposes
-
+    var calculationsObj = [];
+    var calls = [];
+    var forms = [];
+    var visitors = [];
+    var metrics = [];
+    var names = [];
 $('#MetricsLoop').on('click' , function () {
-
+    calls = [];
+    forms = [];
+    visitors = [];
+    metrics = [];
+    names= [];
     //Pre Calculations - Get all data accessible
      
     // get each experience, put in an array.
     var allMetrics = document.getElementsByClassName('metrics');
-    var metrics = [];
+
 
     for (var j = 0; j < allMetrics.length; j++) {
         //from each experience, get the elements with an tag name of input
@@ -394,13 +436,9 @@ $('#MetricsLoop').on('click' , function () {
         }
         return standerr * perctl;
     }
-    function ciDisplay(input){
-    var ci = input * 100;
-    return "<div class='ci'>&plusmn"+ci.toFixed(2)+"%</div>";
-    }
 
     function lift (rrControl,rr2){
-    var num1_TR = ((rr2 - rrControl) / rrControl)*100;
+    var num1_TR = ((rr2 - rrControl) / rrControl);
         return num1_TR
    // return num1.toFixed(fixed2)+"%";
     }
@@ -455,89 +493,128 @@ $('#MetricsLoop').on('click' , function () {
     //Experiment Title
     var testTitle = $("#test_title").val() || "Test Results";
 
-    //Populate Names 
-    for (var NAMEi = 1; NAMEi <= experienceNumber; NAMEi++){
-        $(".exp"+NAMEi+" .experience").html(metrics[NAMEi-1].name);
-    }
+    //////Create Calculations and Range Objects 
+    calculationsObj = [];
+    var leadTypes = ["forms","calls","total","f","c","t"];
+    var calcTypes = ["rr","ci","lift","min","max","conf","liftMax","liftMin"];
 
-    //////Populate Response Rates 
-    var responseRateObj = [];
-    
-    for(var RROi = 1; RROi <= experienceNumber; RROi++){
-        var tempObj2 = {};
-        responseRateObj.push(tempObj2);
-    }
-        //FORMS
-    for (var FRRi=1; FRRi<=experienceNumber; FRRi++){
-        //Find CSS Elements
-        var RR_CSS_ID = "#forms"+FRRi+" div.frr";
-        //Get form Reponse Rate
-        var Form_Response_Rate = (responseRate(metrics[FRRi-1].visitors,metrics[FRRi-1].forms)*100);
-        //Store in responseRateObj for later user, e.g., responseRateObj.[0].forms for experience 1 form RR
-        responseRateObj[FRRi-1].forms = (Form_Response_Rate) / 100;
-        //Calculate Standard Error
-        var Forms_Standard_Error = se(metrics[FRRi-1].forms,metrics[FRRi-1].visitors);
-        //Calculate Confidence Interval Using Standard Error
-        var Forms_ConfidenceInt = confInt(Forms_Standard_Error,percentile)*100;
-        responseRateObj[FRRi-1].formsMin = (Form_Response_Rate) - (Forms_ConfidenceInt);
-         responseRateObj[FRRi-1].formsMax = (Form_Response_Rate) + (Forms_ConfidenceInt);
-        //Format and Push HTML to CSS Element
-        $(RR_CSS_ID).html(Form_Response_Rate.toFixed(2) +"% <div class='ci'>±"+Forms_ConfidenceInt.toFixed(2)+"%</div>");
-    }   
-        //CALLS
-    for (var CRRi=1; CRRi<=experienceNumber; CRRi++){
-        //Find CSS Elements
-        var CRR_CSS_ID = "#calls"+CRRi+" div.cRR";
-        //Get form Reponse Rate
-        var Call_Response_Rate = (responseRate(metrics[CRRi-1].visitors,metrics[CRRi-1].calls)*100);
-        //Store in responseRateObj for later user, e.g., responseRateObj.[0].calls for experience 1 call RR
-        responseRateObj[CRRi-1].calls = (Call_Response_Rate) / 100;
-       //Calculate Standard Error
-        var Calls_Standard_Error = se(metrics[CRRi-1].calls,metrics[CRRi-1].visitors);
-       //Calculate Confidence Interval Using Standard Error
-        var Calls_ConfidenceInt = confInt(Calls_Standard_Error,percentile)*100;
-        responseRateObj[CRRi-1].callsMin = (Call_Response_Rate) - (Calls_ConfidenceInt);
-         responseRateObj[CRRi-1].callsMax = (Call_Response_Rate) + (Calls_ConfidenceInt);
-       //Format and Push HTML to CSS Element
-        $(CRR_CSS_ID).html(Call_Response_Rate.toFixed(2)+"% <div class='ci'>±"+Calls_ConfidenceInt.toFixed(2)+"%</div>");
-    }
+    for(var calculations_i = 1; calculations_i <= experienceNumber; calculations_i++){
+        var tempObj2 = {forms:{},calls:{},total:{}};
+        calculationsObj.push(tempObj2);
 
-        //TOTAL
-    for (var TRRi=1; TRRi<=experienceNumber; TRRi++){
-        //Find CSS Elements
-        var TRR_CSS_ID = "#total"+TRRi+" div.tRR";
-        //Get form Reponse Rate
-      var Total_Response_Rate = (responseRate(metrics[TRRi-1].visitors,metrics[TRRi-1].total)*100);
-       //Store in responseRateObj for later user, e.g., responseRateObj.[0].calls for experience 1 call RR
-        responseRateObj[TRRi-1].total = (Total_Response_Rate) / 100;
-       //Calculate Standard Error
-        var Total_Standard_Error = se(metrics[TRRi-1].total,metrics[TRRi-1].visitors);
-       //Calculate Confidence Interval Using Standard Error
-        var Total_ConfidenceInt = confInt(Total_Standard_Error,percentile)*100;
-        responseRateObj[TRRi-1].totalMin = (Total_Response_Rate) - (Total_ConfidenceInt);
-         responseRateObj[TRRi-1].totalMax = (Total_Response_Rate) + (Total_ConfidenceInt);
-       //Format and Push HTML to CSS Element
-        $(TRR_CSS_ID).html(Total_Response_Rate.toFixed(2)+"% <div class='ci'>±"+Total_ConfidenceInt.toFixed(2)+"%</div>");
-    }
-
-
-
-    //////Populate Lifts
-        //Forms 
-    // for (var LIFTi=1; LIFTi <= experienceNumber; LIFTi++){
-    //    var testLift = lift(1,3);
-    //  var fLift_TR = lift(responseRateObj[0].forms,responseRateObj[LIFTi].forms);
-  //   var fminLift = lift(responseRateObj[0].formsMax,responseRateObj[LIFTi].formsMin,1)
-  //      var fmaxLift = lift(responseRateObj[0].formsMin,responseRateObj[LIFTi].formsMax,1);
-   //   var fLift_CSS_ID = "#forms"+(LIFTi+1)+" div.flift";
- //       $(fLift_CSS_ID).html(fLift_TR+" <div class='ci'> ("+fminLift+" to "+fmaxLift+")</div>");
+    calls.push(metrics[calculations_i-1].calls);
+    forms.push(metrics[calculations_i-1].forms);
+    visitors.push(metrics[calculations_i-1].visitors);
+    names.push(metrics[calculations_i-1].name);
 
     }
-    alert("hi");
+    for (var calcValue_i = 1; calcValue_i<=experienceNumber; calcValue_i++){
+
+        for (var leadTypes_i =0; leadTypes_i <3; leadTypes_i++ ){
+            var leadObject = leadTypes[leadTypes_i];
+            //Response Rate 
+           calculationsObj[calcValue_i-1][leadObject]["rr"] = responseRate(metrics[calcValue_i-1]["visitors"],metrics[calcValue_i-1][leadObject]);
+           //Confidence Intervals
+           calculationsObj[calcValue_i-1][leadObject]["ci"]  = confInt(se(metrics[calcValue_i-1][leadObject], metrics[calcValue_i-1].visitors), percentile);
+
+        }
+    }
+
+    for (var rangeValue_i = 1; rangeValue_i<=experienceNumber; rangeValue_i++){
+        for (var leadTypesR_i =0; leadTypesR_i <3; leadTypesR_i++ ){
+            var leadObject = leadTypes[leadTypesR_i];
+            //lift
+            calculationsObj[rangeValue_i-1][leadObject]["lift"] = lift(calculationsObj[0][leadObject]["rr"],calculationsObj[rangeValue_i-1][leadObject]["rr"]);
+            //min
+            calculationsObj[rangeValue_i-1][leadObject]["min"] = calculationsObj[rangeValue_i-1][leadObject]["rr"] - calculationsObj[rangeValue_i-1][leadObject]["ci"];
+            //max
+            calculationsObj[rangeValue_i-1][leadObject]["max"] = calculationsObj[rangeValue_i-1][leadObject]["rr"] + calculationsObj[rangeValue_i-1][leadObject]["ci"];
+            //conf
+            calculationsObj[rangeValue_i-1][leadObject]["conf"] = cumnormdist(zscore(calculationsObj[rangeValue_i-1][leadObject]["rr"],metrics[rangeValue_i-1].visitors,calculationsObj[0][leadObject]["rr"],metrics[0].visitors));
+        }
+
+    }
+    for (var final_i = 1; final_i<=experienceNumber; final_i++){
+        for (var leadTypesF_i =0; leadTypesF_i <3; leadTypesF_i++ ){
+        var leadObject = leadTypes[leadTypesF_i];
+        //min Lift
+        calculationsObj[final_i-1][leadObject]["liftMin"] = lift(calculationsObj[0][leadObject]["max"],calculationsObj[final_i-1][leadObject]["min"]);
+        //max Lift
+        calculationsObj[final_i-1][leadObject]["liftMax"] = lift(calculationsObj[0][leadObject]["min"],calculationsObj[final_i-1][leadObject]["max"]);
+        }
+    }
+
+    $("i").show();
+    //Populate Results Table
+    for (var popRR_i = 1; popRR_i <= experienceNumber; popRR_i++){
+        //Populate Experience Column
+        var nameHTML = metrics[popRR_i-1].name || "Test"+popRR_i;
+        $(".exp"+popRR_i+" .experience").html(nameHTML);
+        //Populate RR, Lift, and Confidence Columns
+        for (var popRR_ii = 0; popRR_ii <= 2; popRR_ii++){
+            var rrCSSID2 = leadTypes[popRR_ii+3]+"RR";
+            var rrCSSID = "#"+leadTypes[popRR_ii]+popRR_i+" div."+rrCSSID2;
+            var rrHTML = toPercent(calculationsObj[popRR_i-1][leadTypes[popRR_ii]]["rr"],2)+"<div class='ci'>&plusmn;"+toPercent(calculationsObj[popRR_i-1][leadTypes[popRR_ii]]["ci"],1)+"</div>"
+
+            var liftCSSID2 = leadTypes[popRR_ii+3]+"Lift";
+            var liftCSSID = "#"+leadTypes[popRR_ii]+popRR_i+" div."+liftCSSID2;
+            var liftHTML = toPercent( calculationsObj[popRR_i-1][leadTypes[popRR_ii]]["lift"],2 ) +"<div class='ci'>&nbsp;"+ toPercent(calculationsObj[popRR_i-1][leadTypes[popRR_ii]]["liftMin"],1)+" to "+toPercent(calculationsObj[popRR_i-1][leadTypes[popRR_ii]]["liftMax"],1) +"</div>";
+
+            var confCSSID2 = leadTypes[popRR_ii+3]+"Conf";
+            var confCSSID = "#"+leadTypes[popRR_ii]+popRR_i+" div."+confCSSID2;
+            var confindenceDecimal = calculationsObj[popRR_i-1][leadTypes[popRR_ii]]["conf"];
+
+            var confHTML = toPercent(confindenceDecimal,1 );
 
 
+            $(rrCSSID).html(rrHTML);
+            $(liftCSSID).html(liftHTML);
+            $(confCSSID).html(confHTML);
 
+            var iconCSSID = ".exp"+popRR_i+" i#"+leadTypes[popRR_ii+3]+"Conf-";
+            var iconCSSID2="att";
+            var iconCSSID3="check";
+            if (confindenceDecimal >0.95){
+                iconCSSID2 = "att";
+                iconCSSID3 =iconCSSID+iconCSSID2;
+                $(iconCSSID3).hide();
 
+            }else if (confindenceDecimal<0.90){
+                iconCSSID2 = "check";
+                iconCSSID3 =iconCSSID+iconCSSID2;
+                $(iconCSSID3).hide();
+            }else {
+                var iconNone1 =iconCSSID+iconCSSID2;
+                var iconNone2 = iconCSSID+iconCSSID3;
+                $(iconNone1).hide();
+                $(iconNone2).hide();
+
+            };
+
+        }
+
+    }
+
+        //Populate URL
+    var daysInTest = $("#daysInTest").val() || 14;
+    var date = new Date();
+    var embeddURL = 
+    "/testing-results/embedd/3/?title="+ encodeURIComponent(testTitle)+
+    "names" + names + 
+    "&expnum" + experienceNumber + 
+    "&forms" + forms + 
+    "&calls=" + calls +
+    "&visit=" + visitors +
+    "&days="  + daysInTest +
+   // "&pic1="  + encodeURIComponent(pic1) +
+   // "&pic2="  + encodeURIComponent(pic2) +
+    "&confint=" + percentile +
+    //"&instrev=" + installRev +
+    //"&formcr=" + formCloseRate * 100 +
+    //"&callcr=" + callCloseRate *100 +
+     "&date="+encodeURIComponent(date.toLocaleString());
+    $("a").attr("href",embeddURL);
+    $("#linksy").show();
 
 });
 </script>
@@ -571,228 +648,6 @@ $("#daysInTest").attr("value",getParameterByName("days"));
 $("#pic1").attr("value",getParameterByName("pic1"));
 $("#pic2").attr("value",getParameterByName("pic2"));
 
-
-/**
-
-
-
-	//Assumptions
-$("#calculate").on("click",function(){
-    var percentilSTN= parseInt($("#percentile").val());   
-    var percentile = percentilSTN || 2;
-
-    var installRev = parseInt($("#installRev").val()) || 59;
-    var formCloseRate = parseInt($("#formCloseRate").val()) || 0.12;
-    var callCloseRate = parseInt($("#callCloseRate").val()) || 0.18;
-
-    $("installRev").html(
-        (installRev*formCloseRate*monthlyEstimate*exp2Min)+(installRev*callCloseRate*monthlyEstimate*exp2Min_c)
-            );
-    //Experiment Title
-    var testTitle = $("#test_title").val() || "Test Results";
-
-    //Experience 1
-    var exp1Name = $("#exp1-name").val() || "Test A";
-    var exp1Visitors = $("#exp1-visitors").val() || 1000;
-    var exp1Forms = $("#exp1-forms").val() || 50;
-    var exp1Calls = $("#exp1-calls").val() || 50;
-    var exp1Total = parseInt(exp1Forms) + parseInt(exp1Calls);
-
-    var exp1fRR = responseRate(exp1Visitors, exp1Forms);
-    var exp1fRR_p = toPercent(exp1fRR, 2);
-    var exp1Forms_se = se(exp1Forms,exp1Visitors);
-    var exp1Forms_ci = confInt(exp1Forms_se,percentile);
-    var exp1Min = exp1fRR - exp1Forms_ci;
-    var exp1Max = exp1fRR + exp1Forms_ci;
-    var exp1fRR_TT = ((exp1fRR-exp1Forms_ci)*100).toFixed(2)+"% to "+((exp1fRR+exp1Forms_ci)*100).toFixed(2)+"%";
-
-    var exp1cRR = responseRate(exp1Visitors, exp1Calls);
-    var exp1cRR_p = toPercent(exp1cRR, 2);
-    var exp1Calls_se = se(exp1Calls,exp1Visitors);
-    var exp1Calls_ci = confInt(exp1Calls_se,percentile);
-    var exp1Min_c = exp1cRR - exp1Calls_ci;
-    var exp1Max_c = exp1cRR + exp1Calls_ci;
-    var exp1cRR_TT = ((exp1cRR-exp1Calls_ci)*100).toFixed(2)+"% to "+((exp1cRR+exp1Calls_ci)*100).toFixed(2)+"%";
-
-    var exp1tRR = responseRate(exp1Visitors, exp1Total);
-    var exp1tRR_p = toPercent(exp1tRR, 2);
-    var exp1Total_se = se(exp1Total,exp1Visitors);
-    var exp1Total_ci = confInt(exp1Total_se,percentile);
-    var exp1Min_t = exp1tRR - exp1Total_ci;
-    var exp1Max_t = exp1tRR + exp1Total_ci;
-    var exp1tRR_TT = ((exp1tRR-exp1Total_ci)*100).toFixed(2)+"% to "+((exp1tRR+exp1Total_ci)*100).toFixed(2)+"%";
-
-
-    //------------------------------------
-
-    //Experience 2
-    var exp2Name = $("#exp2-name").val() || "Test B";
-    var exp2Visitors = $("#exp2-visitors").val() || 1000;
-    var exp2Forms = $("#exp2-forms").val() || 70;
-    var exp2Calls = $("#exp2-calls").val() || 70;
-    var exp2Total = parseInt(exp2Forms) + parseInt(exp2Calls);
-
-    var exp2fRR = responseRate(exp2Visitors, exp2Forms);
-    var exp2fRR_p = toPercent(exp2fRR, 2);
-    var exp2Forms_se = se(exp2Forms,exp2Visitors);
-    var exp2Forms_ci = confInt(exp2Forms_se,percentile);
-    var exp2Min = exp2fRR - exp2Forms_ci;
-    var exp2Max = exp2fRR + exp2Forms_ci;
-    var exp2fRR_TT = ((exp2fRR-exp2Forms_ci)*100).toFixed(2)+"% to "+((exp2fRR+exp2Forms_ci)*100).toFixed(2)+"%";
-
-    var exp2cRR = responseRate(exp2Visitors, exp2Calls);
-    var exp2cRR_p = toPercent(exp2cRR, 2);
-    var exp2Calls_se = se(exp2Calls,exp2Visitors);
-    var exp2Calls_ci = confInt(exp2Calls_se,percentile);
-    var exp2Min_c = exp2cRR - exp2Calls_ci;
-    var exp2Max_c = exp2cRR + exp2Calls_ci;
-    var exp2cRR_TT = ((exp2cRR-exp2Calls_ci)*100).toFixed(2)+"% to "+((exp2cRR+exp2Calls_ci)*100).toFixed(2)+"%";
-
-    var exp2tRR = responseRate(exp2Visitors, exp2Total);
-    var exp2tRR_p = toPercent(exp2tRR, 2);
-    var exp2Total_se = se(exp2Total,exp2Visitors);
-    var exp2Total_ci = confInt(exp2Total_se,percentile);
-    var exp2Min_t = exp2tRR - exp2Total_ci;
-    var exp2Max_t = exp2tRR + exp2Total_ci;
-    var exp2tRR_TT = ((exp2tRR-exp2Total_ci)*100).toFixed(2)+"% to "+((exp2tRR+exp2Total_ci)*100).toFixed(2)+"%";
-
-    
-
-
-
-    //Calculations
-    function responseRate(visitors, conversions) {
-        return (conversions / visitors);
-    }
-
-    function toPercent(toConvert, decimal) {
-        var num = toConvert*100;
-        return num.toFixed(decimal) + "%";
-    }
-
-    function se(conversions, visitors) {
-        var p = conversions / visitors;
-        var a = p * (1 - p);
-        var b = a / visitors;
-        var standerr = Math.sqrt(b);
-        return standerr;
-    }
-
-    function confInt(standerr, sig) {
-        var perctl;
-        switch (sig) {
-            case 1:
-                perctl = 1.28;
-                break;
-            case 2:
-                perctl = 1.65;
-                break;
-            case 3:
-                perctl = 1.96;
-                break;
-            case 4:
-                perctl = 2.58;
-                break;
-        }
-        return standerr * perctl;
-    }
-    function ciDisplay(input){
-    var ci = input * 100;
-    return "<div class='ci'>&plusmn"+ci.toFixed(2)+"%</div>";
-    }
-
-    function lift (rrControl,rr2){
-    var num1 = ((rr2 - rrControl) / rrControl)*100;
-    return num1.toFixed(2)+"%";
-    }
-    function zscore (P,N,Pc,Nc){
-        var Ac = Pc*(1-Pc);
-        var Bc = Ac/Nc;
-
-        var A = P*(1-P);
-        var B = A/N;
-
-        var C = B + Bc;
-        var Numerator = P - Pc;
-        var Denomninator = Math.sqrt(C);
-      
-        
-    return Numerator/Denomninator;
-    }
-    function cumnormdist(x) {
-        var b1 = 0.319381530;
-        var b2 = -0.356563782;
-        var b3 = 1.781477937;
-        var b4 = -1.821255978;
-        var b5 = 1.330274429;
-        var p = 0.2316419;
-        var c = 0.39894228;
-        var t;
-        var taylor;
-        var package;
-        var exponent1;
-
-        if (x >= 0) {
-
-            t = 1.0 / (1.0 + p * x);
-            exponent1 =  (-x * x) / 2.0;
-            package = ( t *( t * ( t * ( t * b5 + b4 ) + b3 ) + b2 ) + b1 );
-            taylor = 1.0 - c * Math.exp(exponent1) * t * package;
-            return taylor;
-
-        } else {
-             t = 1.0 / (1.0 - p * x);
-            exponent1 =  -x * x / 2.0;
-            package = ( t *( t * ( t * ( t * b5 + b4 ) + b3 ) + b2 ) + b1 );
-            taylor = (c * Math.exp(exponent1)) * t * package;
-            return 1 - taylor;
-        }
-    }
-
-    //Populate Experience Names
-    $(".exp1 div.experience").html(exp1Name + " [CONTROL]");
-    $(".exp2 div.experience").html(exp2Name);
-
-    //Populate Metrics
-    //$(".exp1 div.visitors").html(exp1Visitors);
-    //$(".exp1 div.forms").html(exp1Forms);
-    //$(".exp1 div.calls").html(exp1Calls);
-    $(".exp1 div.total").html(exp1Total);
-
-    $(".exp2 div.visitors").html(exp2Visitors);
-    $(".exp2 div.forms").html(exp2Forms);
-    $(".exp2 div.calls").html(exp2Calls);
-    $(".exp2 div.total").html(exp2Total);
-
-    //Populate Outbound Leads (Forms)
-    $(".exp1 div.fRR").html(exp1fRR_p + " " + ciDisplay(exp1Forms_ci));
-    $(".exp1 div.fRR").attr("data-content",exp1fRR_TT);
-
-    $(".exp2 div.fRR").html(exp2fRR_p + " " + ciDisplay(exp2Forms_ci));
-    $(".exp2 div.fRR").attr("data-content",exp2fRR_TT);
-    $(".exp2 div.fLift").html(lift(exp1fRR,exp2fRR)+"<div class='ci'> ("+lift(exp1Max,exp2Min)+" to "+lift(exp1Min,exp2Max)+")</div>");
-    $(".exp2 div.fConf").html((cumnormdist(zscore(exp2fRR,exp2Visitors,exp1fRR,exp1Visitors))*100).toFixed(2)+"%");
-
-    //Populate Inbound Leads (Calls)
-    $(".exp1 div.cRR").html(exp1cRR_p + " " + ciDisplay(exp1Calls_ci));
-    $(".exp1 div.cRR").attr("data-content",exp1cRR_TT);
-
-    $(".exp2 div.cRR").html(exp2cRR_p + " " + ciDisplay(exp2Calls_ci));
-    $(".exp2 div.cRR").attr("data-content",exp2cRR_TT);
-    $(".exp2 div.cLift").html(lift(exp1cRR,exp2cRR)+"<div class='ci'> ("+lift(exp1Max_c,exp2Min_c)+" to "+lift(exp1Min_c,exp2Max_c)+")</div>");
-    $(".exp2 div.cConf").html((cumnormdist(zscore(exp2cRR,exp2Visitors,exp1cRR,exp1Visitors))*100).toFixed(2)+"%");
-
-    //Populate Total Leads
-    $(".exp1 div.tRR").html(exp1tRR_p + " " + ciDisplay(exp1Total_ci));
-    $(".exp1 div.tRR").attr("data-content",exp1tRR_TT);
-
-    $(".exp2 div.tRR").html(exp2tRR_p + " " + ciDisplay(exp2Total_ci));
-    $(".exp2 div.tRR").attr("data-content",exp2tRR_TT);
-    $(".exp2 div.tLift").html(lift(exp1tRR,exp2tRR)+"<div class='ci'> ("+lift(exp1Max_t,exp2Min_t)+" to "+lift(exp1Min_t,exp2Max_t)+")</div>");
-    $(".exp2 div.tConf").html((cumnormdist(zscore(exp2tRR,exp2Visitors,exp1tRR,exp1Visitors))*100).toFixed(2)+"%");
-
-**/
-
     //Capture Images
     var pic1 = $("#pic1").val();
     var pic2 = $("#pic2").val();
@@ -802,17 +657,13 @@ $("#calculate").on("click",function(){
     var date = new Date();
     var embeddURL = 
     "/testing-results/embedd/1/?title="+ encodeURIComponent(testTitle)+
-    "&name1=" + encodeURIComponent(exp1Name) + 
-    "&name2=" + encodeURIComponent(exp2Name) + 
-    "&visit1=" + exp1Visitors +
-    "&visit2=" + exp2Visitors +
-    "&form1=" + exp1Forms +
-    "&form2=" + exp2Forms +
-    "&call1=" + exp1Calls +
-    "&call2=" + exp2Calls +
+    "&names=" + encodeURIComponent(exp1Name) + 
+    "&forms=" + encodeURIComponent(exp2Name) + 
+    "&calls=" + exp1Visitors +
+    "&visit=" + exp2Visitors +
     "&days="  + daysInTest +
-    "&pic1="  + encodeURIComponent(pic1) +
-    "&pic2="  + encodeURIComponent(pic2) +
+   // "&pic1="  + encodeURIComponent(pic1) +
+   // "&pic2="  + encodeURIComponent(pic2) +
     "&confint=" + percentile +
     "&instrev=" + installRev +
     "&formcr=" + formCloseRate * 100 +
@@ -821,56 +672,7 @@ $("#calculate").on("click",function(){
     $("a").attr("href",embeddURL);
     $("#linksy").show();
 
-    var fConfidence = cumnormdist(zscore(exp2fRR,exp2Visitors,exp1fRR,exp1Visitors));
-    var cConfidence = cumnormdist(zscore(exp2cRR,exp2Visitors,exp1cRR,exp1Visitors));
-    var tConfidence = cumnormdist(zscore(exp2tRR,exp2Visitors,exp1tRR,exp1Visitors));
-
-    if(fConfidence >= 0.95) {
-     $("#fConf-check").show();
-     $("#fConf-att").hide();
-
-    } else if (fConfidence <=0.85) {
-         $("#fConf-check").hide();
-        $("#fConf-att").show();
-
-    } else {
-     $("#fConf-check").hide();
-     $("#fConf-att").hide();
-
-    };
-
-    if(cConfidence >= 0.95) {
-     $("#cConf-check").show();
-     $("#cConf-att").hide();
-
-    } else if (cConfidence <=0.85) {
-         $("#cConf-check").hide();
-        $("#cConf-att").show();
-
-    } else {
-     $("#cConf-check").hide();
-     $("#cConf-att").hide();
-
-    };
-
-    if(tConfidence >= 0.95) {
-     $("#tConf-check").show();
-     $("#tConf-att").hide();
-
-    } else if (tConfidence <=0.85) {
-         $("#tConf-check").hide();
-        $("#tConf-att").show();
-    } else {
-     $("#tConf-check").hide();
-     $("#tConf-att").hide();
-    };
-
-    if (!(percentile >= 0)){
-    $(".ui.selection.dropdown").addClass("error");
-    }else{
-    $(".ui.selection.dropdown").removeClass("error");
-    }
-
+   
 
     $("div.ui.backSection").css("display","inline-block");
     $(".highchartsDisplay").css("display","inline-block");

@@ -21,8 +21,10 @@
 <body>
 
 
+<div class="ui raised segment">
+<div class="ui mini green ribbon label">BETA</div>
 
-
+<br><br>
 <div class="ui selection dropdown">
   <input id="percentile" type="hidden" name="Percentile">
   <div class="default text">90% Confidence Interval</div>
@@ -67,20 +69,56 @@
         <th>Calls</th>
         <th>Total Leads</th>
     </tr>
-    <tr id = "metrics1" class="exp1">
-        <td><div class="ui input"><input type="text" id="exp1-name" placeholder="Experience A [Control]"></div></td>
-        <td><div class="ui input"><input type="text" id="exp1-visitors" placeholder="Visitors"></div></td>
-        <td><div class="ui input"><input type="text" id="exp1-forms" placeholder="Forms"></div></td>
-        <td><div class="ui input"><input type="text" id="exp1-calls" placeholder="Calls"></div></td>
-        <td><div class="total"></div></td>
-    </tr>
-    <tr id = "metrics2" class="exp2">
-        <td><div class="ui input"><input type="text" id="exp2-name" placeholder="Experience B"></div></td>
-        <td><div class="ui input"><input type="text" id="exp2-visitors" placeholder="Visitors"></div></td>
-        <td><div class="ui input"><input type="text" id="exp2-forms" placeholder="Forms"></div></td>
-        <td><div class="ui input"><input type="text" id="exp2-calls" placeholder="Calls"></div></td>
-        <td ><div class="total"></div></td>
-    </tr>
+  <tr id = "metrics1" class="exp1 metrics">
+                <td>
+                    <div class="ui input">
+                        <input type="text" id="exp1-name" class="name" placeholder="Experience A [Control]">
+                    </div>
+                </td>
+                <td>
+                    <div class="ui input">
+                        <input type="text" id="exp1-visitors" class="visitors" placeholder="Visitors">
+                    </div>
+                </td>
+                <td>
+                    <div class="ui input">
+                        <input type="text" id="exp1-forms" class="forms" placeholder="Forms">
+                    </div>
+                </td>
+                <td>
+                    <div class="ui input">
+                        <input type="text" id="exp1-calls" class="calls" placeholder="Calls">
+                    </div>
+                </td>
+                <td>
+                    <div class="total"></div>
+                </td>
+            </tr>
+    <tr id = "metrics2" class="exp2 metrics">
+                <td>
+                    <div class="ui input">
+                        <input type="text" id="exp2-name" class="name" placeholder="Experience B">
+                    </div>
+                </td>
+                <td>
+                    <div class="ui input">
+                        <input type="text" id="exp2-visitors"  class="visitors" placeholder="Visitors">
+                    </div>
+                </td>
+                <td>
+                    <div class="ui input">
+                        <input type="text" id="exp2-forms" class="forms" placeholder="Forms">
+                    </div>
+                </td>
+                <td>
+                    <div class="ui input">
+                        <input type="text" id="exp2-calls" class="calls" placeholder="Calls">
+                    </div>
+                </td>
+                <td >
+                    <div class="total"></div>
+                </td>
+            </tr>
 </table>
 <div id="AddExperience" class="mini ui button">
 <i class="plus icon"></i> Add Experience
@@ -94,13 +132,17 @@
 <br>
 <h3 class="ui header" style="display:inline-block; margin-right:25px;">Number of Days In Test:</h3><div class="ui input" style="width:60px"><input type="text" id="daysInTest" placeholder="#"></div>
 
-<br>
+<br>    
 <h3 class="ui header" style="display:inline-block; margin-right:25px;">Screen Grabs:</h3>
 <h4 class="ui header" style="display:inline-block; margin-right:25px;"><div class="ui input"><input type="text" id="pic1" placeholder="Experience A Image"></div></h4>
 <h4 class="ui header" style="display:inline-block; margin-right:25px;"><div class="ui input"><input type="text" id="pic2" placeholder="Experience B Image"></div></h4>
 
 <br id="addPics">
 <div id="calculate" class="ui blue button">Calculate<i class="lab icon"></i></div>
+
+
+<div id="MetricsLoop" class="ui purple button">Run Metrics Loop<i class="smile icon"></i></div>
+<br>
 <br>
 
 <div class="ui divider"></div>
@@ -128,7 +170,7 @@
     <tr>
         <th>Experience</th>
         <th>Response Rate%</th>
-        <th>Lift %</th>
+        <th>Lift % (Conf. Int.)</th>
         <th>Confidence</th>
     </tr>
     <tr id = "forms1" class="exp1">
@@ -137,7 +179,7 @@
         <td class="fLift">-</td>
         <td class="fConf">-</td>
     </tr>
-    <tr id = "forms1" class="exp2">
+    <tr id = "forms2" class="exp2">
         <td><div class="experience"></div></td>
         <td><div class="ui fRR"></div></td>
         <td><div class="fLift"></div></td>
@@ -149,7 +191,7 @@
     <tr>
         <th>Experience</th>
         <th>Response Rate%</th>
-        <th>Lift %</th>
+        <th>Lift % (Conf. Int.)</th>
         <th>Confidence</th>
     </tr>
     <tr id = "calls1" class="exp1">
@@ -170,7 +212,7 @@
     <tr>
         <th>Experience</th>
         <th>Response Rate%</th>
-        <th>Lift %</th>
+        <th>Lift % (Conf. Int.)</th>
         <th>Confidence</th>
     </tr>
     <tr id = "total1" class="exp1">
@@ -202,9 +244,12 @@
 </div>
 
 
-
+</div>
 
 </body>
+
+
+
 
 <script type="text/javascript">
 //Show the backsection, which normally is hidden - !! For Troubleshooting only !!
@@ -212,19 +257,21 @@
 
 
 //Add Experiences Button Click
+var experienceNumber = 2;
+
     $('#AddExperience').on('click' , function () {
             //First Capture the ID of last Row --> 'metrics2'
             var id_Metrics = $("#myTable tr:last").attr("id");
                 //Pull out the '2' in 'metrics2' using regex
             var getID_MetricsNum = id_Metrics.match(/(\d+)/);
                 //Make pulled number, e.g., '2', a number and increment. This returns the number of experiences in experiment
-            var experienceNumber = parseInt(getID_MetricsNum[1],10) + 1;
+             experienceNumber = parseInt(getID_MetricsNum[1],10) + 1;
                 //An array to convert numbers into letters - to populate later in field placeholder, e.g., [Experience C]
             var LetterArray = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","AA","AB","AC","AD","AE","AF","AG","AH","AI","AJ","AK","AL","AM","AN","AO","AP","AQ","AR","AS","AT","AU","AV","AW","AX","AY","AZ"];
             //Add a row to end of Metrics table
                 //Include a unique ID and placeholder attributes in adding in the number of experiments
                     //Includes a class of 'lastRow' so it can easily be targeted
-            $("#myTable tr:last").after('<tr id="metrics' + experienceNumber + '" class="metrics lastRow"><td><div class="ui input"><input type="text" class="name" placeholder="Experience ' + LetterArray[experienceNumber-1] + '"></div></td><td><div class="ui input"><input type="text" class="visitors" placeholder="Visitors"></div></td><td><div class="ui input"><input type="text" class="forms" placeholder="Forms"></div></td><td><div class="ui input"><input type="text" class="calls" placeholder="Calls"></div></td><td><div class="total"></div></td></tr>');
+            $("#myTable tr:last").after('<tr id = "metrics'+experienceNumber+'" class="exp'+experienceNumber+' metrics lastRow"><td><div class="ui input"><input type="text" id="exp2-name" class="name" placeholder="Experience '+ LetterArray[experienceNumber-1]+'"></div></td><td><div class="ui input"><input type="text" id="exp2-visitors"  class="visitors" placeholder="Visitors"></div></td><td><div class="ui input"><input type="text" id="exp2-forms" class="forms" placeholder="Forms"></div></td><td><div class="ui input"><input type="text" id="exp2-calls" class="calls" placeholder="Calls"></div></td><td ><div class="total"></div></td></tr>');
             //Added ID to <br> tag (I know...) so that I could place additional picture fields before the 'Calculate' button
                 //Includes a class of 'lastRow' so it can easily be targeted
             $("#addPics").before('<h4 class="ui header lastRow" style="display:inline-block; margin-right:25px;"><div class="ui input"><input type="text" id="pic'+experienceNumber+'" placeholder="Experience '+LetterArray[experienceNumber-1]+' Image"></div></h4>');
@@ -235,11 +282,11 @@
             //Add a row to end of Calls table
                 //Include a unique ID and class attributes in adding in the number of experiments
                     //Includes a class of 'lastRow' so it can easily be targeted
-            $("#tableCalls tr:last").after('<tr id = "calls'+experienceNumber+'" class="exp'+experienceNumber+' lastRow"><td ><div class="experience"></div></td><td ><div class="ui tRR"></div></td><td ><div class="tLift"></div></td><td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="tConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive in the test. More data should be collected." id="tConf-att" class="ui orange icon attention"></i><div class="tConf"></div></td></tr>');
+            $("#tableCalls tr:last").after('<tr id = "calls'+experienceNumber+'" class="exp'+experienceNumber+' lastRow"><td ><div class="experience"></div></td><td ><div class="ui cRR"></div></td><td ><div class="cLift"></div></td><td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="cConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive in the test. More data should be collected." id="cConf-att" class="ui orange icon attention"></i><div class="cConf"></div></td></tr>');
             //Add a row to end of Forms table
                 //Include a unique ID and class attributes in adding in the number of experiments
                     //Includes a class of 'lastRow' so it can easily be targeted
-            $("#tableForms tr:last").after('<tr id = "forms'+experienceNumber+'" class="exp'+experienceNumber+' lastRow"><td ><div class="experience"></div></td><td ><div class="ui tRR"></div></td><td ><div class="tLift"></div></td><td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="tConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive in the test. More data should be collected." id="tConf-att" class="ui orange icon attention"></i><div class="tConf"></div></td></tr>');
+            $("#tableForms tr:last").after('<tr id = "forms'+experienceNumber+'" class="exp'+experienceNumber+' lastRow"><td ><div class="experience"></div></td><td ><div class="ui fRR"></div></td><td ><div class="fLift"></div></td><td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="tConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive in the test. More data should be collected." id="fConf-att" class="ui orange icon attention"></i><div class="fConf"></div></td></tr>');
 
             //Show the 'Remove Last Experience' button
             $('#removeLastExperiece').attr("style","display:inline-block");
@@ -272,6 +319,229 @@
     });
 </script>
 
+<script type="text/javascript">
+//Teporary Story responseRateObj globally for QA purposes
+
+$('#MetricsLoop').on('click' , function () {
+
+    //Pre Calculations - Get all data accessible
+     
+    // get each experience, put in an array.
+    var allMetrics = document.getElementsByClassName('metrics');
+    var metrics = [];
+
+    for (var j = 0; j < allMetrics.length; j++) {
+        //from each experience, get the elements with an tag name of input
+        var tempArray = allMetrics[j].getElementsByTagName('input');
+        // temporary object to be pushed into the metrics array
+        var tempObj = {};
+        
+        //loop through inputs,
+        for (var i = 0; i < tempArray.length; i++) {
+            //if the input is the experience name (id with 'name' in it), add it to the object with no changes. 
+            if (tempArray[i].id.indexOf('name') > -1) {
+                tempObj[tempArray[i].className] = tempArray[i].value;
+            // if the input doesn't have 'name' in it, change it to a number, then add to object
+            } else {
+                tempObj[tempArray[i].className] = parseInt(tempArray[i].value, 10);
+            }  
+        }
+        tempObj['total'] = tempObj.calls + tempObj.forms;
+        // push the object to the metrics array
+        metrics.push(tempObj);
+    }
+    //Populate All Total Leads Fields
+    for (var t=1; t<=experienceNumber; t++){
+        //Find CSS Element to populate
+    var total_CSS_ID = ".exp"+t+" div.total";
+        //Push result into CSS Element
+    $(total_CSS_ID).html(metrics[t-1].total)
+    }
+
+    //Functions For Calculations
+    function responseRate(visitors, conversions) {
+        return (conversions / visitors);
+    }
+
+    function toPercent(toConvert, decimal) {
+        var num = toConvert*100;
+        return num.toFixed(decimal) + "%";
+    }
+
+    function se(conversions, visitors) {
+        var p = conversions / visitors;
+        var a = p * (1 - p);
+        var b = a / visitors;
+        var standerr = Math.sqrt(b);
+        return standerr;
+    }
+
+    function confInt(standerr, sig) {
+        var perctl;
+        switch (sig) {
+            case 1:
+                perctl = 1.28;
+                break;
+            case 2:
+                perctl = 1.65;
+                break;
+            case 3:
+                perctl = 1.96;
+                break;
+            case 4:
+                perctl = 2.58;
+                break;
+        }
+        return standerr * perctl;
+    }
+    function ciDisplay(input){
+    var ci = input * 100;
+    return "<div class='ci'>&plusmn"+ci.toFixed(2)+"%</div>";
+    }
+
+    function lift (rrControl,rr2){
+    var num1_TR = ((rr2 - rrControl) / rrControl)*100;
+        return num1_TR
+   // return num1.toFixed(fixed2)+"%";
+    }
+    function zscore (P,N,Pc,Nc){
+        var Ac = Pc*(1-Pc);
+        var Bc = Ac/Nc;
+        /********************/
+        var A = P*(1-P);
+        var B = A/N;
+        /******************/
+        var C = B + Bc;
+        var Numerator = P - Pc;
+        var Denomninator = Math.sqrt(C);
+      
+        
+    return Numerator/Denomninator;
+    }
+    function cumnormdist(x) {
+        var b1 = 0.319381530;
+        var b2 = -0.356563782;
+        var b3 = 1.781477937;
+        var b4 = -1.821255978;
+        var b5 = 1.330274429;
+        var p = 0.2316419;
+        var c = 0.39894228;
+        var t;
+        var taylor;
+        var package;
+        var exponent1;
+
+        if (x >= 0) {
+
+            t = 1.0 / (1.0 + p * x);
+            exponent1 =  (-x * x) / 2.0;
+            package = ( t *( t * ( t * ( t * b5 + b4 ) + b3 ) + b2 ) + b1 );
+            taylor = 1.0 - c * Math.exp(exponent1) * t * package;
+            return taylor;
+
+        } else {
+             t = 1.0 / (1.0 - p * x);
+            exponent1 =  -x * x / 2.0;
+            package = ( t *( t * ( t * ( t * b5 + b4 ) + b3 ) + b2 ) + b1 );
+            taylor = (c * Math.exp(exponent1)) * t * package;
+            return 1 - taylor;
+        }
+    }
+
+    //Confidence Interval Percentile
+    var percentilSTN= parseInt($("#percentile").val());   
+    var percentile = percentilSTN || 2;
+
+    //Experiment Title
+    var testTitle = $("#test_title").val() || "Test Results";
+
+    //Populate Names 
+    for (var NAMEi = 1; NAMEi <= experienceNumber; NAMEi++){
+        $(".exp"+NAMEi+" .experience").html(metrics[NAMEi-1].name);
+    }
+
+    //////Populate Response Rates 
+    var responseRateObj = [];
+    
+    for(var RROi = 1; RROi <= experienceNumber; RROi++){
+        var tempObj2 = {};
+        responseRateObj.push(tempObj2);
+    }
+        //FORMS
+    for (var FRRi=1; FRRi<=experienceNumber; FRRi++){
+        //Find CSS Elements
+        var RR_CSS_ID = "#forms"+FRRi+" div.frr";
+        //Get form Reponse Rate
+        var Form_Response_Rate = (responseRate(metrics[FRRi-1].visitors,metrics[FRRi-1].forms)*100);
+        //Store in responseRateObj for later user, e.g., responseRateObj.[0].forms for experience 1 form RR
+        responseRateObj[FRRi-1].forms = (Form_Response_Rate) / 100;
+        //Calculate Standard Error
+        var Forms_Standard_Error = se(metrics[FRRi-1].forms,metrics[FRRi-1].visitors);
+        //Calculate Confidence Interval Using Standard Error
+        var Forms_ConfidenceInt = confInt(Forms_Standard_Error,percentile)*100;
+        responseRateObj[FRRi-1].formsMin = (Form_Response_Rate) - (Forms_ConfidenceInt);
+         responseRateObj[FRRi-1].formsMax = (Form_Response_Rate) + (Forms_ConfidenceInt);
+        //Format and Push HTML to CSS Element
+        $(RR_CSS_ID).html(Form_Response_Rate.toFixed(2) +"% <div class='ci'>±"+Forms_ConfidenceInt.toFixed(2)+"%</div>");
+    }   
+        //CALLS
+    for (var CRRi=1; CRRi<=experienceNumber; CRRi++){
+        //Find CSS Elements
+        var CRR_CSS_ID = "#calls"+CRRi+" div.cRR";
+        //Get form Reponse Rate
+        var Call_Response_Rate = (responseRate(metrics[CRRi-1].visitors,metrics[CRRi-1].calls)*100);
+        //Store in responseRateObj for later user, e.g., responseRateObj.[0].calls for experience 1 call RR
+        responseRateObj[CRRi-1].calls = (Call_Response_Rate) / 100;
+       //Calculate Standard Error
+        var Calls_Standard_Error = se(metrics[CRRi-1].calls,metrics[CRRi-1].visitors);
+       //Calculate Confidence Interval Using Standard Error
+        var Calls_ConfidenceInt = confInt(Calls_Standard_Error,percentile)*100;
+        responseRateObj[CRRi-1].callsMin = (Call_Response_Rate) - (Calls_ConfidenceInt);
+         responseRateObj[CRRi-1].callsMax = (Call_Response_Rate) + (Calls_ConfidenceInt);
+       //Format and Push HTML to CSS Element
+        $(CRR_CSS_ID).html(Call_Response_Rate.toFixed(2)+"% <div class='ci'>±"+Calls_ConfidenceInt.toFixed(2)+"%</div>");
+    }
+
+        //TOTAL
+    for (var TRRi=1; TRRi<=experienceNumber; TRRi++){
+        //Find CSS Elements
+        var TRR_CSS_ID = "#total"+TRRi+" div.tRR";
+        //Get form Reponse Rate
+      var Total_Response_Rate = (responseRate(metrics[TRRi-1].visitors,metrics[TRRi-1].total)*100);
+       //Store in responseRateObj for later user, e.g., responseRateObj.[0].calls for experience 1 call RR
+        responseRateObj[TRRi-1].total = (Total_Response_Rate) / 100;
+       //Calculate Standard Error
+        var Total_Standard_Error = se(metrics[TRRi-1].total,metrics[TRRi-1].visitors);
+       //Calculate Confidence Interval Using Standard Error
+        var Total_ConfidenceInt = confInt(Total_Standard_Error,percentile)*100;
+        responseRateObj[TRRi-1].totalMin = (Total_Response_Rate) - (Total_ConfidenceInt);
+         responseRateObj[TRRi-1].totalMax = (Total_Response_Rate) + (Total_ConfidenceInt);
+       //Format and Push HTML to CSS Element
+        $(TRR_CSS_ID).html(Total_Response_Rate.toFixed(2)+"% <div class='ci'>±"+Total_ConfidenceInt.toFixed(2)+"%</div>");
+    }
+
+
+
+    //////Populate Lifts
+        //Forms 
+    // for (var LIFTi=1; LIFTi <= experienceNumber; LIFTi++){
+    //    var testLift = lift(1,3);
+    //  var fLift_TR = lift(responseRateObj[0].forms,responseRateObj[LIFTi].forms);
+  //   var fminLift = lift(responseRateObj[0].formsMax,responseRateObj[LIFTi].formsMin,1)
+  //      var fmaxLift = lift(responseRateObj[0].formsMin,responseRateObj[LIFTi].formsMax,1);
+   //   var fLift_CSS_ID = "#forms"+(LIFTi+1)+" div.flift";
+ //       $(fLift_CSS_ID).html(fLift_TR+" <div class='ci'> ("+fminLift+" to "+fmaxLift+")</div>");
+
+    }
+    alert("hi");
+
+
+
+
+
+});
+</script>
+
 <script>
 
 //Get Param Function
@@ -302,7 +572,7 @@ $("#pic1").attr("value",getParameterByName("pic1"));
 $("#pic2").attr("value",getParameterByName("pic2"));
 
 
-
+/**
 
 
 
@@ -438,10 +708,10 @@ $("#calculate").on("click",function(){
     function zscore (P,N,Pc,Nc){
         var Ac = Pc*(1-Pc);
         var Bc = Ac/Nc;
-        /********************/
+
         var A = P*(1-P);
         var B = A/N;
-        /******************/
+
         var C = B + Bc;
         var Numerator = P - Pc;
         var Denomninator = Math.sqrt(C);
@@ -520,6 +790,8 @@ $("#calculate").on("click",function(){
     $(".exp2 div.tRR").attr("data-content",exp2tRR_TT);
     $(".exp2 div.tLift").html(lift(exp1tRR,exp2tRR)+"<div class='ci'> ("+lift(exp1Max_t,exp2Min_t)+" to "+lift(exp1Min_t,exp2Max_t)+")</div>");
     $(".exp2 div.tConf").html((cumnormdist(zscore(exp2tRR,exp2Visitors,exp1tRR,exp1Visitors))*100).toFixed(2)+"%");
+
+**/
 
     //Capture Images
     var pic1 = $("#pic1").val();
@@ -813,11 +1085,10 @@ if (maxaddRev<0) {
   .popup({
     position: 'left center',
     delay:0
-  })
-  ;
+  });
 $("#result").show();
 $("html, body").animate({ scrollTop: $(document).height() }, "slow");
-});
+
 
 </script>
 
