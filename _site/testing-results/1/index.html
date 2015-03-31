@@ -356,8 +356,8 @@ $("#calculate").on("click",function(){
     }
 
     function lift (rrControl,rr2){
-    var num1 = ((rr2 - rrControl) / rrControl)*100;
-    return num1.toFixed(2)+"%";
+    var num1 = ((rr2 - rrControl) / rrControl);
+    return num1;
     }
     function zscore (P,N,Pc,Nc){
         var Ac = Pc*(1-Pc);
