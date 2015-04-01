@@ -1,7 +1,7 @@
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Significance Calculator</title>
+    <meta charset="UTF-8">
+    <title>Significance Calculator</title>
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" class="ui" href="/semantic/packaged/css/semantic.css">
@@ -14,7 +14,6 @@
     #linksy {
         display: none;
     }
-
   </style>
 </head>
 
@@ -52,7 +51,6 @@
   <div class="ui button">5</div>
   <div class="ui button">6</div>
 </div>
-
 -->
 
 
@@ -197,7 +195,6 @@
 </body>
 
 <script>
-
 //Get Param Function
     function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -205,53 +202,36 @@
         results = regex.exec(location.search);
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
-
 $("#test_title").attr("value",getParameterByName("title"));
-
 $("#exp1-name").attr("value",getParameterByName("name1"));
 $("#exp2-name").attr("value",getParameterByName("name2"));
-
 $("#exp1-visitors").attr("value",getParameterByName("visit1"));
 $("#exp2-visitors").attr("value",getParameterByName("visit2"));
-
 $("#exp1-forms").attr("value",getParameterByName("form1"));
 $("#exp2-forms").attr("value",getParameterByName("form2"));
-
 $("#exp1-calls").attr("value",getParameterByName("call1"));
 $("#exp2-calls").attr("value",getParameterByName("call2"));
-
 $("#daysInTest").attr("value",getParameterByName("days"));
-
 $("#pic1").attr("value",getParameterByName("pic1"));
 $("#pic2").attr("value",getParameterByName("pic2"));
-
-
-
-
-
-
-	//Assumptions
+    //Assumptions
 $("#calculate").on("click",function(){
     var percentilSTN= parseInt($("#percentile").val());   
     var percentile = percentilSTN || 2;
-
     var installRev = parseInt($("#installRev").val()) || 59;
     var formCloseRate = parseInt($("#formCloseRate").val()) || 0.12;
     var callCloseRate = parseInt($("#callCloseRate").val()) || 0.18;
-
     $("installRev").html(
         (installRev*formCloseRate*monthlyEstimate*exp2Min)+(installRev*callCloseRate*monthlyEstimate*exp2Min_c)
             );
     //Experiment Title
     var testTitle = $("#test_title").val() || "Test Results";
-
     //Experience 1
     var exp1Name = $("#exp1-name").val() || "Test A";
     var exp1Visitors = $("#exp1-visitors").val() || 1000;
     var exp1Forms = $("#exp1-forms").val() || 50;
     var exp1Calls = $("#exp1-calls").val() || 50;
     var exp1Total = parseInt(exp1Forms) + parseInt(exp1Calls);
-
     var exp1fRR = responseRate(exp1Visitors, exp1Forms);
     var exp1fRR_p = toPercent(exp1fRR, 2);
     var exp1Forms_se = se(exp1Forms,exp1Visitors);
@@ -259,7 +239,6 @@ $("#calculate").on("click",function(){
     var exp1Min = exp1fRR - exp1Forms_ci;
     var exp1Max = exp1fRR + exp1Forms_ci;
     var exp1fRR_TT = ((exp1fRR-exp1Forms_ci)*100).toFixed(2)+"% to "+((exp1fRR+exp1Forms_ci)*100).toFixed(2)+"%";
-
     var exp1cRR = responseRate(exp1Visitors, exp1Calls);
     var exp1cRR_p = toPercent(exp1cRR, 2);
     var exp1Calls_se = se(exp1Calls,exp1Visitors);
@@ -267,7 +246,6 @@ $("#calculate").on("click",function(){
     var exp1Min_c = exp1cRR - exp1Calls_ci;
     var exp1Max_c = exp1cRR + exp1Calls_ci;
     var exp1cRR_TT = ((exp1cRR-exp1Calls_ci)*100).toFixed(2)+"% to "+((exp1cRR+exp1Calls_ci)*100).toFixed(2)+"%";
-
     var exp1tRR = responseRate(exp1Visitors, exp1Total);
     var exp1tRR_p = toPercent(exp1tRR, 2);
     var exp1Total_se = se(exp1Total,exp1Visitors);
@@ -275,17 +253,13 @@ $("#calculate").on("click",function(){
     var exp1Min_t = exp1tRR - exp1Total_ci;
     var exp1Max_t = exp1tRR + exp1Total_ci;
     var exp1tRR_TT = ((exp1tRR-exp1Total_ci)*100).toFixed(2)+"% to "+((exp1tRR+exp1Total_ci)*100).toFixed(2)+"%";
-
-
     //------------------------------------
-
     //Experience 2
     var exp2Name = $("#exp2-name").val() || "Test B";
     var exp2Visitors = $("#exp2-visitors").val() || 1000;
     var exp2Forms = $("#exp2-forms").val() || 70;
     var exp2Calls = $("#exp2-calls").val() || 70;
     var exp2Total = parseInt(exp2Forms) + parseInt(exp2Calls);
-
     var exp2fRR = responseRate(exp2Visitors, exp2Forms);
     var exp2fRR_p = toPercent(exp2fRR, 2);
     var exp2Forms_se = se(exp2Forms,exp2Visitors);
@@ -293,7 +267,6 @@ $("#calculate").on("click",function(){
     var exp2Min = exp2fRR - exp2Forms_ci;
     var exp2Max = exp2fRR + exp2Forms_ci;
     var exp2fRR_TT = ((exp2fRR-exp2Forms_ci)*100).toFixed(2)+"% to "+((exp2fRR+exp2Forms_ci)*100).toFixed(2)+"%";
-
     var exp2cRR = responseRate(exp2Visitors, exp2Calls);
     var exp2cRR_p = toPercent(exp2cRR, 2);
     var exp2Calls_se = se(exp2Calls,exp2Visitors);
@@ -301,7 +274,6 @@ $("#calculate").on("click",function(){
     var exp2Min_c = exp2cRR - exp2Calls_ci;
     var exp2Max_c = exp2cRR + exp2Calls_ci;
     var exp2cRR_TT = ((exp2cRR-exp2Calls_ci)*100).toFixed(2)+"% to "+((exp2cRR+exp2Calls_ci)*100).toFixed(2)+"%";
-
     var exp2tRR = responseRate(exp2Visitors, exp2Total);
     var exp2tRR_p = toPercent(exp2tRR, 2);
     var exp2Total_se = se(exp2Total,exp2Visitors);
@@ -309,21 +281,15 @@ $("#calculate").on("click",function(){
     var exp2Min_t = exp2tRR - exp2Total_ci;
     var exp2Max_t = exp2tRR + exp2Total_ci;
     var exp2tRR_TT = ((exp2tRR-exp2Total_ci)*100).toFixed(2)+"% to "+((exp2tRR+exp2Total_ci)*100).toFixed(2)+"%";
-
     
-
-
-
     //Calculations
     function responseRate(visitors, conversions) {
         return (conversions / visitors);
     }
-
     function toPercent(toConvert, decimal) {
         var num = toConvert*100;
         return num.toFixed(decimal) + "%";
     }
-
     function se(conversions, visitors) {
         var p = conversions / visitors;
         var a = p * (1 - p);
@@ -331,7 +297,6 @@ $("#calculate").on("click",function(){
         var standerr = Math.sqrt(b);
         return standerr;
     }
-
     function confInt(standerr, sig) {
         var perctl;
         switch (sig) {
@@ -354,10 +319,9 @@ $("#calculate").on("click",function(){
     var ci = input * 100;
     return "<div class='ci'>&plusmn"+ci.toFixed(2)+"%</div>";
     }
-
     function lift (rrControl,rr2){
-    var num1 = ((rr2 - rrControl) / rrControl);
-    return num1;
+    var num1 = ((rr2 - rrControl) / rrControl)*100;
+    return num1.toFixed(2)+"%";
     }
     function zscore (P,N,Pc,Nc){
         var Ac = Pc*(1-Pc);
@@ -385,15 +349,12 @@ $("#calculate").on("click",function(){
         var taylor;
         var package;
         var exponent1;
-
         if (x >= 0) {
-
             t = 1.0 / (1.0 + p * x);
             exponent1 =  (-x * x) / 2.0;
             package = ( t *( t * ( t * ( t * b5 + b4 ) + b3 ) + b2 ) + b1 );
             taylor = 1.0 - c * Math.exp(exponent1) * t * package;
             return taylor;
-
         } else {
              t = 1.0 / (1.0 - p * x);
             exponent1 =  -x * x / 2.0;
@@ -402,53 +363,42 @@ $("#calculate").on("click",function(){
             return 1 - taylor;
         }
     }
-
     //Populate Experience Names
     $(".exp1 div.experience").html(exp1Name + " [CONTROL]");
     $(".exp2 div.experience").html(exp2Name);
-
     //Populate Metrics
     //$(".exp1 div.visitors").html(exp1Visitors);
     //$(".exp1 div.forms").html(exp1Forms);
     //$(".exp1 div.calls").html(exp1Calls);
     $(".exp1 div.total").html(exp1Total);
-
     $(".exp2 div.visitors").html(exp2Visitors);
     $(".exp2 div.forms").html(exp2Forms);
     $(".exp2 div.calls").html(exp2Calls);
     $(".exp2 div.total").html(exp2Total);
-
     //Populate Outbound Leads (Forms)
     $(".exp1 div.fRR").html(exp1fRR_p + " " + ciDisplay(exp1Forms_ci));
     $(".exp1 div.fRR").attr("data-content",exp1fRR_TT);
-
     $(".exp2 div.fRR").html(exp2fRR_p + " " + ciDisplay(exp2Forms_ci));
     $(".exp2 div.fRR").attr("data-content",exp2fRR_TT);
     $(".exp2 div.fLift").html(lift(exp1fRR,exp2fRR)+"<div class='ci'> ("+lift(exp1Max,exp2Min)+" to "+lift(exp1Min,exp2Max)+")</div>");
     $(".exp2 div.fConf").html((cumnormdist(zscore(exp2fRR,exp2Visitors,exp1fRR,exp1Visitors))*100).toFixed(2)+"%");
-
     //Populate Inbound Leads (Calls)
     $(".exp1 div.cRR").html(exp1cRR_p + " " + ciDisplay(exp1Calls_ci));
     $(".exp1 div.cRR").attr("data-content",exp1cRR_TT);
-
     $(".exp2 div.cRR").html(exp2cRR_p + " " + ciDisplay(exp2Calls_ci));
     $(".exp2 div.cRR").attr("data-content",exp2cRR_TT);
     $(".exp2 div.cLift").html(lift(exp1cRR,exp2cRR)+"<div class='ci'> ("+lift(exp1Max_c,exp2Min_c)+" to "+lift(exp1Min_c,exp2Max_c)+")</div>");
     $(".exp2 div.cConf").html((cumnormdist(zscore(exp2cRR,exp2Visitors,exp1cRR,exp1Visitors))*100).toFixed(2)+"%");
-
     //Populate Total Leads
     $(".exp1 div.tRR").html(exp1tRR_p + " " + ciDisplay(exp1Total_ci));
     $(".exp1 div.tRR").attr("data-content",exp1tRR_TT);
-
     $(".exp2 div.tRR").html(exp2tRR_p + " " + ciDisplay(exp2Total_ci));
     $(".exp2 div.tRR").attr("data-content",exp2tRR_TT);
     $(".exp2 div.tLift").html(lift(exp1tRR,exp2tRR)+"<div class='ci'> ("+lift(exp1Max_t,exp2Min_t)+" to "+lift(exp1Min_t,exp2Max_t)+")</div>");
     $(".exp2 div.tConf").html((cumnormdist(zscore(exp2tRR,exp2Visitors,exp1tRR,exp1Visitors))*100).toFixed(2)+"%");
-
     //Capture Images
     var pic1 = $("#pic1").val();
     var pic2 = $("#pic2").val();
-
     //Populate URL
     var daysInTest = $("#daysInTest").val() || 14;
     var date = new Date();
@@ -472,43 +422,32 @@ $("#calculate").on("click",function(){
      "&date="+encodeURIComponent(date.toLocaleString());
     $("a").attr("href",embeddURL);
     $("#linksy").show();
-
     var fConfidence = cumnormdist(zscore(exp2fRR,exp2Visitors,exp1fRR,exp1Visitors));
     var cConfidence = cumnormdist(zscore(exp2cRR,exp2Visitors,exp1cRR,exp1Visitors));
     var tConfidence = cumnormdist(zscore(exp2tRR,exp2Visitors,exp1tRR,exp1Visitors));
-
     if(fConfidence >= 0.95) {
      $("#fConf-check").show();
      $("#fConf-att").hide();
-
     } else if (fConfidence <=0.85) {
          $("#fConf-check").hide();
         $("#fConf-att").show();
-
     } else {
      $("#fConf-check").hide();
      $("#fConf-att").hide();
-
     };
-
     if(cConfidence >= 0.95) {
      $("#cConf-check").show();
      $("#cConf-att").hide();
-
     } else if (cConfidence <=0.85) {
          $("#cConf-check").hide();
         $("#cConf-att").show();
-
     } else {
      $("#cConf-check").hide();
      $("#cConf-att").hide();
-
     };
-
     if(tConfidence >= 0.95) {
      $("#tConf-check").show();
      $("#tConf-att").hide();
-
     } else if (tConfidence <=0.85) {
          $("#tConf-check").hide();
         $("#tConf-att").show();
@@ -516,28 +455,20 @@ $("#calculate").on("click",function(){
      $("#tConf-check").hide();
      $("#tConf-att").hide();
     };
-
     if (!(percentile >= 0)){
     $(".ui.selection.dropdown").addClass("error");
     }else{
     $(".ui.selection.dropdown").removeClass("error");
     }
-
-
     $("div.ui.backSection").css("display","inline-block");
     $(".highchartsDisplay").css("display","inline-block");
-
-
     var visitsInTest = parseInt($("#exp1-visitors").val()) + parseInt($("#exp2-visitors").val()) || 2000;
     var monthlyEstimate = (visitsInTest / daysInTest) * 7 * 4.33333334;
     var test1Min = exp2Min_t;
     var ctl1Min = exp1Min_t;
     var test1Max = exp2Max_t;
     var ctlRRMax = exp1Max_t;
-
-
     var minMaxArr = [Math.round((test1Min * monthlyEstimate) - (ctlRRMax * monthlyEstimate)),Math.round((test1Max * monthlyEstimate) - (ctl1Min * monthlyEstimate))];
-
     var cumMonLead =[
         [minMaxArr[0]*(1),minMaxArr[1]*(1)],
         [minMaxArr[0]*(2),minMaxArr[1]*(2)],
@@ -547,14 +478,11 @@ $("#calculate").on("click",function(){
         [minMaxArr[0]*(6),minMaxArr[1]*(6)]
     ];
     
-
     //*********************************
     var winningTest = "<em>"+exp2Name+"</em>";
     var today = new Date();
     var currentMonth = today.getMonth();
     var currentYear = parseInt(today.getFullYear().toString().substring(2));
-
-
     function monthStr(month, addition) {
         var montharr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         var addMonth = month + addition;
@@ -565,43 +493,32 @@ $("#calculate").on("click",function(){
             return montharr[addMonth]+" '"+(currentYear+0);
         }
     }
-
     var nextSixMonths = [];
-
     for (i = 1; i < 7; i++) {
         nextSixMonths.push( monthStr(currentMonth, i));
     };
-
     /**************************************************
     ***************************************************
     ***************************************************/
-
     $(function () {
-
         $('#containerCum').highcharts({
-
             chart: {
                 type: 'columnrange',
                 inverted: false,
                   style: {
                 fontFamily: 'Arial, Helvetica, sans-serif'
-
             }
             },
-
             title: {
                 text: '<strong>Monthly Lead Increase (Range)</strong>'
             },
-
             subtitle: {
                 text: 'Experience: '+winningTest
             },
-
             xAxis: {
                 categories: nextSixMonths
                 
             },
-
             yAxis: {
                 title: {
                    text: 'Additional Leads'
@@ -618,11 +535,9 @@ $("#calculate").on("click",function(){
                         
                     }]*/
             },
-
             tooltip: {
                 //valueSuffix: '°C'
             },
-
             plotOptions: {
                 columnrange: {
                     dataLabels: {
@@ -633,19 +548,15 @@ $("#calculate").on("click",function(){
                     }
                 }
             },
-
             legend: {
                 enabled: false
             },
-
             series: [{
                 name: 'Leads',
                 data: cumMonLead,
                 color:"#A1CF64"
             }]
-
         });
-
     });
     var TRtest1Calls = parseInt(exp1Calls);
     var TRtest2Calls = parseInt(exp2Calls);
@@ -658,7 +569,6 @@ $("#calculate").on("click",function(){
                 inverted: true,
                 style:{
                     fontFamily:'Arial, Helvetica, sans-serif'
-
                 }
             },
             legend:'none',
@@ -678,7 +588,6 @@ $("#calculate").on("click",function(){
             plotOptions: {
                 column: {
                     stacking: 'percent',
-
                 }
             },
             series: [{
@@ -693,7 +602,6 @@ $("#calculate").on("click",function(){
             }]
         });
     });
-
 var minaddRev = Math.round( 
     (
       (installRev*formCloseRate*monthlyEstimate*exp2Min)+(installRev*callCloseRate*monthlyEstimate*exp2Min_c)//Minimum Experience 2 Rev
@@ -701,7 +609,6 @@ var minaddRev = Math.round(
       (installRev*formCloseRate*monthlyEstimate*exp1Max)+(installRev*callCloseRate*monthlyEstimate*exp1Max_c)//Minus Maximum Experience 1 Rev
         ) 
     );
-
 var maxaddRev = Math.round(
     (
         (installRev*formCloseRate*monthlyEstimate*exp2Max)+(installRev*callCloseRate*monthlyEstimate*exp2Max_c)//Maximum Experience 2 Rev
@@ -711,28 +618,23 @@ var maxaddRev = Math.round(
     );
 var revSymbol1 = "";
 var revSymbol2 = "";
-
 if (minaddRev<0) {
    revSymbol1 = "-$";
 }else{
     revSymbol1="$";
 };
-
 if (maxaddRev<0) {
    revSymbol2 = "-$";
 }else{
     revSymbol2="$";
 };
-
     $("#addRev").html(
         revSymbol1+Math.abs(minaddRev).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+" <span style='font-size:28px;'>to</span> "+
         revSymbol2+Math.abs(maxaddRev).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
             );
-
     $( document ).ready(function() {
         $( "text:contains('Highcharts.com')" ).hide();
     });
-
     $('.ui')
   .popup({
     position: 'left center',
@@ -742,21 +644,16 @@ if (maxaddRev<0) {
 $("#result").show();
 $("html, body").animate({ scrollTop: $(document).height() }, "slow");
 });
-
 </script>
 
 <script type="text/javascript">
-
 $('.ui.dropdown')
   .dropdown()
 ;
 $("#expandOptions").on("click",function (){
 $("#CloseRates").toggle();
 $("#expandOptions").removeAttr("Class","Down").toogle();
-
 });
-
-
 </script>
 
 </html>

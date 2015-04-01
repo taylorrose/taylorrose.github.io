@@ -154,14 +154,14 @@
 </div>
 <div class="ui divider"></div>!-->
   <!--*********** Charts ***************!-->
-   <div style="float:right;"> 
+<!--    <div style="float:right;"> 
     
   
    <div id="containerCum" class="highchartsDisplay" style="min-width: 350px; height: 300px; margin: 0px"></div>
    <br>
    <div id="containerRatio" class="highchartsDisplay" style="min-width: 350px; height: 180px; margin: 0px;"></div>
    </div>
-
+ -->
   <!--*********** Reults Table ***************!-->
 <div class="ui backSection">
 <h3><strong>Outbound Leads (Forms)</strong></h3>
@@ -249,6 +249,9 @@
 </body>
 
 <script type="text/javascript">
+
+
+
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -267,6 +270,9 @@ var fillVisitors = getParameterByName("visit").split(",").map(function(item) {
 });
 
 var fillNames = getParameterByName("names").split(",");
+var fillExperienceNum = parseInt(getParameterByName("expnum"));
+
+
 
     
 
@@ -294,7 +300,7 @@ var experienceNumber = 2;
             //Add a row to end of Metrics table
                 //Include a unique ID and placeholder attributes in adding in the number of experiments
                     //Includes a class of 'lastRow' so it can easily be targeted
-            $("#myTable tr:last").after('<tr id = "metrics'+experienceNumber+'" class="exp'+experienceNumber+' metrics lastRow"><td><div class="ui input"><input type="text" id="exp2-name" class="name" placeholder="Experience '+ LetterArray[experienceNumber-1]+'"></div></td><td><div class="ui input"><input type="text" id="exp2-visitors"  class="visitors" placeholder="Visitors"></div></td><td><div class="ui input"><input type="text" id="exp2-forms" class="forms" placeholder="Forms"></div></td><td><div class="ui input"><input type="text" id="exp2-calls" class="calls" placeholder="Calls"></div></td><td ><div class="total"></div></td></tr>');
+            $("#myTable tr:last").after('<tr id = "metrics'+experienceNumber+'" class="exp'+experienceNumber+' metrics lastRow"><td><div class="ui input"><input type="text" id="exp'+experienceNumber+'-name" class="name" placeholder="Experience '+ LetterArray[experienceNumber-1]+'"></div></td><td><div class="ui input"><input type="text" id="exp'+experienceNumber+'-visitors"  class="visitors" placeholder="Visitors"></div></td><td><div class="ui input"><input type="text" id="exp'+experienceNumber+'-forms" class="forms" placeholder="Forms"></div></td><td><div class="ui input"><input type="text" id="exp'+experienceNumber+'-calls" class="calls" placeholder="Calls"></div></td><td ><div class="total"></div></td></tr>');
             //Added ID to <br> tag (I know...) so that I could place additional picture fields before the 'Calculate' button
                 //Includes a class of 'lastRow' so it can easily be targeted
             $("#addPics").before('<h4 class="ui header lastRow" style="display:inline-block; margin-right:25px;"><div class="ui input"><input type="text" id="pic'+experienceNumber+'" placeholder="Experience '+LetterArray[experienceNumber-1]+' Image"></div></h4>');
@@ -317,6 +323,31 @@ var experienceNumber = 2;
             $('#resetExperiece').attr("style","display:inline-block");
     });
 
+
+
+
+
+for(h=2;h<fillExperienceNum;h++){
+$( "#AddExperience" ).click ();
+}
+
+
+for(n=0;n<fillExperienceNum+1;n++){
+    var nameFieldFill = "#exp"+(n+1)+"-name"
+    $(nameFieldFill).attr("value",fillNames[n]);
+}
+for(n=2;n<fillExperienceNum+1;n++){
+    var nameFieldFill = "#exp"+(n+1)+"-visitors"
+    $(nameFieldFill).attr("value",fillVisitors[n]);
+}
+for(n=2;n<fillExperienceNum+1;n++){
+    var nameFieldFill = "#exp"+(n+1)+"-calls"
+    $(nameFieldFill).attr("value",fillCalls[n]);
+}
+for(n=2;n<fillExperienceNum+1;n++){
+    var nameFieldFill = "#exp"+(n+1)+"-forms"
+    $(nameFieldFill).attr("value",fillForms[n]);
+}
     //Remove Experience Button Click
     $("#removeLastExperiece").on("click", function () {
         //Remove Last Row of Metrics, Totals, Calls, and Forms tables - Will only remove if class of 'lastRow' is present
@@ -554,11 +585,11 @@ $('#MetricsLoop').on('click' , function () {
         for (var popRR_ii = 0; popRR_ii <= 2; popRR_ii++){
             var rrCSSID2 = leadTypes[popRR_ii+3]+"RR";
             var rrCSSID = "#"+leadTypes[popRR_ii]+popRR_i+" div."+rrCSSID2;
-            var rrHTML = toPercent(calculationsObj[popRR_i-1][leadTypes[popRR_ii]]["rr"],2)+"<div class='ci'>&plusmn;"+toPercent(calculationsObj[popRR_i-1][leadTypes[popRR_ii]]["ci"],1)+"</div>"
+            var rrHTML = toPercent(calculationsObj[popRR_i-1][leadTypes[popRR_ii]]["rr"],2)+"<div class='ci'>&plusmn;"+toPercent(calculationsObj[popRR_i-1][leadTypes[popRR_ii]]["ci"],2)+"</div>"
 
             var liftCSSID2 = leadTypes[popRR_ii+3]+"Lift";
             var liftCSSID = "#"+leadTypes[popRR_ii]+popRR_i+" div."+liftCSSID2;
-            var liftHTML = toPercent( calculationsObj[popRR_i-1][leadTypes[popRR_ii]]["lift"],2 ) +"<div class='ci'>&nbsp;"+ toPercent(calculationsObj[popRR_i-1][leadTypes[popRR_ii]]["liftMin"],1)+" to "+toPercent(calculationsObj[popRR_i-1][leadTypes[popRR_ii]]["liftMax"],1) +"</div>";
+            var liftHTML = toPercent( calculationsObj[popRR_i-1][leadTypes[popRR_ii]]["lift"],2 ) +"<div class='ci'>&nbsp;("+ toPercent(calculationsObj[popRR_i-1][leadTypes[popRR_ii]]["liftMin"],1)+" to "+toPercent(calculationsObj[popRR_i-1][leadTypes[popRR_ii]]["liftMax"],1) +")</div>";
 
             var confCSSID2 = leadTypes[popRR_ii+3]+"Conf";
             var confCSSID = "#"+leadTypes[popRR_ii]+popRR_i+" div."+confCSSID2;
@@ -599,10 +630,10 @@ $('#MetricsLoop').on('click' , function () {
     var daysInTest = $("#daysInTest").val() || 14;
     var date = new Date();
     var embeddURL = 
-    "/testing-results/embedd/3/?title="+ encodeURIComponent(testTitle)+
-    "names" + names + 
-    "&expnum" + experienceNumber + 
-    "&forms" + forms + 
+    "?title="+ encodeURIComponent(testTitle)+
+    "&names=" + names + 
+    "&expnum=" + experienceNumber + 
+    "&forms=" + forms + 
     "&calls=" + calls +
     "&visit=" + visitors +
     "&days="  + daysInTest +
@@ -615,6 +646,8 @@ $('#MetricsLoop').on('click' , function () {
      "&date="+encodeURIComponent(date.toLocaleString());
     $("a").attr("href",embeddURL);
     $("#linksy").show();
+
+    // document.location.replace(embeddURL);
 
 });
 </script>
@@ -631,17 +664,17 @@ $('#MetricsLoop').on('click' , function () {
 
 $("#test_title").attr("value",getParameterByName("title"));
 
-$("#exp1-name").attr("value",getParameterByName("name1"));
-$("#exp2-name").attr("value",getParameterByName("name2"));
+$("#exp1-name").attr("value",fillNames[0]);
+$("#exp2-name").attr("value",fillNames[1]);
 
-$("#exp1-visitors").attr("value",getParameterByName("visit1"));
-$("#exp2-visitors").attr("value",getParameterByName("visit2"));
+$("#exp1-visitors").attr("value",fillVisitors[0]);
+$("#exp2-visitors").attr("value",fillVisitors[2]);
 
-$("#exp1-forms").attr("value",getParameterByName("form1"));
-$("#exp2-forms").attr("value",getParameterByName("form2"));
+$("#exp1-forms").attr("value",fillForms[0]);
+$("#exp2-forms").attr("value",fillForms[1]);
 
-$("#exp1-calls").attr("value",getParameterByName("call1"));
-$("#exp2-calls").attr("value",getParameterByName("call2"));
+$("#exp1-calls").attr("value",fillCalls[0]);
+$("#exp2-calls").attr("value",fillCalls[1]);
 
 $("#daysInTest").attr("value",getParameterByName("days"));
 
@@ -656,7 +689,7 @@ $("#pic2").attr("value",getParameterByName("pic2"));
     var daysInTest = $("#daysInTest").val() || 14;
     var date = new Date();
     var embeddURL = 
-    "/testing-results/embedd/1/?title="+ encodeURIComponent(testTitle)+
+    "?title="+ encodeURIComponent(testTitle)+
     "&names=" + encodeURIComponent(exp1Name) + 
     "&forms=" + encodeURIComponent(exp2Name) + 
     "&calls=" + exp1Visitors +
@@ -672,7 +705,7 @@ $("#pic2").attr("value",getParameterByName("pic2"));
     $("a").attr("href",embeddURL);
     $("#linksy").show();
 
-   
+   document.location.replace(embeddURL);
 
     $("div.ui.backSection").css("display","inline-block");
     $(".highchartsDisplay").css("display","inline-block");
