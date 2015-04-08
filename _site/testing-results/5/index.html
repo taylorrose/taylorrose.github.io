@@ -228,6 +228,17 @@
         <td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="tConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive in the test. More data should be collected." id="tConf-att" class="ui orange icon attention"></i><div class="tConf"></div></td>
     </tr>
 </table>
+
+
+
+</div>
+<br>
+<br>
+<div class="ui labeled input">
+  <div class="ui label">
+    SHARABLE LINK
+  </div>
+  <input id="embedURL" type="text" placeholder="Embed URL">
 </div>
 <br>
 <div id="result">
@@ -631,7 +642,7 @@ $('#MetricsLoop').on('click' , function () {
     var date = new Date();
     var embeddURL = 
     "?title="+ encodeURIComponent(testTitle)+
-    "&names=" + names + 
+    "&names=" + encodeURICompnents(names) + 
     "&expnum=" + experienceNumber + 
     "&forms=" + forms + 
     "&calls=" + calls +
@@ -647,7 +658,10 @@ $('#MetricsLoop').on('click' , function () {
     $("a").attr("href",embeddURL);
     $("#linksy").show();
 
+
     // document.location.replace(embeddURL);
+
+    $("#embedURL").attr("value",embeddURL);
 
 });
 </script>
