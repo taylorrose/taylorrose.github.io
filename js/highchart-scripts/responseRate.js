@@ -55,7 +55,7 @@ $(function () {
         },
         yAxis: {
             title: {
-                text: 'Conversion Rate (%)'
+                text: 'Response Rate (%)'
             },
             labels: {
                 valueSuffix:"%"
@@ -79,12 +79,12 @@ $(function () {
         },
         series: [{
             name: 'Inbound (Calls)',
-            data: HomeForms,
+            data: HomeCalls,
             color: "#92B0DF"
 
         }, {
             name: 'Outbound (Forms)',
-            data: HomeCalls,
+            data: HomeForms,
             color:"#3C5178"
 
         },
