@@ -7,7 +7,7 @@ $("#home .masthead").css("background-image","url(images/bg2.jpg)");
 
 //H1
 $("#home > div.ui.inverted.masthead.segment > div > div > div.ui.transition.information.visible > h1").html("Sign Up Your Cat For Classes Today");
-$(".transition > p").css({"display":"none", "visibility":""});
+//$(".transition > p").css({"display":"none", "visibility":""});
 
 //Button CTAs
 $("#home > div.ui.inverted.masthead.segment > div > div > div.ui.transition.information.visible > div > div.visible.content").html("Sign Up Today!");
