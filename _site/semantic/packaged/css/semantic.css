@@ -6327,6 +6327,9 @@ i.icon.bug:before {
 i.icon.building:before {
   content: "\f0f7";
 }
+i.icon.calculator:before {
+  content: "\f1ec";
+}
 i.icon.bullhorn:before {
   content: "\f0a1";
 }
@@ -7068,6 +7071,9 @@ i.icon.stop:before {
 }
 i.icon.strikethrough:before {
   content: "\f0cc";
+}
+i.icon.linkify:before {
+  content: "\f0c1";
 }
 i.icon.subscript:before {
   content: "\f12c";

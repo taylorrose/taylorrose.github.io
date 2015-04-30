@@ -5,6 +5,7 @@
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" class="ui" href="/semantic/packaged/css/semantic.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <script src="/semantic/packaged/javascript/semantic.js"></script>
   <!--<link rel="stylesheet" type="text/css" class="ui" href="/Semantic-UI-2/dist/semantic.css">
   <script src="/Semantic-UI-2/dist/semantic.js"></script>!-->
@@ -26,8 +27,7 @@
     	vertical-align: top;
     	margin-top: 30px;
     	
-    }	
-
+    }
 
     @media screen and (max-width: 900px) {
     /*.description {
@@ -49,6 +49,7 @@
 
 <div class="ui raised segment">
 <div class="ui mini green ribbon label">BETA</div>
+
 
 <br><br>
 
@@ -165,10 +166,7 @@
 <h4 class="ui header" style="display:inline-block; margin-right:25px;"><div class="ui input"><input type="text" id="pic2" placeholder="Experience B Image"></div></h4>
 
 <br id="addPics">
-<div id="calculate" class="ui blue button">Calculate<i class="lab icon"></i></div>
-
-
-<div id="MetricsLoop" class="ui purple button">Run Metrics Loop<i class="smile icon"></i></div>
+<div id="calculate" class="ui blue button">Calculate <i class="fa fa-calculator"></i></div>
 <br>
 <br>
 
@@ -186,7 +184,7 @@
   
    <div id="containerCum" class="highchartsDisplay" style="min-width: 350px; height: 300px; margin: 0px"></div>
    <br>
-   <div id="containerRatio" class="highchartsDisplay" style="min-width: 350px; height: 180px; margin: 0px;"></div>
+   <div id="containerRatio" class="highchartsDisplay" style="min-width: 350px; height: 300px; margin: 0px;"></div>
    </div>   
 
   <!--*********** Reults Table ***************!-->
@@ -263,7 +261,7 @@
 <br>
 <div class="ui labeled input">
   <div class="ui label">
-    SHARABLE LINK
+    SHARABLE LINK <i class="linkify icon"></i>
   </div>
   <input id="embedURL" type="text" placeholder="Embed URL">
 </div>
@@ -479,7 +477,7 @@ var experienceNumber = 2;
 
    // var winnerTest;
 
-$('#MetricsLoop').on('click' , function () {
+$('#calculate').on('click' , function () {
     calls = [];
     forms = [];
     visitors = [];
@@ -784,21 +782,21 @@ $('#MetricsLoop').on('click' , function () {
     var totalWinnerIndex = maxArrIndex(totalResponseArr);
 
     //
-    $(formWinner+" > td:nth-child(1) > div").prepend("<i class='trophy small icon'></i>");
-    $(callWinner+" > td:nth-child(1) > div").prepend("<i class='trophy small icon'></i>");
-    $(totalWinner+" > td:nth-child(1) > div").prepend("<i class='trophy small icon'></i>");
+    $(formWinner+" > td:nth-child(1) > div").prepend("<i class='trophy small icon' style='color:#ff8200'></i>");
+    $(callWinner+" > td:nth-child(1) > div").prepend("<i class='trophy small icon' style='color:#ff8200'></i>");
+    $(totalWinner+" > td:nth-child(1) > div").prepend("<i class='trophy small icon' style='color:#ff8200'></i>");
     //
-    $(formWinner).css("color","#ff8200");
-    $(callWinner).css("color","#ff8200");
-    $(totalWinner).css("color","#ff8200");
-    //
-    $(formWinner+" > td:nth-child(3) > div > div").css("color","#ff8200");
-    $(callWinner+" > td:nth-child(3) > div > div").css("color","#ff8200");
-    $(totalWinner+" > td:nth-child(3) > div > div").css("color","#ff8200");
-    //
-    $(formWinner+"> td:nth-child(2) > div > div").css("color","#ff8200");
-    $(callWinner+"> td:nth-child(2) > div > div").css("color","#ff8200");
-    $(totalWinner+"> td:nth-child(2) > div > div").css("color","#ff8200");
+    // $(formWinner).css("color","#ff8200");
+    // $(callWinner).css("color","#ff8200");
+    // $(totalWinner).css("color","#ff8200");
+    // //
+    // $(formWinner+" > td:nth-child(3) > div > div").css("color","#ff8200");
+    // $(callWinner+" > td:nth-child(3) > div > div").css("color","#ff8200");
+    // $(totalWinner+" > td:nth-child(3) > div > div").css("color","#ff8200");
+    // //
+    // $(formWinner+"> td:nth-child(2) > div > div").css("color","#ff8200");
+    // $(callWinner+"> td:nth-child(2) > div > div").css("color","#ff8200");
+    // $(totalWinner+"> td:nth-child(2) > div > div").css("color","#ff8200");
 
         //*********************************
         var controlLeads = metrics[0].total;
@@ -896,13 +894,74 @@ $('#MetricsLoop').on('click' , function () {
             series: [{
                 name: 'Leads',
                 data: Temp_cumMonLead,
-                color:"#ff8200"
+                color:"#6ECFF5"
             }]
 
         });
 
     });
+
+var Temp_winningForms = metrics[totalWinnerIndex].forms;
+var Temp_winningCalls = metrics[totalWinnerIndex].calls;
+var Temp_controlForms =metrics[0].forms;
+var Temp_controlCalls =metrics[0].calls;
+var Temp_callRatio = (Temp_winningForms/(Temp_winningCalls+Temp_winningForms))*100;
+	
+$(function () {
+    $('#containerRatio').highcharts({
+        chart: {
+            type: 'bar'
+
+        },
+        legend: {
+            itemStyle: {
+                color: '#808080'
+            }
+        },
+        title: {
+            text: '<strong>Percent Calls </strong>('+Temp_callRatio.toFixed(1)+"%)",
+            style: {
+                fontFamily: 'Arial, Helvetica, sans-serif',
+                color: '#808080'
+
+            }
+        },
+        xAxis: {
+            categories: ['Control', '<strong>Top Exp.</strong>']
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Percent of Leads'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+            shared: true
+        },
+        plotOptions: {
+            bar: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Calls',
+            data: [Temp_controlCalls, Temp_winningCalls],
+            color:'#6ECFF5',
+            index:1,
+            legendIndex:0
+        }, {
+            name: 'Forms',
+            data: [Temp_controlForms, Temp_winningForms],
+            color:'#bccdd6',
+            index:0,
+            legendIndex:1
+        }]
+    });
+});
     $("#highcharts-0 > svg > text:nth-child(15)").hide();
+
+    $("#highcharts-2 > svg > text:nth-child(14)").hide();
 
 
 });
