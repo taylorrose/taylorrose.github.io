@@ -261,10 +261,11 @@
 <br>
 <div class="ui labeled input">
   <div class="ui label">
-    SHARABLE LINK <i class="linkify icon"></i>
+    <a id="shareable" href="#">SHARABLE LINK</a> <i class="linkify icon"></i>
   </div>
-  <input id="embedURL" type="text" placeholder="Embed URL">
+  <input id="embedURL" type="text" placeholder="URL">
 </div>
+
 <br>
 <div id="result">
 <!--<div style="font-size:20;">Additional Monthly Revenue</div>
@@ -364,7 +365,7 @@ LINKEDIN
 
 <script type="text/javascript">
 //Show the backsection, which normally is hidden - !! For Troubleshooting only !!
-    $("div.ui.backSection").css("display","inline-block");
+   // $("div.ui.backSection").css("display","inline-block");
 
 
 //Add Experiences Button Click
@@ -741,6 +742,7 @@ $('#calculate').on('click' , function () {
     // document.location.replace(embeddURL);
 
     $("#embedURL").attr("value",document.location.origin + document.location.pathname + embeddURL);
+    $("#shareable").attr("href",document.location.origin + document.location.pathname + embeddURL)
 
     //Identify and Highlight Winners
     function maxArr(arr,stringName) {
@@ -782,14 +784,14 @@ $('#calculate').on('click' , function () {
     var totalWinnerIndex = maxArrIndex(totalResponseArr);
 
     //
-    $(formWinner+" > td:nth-child(1) > div").prepend("<i class='trophy small icon' style='color:#ff8200'></i>");
-    $(callWinner+" > td:nth-child(1) > div").prepend("<i class='trophy small icon' style='color:#ff8200'></i>");
-    $(totalWinner+" > td:nth-child(1) > div").prepend("<i class='trophy small icon' style='color:#ff8200'></i>");
+    $(formWinner+" > td:nth-child(1) > div").prepend("<i class='trophy small icon' style='color:#666666'></i>");
+    $(callWinner+" > td:nth-child(1) > div").prepend("<i class='trophy small icon' style='color:#666666'></i>");
+    $(totalWinner+" > td:nth-child(1) > div").prepend("<i class='trophy small icon' style='color:#666666'></i>");
     //
-    // $(formWinner).css("color","#ff8200");
-    // $(callWinner).css("color","#ff8200");
-    // $(totalWinner).css("color","#ff8200");
-    // //
+    $(formWinner).css("background-color","#d9f5ff");
+    $(callWinner).css("background-color","#d9f5ff");
+    $(totalWinner).css("background-color","#d9f5ff");
+    //
     // $(formWinner+" > td:nth-child(3) > div > div").css("color","#ff8200");
     // $(callWinner+" > td:nth-child(3) > div > div").css("color","#ff8200");
     // $(totalWinner+" > td:nth-child(3) > div > div").css("color","#ff8200");
@@ -905,7 +907,7 @@ var Temp_winningForms = metrics[totalWinnerIndex].forms;
 var Temp_winningCalls = metrics[totalWinnerIndex].calls;
 var Temp_controlForms =metrics[0].forms;
 var Temp_controlCalls =metrics[0].calls;
-var Temp_callRatio = (Temp_winningForms/(Temp_winningCalls+Temp_winningForms))*100;
+var Temp_callRatio = (Temp_winningCalls/(Temp_winningCalls+Temp_winningForms))*100;
 	
 $(function () {
     $('#containerRatio').highcharts({
@@ -919,7 +921,7 @@ $(function () {
             }
         },
         title: {
-            text: '<strong>Percent Calls </strong>('+Temp_callRatio.toFixed(1)+"%)",
+            text: '<strong>Percent Calls </strong>('+Temp_callRatio.toFixed(0)+"%)",
             style: {
                 fontFamily: 'Arial, Helvetica, sans-serif',
                 color: '#808080'
@@ -962,7 +964,8 @@ $(function () {
     $("#highcharts-0 > svg > text:nth-child(15)").hide();
 
     $("#highcharts-2 > svg > text:nth-child(14)").hide();
-
+    $("div.ui.backSection").css("display","inline-block");
+    $("html, body").animate({ scrollTop: $(document).height() }, "slow");
 
 });
 </script>
@@ -997,8 +1000,8 @@ $("#pic2").attr("value",getParameterByName("pic2"));
     var daysInTest = $("#daysInTest").val() || 14;
 
 
-    $("div.ui.backSection").css("display","inline-block");
-    $(".highchartsDisplay").css("display","inline-block");
+    
+   // $(".highchartsDisplay").css("display","inline-block");
 
 
     
