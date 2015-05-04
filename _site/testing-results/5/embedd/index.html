@@ -6,6 +6,7 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" class="ui" href="/semantic/packaged/css/semantic.css">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/responsive.css">
   <script src="/semantic/packaged/javascript/semantic.js"></script>
   <!--<link rel="stylesheet" type="text/css" class="ui" href="/Semantic-UI-2/dist/semantic.css">
   <script src="/Semantic-UI-2/dist/semantic.js"></script>!-->
@@ -34,15 +35,23 @@
     	margin-top: 30px;
     }
     @media screen and (max-width: 900px) {
-    /*.description {
-        display:none;
-    }*/
-    .third{
-    	display:block;
-    	max-width:450px;
+        .third{
+        	display:block;
+        	max-width:450px;
+
+        }
 
     }
-}
+    @media screen and (max-width: 570px) {
+        .ci , body > div.ui.raised.segment > div.margins > div.ui.labeled.input , #containerCum , #containerRatio ,  .responsiveHide {
+            display:none;
+        }
+        .total , .experience, .trr , .crr , .frr , .clift , .tlift , .flift , .fconf , .cconf , .tconf , #daysInTest , th , ins {
+            font-size: 12px;
+        }
+    }
+
+
 </style>
 </head>
 
@@ -185,7 +194,7 @@
     <tr>
         <th>Experience</th>
         <th>Response Rate%</th>
-        <th>Lift % (Conf. Int.)</th>
+        <th>Lift <span class="responsiveHide">% (Conf. Int.)<span></th>
         <th>Confidence</th>
     </tr>
     <tr id = "forms1" class="exp1">
@@ -206,7 +215,7 @@
     <tr>
         <th>Experience</th>
         <th>Response Rate%</th>
-        <th>Lift % (Conf. Int.)</th>
+        <th>Lift <span class="responsiveHide">% (Conf. Int.)<span></th>
         <th>Confidence</th>
     </tr>
     <tr id = "calls1" class="exp1">
@@ -227,7 +236,7 @@
     <tr>
         <th>Experience</th>
         <th>Response Rate%</th>
-        <th>Lift % (Conf. Int.)</th>
+        <th>Lift <span class="responsiveHide">% (Conf. Int.)<span></th>
         <th>Confidence</th>
     </tr>
     <tr id = "total1" class="exp1">
