@@ -12,36 +12,38 @@
   <script src="http://code.highcharts.com/highcharts.js"></script>
   <script src="http://code.highcharts.com/highcharts-more.js"></script>
   <style>
-    #linksy , #removeLastExperiece , #resetExperiece, #contributors {
+    #linksy , #removeLastExperiece , #resetExperiece, #contributors, #calculate, #buttons {
         display: none;
     }
-
-
+    #daysInTest {
+        font-size: 18px;
+        background-color: #f9f9fa;
+        padding:5px;
+        border: 1px solid #cdcdcd;
+    }
+    ins {
+        text-decoration: none;  
+    }
    .inline {
     	display:inline-block;
     }
-
     .third {
     	max-width:30%;
     	margin-left:25px;
     	vertical-align: top;
     	margin-top: 30px;
-    	
     }
-
     @media screen and (max-width: 900px) {
     /*.description {
         display:none;
     }*/
     .third{
     	display:block;
-    	
     	max-width:450px;
 
     }
 }
-
-  </style>
+</style>
 </head>
 
 <body>
@@ -49,11 +51,9 @@
 
 <div class="ui raised segment">
 <div class="ui mini green ribbon label">BETA</div>
-
-
-<br><br>
-
-<div class="ui selection dropdown">
+<br>
+<br>
+<div class="ui selection dropdown" style="display:none;">
   <input id="percentile" type="hidden" name="Percentile">
   <div class="default text">90% Confidence Interval</div>
   <i class="dropdown icon"></i>
@@ -72,19 +72,7 @@
 <div class="margins">
 
 
-    <h2 class="ui header"><div class="ui input"><input type="text" id="test_title" placeholder="Title of Experiment"></div></h2>
-
-<!--<<div class="ui icon buttons">
-  <div class="ui active button"><a class="link" href="#">1</a></div>
-  <div class="ui button">2</div>
-  <div class="ui button">3</div>
-  <div class="ui button">4</div>
-  <div class="ui button">5</div>
-  <div class="ui button">6</div>
-</div>
-
--->
-
+    <h2 class="ui header"><div class="ui input"><ins type="text" id="test_title" placeholder="Title of Experiment"></ins></div></h2>
 
 
 <h3 class="ui header" style="display:inline-block;margin:0px;"><strong>Metrics:</strong></h3>
@@ -100,22 +88,22 @@
   <tr id = "metrics1" class="exp1 metrics">
                 <td>
                     <div class="ui input">
-                        <input type="text" id="exp1-name" class="name" placeholder="Experience A [Control]">
+                        <ins type="text" id="exp1-name" class="name" placeholder="Experience A [Control]"></ins>
                     </div>
                 </td>
                 <td>
                     <div class="ui input">
-                        <input type="text" id="exp1-visitors" class="visitors" placeholder="Visitors">
+                        <ins type="text" id="exp1-visitors" class="visitors" placeholder="Visitors"></ins>
                     </div>
                 </td>
                 <td>
                     <div class="ui input">
-                        <input type="text" id="exp1-forms" class="forms" placeholder="Forms">
+                        <ins type="text" id="exp1-forms" class="forms" placeholder="Forms"></ins>
                     </div>
                 </td>
                 <td>
                     <div class="ui input">
-                        <input type="text" id="exp1-calls" class="calls" placeholder="Calls">
+                        <ins type="text" id="exp1-calls" class="calls" placeholder="Calls"></ins>
                     </div>
                 </td>
                 <td>
@@ -125,22 +113,22 @@
     <tr id = "metrics2" class="exp2 metrics">
                 <td>
                     <div class="ui input">
-                        <input type="text" id="exp2-name" class="name" placeholder="Experience B">
+                        <ins type="text" id="exp2-name" class="name" placeholder="Experience B"></ins>
                     </div>
                 </td>
                 <td>
                     <div class="ui input">
-                        <input type="text" id="exp2-visitors"  class="visitors" placeholder="Visitors">
+                        <ins type="text" id="exp2-visitors"  class="visitors" placeholder="Visitors"></ins>
                     </div>
                 </td>
                 <td>
                     <div class="ui input">
-                        <input type="text" id="exp2-forms" class="forms" placeholder="Forms">
+                        <ins type="text" id="exp2-forms" class="forms" placeholder="Forms"></ins>
                     </div>
                 </td>
                 <td>
                     <div class="ui input">
-                        <input type="text" id="exp2-calls" class="calls" placeholder="Calls">
+                        <ins type="text" id="exp2-calls" class="calls" placeholder="Calls"></ins>
                     </div>
                 </td>
                 <td >
@@ -148,24 +136,26 @@
                 </td>
             </tr>
 </table>
-<div id="AddExperience" class="mini ui button">
-<i class="plus icon"></i> Add Experience
-</div>
-<div id="removeLastExperiece" class="mini ui button">
-<i class="minus icon"></i> Remove Last Experience
-</div>
-<div id="resetExperiece" class="mini ui button">
-<i class="remove icon"></i> Remove All
+<div id="buttons">
+    <div id="AddExperience" class="mini ui button">
+    <i class="plus icon"></i> Add Experience
+    </div>
+    <div id="removeLastExperiece" class="mini ui button">
+    <i class="minus icon"></i> Remove Last Experience
+    </div>
+    <div id="resetExperiece" class="mini ui button">
+    <i class="remove icon"></i> Remove All
+    </div>
 </div>
 <br>
-<h3 class="ui header" style="display:inline-block; margin-right:25px;">Number of Days In Test:</h3><div class="ui input" style="width:60px"><input type="text" id="daysInTest" placeholder="#"></div>
+<h3 class="ui header" style="display:inline-block; margin-right:25px;">Number of Days In Test:</h3><div class="ui input" style="width:60px"><ins type="text" id="daysInTest" placeholder="#"></ins></div>
 
-<br>    
+<!-- <br>    
 <h3 class="ui header" style="display:inline-block; margin-right:25px;">Screen Grabs:</h3>
 <h4 class="ui header" style="display:inline-block; margin-right:25px;"><div class="ui input"><input type="text" id="pic1" placeholder="Experience A Image"></div></h4>
 <h4 class="ui header" style="display:inline-block; margin-right:25px;"><div class="ui input"><input type="text" id="pic2" placeholder="Experience B Image"></div></h4>
 
-<br id="addPics">
+<br id="addPics"> -->
 <div id="calculate" class="ui blue button">Calculate <i class="fa fa-calculator"></i></div>
 <br>
 <br>
@@ -179,7 +169,7 @@
 </div>
 <div class="ui divider"></div>!-->
   <!--*********** Charts ***************!-->
-   <div style="float:right;"> 
+   <div style="float:right;">
     
   
    <div id="containerCum" class="highchartsDisplay" style="min-width: 350px; height: 300px; margin: 0px"></div>
@@ -259,14 +249,16 @@
 </div>
 <br>
 <br>
-<div class="ui backSection">
 <div class="ui labeled input">
   <div class="ui label">
     <a id="shareable" href="#">SHARABLE LINK</a> <i class="linkify icon"></i>
   </div>
   <input id="embedURL" type="text" placeholder="URL">
 </div>
-</div>
+<a id="updateData" href="#" target="blank">
+<div class="ui icon button">
+<i class="lab icon"></i> Update Data</div></a>
+
 <br>
 <div id="result">
 <!--<div style="font-size:20;">Additional Monthly Revenue</div>
@@ -384,7 +376,7 @@ var experienceNumber = 2;
             //Add a row to end of Metrics table
                 //Include a unique ID and placeholder attributes in adding in the number of experiments
                     //Includes a class of 'lastRow' so it can easily be targeted
-            $("#myTable tr:last").after('<tr id = "metrics'+experienceNumber+'" class="exp'+experienceNumber+' metrics lastRow"><td><div class="ui input"><input type="text" id="exp'+experienceNumber+'-name" class="name" placeholder="Experience '+ LetterArray[experienceNumber-1]+'"></div></td><td><div class="ui input"><input type="text" id="exp'+experienceNumber+'-visitors"  class="visitors" placeholder="Visitors"></div></td><td><div class="ui input"><input type="text" id="exp'+experienceNumber+'-forms" class="forms" placeholder="Forms"></div></td><td><div class="ui input"><input type="text" id="exp'+experienceNumber+'-calls" class="calls" placeholder="Calls"></div></td><td ><div class="total"></div></td></tr>');
+            $("#myTable tr:last").after('<tr id = "metrics'+experienceNumber+'" class="exp'+experienceNumber+' metrics lastRow"><td><div class="ui input"><ins type="text" id="exp'+experienceNumber+'-name" class="name" placeholder="Experience '+ LetterArray[experienceNumber-1]+'"></ins></div></td><td><div class="ui input"><ins type="text" id="exp'+experienceNumber+'-visitors"  class="visitors" placeholder="Visitors"></ins></div></td><td><div class="ui input"><ins type="text" id="exp'+experienceNumber+'-forms" class="forms" placeholder="Forms"></ins></div></td><td><div class="ui input"><ins type="text" id="exp'+experienceNumber+'-calls" class="calls" placeholder="Calls"></ins></div></td><td ><div class="total"></div></td></tr>');
             //Added ID to <br> tag (I know...) so that I could place additional picture fields before the 'Calculate' button
                 //Includes a class of 'lastRow' so it can easily be targeted
             $("#addPics").before('<h4 class="ui header lastRow" style="display:inline-block; margin-right:25px;"><div class="ui input"><input type="text" id="pic'+experienceNumber+'" placeholder="Experience '+LetterArray[experienceNumber-1]+' Image"></div></h4>');
@@ -418,19 +410,19 @@ var experienceNumber = 2;
 
     for(n=0;n<fillExperienceNum+1;n++){
         var nameFieldFill = "#exp"+(n+1)+"-name"
-        $(nameFieldFill).attr("value",fillNames[n]);
+        $(nameFieldFill).attr("value",fillNames[n]).html(fillNames[n]);
     }
     for(n=2;n<fillExperienceNum+1;n++){
         var nameFieldFill = "#exp"+(n+1)+"-visitors"
-        $(nameFieldFill).attr("value",fillVisitors[n]);
+        $(nameFieldFill).attr("value",fillVisitors[n]).html(fillVisitors[n]);
     }
     for(n=2;n<fillExperienceNum+1;n++){
         var nameFieldFill = "#exp"+(n+1)+"-calls"
-        $(nameFieldFill).attr("value",fillCalls[n]);
+        $(nameFieldFill).attr("value",fillCalls[n]).html(fillCalls[n]);
     }
     for(n=2;n<fillExperienceNum+1;n++){
         var nameFieldFill = "#exp"+(n+1)+"-forms"
-        $(nameFieldFill).attr("value",fillForms[n]);
+        $(nameFieldFill).attr("value",fillForms[n]).html(fillForms[n]);
     }
     //Remove Experience Button Click
     $("#removeLastExperiece").on("click", function () {
@@ -497,7 +489,7 @@ $('#calculate').on('click' , function () {
 
     for (var j = 0; j < allMetrics.length; j++) {
         //from each experience, get the elements with an tag name of input
-        var tempArray = allMetrics[j].getElementsByTagName('input');
+        var tempArray = allMetrics[j].getElementsByTagName('ins');
         // temporary object to be pushed into the metrics array
         var tempObj = {};
         
@@ -505,10 +497,10 @@ $('#calculate').on('click' , function () {
         for (var i = 0; i < tempArray.length; i++) {
             //if the input is the experience name (id with 'name' in it), add it to the object with no changes. 
             if (tempArray[i].id.indexOf('name') > -1) {
-                tempObj[tempArray[i].className] = tempArray[i].value;
+                tempObj[tempArray[i].className] = tempArray[i].getAttribute("value");
             // if the input doesn't have 'name' in it, change it to a number, then add to object
             } else {
-                tempObj[tempArray[i].className] = parseInt(tempArray[i].value, 10);
+                tempObj[tempArray[i].className] = parseInt(tempArray[i].getAttribute("value"), 10);
             }  
         }
         tempObj['total'] = tempObj.calls + tempObj.forms;
@@ -614,7 +606,7 @@ $('#calculate').on('click' , function () {
     var percentile = percentilSTN || 2;
 
     //Experiment Title
-    testTitle = $("#test_title").val() || "Test Results";
+    testTitle = $("#test_title").html() || "Test Results";
 
     //////Create Calculations and Range Objects 
     calculationsObj = [];
@@ -719,7 +711,7 @@ $('#calculate').on('click' , function () {
     }
 
         //Populate URL
-    var daysInTest = $("#daysInTest").val() || 14;
+    var daysInTest = $("#daysInTest").html() || 14;
     var date = new Date();
     var embeddURL = 
     "?title="+ encodeURIComponent(testTitle)+
@@ -742,8 +734,9 @@ $('#calculate').on('click' , function () {
 
     // document.location.replace(embeddURL);
 
-    $("#embedURL").attr("value",document.location.origin + document.location.pathname +"embedd/"+ embeddURL);
-    $("#shareable").attr("href",document.location.origin + document.location.pathname +"embedd/"+ embeddURL)
+    $("#embedURL").attr("value",document.location.origin + document.location.pathname + embeddURL);
+    $("#shareable").attr("href",document.location.origin + document.location.pathname+ embeddURL);
+    $("#updateData").attr("href",document.location.origin + "/testing-results/5/" + embeddURL);
 
     //Identify and Highlight Winners
     function maxArr(arr,stringName) {
@@ -803,7 +796,7 @@ $('#calculate').on('click' , function () {
 
         //*********************************
         var controlLeads = metrics[0].total;
-        var Temp_daysInTest = $("#daysInTest").val();
+        var Temp_daysInTest = getParameterByName("days");
         var monthlyEstimate = (controlLeads / Temp_daysInTest) * 7 * 4.5;
         var Temp_exp2RRMin = 0.278952;
         var Temp_ctlRRMin = 0.216493;
@@ -962,33 +955,38 @@ $(function () {
         }]
     });
 });
-    $("#highcharts-0 > svg > text:nth-child(15)").hide();
 
-    $("#highcharts-2 > svg > text:nth-child(14)").hide();
     $("div.ui.backSection").css("display","inline-block");
-    $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+    // $("html, body").animate({ scrollTop: $(document).height() }, "slow");
 
 });
+
+$( document ).ready(function() {
+$( "#calculate" ).click ();
+    // $("#highcharts-0 > svg > text:nth-child(15)").hide();
+    // $("#highcharts-2 > svg > text:nth-child(14)").hide();
+});
+
+
 </script>
 
 <script>
 
+$("#test_title").html(getParameterByName("title"));
 
-$("#test_title").attr("value",getParameterByName("title"));
+$("#exp1-name").attr("value",fillNames[0]).html(fillNames[0]);
+$("#exp2-name").attr("value",fillNames[1]).html(fillNames[1]);
 
-$("#exp1-name").attr("value",fillNames[0]);
-$("#exp2-name").attr("value",fillNames[1]);
+$("#exp1-visitors").attr("value",fillVisitors[0]).html(fillVisitors[0]);
+$("#exp2-visitors").attr("value",fillVisitors[2]).html(fillVisitors[2]);
 
-$("#exp1-visitors").attr("value",fillVisitors[0]);
-$("#exp2-visitors").attr("value",fillVisitors[2]);
+$("#exp1-forms").attr("value",fillForms[0]).html(fillForms[0]);
+$("#exp2-forms").attr("value",fillForms[1]).html(fillForms[1]);
 
-$("#exp1-forms").attr("value",fillForms[0]);
-$("#exp2-forms").attr("value",fillForms[1]);
+$("#exp1-calls").attr("value",fillCalls[0]).html(fillCalls[0]);
+$("#exp2-calls").attr("value",fillCalls[1]).html(fillCalls[1]);
 
-$("#exp1-calls").attr("value",fillCalls[0]);
-$("#exp2-calls").attr("value",fillCalls[1]);
-
-$("#daysInTest").attr("value",getParameterByName("days"));
+$("#daysInTest").html(getParameterByName("days"));
 
 $("#pic1").attr("value",getParameterByName("pic1"));
 $("#pic2").attr("value",getParameterByName("pic2"));
@@ -998,7 +996,7 @@ $("#pic2").attr("value",getParameterByName("pic2"));
     var pic2 = $("#pic2").val();
 
     //Populate URL
-    var daysInTest = $("#daysInTest").val() || 14;
+    var daysInTest = $("#daysInTest").html() || 14;
 
 
     

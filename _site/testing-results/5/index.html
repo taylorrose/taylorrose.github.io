@@ -259,13 +259,14 @@
 </div>
 <br>
 <br>
+<div class="ui backSection">
 <div class="ui labeled input">
   <div class="ui label">
     <a id="shareable" href="#">SHARABLE LINK</a> <i class="linkify icon"></i>
   </div>
   <input id="embedURL" type="text" placeholder="URL">
 </div>
-
+</div>
 <br>
 <div id="result">
 <!--<div style="font-size:20;">Additional Monthly Revenue</div>
@@ -741,8 +742,8 @@ $('#calculate').on('click' , function () {
 
     // document.location.replace(embeddURL);
 
-    $("#embedURL").attr("value",document.location.origin + document.location.pathname + embeddURL);
-    $("#shareable").attr("href",document.location.origin + document.location.pathname + embeddURL)
+    $("#embedURL").attr("value",document.location.origin + document.location.pathname +"embedd/"+ embeddURL);
+    $("#shareable").attr("href",document.location.origin + document.location.pathname +"embedd/"+ embeddURL)
 
     //Identify and Highlight Winners
     function maxArr(arr,stringName) {
