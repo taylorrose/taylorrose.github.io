@@ -73,9 +73,9 @@
 </head>
 
 <body>
-<div>Last Updated: <ins id="lastUpdated"></ins></div>
+<div>Data Updated: <ins id="lastUpdated"></ins></div>
 
-<div class="ui raised segment">
+<div class="ui raised segment" style="max-width=900px;">
 <div class="ui mini green ribbon label">BETA</div>
 <br>
 <br>
@@ -265,12 +265,12 @@
 </div>
   <!--*********** Charts ***************!-->
 
-   <div id="charts" class="ui backSection" style="float:none; display:block; min-height:680px; max-width:700px; width:100%; margin:auto; margin-top:10px; ">
+   <div id="charts" class="ui backSection" style="float:none; display:block; min-height:680px; max-width:700px; width:100%; margin:auto; margin-top:10px;">
     
   
-   <div id="containerCum" class="highchartsDisplay" style="width:95%; margin-right:2.5%; margin-top:20px; height: 300px; border:1px solid #cdcdcd;"></div>
+   <div id="containerCum" class="highchartsDisplay" style="width:100%;  margin-top:20px; height: 300px; border:1px solid #cdcdcd; border-radius:4px;"></div>
    <br>
-   <div id="containerRatio" class="highchartsDisplay" style="width:95%; margin-right:2.5%; margin-top:20px; height: 300px; border:1px solid #cdcdcd;"></div>
+   <div id="containerRatio" class="highchartsDisplay" style="width:100%;  margin-top:20px; height: 300px; border:1px solid #cdcdcd;border-radius:4px;"></div>
    </div>
 
 
@@ -950,7 +950,7 @@ $(function () {
             }
         },
         xAxis: {
-            categories: ['Control', '<strong>Top Exp.</strong>']
+            categories: ['Control', '<strong>'+Temp_winningTest+'</strong>']
         },
         yAxis: {
             min: 0,
@@ -990,8 +990,10 @@ $(function () {
 
 $( document ).ready(function() {
 $( "#calculate" ).click ();
-    // $("#highcharts-0 > svg > text:nth-child(15)").hide();
-    // $("#highcharts-2 > svg > text:nth-child(14)").hide();
+    $().ready(function(){
+        $("#highcharts-0 > svg > text:nth-child(15)").hide();
+        $("#highcharts-2 > svg > text:nth-child(14)").hide();
+    });
 });
 
 
@@ -1051,5 +1053,10 @@ $("#expandOptions").removeAttr("Class","Down").toogle();
 
 
 </script>
-
+<script type="text/javascript">
+    $.ajax({
+    $("#highcharts-2 > svg > text:nth-child(14)").hide();
+    $("#highcharts-0 > svg > text:nth-child(15)").hide();
+});
+</script>
 </html>
