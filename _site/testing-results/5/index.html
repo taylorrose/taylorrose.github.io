@@ -718,6 +718,16 @@ $('#calculate').on('click' , function () {
         }
 
     }
+    var picID ="";
+    var picNumber ="";
+    var picArr = [];
+    for(var PICi = 1; PICi<=experienceNumber; PICi++){
+        picID = "#pic"+PICi;
+
+        picNumber = $(picID).val();
+        picArr.push(picNumber);
+
+    }
 
         //Populate URL
     var daysInTest = $("#daysInTest").val() || 14;
@@ -730,7 +740,7 @@ $('#calculate').on('click' , function () {
     "&calls=" + calls +
     "&visit=" + visitors +
     "&days="  + daysInTest +
-   // "&pic1="  + encodeURIComponent(pic1) +
+    "&pic="  + encodeURIComponent(picArr) +
    // "&pic2="  + encodeURIComponent(pic2) +
     "&confint=" + percentile +
     //"&instrev=" + installRev +

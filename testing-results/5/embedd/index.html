@@ -114,7 +114,7 @@
   <tr id = "metrics1" class="exp1 metrics">
                 <td>
                     <div class="ui input">
-                        <ins type="text" id="exp1-name" class="name" placeholder="Experience A [Control]"></ins>
+                       <ins type="text" id="exp1-name" class="name" placeholder="Experience A [Control]"></ins>
                     </div>
                 </td>
                 <td>
@@ -303,43 +303,24 @@
 
 </div>
 
-<div id="contributors">
-<h3 class="ui header">Contributors</h3>
-
-<div class="third inline">
-<img class="ui small circular image" src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/2/005/026/1c5/2d733b0.jpg">
-<h5 class="ui header">Taylor Rose <span class="description"> - Digital Strategy</span></h5>
-<p class="description">Battle-tested in growing businesses through digital technologies, Taylor works to convert data insights into bottom-line revenue through testing and optimization.</p>
-<a href="https://www.linkedin.com/in/taylorrose" target="blank">
-<div class="ui tiny linkedin button">
-<i class="linkedin small icon"></i>
-LINKEDIN
-</div>
-</a>
-</div>
-<div class="third inline">
-<img class="ui small circular image" src="https://media.licdn.com/mpr/mpr/shrink_200_200/p/1/000/050/193/10be103.jpg">
-<h5 class="ui header">Ian Bell <span class="description">- Marketing Technologist</span></h5>
-<p class="description">Ian loves diving in to identify opportunities, and then architecting and building a solution to maximize the benefit from those opportunities.</p>
-<a href="https://www.linkedin.com/in/enbell" target="blank">
-<div class="ui tiny linkedin button">
-<i class="linkedin small icon"></i>
-LINKEDIN
-</div>
-</a>
-</div>
-<div class="third inline">
-<img class="ui small circular image" src="https://media.licdn.com/mpr/mpr/shrink_200_200/p/3/000/210/1a2/17f8735.jpg">
-<h5 class="ui header">Steve Jones <span class="description">- CRO Specialist </span></h5>
-<p class="description">Steve strategizes, designs, develops, and implements web optimization tests ranging from A/B and Multivariate testing to Behavioral targeting.</p>
-<a href="https://www.linkedin.com/pub/steven-jones/28/b07/68" target="blank">
-<div class="ui tiny linkedin button">
-<i class="linkedin small icon"></i>
-LINKEDIN
-</div>
-</a>
+<div class="ui labeled input">
+  <div id="imageTitle1" class="ui label">
+    Test Experience A
+  </div>
+<div class="ui segment" style="margin-top:0px;">
+<div id="test1_image_name"></div><br>
+  <img class="ui centered image" id="test1_image" src="">
 </div>
 
+<div class="ui divider visible"></div>
+
+<div class="ui labeled input">
+  <div id="imageTitle2"  class="ui label">
+    Test Experience B
+  </div>
+<div class="ui segment" style="margin-top:0px;">
+<div id="test2_image_name"></div><br>
+  <img class="ui centered image" id="test2_image" src="">
 </div>
 
 
@@ -351,6 +332,7 @@ LINKEDIN
 
 
 <script type="text/javascript">
+
 
 
 //Convert Query Params into arrays; Pass to variables
@@ -373,6 +355,7 @@ LINKEDIN
     });
 
     var fillNames = getParameterByName("names").split(",");
+    var fillPics = getParameterByName("pic").split(",");
     var fillExperienceNum = parseInt(getParameterByName("expnum"));
 
 
@@ -994,6 +977,15 @@ $( "#calculate" ).click ();
         $("#highcharts-0 > svg > text:nth-child(15)").hide();
         $("#highcharts-2 > svg > text:nth-child(14)").hide();
     });
+
+var imageDirectory = "/images/"
+
+$("#test1_image").attr("src",imageDirectory+fillPics[0]);
+$("#test2_image").attr("src",imageDirectory+fillPics[1]);
+
+$("#imageTitle1").html(fillNames[0]);
+$("#imageTitle2").html(fillNames[1]);
+
 });
 
 
