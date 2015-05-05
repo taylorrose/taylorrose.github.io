@@ -13,14 +13,15 @@
   <script src="http://code.highcharts.com/highcharts.js"></script>
   <script src="http://code.highcharts.com/highcharts-more.js"></script>
   <style>
-    #linksy , #removeLastExperiece , #resetExperiece, #contributors, #calculate, #buttons {
+    #linksy , #removeLastExperiece , #resetExperiece, #contributors, #calculate, #buttons  {
         display: none;
     }
     #daysInTest {
         font-size: 18px;
-        background-color: #f9f9fa;
+        background-color: #fff;
         padding:5px;
         border: 1px solid #cdcdcd;
+        font-weight: normal;
     }
     ins {
         text-decoration: none;  
@@ -42,13 +43,29 @@
         }
 
     }
+        @media screen and (max-width: 1007px) {
+        #containerCum , #containerRatio{
+            display:block;
+        }
+    }
+@media screen and (max-width: 765px) {
+                #updateData > div {
+            margin-top: 9px; 
+        }
+    }
     @media screen and (max-width: 570px) {
-        .ci , body > div.ui.raised.segment > div.margins > div.ui.labeled.input , #containerCum , #containerRatio ,  .responsiveHide {
+        .ci , body > div.ui.raised.segment > div.margins > div.ui.labeled.input ,  .responsiveHide, i.icon {
             display:none;
         }
         .total , .experience, .trr , .crr , .frr , .clift , .tlift , .flift , .fconf , .cconf , .tconf , #daysInTest , th , ins {
-            font-size: 12px;
+            font-size: 15px;
+
         }
+        .fconf , .cconf , .tconf {
+            text-align: right;
+        }
+
+
     }
 
 
@@ -56,7 +73,7 @@
 </head>
 
 <body>
-
+<div>Last Updated: <ins id="lastUpdated"></ins></div>
 
 <div class="ui raised segment">
 <div class="ui mini green ribbon label">BETA</div>
@@ -83,8 +100,8 @@
 
     <h2 class="ui header"><div class="ui input"><ins type="text" id="test_title" placeholder="Title of Experiment"></ins></div></h2>
 
-
-<h3 class="ui header" style="display:inline-block;margin:0px;"><strong>Metrics:</strong></h3>
+<div class="backgroundGradient">
+<h3 class="ui header" style="display:inline-block;margin:0px;"><strong>Metrics</strong></h3>
 
 <table id="myTable" class="ui celled table segment">
     <tr>
@@ -156,8 +173,8 @@
     <i class="remove icon"></i> Remove All
     </div>
 </div>
-<br>
-<h3 class="ui header" style="display:inline-block; margin-right:25px;">Number of Days In Test:</h3><div class="ui input" style="width:60px"><ins type="text" id="daysInTest" placeholder="#"></ins></div>
+
+<h3 class="ui header" style="display:inline-block; margin-right:25px;">Number of Days In Test</h3><div class="ui input" style="width:60px"><ins type="text" id="daysInTest" placeholder="#"></ins></div>
 
 <!-- <br>    
 <h3 class="ui header" style="display:inline-block; margin-right:25px;">Screen Grabs:</h3>
@@ -167,9 +184,7 @@
 <br id="addPics"> -->
 <div id="calculate" class="ui blue button">Calculate <i class="fa fa-calculator"></i></div>
 <br>
-<br>
-
-<div class="ui divider"></div>
+</div>
 <!--<div id="expandOptions"><i class="ui large icon Angle Down"></i><strong> Sales Assumptions (Optional)</strong></div>
 <div id="CloseRates">
     <h4 class="ui header" style="display:inline-block; margin-right:25px;">Form Close Rate:</h4><div class="ui input" style="width:70px"><input type="text" id="formCloseRate" placeholder="%"></div>
@@ -177,14 +192,6 @@
      <h4 class="ui header" style="display:inline-block;margin-left:25px; margin-right:25px;">Monthly Revenue From An Acquisition:</h4><div class="ui input" style="width:120px"><input type="text" id="installRev" placeholder="$"></div>
 </div>
 <div class="ui divider"></div>!-->
-  <!--*********** Charts ***************!-->
-   <div style="float:right;">
-    
-  
-   <div id="containerCum" class="highchartsDisplay" style="min-width: 350px; height: 300px; margin: 0px"></div>
-   <br>
-   <div id="containerRatio" class="highchartsDisplay" style="min-width: 350px; height: 300px; margin: 0px;"></div>
-   </div>   
 
   <!--*********** Reults Table ***************!-->
 <div class="ui backSection">
@@ -256,8 +263,20 @@
 
 
 </div>
+  <!--*********** Charts ***************!-->
+
+   <div id="charts" class="ui backSection" style="float:none; display:block; min-height:680px; max-width:700px; width:100%; margin:auto; margin-top:10px;">
+    
+  
+   <div id="containerCum" class="highchartsDisplay" style="width:95%; margin-right:2.5%; margin-top:20px; height: 300px; border:1px solid #cdcdcd;"></div>
+   <br>
+   <div id="containerRatio" class="highchartsDisplay" style="width:95%; margin-right:2.5%; margin-top:20px; height: 300px; border:1px solid #cdcdcd;"></div>
+   </div>
+
+
 <br>
 <br>
+<div style="margin-left:20%;">
 <div class="ui labeled input">
   <div class="ui label">
     <a id="shareable" href="#">SHARABLE LINK</a> <i class="linkify icon"></i>
@@ -267,8 +286,7 @@
 <a id="updateData" href="#" target="blank">
 <div class="ui icon button">
 <i class="lab icon"></i> Update Data</div></a>
-
-<br>
+</div>
 <div id="result">
 <!--<div style="font-size:20;">Additional Monthly Revenue</div>
 <div id="addRev"></div>
@@ -965,7 +983,7 @@ $(function () {
     });
 });
 
-    $("div.ui.backSection").css("display","inline-block");
+    $("div.ui.backSection").css("display","block");
     // $("html, body").animate({ scrollTop: $(document).height() }, "slow");
 
 });
@@ -982,6 +1000,7 @@ $( "#calculate" ).click ();
 <script>
 
 $("#test_title").html(getParameterByName("title"));
+$("#lastUpdated").html(getParameterByName("date"));
 
 $("#exp1-name").attr("value",fillNames[0]).html(fillNames[0]);
 $("#exp2-name").attr("value",fillNames[1]).html(fillNames[1]);
