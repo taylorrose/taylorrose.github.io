@@ -344,13 +344,13 @@
     }
 
 
-    var fillForms = getParameterByName("forms") ==="" ? "" : getParameterByName("forms").split(",").map(function(item) {
+    var fillForms = getParameterByName("forms").split(",").map(function(item) {
         return parseInt(item, 10);
     });
-    var fillCalls = getParameterByName("calls") ==="" ? "" :getParameterByName("calls").split(",").map(function(item) {
+    var fillCalls = getParameterByName("calls").split(",").map(function(item) {
         return parseInt(item, 10);
     });
-    var fillVisitors = getParameterByName("visit") ==="" ? "" : getParameterByName("visit").split(",").map(function(item) {
+    var fillVisitors = getParameterByName("visit").split(",").map(function(item) {
         return parseInt(item, 10);
     });
 
@@ -372,15 +372,13 @@
 
 
 //Add Experiences Button Click
-var experienceNumber = 2;
+var experienceNumber = fillExperienceNum;
 
-    $('#AddExperience').on('click' , function () {
+    function AddRowExperience () {
             //First Capture the ID of last Row --> 'metrics2'
-            var id_Metrics = $("#myTable tr:last").attr("id");
                 //Pull out the '2' in 'metrics2' using regex
-            var getID_MetricsNum = id_Metrics.match(/(\d+)/);
+            var getID_MetricsNum = experienceNumber;
                 //Make pulled number, e.g., '2', a number and increment. This returns the number of experiences in experiment
-             experienceNumber = parseInt(getID_MetricsNum[1],10) + 1;
                 //An array to convert numbers into letters - to populate later in field placeholder, e.g., [Experience C]
             var LetterArray = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","AA","AB","AC","AD","AE","AF","AG","AH","AI","AJ","AK","AL","AM","AN","AO","AP","AQ","AR","AS","AT","AU","AV","AW","AX","AY","AZ"];
             //Add a row to end of Metrics table
@@ -397,24 +395,20 @@ var experienceNumber = 2;
             //Add a row to end of Calls table
                 //Include a unique ID and class attributes in adding in the number of experiments
                     //Includes a class of 'lastRow' so it can easily be targeted
-            $("#tableCalls tr:last").after('<tr id = "calls'+experienceNumber+'" class="exp'+experienceNumber+' lastRow"><td ><div class="experience"></div></td><td ><div class="ui cRR"></div></td><td ><div class="cLift"></div></td><td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="cConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive in the test. More data should be collected." id="cConf-att" class="ui orange icon attention"></i><div class="cConf"></div></td></tr>');
+            $("#tableCalls tr:last").after('<tr id = "calls'+experienceNumber+'" class="exp'+experienceNumber+' lastRow"><td ><div class="experience"></div></td><td ><div class="ui cRR"></div></td><td ><div class="cLift"></div></td><td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false   positive." id="cConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive in the test. More data should be collected." id="cConf-att" class="ui orange icon attention"></i><div class="cConf"></div></td></tr>');
             //Add a row to end of Forms table
                 //Include a unique ID and class attributes in adding in the number of experiments
                     //Includes a class of 'lastRow' so it can easily be targeted
             $("#tableForms tr:last").after('<tr id = "forms'+experienceNumber+'" class="exp'+experienceNumber+' lastRow"><td ><div class="experience"></div></td><td ><div class="ui fRR"></div></td><td ><div class="fLift"></div></td><td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="tConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive in the test. More data should be collected." id="fConf-att" class="ui orange icon attention"></i><div class="fConf"></div></td></tr>');
 
-            //Show the 'Remove Last Experience' button
-            $('#removeLastExperiece').attr("style","display:inline-block");
-            //Show the 'Reset' button
-            $('#resetExperiece').attr("style","display:inline-block");
-    });
+    };
 
 
 
 
 //Populate Open Fields
     for(h=2;h<fillExperienceNum;h++){
-    $( "#AddExperience" ).click ();
+    AddRowExperience();
     }
 
 
@@ -435,38 +429,6 @@ var experienceNumber = 2;
         $(nameFieldFill).attr("value",fillForms[n]).html(fillForms[n]);
     }
     //Remove Experience Button Click
-    $("#removeLastExperiece").on("click", function () {
-        //Remove Last Row of Metrics, Totals, Calls, and Forms tables - Will only remove if class of 'lastRow' is present
-            //Metrics Table
-            $("#myTable tr.lastRow:last").remove();
-            //Totals Table
-            $("#tableTotals tr.lastRow:last").remove();
-            //Calls Table
-            $("#tableCalls tr.lastRow:last").remove();
-            //Forms Table
-            $("#tableForms tr.lastRow:last").remove();
-            //Picture Fields
-            $("#addPics").prev(".lastRow").remove();
-
-
-            var id_Metrics = $("#myTable tr:last").attr("id");
-            var getID_MetricsNum = id_Metrics.match(/(\d+)/);
-             experienceNumber = parseInt(getID_MetricsNum[1],10);
-
-            if(experienceNumber<=3){
-                $('#removeLastExperiece').hide();
-                $('#resetExperiece').hide();
-            };
-    });
-
-    //Reset Button Click
-    $("#resetExperiece").on("click", function () {
-        //Remove all elements with 'lastRow' class
-        $(".lastRow").remove();
-        //Remove 'Remove Last Experience' and 'Reset' Buttons
-        $('#removeLastExperiece').hide();
-        $('#resetExperiece').hide();
-    });
 </script>
 
 <script type="text/javascript">
@@ -1000,7 +962,7 @@ $("#exp1-name").attr("value",fillNames[0]).html(fillNames[0]);
 $("#exp2-name").attr("value",fillNames[1]).html(fillNames[1]);
 
 $("#exp1-visitors").attr("value",fillVisitors[0]).html(fillVisitors[0]);
-$("#exp2-visitors").attr("value",fillVisitors[2]).html(fillVisitors[2]);
+$("#exp2-visitors").attr("value",fillVisitors[1]).html(fillVisitors[1]);
 
 $("#exp1-forms").attr("value",fillForms[0]).html(fillForms[0]);
 $("#exp2-forms").attr("value",fillForms[1]).html(fillForms[1]);
