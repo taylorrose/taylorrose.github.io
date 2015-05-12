@@ -732,29 +732,13 @@ $('#calculate').on('click' , function () {
         //Populate URL
     var daysInTest = $("#daysInTest").val() || 14;
     var date = new Date();
-    var embeddURL = 
-    "?title="+ encodeURIComponent(testTitle)+
-    "&names=" + encodeURIComponent(names) + 
-    "&expnum=" + experienceNumber + 
-    "&forms=" + forms + 
-    "&calls=" + calls +
-    "&visit=" + visitors +
-    "&days="  + daysInTest +
-    "&pic="  + encodeURIComponent(picArr) +
-   // "&pic2="  + encodeURIComponent(pic2) +
-    "&confint=" + percentile +
-    //"&instrev=" + installRev +
-    //"&formcr=" + formCloseRate * 100 +
-    //"&callcr=" + callCloseRate *100 +
-     "&date="+encodeURIComponent(date.toLocaleString());
-    $("a").attr("href",embeddURL);
-    $("#linksy").show();
+    var embeddURL = document.URL;
 
 
     // document.location.replace(embeddURL);
 
-    $("#embedURL").attr("value",document.location.origin + document.location.pathname +"embedd/"+ embeddURL);
-    $("#shareable").attr("href",document.location.origin + document.location.pathname +"embedd/"+ embeddURL)
+    $("#embedURL").attr("value",embeddURL);
+    $("#shareable").attr("href",embeddURL)
 
     //Identify and Highlight Winners
     function maxArr(arr,stringName) {
