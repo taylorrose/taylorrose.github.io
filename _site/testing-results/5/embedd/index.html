@@ -13,7 +13,7 @@
   <script src="http://code.highcharts.com/highcharts.js"></script>
   <script src="http://code.highcharts.com/highcharts-more.js"></script>
   <style>
-    #linksy , #removeLastExperiece , #resetExperiece, #contributors, #calculate, #buttons  {
+    #linksy , #removeLastExperiece , #resetExperiece, #contributors, #calculate, #buttons,#RRShort  {
         display: none;
     }
     #daysInTest {
@@ -54,7 +54,7 @@
         }
     }
     @media screen and (max-width: 570px) {
-        .ci , body > div.ui.raised.segment > div.margins > div.ui.labeled.input ,  .responsiveHide, i.icon {
+        .ci , body > div.ui.raised.segment > div.margins > div.ui.labeled.input ,  .responsiveHide, i.icon, #RRLong {
             display:none;
         }
         .total , .experience, .trr , .crr , .frr , .clift , .tlift , .flift , .fconf , .cconf , .tconf , #daysInTest , th , ins {
@@ -65,6 +65,9 @@
             text-align: right;
         }
 
+    #RRShort{
+        display:block;
+    }
 
     }
 
@@ -200,7 +203,7 @@
 <table id="tableForms" class="ui celled table segment">
     <tr>
         <th>Experience</th>
-        <th>Response Rate%</th>
+        <th><span id="RRLong">Response Rate%</span><span id="RRShort">RR%</span></th>
         <th>Lift <span class="responsiveHide">% (Conf. Int.)<span></th>
         <th>Confidence</th>
     </tr>
@@ -221,7 +224,7 @@
 <table id="tableCalls" class="ui celled table segment">
     <tr>
         <th>Experience</th>
-        <th>Response Rate%</th>
+        <th><span id="RRLong">Response Rate%</span><span id="RRShort">RR%</span></th>
         <th>Lift <span class="responsiveHide">% (Conf. Int.)<span></th>
         <th>Confidence</th>
     </tr>
@@ -242,7 +245,7 @@
 <table id="tableTotals"class="ui celled table segment">
     <tr>
         <th>Experience</th>
-        <th>Response Rate%</th>
+        <th><span id="RRLong">Response Rate%</span><span id="RRShort">RR%</span></th>
         <th>Lift <span class="responsiveHide">% (Conf. Int.)<span></th>
         <th>Confidence</th>
     </tr>
