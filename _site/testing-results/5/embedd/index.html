@@ -686,30 +686,15 @@ $('#calculate').on('click' , function () {
         //Populate URL
     var daysInTest = $("#daysInTest").html() || 14;
     var date = new Date();
-    var embeddURL = 
-    "?title="+ encodeURIComponent(testTitle)+
-    "&names=" + encodeURIComponent(names) + 
-    "&expnum=" + experienceNumber + 
-    "&forms=" + forms + 
-    "&calls=" + calls +
-    "&visit=" + visitors +
-    "&days="  + daysInTest +
-   // "&pic1="  + encodeURIComponent(pic1) +
-   // "&pic2="  + encodeURIComponent(pic2) +
-    "&confint=" + percentile +
-    //"&instrev=" + installRev +
-    //"&formcr=" + formCloseRate * 100 +
-    //"&callcr=" + callCloseRate *100 +
-     "&date="+encodeURIComponent(date.toLocaleString());
-    $("a").attr("href",embeddURL);
-    $("#linksy").show();
+    var embeddURL = document.URL;
+    var embeddQuery = document.location.search;
 
 
     // document.location.replace(embeddURL);
 
-    $("#embedURL").attr("value",document.location.origin + document.location.pathname + embeddURL);
-    $("#shareable").attr("href",document.location.origin + document.location.pathname+ embeddURL);
-    $("#updateData").attr("href",document.location.origin + "/testing-results/5/" + embeddURL);
+    $("#embedURL").attr("value",embeddURL);
+    $("#shareable").attr("href",embeddURL);
+    $("#updateData").attr("href",document.location.origin + "/testing-results/5/" + embeddQuery);
 
     //Identify and Highlight Winners
     function maxArr(arr,stringName) {
