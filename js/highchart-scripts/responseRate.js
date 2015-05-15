@@ -10,7 +10,8 @@ var PackageForms = [1.99,2.21,1.59,1.65,2.12,1.08,0.96,1.82,2.30,2.09,1.59,0.79,
 
 var PPCcalls = [1.23,1.16,1.05,1.07,1.16,0.93,0.34,1.33,1.58,1.23,1.35,1.55,2.82,1.72,1.50,1.73,1.96,1.48,1.08,1.53,1.22,1.04,1.47,1.01,1.14,1.20,1.50,1.48,1.04,1.39,1.14,1.00,0.80,1.32,0.90,0.76,0.68,1.00,1.01,1.03,1.29,0.96,1.41,1.27,1.19,1.28,1.33,1.62,1.13,2.09,1.80,1.25,1.21,1.59,1.54,1.23,0.82,1.38,1.18,0.94,1.18,0.60];
 var PPCforms = [1.50,1.23,1.00,1.19,1.29,1.22,0.45,1.08,1.16,0.90,1.08,0.87,0.72,0.46,1.02,1.52,1.44,1.44,1.44,0.74,0.62,1.30,1.48,1.03,1.13,1.02,0.73,0.69,1.22,1.24,0.93,0.91,0.90,0.63,0.55,0.75,0.77,0.86,0.83,0.90,0.61,0.64,1.10,1.10,0.98,1.02,0.86,0.58,0.29,1.43,0.99,0.87,0.86,0.70,0.15,1.04,1.03,0.99,0.71,0.85,0.83,0.43];
-
+var color1 ="#0AE0A3";
+var color2 = "#26ABA1";
 // var callTest1 = [0.27,1.18,1.32,0.68,0.95,0.11,0.00,1.61,1.44,28.00,3.09,0.58,0.94,5.69,3.47,1.75,4.12,1.19,0.79,1.09,0.45,1.28,0.45,0.75,5.56,0.41,1.19,3.23,0.58,4.55,1.60,0.25,1.15,0.34,0.14,0.13,0.50,0.56,0.85,0.43,0.81,0.81,2.34,1.03,1.20,0.71,3.96,0.32,0.00,1.37,1.22,1.10,0.88,1.72,4.07,8.47,0.13,1.05,0.50,1.16,0.00,0.93,3.35,1.69,2.17,0.21,0.85,1.13,0.43,17.86,1.44,2.36,1.12,0.49,0.63,1.05,0.63,0.78,0.24,8.04,4.61,0.15,4.27,0.92,30.77,2.16,0.52,0.39,0.89,0.52,2.28,0.96,3.92,2.42,1.49,3.29,0.26,0.59,0.18,0.99,18.92,1.91,0.81,3.57,0.00,0.97,1.18,0.39,0.13,1.62,10.53,0.62,1.69,2.84,11.43,3.98,0.34,1.62,0.74,1.32,45.00,0.58,1.38,0.71,0.74,1.37,0.86,0.00,0.44,0.11,1.76,3.27,0.82,0.72,2.55,0.15,0.72,2.34,9.09,10.29,0.85,3.69,0.41,0.55,0.47,1.75,1.20,2.61,0.00,16.67,0.32,0.81,0.47,0.33,0.44,0.24,4.76,0.00,1.20,0.00,0.62,2.29,1.13];
 // //Set date of first data point
 // var startDate = new Date("2/2/2015");
@@ -80,12 +81,12 @@ $(function () {
         series: [{
             name: 'Inbound (Calls)',
             data: HomeCalls,
-            color: "#92B0DF"
+            color: color1
 
         }, {
             name: 'Outbound (Forms)',
             data: HomeForms,
-            color:"#3C5178"
+            color: color2
 
         },
         ]
@@ -96,31 +97,42 @@ $(function () {
         chart = $('#container').highcharts();
     
         $('#home').click(function () {
-        
+        color1 ="#0AE0A3";
+        color2 = "#26ABA1";
         chart.series[0].update({data:HomeCalls});
         chart.series[1].update({data:HomeForms});
-        $("#highcharts-0 > svg > text.highcharts-title > tspan").html("Home Page Resonse Rates");
-        $("#slides").attr("data-background","http://assets.cdn.aws.vivint.com/global/vivint.com/home/feature-home-v2.jpg")
+        chart.series[0].update({color:color1});
+        chart.series[1].update({color:color2});
+        $("#highcharts-12 > svg > text.highcharts-title > tspan").html("Home Page Resonse Rates");
+        
+        //$("#slides").attr("data-background","http://assets.cdn.aws.vivint.com/global/vivint.com/home/feature-home-v2.jpg")
         Reveal.initialize();
     });
        
       $('#package').click(function () {
-        
+        color1 ="#b5c9d5";
+        color2 = "#65839a";
         chart.series[0].update({data:PackageCalls});
         chart.series[1].update({data:PackageForms});
-        $("#highcharts-0 > svg > text.highcharts-title > tspan").html("Package Page Resonse Rates");
-        $("#slides").attr("data-background","http://assets.cdn.aws.vivint.com/global/vivint.com/packages/2015/smart-protect/featured-r1.jpg")
+        chart.series[0].update({color:color1});
+        chart.series[1].update({color:color2});
+        $("#highcharts-12 > svg > text.highcharts-title > tspan").html("Package Page Resonse Rates");
+
+        //$("#slides").attr("data-background","http://assets.cdn.aws.vivint.com/global/vivint.com/packages/2015/smart-protect/featured-r1.jpg")
         Reveal.initialize();
 
 
     });
 
           $('#ppc').click(function () {
-        
+        color1 ="#B9F291";
+        color2 = "#50BF94";
         chart.series[0].update({data:PPCcalls});
         chart.series[1].update({data:PPCforms});
-        $("#highcharts-0 > svg > text.highcharts-title > tspan").html("PPC Page Resonse Rates");
-        $("#slides").attr("data-background","http://images.cdn.aws.vivint.com/global/vivint.com/web/campaigns/ppc/fb-feature-home-sign_opt.jpg")
+        chart.series[0].update({color:color1});
+        chart.series[1].update({color:color2});
+        $("#highcharts-12 > svg > text.highcharts-title > tspan").html("PPC Page Resonse Rates");
+        //$("#slides").attr("data-background","http://images.cdn.aws.vivint.com/global/vivint.com/web/campaigns/ppc/fb-feature-home-sign_opt.jpg")
         Reveal.initialize();
     });
 
