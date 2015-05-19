@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Repsonse Optimization</title>
+
+		<link rel="stylesheet" href="../../css/reveal.css">
+		<link rel="stylesheet" href="../../css/theme/vivint.css" id="theme">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://code.highcharts.com/highcharts.js"></script>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.2/components/button.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.2/components/table.min.css">
+
+
+	</head>
+
+	<body>
+    <style>
+    .legendType {
+          font-family: "IntCircularProWeb-Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+          font-size: 13px !important;
+          color: #333;
+          margin:auto;
+    }
+    .reveal i.fa{
+        font-style:normal;
+        color:#26ABA1;
+    }
+    .reveal i.fa.titleIcon{
+
+        font-size:150px;
+        margin:40px;
+    }
+    </style>
+  <img style="position: fixed; bottom:30px; left:45px; border:none; box-shadow:none; background:none;" src="/presentations/images/orange-logo.png">
+		<div class="reveal"> 
+
+			<div class="slides">
+<!-- Title Slide -->
+			<section data-background="#ff8200">
+				
+			<img style="border:none; box-shadow:none; background:none;" src="/presentations/images/white-logo.png">
+      <br>
+
+        <!--<a href="#" class="navigate-right enabled">
+          <img style="border:none; box-shadow:none; background:none;" src="/presentations/images/nextButton.png">
+         </a>!-->
+         <br>
+        <span style="color:#e0e0e0">
+        <p>Marketing Townhall Meeting</p>
+        <p>May 2015</p>
+        </span>
+        <br>
+        <span style="font-size:16px;">
+        <p style="color:#e0e0e0">Press <span style="font-family:Consolas; color:#ffffff;">&lt;Cmd+Shift+F&gt;</span> for Presentation Mode</p>
+        <p style="color:#e0e0e0">Use <span style="font-family:Consolas; color:#ffffff;">&lt;Space Bar&gt;</span> or <span style="font-family:Consolas; color:#ffffff;">&lt;Arrows&gt;</span> for Navigation</p>
+        </span>
+		</section>
+<!-- Conversion Funnel Slide -->
+    <section>
+    <section>
+    <h4>Conversion Funnel</h4>
+    <div style="width:700px;" class=" massive ui black basic button">Impressions</div>
+    <br>
+    &#8595;
+    <br>
+<div style="width:600px;" class=" massive ui yellow basic button">Visits</div>
+<br>
+    &#8595;
+    <br>
+    <span id="WeAreHere"></span>
+
+<div id="leads" style="width:500px;" class="massive ui green basic button">Leads</div>
+<br>
+    &#8595;
+    <br>
+<div style="width:400px;" class="massive ui blue basic button">NIS Connects</div>
+<br>
+    &#8595;
+    <br>
+<div  style="width:300px;" class="massive ui orange basic button">Sales</div>
+<br>
+    &#8595;
+    <br>
+<div style="width:200px;" class="massive ui purple basic button">Installs</div>
+    </section>
+<!-- Channel Traffic Slide -->
+		<section style="margin-top:10px;" data-background='/presentations/images/EntryPages.png'>
+    
+                <h2 class="whiteBlock">What is vivint.com?</h2>
+               
+    </section>
+    <section id="impacts">
+    <h3>Hierarchy of Testing Impacts</h3>
+<div>
+<a href="/presentations/town-hall.html#/RedirectEG"><div style="width:700px; margin:5px;" class="massive ui basic teal button">Redirect</div></a>
+<br>
+<a href="/presentations/town-hall.html#/elementeg"><div style="width:600px;margin:5px;" class="massive ui red basic button">Element</div></a>
+<br>
+<a href="/presentations/town-hall.html#/loctioneg"><div style="width:500px;margin:5px;" class="massive ui green basic button">Location</div></a>
+<br>
+<a href="/presentations/town-hall.html#/styleeg"><div style="width:400px;margin:5px;" class="massive ui yellow basic button">Style</div></a>
+<br>
+<a href="/presentations/town-hall.html#/offereg"><div style="width:300px;margin:5px;" class="massive ui blue basic button">Offer</div></a>
+<br>
+<a href="/presentations/town-hall.html#/ctaeg"><div style="width:200px;margin:5px;" class="massive ui orange basic button">CTA</div></a>
+<br>
+<a href="/presentations/town-hall.html#/copyeg"><div style="width:100px;margin:5px;" class="massive ui purple basic button">Copy</div></a>
+  </div>
+    </section>
+    </section>
+<!-- End First Group -->
+
+
+<!-- Redirect Example -->
+		<section>
+        <section id="RedirectEG" style="margin-bottom:500px; top:-342px !important;">
+        <p style="font-size:22px;">Mobile PPC Traffic from PPC Page to Facebook Page</p>
+        <a href="#RedirectEG"><div style="width:700px; margin:5px;" class="massive ui teal button">Redirect Example</div></a>
+         <img style="max-width:265px; vertical-align:top;"src="http://wwwassets.s3.amazonaws.com/global/vivint.com/web/campaigns/test-results/FB Control.png" alt="">
+         <div style="display:inline-block; vertical-align:middle; padding-top:350px;margin:20px;">VS</div>
+         <img style="max-width:265px; vertical-align:top;" src="http://wwwassets.s3.amazonaws.com/global/vivint.com/web/campaigns/test-results/FB%20Treatment.png" alt="">
+        </section>
+        <section data-background='/presentations/images/winner.gif'>
+                    <h4><a href="http://taylorrose.github.io/testing-results/5/embedd/?title=Mobile%20PPC%20Redirect&names=PPC%20129746,FB%20129747&expnum=2&forms=34,70&calls=66,83&visit=3823,3812&days=9&pic=FB%20Control.png,FB%20Treatment.png&confint=2&date=5/18/2015,%209:40:15%20AM" target="blank"><strong style="color:gold;">54% Total Lift!</strong></h4>
+                    <img src="http://wwwassets.s3.amazonaws.com/global/vivint.com/web/campaigns/test-results/FB%20Treatment.png" alt="Camera Promo Creative"></a>
+
+        </section>
+        <section>
+        <h3>Hierarchy of Testing Impacts</h3>
+        <div>
+        <a href="/presentations/town-hall.html#/RedirectEG"><div style="width:700px; margin:5px;" class="massive ui teal basic button">Redirect</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/elementeg"><div style="width:600px;margin:5px;" class="massive ui red button">Element</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/loctioneg"><div style="width:500px;margin:5px;" class="massive ui green basic button">Location</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/styleeg"><div style="width:400px;margin:5px;" class="massive ui yellow basic button">Style</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/offereg"><div style="width:300px;margin:5px;" class="massive ui blue basic button">Offer</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/ctaeg"><div style="width:200px;margin:5px;" class="massive ui orange basic button">CTA</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/copyeg"><div style="width:100px;margin:5px;" class="massive ui purple basic button">Copy</div></a>
+          </div>
+    </section>
+</section>
+<!-- Element Example -->
+  <section>
+      <section id="elementeg" style="margin-bottom:500px; top:-342px !important;">
+        <p style="font-size:22px;">PPC Brand Modal Slideout</p>
+        <a href="#elementeg"><div style="width:700px; margin:5px;" class="massive ui red button">Element Example</div></a>
+         <a href="http://www.vivint.com/ppc-brand" target="blank"><img style="vertical-align:top;" src="http://wwwassets.s3.amazonaws.com/global/vivint.com/web/campaigns/test-results/slide-in.png" alt=""></a>
+        </section>
+        <section data-background='/presentations/images/winner.gif'>
+                    <h4><a href="http://taylorrose.github.io/testing-results/5/embedd/?title=PPC:%20Slide%20in%20Modal&names=Default%20no%20Slide%20in,Slide%20in%20modal&expnum=2&forms=669,657&calls=413,470&visit=35462,35457&days=13&pic=slide-default.png,slide-in.png&confint=2&date=5/18/2015,%209:43:02%20AM" target="blank"><strong style="color:gold;">13% Call Lift!</strong></h4>
+                    <img src="http://wwwassets.s3.amazonaws.com/global/vivint.com/web/campaigns/test-results/slide-in.png" alt="Camera Promo Creative"></a>
+
+        </section>
+        <section>
+        <h3>Hierarchy of Testing Impacts</h3>
+        <div>
+        <a href="/presentations/town-hall.html#/RedirectEG"><div style="width:700px; margin:5px;" class="massive ui teal basic button">Redirect</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/elementeg"><div style="width:600px;margin:5px;" class="massive ui basic red button">Element</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/loctioneg"><div style="width:500px;margin:5px;" class="massive ui green button">Location</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/styleeg"><div style="width:400px;margin:5px;" class="massive ui yellow basic button">Style</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/offereg"><div style="width:300px;margin:5px;" class="massive ui blue basic button">Offer</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/ctaeg"><div style="width:200px;margin:5px;" class="massive ui orange basic button">CTA</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/copyeg"><div style="width:100px;margin:5px;" class="massive ui purple basic button">Copy</div></a>
+          </div>
+    </section>
+       
+</section>
+<!-- Location Example -->
+  <section>
+      <section id="loctioneg" style="margin-bottom:500px; top:-342px !important;">
+        <p style="font-size:22px;">Package Description on Top</p>
+        <a href="#elementeg"><div style="width:700px; margin:5px;" class="massive ui green button">Location Example</div></a>
+         <img style="vertical-align:top; max-width:470px;" src="http://wwwassets.s3.amazonaws.com/global/vivint.com/web/campaigns/test-results/Package_ctl.png" alt="">
+          <a href="http://www.vivint.com/ppc-brand" target="blank"><img style="vertical-align:top;max-width:470px;" src="http://wwwassets.s3.amazonaws.com/global/vivint.com/web/campaigns/test-results/Package_top.png" alt=""></a>
+        </section>
+        <section data-background='/presentations/images/winner.gif'>
+                    <h4><a href="http://taylorrose.github.io/testing-results/5/embedd/?title=PPC:%20Slide%20in%20Modal&names=Default%20no%20Slide%20in,Slide%20in%20modal&expnum=2&forms=669,657&calls=413,470&visit=35462,35457&days=13&pic=slide-default.png,slide-in.png&confint=2&date=5/18/2015,%209:43:02%20AM" target="blank"><strong style="color:gold;">Lead Mix from 33% Calls to 45% Calls</strong></h4>
+                    <img src="http://wwwassets.s3.amazonaws.com/global/vivint.com/web/campaigns/test-results/Package_top.png" alt="Camera Promo Creative"></a>
+
+        </section>
+        <section>
+        <h3>Hierarchy of Testing Impacts</h3>
+        <div>
+        <a href="/presentations/town-hall.html#/RedirectEG"><div style="width:700px; margin:5px;" class="massive ui teal basic button">Redirect</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/elementeg"><div style="width:600px;margin:5px;" class="massive ui red basic button">Element</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/loctioneg"><div style="width:500px;margin:5px;" class="massive ui green basic button">Location</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/styleeg"><div style="width:400px;margin:5px;" class="massive ui yellow button">Style</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/offereg"><div style="width:300px;margin:5px;" class="massive ui blue basic button">Offer</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/ctaeg"><div style="width:200px;margin:5px;" class="massive ui orange basic button">CTA</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/copyeg"><div style="width:100px;margin:5px;" class="massive ui purple basic button">Copy</div></a>
+          </div>
+    </section>
+       
+</section>
+
+<!-- Style Example -->
+  <section>
+      <section id="styleeg" style="margin-bottom:500px; top:-342px !important;">
+        <p style="font-size:22px;">Pop-over Modal Color Style</p>
+        <a href="#elementeg"><div style="width:700px; margin:5px;" class="massive ui yellow button">Style Example</div></a>
+         <img style="vertical-align:top; max-width:470px;" src="http://taylorrose.github.io/images/blue-banner.png" alt="">
+          <a href="http://www.vivint.com/" target="blank"><img style="vertical-align:top;max-width:470px;" src="http://taylorrose.github.io/images/orange-banner.png" alt=""></a>
+        </section>
+        <section data-background='https://rymdfilm.files.wordpress.com/2013/01/16394538801.jpg'>
+                    <h4><a href="http://taylorrose.github.io/testing-results/5/embedd/?title=PPC:%20Slide%20in%20Modal&names=Default%20no%20Slide%20in,Slide%20in%20modal&expnum=2&forms=669,657&calls=413,470&visit=35462,35457&days=13&pic=slide-default.png,slide-in.png&confint=2&date=5/18/2015,%209:43:02%20AM" target="blank"><strong style="color:gold;">Statistical Tie</strong></h4>
+                    <img style="vertical-align:top; max-width:200px;" src="http://taylorrose.github.io/images/blue-banner.png" alt="">
+          <a href="http://www.vivint.com/" target="blank"><img style="vertical-align:top;max-width:200px;" src="http://taylorrose.github.io/images/orange-banner.png" alt=""></a>
+        </section>
+        <section>
+        <h3>Hierarchy of Testing Impacts</h3>
+        <div>
+        <a href="/presentations/town-hall.html#/RedirectEG"><div style="width:700px; margin:5px;" class="massive ui teal basic button">Redirect</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/elementeg"><div style="width:600px;margin:5px;" class="massive ui red basic button">Element</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/loctioneg"><div style="width:500px;margin:5px;" class="massive ui green basic button">Location</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/styleeg"><div style="width:400px;margin:5px;" class="massive ui yellow basic button">Style</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/offereg"><div style="width:300px;margin:5px;" class="massive ui blue button">Offer</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/ctaeg"><div style="width:200px;margin:5px;" class="massive ui orange basic button">CTA</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/copyeg"><div style="width:100px;margin:5px;" class="massive ui purple basic button">Copy</div></a>
+          </div>
+    </section>
+       
+</section>
+<!-- Offer Example -->
+  <section>
+      <section id="offereg" style="margin-bottom:500px; top:-342px !important;">
+        <p style="font-size:22px;">Free Equipment vs $1500</p>
+        <a href="#elementeg"><div style="width:700px; margin:5px;" class="massive ui blue button">Offer Example</div></a>
+         <img style="vertical-align:top; max-width:470px;" src="http://taylorrose.github.io/images/screen2.png" alt="">
+          <a href="http://www.vivint.com/" target="blank"><img style="vertical-align:top;max-width:470px;" src="http://taylorrose.github.io/images/screen1.png" alt=""></a>
+        </section>
+        <section data-background='https://rymdfilm.files.wordpress.com/2013/01/16394538801.jpg'>
+                    <h4><a href="http://taylorrose.github.io/testing-results/5/embedd/?title=PPC:%20Slide%20in%20Modal&names=Default%20no%20Slide%20in,Slide%20in%20modal&expnum=2&forms=669,657&calls=413,470&visit=35462,35457&days=13&pic=slide-default.png,slide-in.png&confint=2&date=5/18/2015,%209:43:02%20AM" target="blank"><strong style="color:gold;">Statistical Tie</strong></h4>
+                    <img style="vertical-align:top; max-width:200px;" src="http://taylorrose.github.io/images/screen2.png" alt="">
+          <a href="http://www.vivint.com/" target="blank"><img style="vertical-align:top;max-width:200px;" src="http://taylorrose.github.io/images/screen1.png" alt=""></a>
+        </section>
+        <section>
+        <h3>Hierarchy of Testing Impacts</h3>
+        <div>
+        <a href="/presentations/town-hall.html#/RedirectEG"><div style="width:700px; margin:5px;" class="massive ui teal  button">Redirect</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/elementeg"><div style="width:600px;margin:5px;" class="massive ui red  button">Element</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/loctioneg"><div style="width:500px;margin:5px;" class="massive ui green  button">Location</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/styleeg"><div style="width:400px;margin:5px;" class="massive ui yellow  button">Style</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/offereg"><div style="width:300px;margin:5px;" class="massive ui blue  button">Offer</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/ctaeg"><div style="width:200px;margin:5px;" class="massive ui orange button">CTA</div></a>
+        <br>
+        <a href="/presentations/town-hall.html#/copyeg"><div style="width:100px;margin:5px;" class="massive ui purple button">Copy</div></a>
+          </div>
+    </section>
+       
+</section>
+
+				
+
+
+			</div>
+
+		</div>
+
+    <script type="text/javascript">
+$( "#fire" ).click(function()
+
+ { $('#catchFire').attr('data-background','/presentations/images/fire.gif');
+ Reveal.initialize();
+
+});
+
+/*$( "#fire" ).toggle(function() {
+  $('#catchFire').attr('data-background','/presentations/images/fire.gif');
+  Reveal.initialize();}, 
+  function(){
+$('#catchFire').removeAttr('data-background');
+Reveal.initialize();
+  });*/
+
+$("#leads").click(function(event) {
+  $("#WeAreHere").html('<a> We are here</a><br>&#8595;<br>');
+});
+    </script>
+
+<!-- ------------- HighCharts.js ------------ -!-->
+<script type="text/javascript" src="/js/highchart-scripts/sep-PPC-highchart.js"></script>
+<script type="text/javascript" src="/js/highchart-scripts/sep-SEO-highchart.js"></script>
+<script type="text/javascript" src="/js/highchart-scripts/camera-promo.js"></script>
+<script type="text/javascript" src="/js/highchart-scripts/responseRate.js"></script>
+
+<!-- ------------- END HighCharts ------------ -!-->
+
+<script src="../../js/reveal.min.js"></script>
+
+<script>
+
+	Reveal.initialize({
+
+
+
+    // Display controls in the bottom right corner
+    controls: true,
+
+    // Display a presentation progress bar
+    progress: false,
+
+    // Display the page number of the current slide
+    slideNumber: true,
+
+    // Push each slide change to the browser history
+    history: true,
+
+    // Enable keyboard shortcuts for navigation
+    keyboard: true,
+
+    // Enable the slide overview mode
+    overview: true,
+
+    // Vertical centering of slides
+    center: true,
+
+    // Enables touch navigation on devices with touch input
+    touch: true,
+
+    // Loop the presentation
+    loop: false,
+
+    // Change the presentation direction to be RTL
+    rtl: false,
+
+    // Turns fragments on and off globally
+    fragments: true,
+
+    // Flags if the presentation is running in an embedded mode,
+    // i.e. contained within a limited portion of the screen
+    embedded: false,
+
+    // Number of milliseconds between automatically proceeding to the
+    // next slide, disabled when set to 0, this value can be overwritten
+    // by using a data-autoslide attribute on your slides
+    autoSlide: 0,
+
+    // Stop auto-sliding after user input
+    autoSlideStoppable: true,
+
+    // Enable slide navigation via mouse wheel
+    mouseWheel: false,
+
+    // Hides the address bar on mobile devices
+    hideAddressBar: true,
+
+    // Opens links in an iframe preview overlay
+    previewLinks: true,
+
+    // Transition style
+    transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+    // Transition speed
+    transitionSpeed: 'default', // default/fast/slow
+
+    // Transition style for full page slide backgrounds
+    backgroundTransition: 'default', // default/none/slide/concave/convex/zoom
+
+    // Number of slides away from the current that are visible
+    viewDistance: 3,
+
+    // Parallax background image
+    parallaxBackgroundImage: '', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+
+    // Parallax background size
+    parallaxBackgroundSize: '' // CSS syntax, e.g. "2100px 900px"
+
+
+});
+
+$( document ).ready(function() {
+    $( "text:contains('Highcharts.com')" ).hide();
+});
+
+
+		</script>
+	</body>
+</html>

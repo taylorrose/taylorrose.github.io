@@ -12,6 +12,21 @@ var PPCcalls = [1.23,1.16,1.05,1.07,1.16,0.93,0.34,1.33,1.58,1.23,1.35,1.55,2.82
 var PPCforms = [1.50,1.23,1.00,1.19,1.29,1.22,0.45,1.08,1.16,0.90,1.08,0.87,0.72,0.46,1.02,1.52,1.44,1.44,1.44,0.74,0.62,1.30,1.48,1.03,1.13,1.02,0.73,0.69,1.22,1.24,0.93,0.91,0.90,0.63,0.55,0.75,0.77,0.86,0.83,0.90,0.61,0.64,1.10,1.10,0.98,1.02,0.86,0.58,0.29,1.43,0.99,0.87,0.86,0.70,0.15,1.04,1.03,0.99,0.71,0.85,0.83,0.43];
 var color1 ="#0AE0A3";
 var color2 = "#26ABA1";
+var testsObj = {
+    Home:{
+        significant:[1,2,3],
+        insignificant:[2,4,6]
+    },
+    Package:{
+        significant:[1,2,3],
+        insignificant:[2,4,6]
+    },
+    PPC:{
+        significant:[1,2,3],
+        insignificant:[2,4,6]
+    }
+};
+var chartPage = "Home";
 // var callTest1 = [0.27,1.18,1.32,0.68,0.95,0.11,0.00,1.61,1.44,28.00,3.09,0.58,0.94,5.69,3.47,1.75,4.12,1.19,0.79,1.09,0.45,1.28,0.45,0.75,5.56,0.41,1.19,3.23,0.58,4.55,1.60,0.25,1.15,0.34,0.14,0.13,0.50,0.56,0.85,0.43,0.81,0.81,2.34,1.03,1.20,0.71,3.96,0.32,0.00,1.37,1.22,1.10,0.88,1.72,4.07,8.47,0.13,1.05,0.50,1.16,0.00,0.93,3.35,1.69,2.17,0.21,0.85,1.13,0.43,17.86,1.44,2.36,1.12,0.49,0.63,1.05,0.63,0.78,0.24,8.04,4.61,0.15,4.27,0.92,30.77,2.16,0.52,0.39,0.89,0.52,2.28,0.96,3.92,2.42,1.49,3.29,0.26,0.59,0.18,0.99,18.92,1.91,0.81,3.57,0.00,0.97,1.18,0.39,0.13,1.62,10.53,0.62,1.69,2.84,11.43,3.98,0.34,1.62,0.74,1.32,45.00,0.58,1.38,0.71,0.74,1.37,0.86,0.00,0.44,0.11,1.76,3.27,0.82,0.72,2.55,0.15,0.72,2.34,9.09,10.29,0.85,3.69,0.41,0.55,0.47,1.75,1.20,2.61,0.00,16.67,0.32,0.81,0.47,0.33,0.44,0.24,4.76,0.00,1.20,0.00,0.62,2.29,1.13];
 // //Set date of first data point
 // var startDate = new Date("2/2/2015");
@@ -31,6 +46,7 @@ var color2 = "#26ABA1";
 // }
 
 var newSite = dateArr.indexOf('03/30/2015');
+var PushTest = dateArr.indexOf('03/29/2015');
 
 $(function () {
     $('#container').highcharts({
@@ -41,7 +57,7 @@ $(function () {
         },
         
         title: {
-            text: 'Home Page Resonse Rates'
+            text:"Home Page Response Rates"
         },
         subtitle: {
             text: '7 Day Moving Point Average'
@@ -49,7 +65,7 @@ $(function () {
         xAxis: {
             categories: dateArr,
             tickmarkPlacement: 'on',
-            tickInterval: 16,
+            tickInterval: 7,
             title: {
                 enabled: false
             }
@@ -97,6 +113,7 @@ $(function () {
         chart = $('#container').highcharts();
     
         $('#home').click(function () {
+        chartPage = "Home";
         color1 ="#0AE0A3";
         color2 = "#26ABA1";
         chart.series[0].update({data:HomeCalls});
@@ -110,6 +127,7 @@ $(function () {
     });
        
       $('#package').click(function () {
+        chartPage = "Package";
         color1 ="#b5c9d5";
         color2 = "#65839a";
         chart.series[0].update({data:PackageCalls});
@@ -125,6 +143,7 @@ $(function () {
     });
 
           $('#ppc').click(function () {
+        chartPage = "PPC";
         color1 ="#B9F291";
         color2 = "#50BF94";
         chart.series[0].update({data:PPCcalls});
@@ -136,87 +155,54 @@ $(function () {
         Reveal.initialize();
     });
 
+          function addTrueLine(value,identification){
+            chart.xAxis[0].addPlotLine({
+                value: value,
+                color: '#ff8200',
+                width: 4,
+                id: identification,
+            });
+        }
+    
 
-            chart.xAxis[0].addPlotLine({
-                value: newSite,
-                color: '#FF835D',
-                width: 2,
-                id: 'plot-line-1',
+
+             chart.xAxis[0].addPlotBand({
+                from: dateArr.indexOf('03/30/2015'),
+                to: dateArr.length - 1,
+                color: '#F6DC85',
+                id: 'plot-band-1'
             });
     
-             /*  chart.xAxis[0].addPlotLine({
-                value: 9,
-                color: '#FF835D',
-                width: 2,
-                id: 'plot-line-1',
-            });
-            
-  
-            chart.xAxis[0].addPlotLine({
-                value: 40,
-                color: '#F72349',
-                width: 2,
-                id: 'plot-line-2'
-            });
-    
-       chart.xAxis[0].addPlotLine({
-                value: 30,
-                color: '#F72349',
-                width: 2,
-                id: 'plot-line-2'
-            });
-    
-       chart.xAxis[0].addPlotLine({
-                value: 40,
-                color: '#F72349',
-                width: 2,
-                id: 'plot-line-2'
-            });
-    
-         chart.xAxis[0].addPlotLine({
-                value: 47,
-                color: '#F72349',
-                width: 2,
-                id: 'plot-line-2'
-            });
-    
-       chart.xAxis[0].addPlotLine({
-                value: 44,
-                color: '#F72349',
-                width: 2,
-                id: 'plot-line-2'
-            });
-    
-      chart.xAxis[0].addPlotLine({
-                value: 45,
-                color: '#F72349',
-                width: 2,
-                id: 'plot-line-2'
-            });
-    
-         chart.xAxis[0].addPlotLine({
-                value: 74,
-                color: '#F72349',
-                width: 2,
-                id: 'plot-line-2'
-            });
-         chart.xAxis[0].addPlotLine({
-                value: 73,
-                color: '#F72349',
-                width: 2,
-                id: 'plot-line-2'
-            });
-               chart.xAxis[0].addPlotLine({
-                value: 87,
-                color: '#B5A262',
-                width: 1,
-                id: 'plot-line-2'
-            });
-        // the band action
-    //var hasPlotBand = false,*/
-        
-        
-    
-    
+
+
+
+    // $('#checkbox1').change(function() {
+    //     if($(this).is(":checked")) {
+    //         addTrueLine(PushTest,"plot-line-1");
+    //         addTrueLine(10,"plot-line-1");
+    //         addTrueLine(15,"plot-line-1");
+    //         addTrueLine(20,"plot-line-1");
+    //         $(this).attr({
+    //             value: 1
+    //         });
+    //     } else{
+    //     chart.xAxis[0].removePlotLine("plot-line-1");
+    //     $(this).attr({
+    //             value: 0
+    //         });
+    //     }
+    // });
+
+
+
+$("#row1").hover(
+    function(){
+        addTrueLine(dateArr.indexOf('03/05/2015'),"plot-line-1");
+    },function(){
+        chart.xAxis[0].removePlotLine("plot-line-1");
+    }
+
+    );
+
 
 });

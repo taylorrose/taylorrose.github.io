@@ -11,6 +11,8 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="http://code.highcharts.com/highcharts.js"></script>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.2/components/button.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.2/components/table.min.css">
 
 
 	</head>
@@ -55,10 +57,57 @@
         <p style="color:#e0e0e0">Press <span style="font-family:Consolas; color:#ffffff;">&lt;Cmd+Shift+F&gt;</span> for Presentation Mode</p>
         <p style="color:#e0e0e0">Use <span style="font-family:Consolas; color:#ffffff;">&lt;Space Bar&gt;</span> or <span style="font-family:Consolas; color:#ffffff;">&lt;Arrows&gt;</span> for Navigation</p>
         </span>
-       
-			</section>
-			
-			<section>
+		</section>
+    <section>
+    <section>
+    <h4>Conversion Funnel</h4>
+    <div style="width:700px;" class=" massive ui black basic button">Impressions</div>
+    <br>
+    &#8595;
+    <br>
+<div style="width:600px;" class=" massive ui yellow basic button">Visits</div>
+<br>
+    &#8595;
+    <br>
+    <span id="WeAreHere"></span>
+
+<div id="leads" style="width:500px;" class="massive ui green basic button">Leads</div>
+<br>
+    &#8595;
+    <br>
+<div style="width:400px;" class="massive ui blue basic button">NIS Connects</div>
+<br>
+    &#8595;
+    <br>
+<div  style="width:300px;" class="massive ui orange basic button">Sales</div>
+<br>
+    &#8595;
+    <br>
+<div style="width:200px;" class="massive ui purple basic button">Installs</div>
+    </section>
+    
+		<section style="margin-top:10px;">
+                <h4>Channel Traffic FLow</h4>
+               <a href="/documents/ChannelTrafficFlow.pdf" target="blank"><img style="margin:0px; padding:0px; border:none; box-shadow:none; min-width:1000px;" src="/presentations/images/traffic%20Flow.png" alt=""></a>
+    </section>
+    <section>
+    <h3>Hierarchy of Testing Impacts</h3>
+<div>
+<div style="width:700px; margin:5px;" class="massive ui teal basic button">Redirect</div>
+<br>
+<div style="width:600px;margin:5px;" class="massive ui yellow basic button">Element</div>
+<br>
+<div style="width:500px;margin:5px;" class="massive ui green basic button">Location</div>
+<br>
+<div style="width:400px;margin:5px;" class="massive ui blue basic button">Offer</div>
+<br>
+<div style="width:300px;margin:5px;" class="massive ui orange basic button">CTA</div>
+<br>
+<div style="width:200px;margin:5px;" class="massive ui purple basic button">Copy</div>
+  </div>
+    </section>
+    </section>
+		<section>
         <section>
           <h3>Response Rate Trends</h3>
             <i class="fa fa-bar-chart fa-5x titleIcon"></i>
@@ -69,11 +118,27 @@
 			<section id="slides">
             <div class="whiteBlock2">
            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-           <div class="legendType" ><div style="width:20px;height:3px;background-color:#ff8200;display:inline-block;margin:0px 2px 3px 0px;"></div><strong style="display:inline-block;">New Package Launch</strong></div>
-           <button id="home">Home Page</button>
-           <button id="package">Package Pages</button>
-           <button id="ppc">PPC Pages</button>
-    
+          <!--  <div class="legendType" ><div style="width:25px;height:12px;background-color:#F6DC85;display:inline-block;margin:0px 2px 0px 0px;"></div><strong style="display:inline-block;">New Packages</strong></div> -->
+            
+           <table class="ui striped table" style="line-height: 0em;">
+  <thead>
+    <tr>
+    <th>Test</th>
+    <th>Total Lift</th>
+    <th>Monthly Installs</th>
+  </tr></thead>
+  <tbody>
+    <tr id="row1">
+      <td><a href="http://bit.ly/1BMUAMS">Branded Promo</a></td>
+      <td><!-- <i class="fa green fa-caret-up" style="font-size:18;"></i> --> 11% Calls</td>
+      <td><!-- <i class="fa green fa-caret-up" style="font-size:18;"></i> --> 26</td>
+    </tr>
+    <tr>
+      <td>set rating</td>
+      <td>32</td>
+      <td>12</td>
+    </tr>
+</tbody></table>
             </div>
                 </section>
 					<section>
@@ -97,9 +162,9 @@
 						</p>
 						</section>
 					
-					<section>
+					<section data-background='/presentations/images/winner.gif'>
                     <h4>Camera Promo Execution</h4>
-                    <img src="/presentations/images/camera-promo-creative.png" alt="Camera Promo Creative">
+                    <img src="/images/3-Up_House.png" alt="Camera Promo Creative">
 
 				</section>
                     <section>
@@ -243,6 +308,10 @@ $( "#fire" ).click(function()
 $('#catchFire').removeAttr('data-background');
 Reveal.initialize();
   });*/
+
+$("#leads").click(function(event) {
+  $("#WeAreHere").html('<a> We are here</a><br>&#8595;<br>');
+});
     </script>
 
 <!-- ------------- HighCharts.js ------------ -!-->
