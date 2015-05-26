@@ -763,17 +763,19 @@ $('#calculate').on('click' , function () {
         var Temp_ctlRRMin = 0.216493;
         var Temp_exp2RRMax = 0.323952;
         var ctlRRMax = 0.262893;
-
         var Temp_min = (1+calculationsObj[totalWinnerIndex].total.liftMin) * monthlyEstimate;
+
+        
         var Temp_max = (1+calculationsObj[totalWinnerIndex].total.liftMax) * monthlyEstimate;
-
         var Temp_cumMonLead = [];
+        if(totalWinnerIndex == 0){Temp_cumMonLead =[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]];}else
         for(var vip = 1; vip<=6; vip++){
-            Temp_cumMonLead.push([Temp_min.toFixed(0)*(vip),Temp_max.toFixed(0)*(vip)]);
+            Temp_cumMonLead.push([(Temp_min.toFixed(0) - monthlyEstimate) *(vip),(Temp_max.toFixed(0)- monthlyEstimate)*(vip)]);
         }
-
+        // alert(Temp_cumMonLead);
+    var Temp_URLDate= getParameterByName("date");
     var Temp_winningTest = "<em>"+metrics[totalWinnerIndex].name+"</em>";
-    var Temp_today = new Date();
+    var Temp_today = new Date(Temp_URLDate.split(",")[0]);
     var Temp_currentMonth = Temp_today.getMonth();
     var Temp_currentYear = parseInt(Temp_today.getFullYear().toString().substring(2));
 
@@ -998,11 +1000,5 @@ $(".ui.orange.icon.attention").popup();
 $(".ui.green.icon.check").popup();
 
 
-</script>
-<script type="text/javascript">
-    $.ajax({
-    $("#highcharts-2 > svg > text:nth-child(14)").hide();
-    $("#highcharts-0 > svg > text:nth-child(15)").hide();
-});
 </script>
 </html>
