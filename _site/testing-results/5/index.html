@@ -358,6 +358,9 @@ LINKEDIN
     var fillExperienceNum = parseInt(getParameterByName("expnum"));
 
 
+    var fillPics = getParameterByName("pic") ==="" ? "" : getParameterByName("pic").split(",");
+
+
 
     
 
@@ -421,6 +424,7 @@ var experienceNumber = 2;
         var nameFieldFill = "#exp"+(n+1)+"-name"
         $(nameFieldFill).attr("value",fillNames[n]);
     }
+
     for(n=2;n<fillExperienceNum+1;n++){
         var nameFieldFill = "#exp"+(n+1)+"-visitors"
         $(nameFieldFill).attr("value",fillVisitors[n]);
@@ -433,6 +437,12 @@ var experienceNumber = 2;
         var nameFieldFill = "#exp"+(n+1)+"-forms"
         $(nameFieldFill).attr("value",fillForms[n]);
     }
+
+        for(n=0;n<fillExperienceNum+1;n++){
+            var nameFieldFill = "#pic"+(n+1)
+            $(nameFieldFill).attr("value",fillPics[n]);
+        }
+
     //Remove Experience Button Click
     $("#removeLastExperiece").on("click", function () {
         //Remove Last Row of Metrics, Totals, Calls, and Forms tables - Will only remove if class of 'lastRow' is present
@@ -1001,8 +1011,8 @@ $("#exp2-calls").attr("value",fillCalls[1]);
 
 $("#daysInTest").attr("value",getParameterByName("days"));
 
-$("#pic1").attr("value",getParameterByName("pic1"));
-$("#pic2").attr("value",getParameterByName("pic2"));
+// $("#pic1").attr("value",getParameterByName("pic1"));
+// $("#pic2").attr("value",getParameterByName("pic2"));
 
     //Capture Images
     var pic1 = $("#pic1").val();
