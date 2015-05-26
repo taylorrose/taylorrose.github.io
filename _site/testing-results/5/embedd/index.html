@@ -758,19 +758,20 @@ $('#calculate').on('click' , function () {
         //*********************************
         var controlLeads = metrics[0].total;
         var Temp_daysInTest = getParameterByName("days");
-        var monthlyEstimate = (controlLeads / Temp_daysInTest) * 7 * 4.5;
+        var monthlyEstimate = (controlLeads / Temp_daysInTest) * 7 * 4.3452381;
         var Temp_exp2RRMin = 0.278952;
         var Temp_ctlRRMin = 0.216493;
         var Temp_exp2RRMax = 0.323952;
         var ctlRRMax = 0.262893;
-        var Temp_min = (1+calculationsObj[totalWinnerIndex].total.liftMin) * monthlyEstimate;
 
-        
-        var Temp_max = (1+calculationsObj[totalWinnerIndex].total.liftMax) * monthlyEstimate;
+        var Temp_min = (calculationsObj[totalWinnerIndex].total.liftMin) * monthlyEstimate;
+
+
+        var Temp_max = (calculationsObj[totalWinnerIndex].total.liftMax) * monthlyEstimate;
         var Temp_cumMonLead = [];
         if(totalWinnerIndex == 0){Temp_cumMonLead =[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]];}else
         for(var vip = 1; vip<=6; vip++){
-            Temp_cumMonLead.push([(Temp_min.toFixed(0) - monthlyEstimate) *(vip),(Temp_max.toFixed(0)- monthlyEstimate)*(vip)]);
+            Temp_cumMonLead.push([(Temp_min.toFixed(0)) *(vip),(Temp_max.toFixed(0))*(vip)]);
         }
         // alert(Temp_cumMonLead);
     var Temp_URLDate= getParameterByName("date");
