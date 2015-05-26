@@ -723,7 +723,17 @@ $('#calculate').on('click' , function () {
     }
     return maxIndex;
     }
-
+    function maxArrIndex2(arr) {
+    var max = arr[1];
+    var maxIndex = 1;
+    for (var i = 1; i < arr.length; i++) {
+        if (arr[i] > max) {
+            maxIndex = i;
+            max = arr[i];
+        }
+    }
+    return maxIndex;
+    }
 
     var formsResponseArr = [];
     var callsResponseArr = [];
@@ -736,7 +746,8 @@ $('#calculate').on('click' , function () {
     var formWinner = maxArr(formsResponseArr,"forms");
     var callWinner = maxArr(callsResponseArr,"calls");
     var totalWinner = maxArr(totalResponseArr,"total");
-    var totalWinnerIndex = maxArrIndex(totalResponseArr);
+    var totalWinnerIndex = maxArrIndex2(totalResponseArr);
+    alert(totalWinnerIndex);
 
     //
     $(formWinner+" > td:nth-child(1) > div").prepend("<i class='trophy small icon' style='color:#666666'></i>");
@@ -758,7 +769,7 @@ $('#calculate').on('click' , function () {
         //*********************************
         var controlLeads = metrics[0].total;
         var Temp_daysInTest = getParameterByName("days");
-        var monthlyEstimate = (controlLeads / Temp_daysInTest) * 7 * 4.3452381;
+        var monthlyEstimate = (controlLeads / Temp_daysInTest) * 30.4166667;
         var Temp_exp2RRMin = 0.278952;
         var Temp_ctlRRMin = 0.216493;
         var Temp_exp2RRMax = 0.323952;
