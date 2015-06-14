@@ -4,15 +4,92 @@
 	<title>Significance Calculator</title>
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css" class="ui" href="/semantic/packaged/css/semantic.css">
+  <link rel="stylesheet" type="text/css" class="ui" href="/semantic/packaged/css/semantic2.css">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/css/responsive.css">
-  <script src="/semantic/packaged/javascript/semantic.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.0/semantic.min.js"></script>
   <!--<link rel="stylesheet" type="text/css" class="ui" href="/Semantic-UI-2/dist/semantic.css">
   <script src="/Semantic-UI-2/dist/semantic.js"></script>!-->
   <script src="http://code.highcharts.com/highcharts.js"></script>
   <script src="http://code.highcharts.com/highcharts-more.js"></script>
   <style>
+  #result{
+  margin:30px;
+ text-align:center;
+ display: none;
+}
+
+#addRev{
+color: #08A2DF;
+font-size: 40;
+font-weight: bold;
+}
+
+h2#MonthlyRev{
+text-align: center;
+display: block;
+margin-top: 50px;
+}
+#expandOptions{
+  cursor: pointer;
+}
+#closeRates{
+  display: none;
+  
+}
+ a.link {
+}
+    
+font-family: arial;
+text-decoration: none;
+color: 666666;
+
+
+}
+i.lab.icon{
+    float:right;
+    margin-left: 7px;
+}
+
+#fConf-check,#fConf-att,#cConf-check,#cConf-att,#tConf-check,#tConf-att{
+    float:left;
+}
+.margins{
+    width:1043px;
+    margin: 50px 100px 50px 100px;
+    color:#5F5F5F;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body {
+
+  color:#5F5F5F;
+    font-family:Arial, Helvetica, sans-serif;
+}
+table, tr, td, th {
+    text-align: center;
+    border-collapse: collapse;
+    
+}
+
+
+h1, h2, h3, h4 {
+    text-align:center;
+    margin:3px 0px 1px 0px;
+    font-family: arial;
+}
+
+.ci {
+    position:relative;
+    float:right;
+    font-size:14px;
+    color:#666666;
+}
+.highchartsDisplay {
+  display: inline-block;
+  float:right;
+}
+
     #linksy , #removeLastExperiece , #resetExperiece, #contributors, #calculate, #buttons,#RRShort  {
         display: none;
     }
@@ -179,22 +256,9 @@
 
 <h3 class="ui header" style="display:inline-block; margin-right:25px;">Number of Days In Test</h3><div class="ui input" style="width:60px"><ins type="text" id="daysInTest" placeholder="#"></ins></div>
 
-<!-- <br>    
-<h3 class="ui header" style="display:inline-block; margin-right:25px;">Screen Grabs:</h3>
-<h4 class="ui header" style="display:inline-block; margin-right:25px;"><div class="ui input"><input type="text" id="pic1" placeholder="Experience A Image"></div></h4>
-<h4 class="ui header" style="display:inline-block; margin-right:25px;"><div class="ui input"><input type="text" id="pic2" placeholder="Experience B Image"></div></h4>
-
-<br id="addPics"> -->
 <div id="calculate" class="ui blue button">Calculate <i class="fa fa-calculator"></i></div>
 <br>
 </div>
-<!--<div id="expandOptions"><i class="ui large icon Angle Down"></i><strong> Sales Assumptions (Optional)</strong></div>
-<div id="CloseRates">
-    <h4 class="ui header" style="display:inline-block; margin-right:25px;">Form Close Rate:</h4><div class="ui input" style="width:70px"><input type="text" id="formCloseRate" placeholder="%"></div>
-    <h4 class="ui header" style="display:inline-block;margin-left:25px; margin-right:25px;">Call Close Rate:</h4><div class="ui input" style="width:70px"><input type="text" id="callCloseRate" placeholder="%"></div>
-     <h4 class="ui header" style="display:inline-block;margin-left:25px; margin-right:25px;">Monthly Revenue From An Acquisition:</h4><div class="ui input" style="width:120px"><input type="text" id="installRev" placeholder="$"></div>
-</div>
-<div class="ui divider"></div>!-->
 
   <!--*********** Reults Table ***************!-->
 <div class="ui backSection">
@@ -361,16 +425,6 @@
     var fillNames = getParameterByName("names").split(",");
     var fillPics = getParameterByName("pic").split(",");
     var fillExperienceNum = parseInt(getParameterByName("expnum"));
-
-
-
-    
-
-</script>
-
-
-
-<script type="text/javascript">
 //Show the backsection, which normally is hidden - !! For Troubleshooting only !!
    // $("div.ui.backSection").css("display","inline-block");
 
@@ -433,10 +487,7 @@ var experienceNumber = fillExperienceNum;
         $(nameFieldFill).attr("value",fillForms[n]).html(fillForms[n]);
     }
     //Remove Experience Button Click
-</script>
-
-<script type="text/javascript">
-//Teporary Story responseRateObj globally for QA purposes
+    //Teporary Story responseRateObj globally for QA purposes
     var calculationsObj = [];
     var calls = [];
     var forms = [];
@@ -954,10 +1005,6 @@ $("#imageTitle2").html(fillNames[1]);
 });
 
 
-</script>
-
-<script>
-
 $("#test_title").html(getParameterByName("title"));
 $("#lastUpdated").html(getParameterByName("date"));
 
@@ -990,16 +1037,7 @@ $("#pic2").attr("value",getParameterByName("pic2"));
    // $(".highchartsDisplay").css("display","inline-block");
 
 
-    
-
-
-
-
-</script>
-
-<script type="text/javascript">
-
-$('.ui.dropdown')
+    $('.ui.dropdown')
   .dropdown()
 ;
 $("#expandOptions").on("click",function (){
@@ -1011,6 +1049,7 @@ $("#expandOptions").removeAttr("Class","Down").toogle();
 $(".ui.orange.icon.attention").popup();
 $(".ui.green.icon.check").popup();
 
-
 </script>
+
+
 </html>
