@@ -1,0 +1,261 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Significance Calculator</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" class="ui" href="semantic/packaged/css/semantic2.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.0/semantic.min.js"></script>
+
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/highcharts-more.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/calculator-main.css">
+</head>
+
+<body>
+    <div class="ui raised segment">
+        <div class="ui mini green ribbon label">BETA</div>
+
+        <br><br>
+
+        <div class="ui selection dropdown">
+          <input id="percentile" type="hidden" name="Percentile">
+          <div class="default text">90% Confidence Interval</div>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="item" data-value="1">80%</div>
+            <div class="item" data-value="2"><strong>90% (default)</strong></div>
+            <div class="item" data-value="3">95% (Adobe Target)</div>
+            <div class="item" data-value="4">99%</div>
+          </div>
+        </div>
+
+        <div class="margins">
+
+            <h2 class="ui header">
+                <div class="ui input"><input type="text" id="test_title" placeholder="Title of Experiment"></div>
+            </h2>
+
+            <h3 class="ui header" style="display:inline-block;margin:0px;"><strong>Metrics:</strong></h3>
+
+            <table id="myTable" class="ui celled table segment">
+                <tr>
+                    <th>Experience</th>
+                    <th>Visitors</th>
+                    <th>Forms</th>
+                    <th>Calls</th>
+                    <th>Total Leads</th>
+                </tr>
+                <tr id = "metrics1" class="exp1 metrics">
+                    <td>
+                        <div class="ui input">
+                            <input type="text" id="exp1-name" class="name" placeholder="Experience A [Control]">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ui input">
+                            <input type="text" id="exp1-visitors" class="visitors" placeholder="Visitors">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ui input">
+                            <input type="text" id="exp1-forms" class="forms" placeholder="Forms">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ui input">
+                            <input type="text" id="exp1-calls" class="calls" placeholder="Calls">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="total"></div>
+                    </td>
+                </tr>
+                <tr id = "metrics2" class="exp2 metrics">
+                    <td>
+                        <div class="ui input">
+                            <input type="text" id="exp2-name" class="name" placeholder="Experience B">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ui input">
+                            <input type="text" id="exp2-visitors"  class="visitors" placeholder="Visitors">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ui input">
+                            <input type="text" id="exp2-forms" class="forms" placeholder="Forms">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ui input">
+                            <input type="text" id="exp2-calls" class="calls" placeholder="Calls">
+                        </div>
+                    </td>
+                    <td >
+                        <div class="total"></div>
+                    </td>
+                </tr>
+            </table>
+
+            <div id="AddExperience" class="mini ui button">
+                <i class="plus icon"></i> Add Experience
+            </div>
+            <div id="removeLastExperiece" class="mini ui button">
+                <i class="minus icon"></i> Remove Last Experience
+            </div>
+            <div id="resetExperiece" class="mini ui button">
+                <i class="remove icon"></i> Remove All
+            </div>
+            
+            <br>
+            <h3 class="ui header" style="display:inline-block; margin-right:25px;">Number of Days In Test:</h3>
+            <div class="ui input" style="width:60px"><input type="text" id="daysInTest" placeholder="#"></div>
+
+            <br>    
+            <h3 class="ui header" style="display:inline-block; margin-right:25px;">Screen Grabs:</h3>
+            <h4 class="ui header" style="display:inline-block; margin-right:25px;">
+                <div class="ui input"><input type="text" id="pic1" placeholder="Experience A Image"></div>
+            </h4>
+            <h4 class="ui header" style="display:inline-block; margin-right:25px;">
+                <div class="ui input"><input type="text" id="pic2" placeholder="Experience B Image"></div>
+            </h4>
+
+            <br id="addPics">
+            <div id="calculate" class="ui blue button">Calculate <i class="fa fa-calculator"></i></div>
+            
+            <br>
+            <br>
+
+            <div class="ui divider"></div>
+
+          <!--*********** Reults Table ***************!-->
+            <div class="ui backSection">
+                
+                <h3><strong>Outbound Leads (Forms)</strong></h3> 
+                <table id="tableForms" class="ui celled table segment">
+                    <tr>
+                        <th>Experience</th>
+                        <th>Response Rate%</th>
+                        <th>Lift % (Conf. Int.)</th>
+                        <th>Confidence</th>
+                    </tr>
+                    <tr id = "forms1" class="exp1">
+                        <td><div class="experience"></div></td>
+                        <td><div class="ui fRR"></div></td>
+                        <td class="fLift">-</td>
+                        <td class="fConf">-</td>
+                    </tr>
+                    <tr id = "forms2" class="exp2">
+                        <td><div class="experience"></div></td>
+                        <td><div class="ui fRR"></div></td>
+                        <td><div class="fLift"></div></td>
+                        <td><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="fConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive. More data should be collected for this test." id="fConf-att" class="ui orange icon attention"></i><div class="fConf"></div></td>
+                    </tr>
+                </table>
+                
+                <h3><strong>Inbound Leads (Calls)</strong></h3>
+                <table id="tableCalls" class="ui celled table segment">
+                    <tr>
+                        <th>Experience</th>
+                        <th>Response Rate%</th>
+                        <th>Lift % (Conf. Int.)</th>
+                        <th>Confidence</th>
+                    </tr>
+                    <tr id = "calls1" class="exp1">
+                        <td ><div class="experience"></div></td>
+                        <td ><div class="ui cRR"></div></td>
+                        <td class="cLift">-</td>
+                        <td class="cConf">-</td>
+                    </tr>
+                    <tr id = "calls2" class="exp2">
+                        <td ><div class="experience"></div></td>
+                        <td ><div class="ui cRR"></div></td>
+                        <td ><div class="cLift"></div></td>
+                        <td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="cConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive. More data should be collected for this test." id="cConf-att" class="ui orange icon attention"></i><div class="cConf"></div></td>
+                    </tr>
+                </table>
+
+                <h3><strong>Total Leads</strong></h3>
+                <table id="tableTotals"class="ui celled table segment">
+                    <tr>
+                        <th>Experience</th>
+                        <th>Response Rate%</th>
+                        <th>Lift % (Conf. Int.)</th>
+                        <th>Confidence</th>
+                    </tr>
+                    <tr id = "total1" class="exp1">
+                        <td ><div class="experience"></div></td>
+                        <td ><div class="ui tRR"></div></td>
+                        <td class="tLift">-</td>
+                        <td class="cConf">-</td>
+                    </tr>
+                    <tr id = "total2" class="exp2">
+                        <td ><div class="experience"></div></td>
+                        <td ><div class="ui tRR"></div></td>
+                        <td ><div class="tLift"></div></td>
+                        <td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="tConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive in the test. More data should be collected." id="tConf-att" class="ui orange icon attention"></i><div class="tConf"></div></td>
+                    </tr>
+                </table>
+            </div>
+
+            <br>
+            <br>
+
+            <div class="ui backSection">
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        <a id="shareable" href="#">SHARABLE LINK</a>
+                        <i class="linkify icon"></i>
+                    </div>
+                    <input id="embedURL" type="text" placeholder="URL">
+                </div>
+            </div>
+
+            <br>
+            
+            <div id="result">
+            
+                <br>
+                <a href="#" target="blank"><div class="ui icon button"><i class="right arrow icon"></i> Sharable Link</div></a>
+            </div>
+        </div>
+    </div>
+
+    <div id="contributors">
+        <h3 class="ui header">Contributors</h3>
+
+        <div class="third inline">
+            <img class="ui small circular image" src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/2/005/026/1c5/2d733b0.jpg">            
+            <h5 class="ui header">Taylor Rose <span class="description"> - Digital Strategy</span></h5>
+            <p class="description">Battle-tested in growing businesses through digital technologies, Taylor works to convert data insights into bottom-line revenue through testing and optimization.</p>
+            <a href="https://www.linkedin.com/in/taylorrose" target="blank">
+                <div class="ui tiny linkedin button"><i class="linkedin small icon"></i>LINKEDIN</div>
+            </a>
+        </div>
+
+        <div class="third inline">
+            <img class="ui small circular image" src="https://media.licdn.com/mpr/mpr/shrink_200_200/p/1/000/050/193/10be103.jpg">
+            <h5 class="ui header">Ian Bell <span class="description">- Marketing Technologist</span></h5>
+            <p class="description">Ian loves diving in to identify opportunities, and then architecting and building a solution to maximize the benefit from those opportunities.</p>
+            <a href="https://www.linkedin.com/in/enbell" target="blank">
+                <div class="ui tiny linkedin button"><i class="linkedin small icon"></i>LINKEDIN</div>
+            </a>
+        </div>
+
+        <div class="third inline">
+            <img class="ui small circular image" src="https://media.licdn.com/mpr/mpr/shrink_200_200/p/3/000/210/1a2/17f8735.jpg">
+            <h5 class="ui header">Steve Jones <span class="description">- CRO Specialist </span></h5>
+            <p class="description">Steve strategizes, designs, develops, and implements web optimization tests ranging from A/B and Multivariate testing to Behavioral targeting.</p>
+            <a href="https://www.linkedin.com/pub/steven-jones/28/b07/68" target="blank">
+                <div class="ui tiny linkedin button"><i class="linkedin small icon"></i>LINKEDIN</div>
+            </a>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="js/calculate.js"></script>
+
+</html>
