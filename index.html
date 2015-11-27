@@ -1,126 +1,325 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Standard Meta -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-	<head>
-		<meta charset="utf-8">
+  <!-- Site Properities -->
+  <title>conversionrate.io</title>
+  <link rel="stylesheet" type="text/css" href="../dist/components/reset.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/site.css">
 
-		<title>Taylor Rose</title>
+  <link rel="stylesheet" type="text/css" href="../dist/components/container.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/grid.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/header.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/image.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/menu.css">
 
-		<link rel="stylesheet" href="../../css/reveal.min.css">
-		<link rel="stylesheet" href="../../css/theme/TaylorCustom.css" id="theme">
-          <link rel="stylesheet" type="text/css" class="ui" href="/semantic/packaged/css/semantic.css">
-   <script src="/semantic/packaged/javascript/semantic.js"></script>
+  <link rel="stylesheet" type="text/css" href="../dist/components/divider.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/dropdown.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/segment.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/button.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/list.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/icon.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/sidebar.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/transition.css">
 
-	</head>
+  <style type="text/css">
 
-	<body>
-	<!--<a href="https://www.linkedin.com/in/taylorrose" target="blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://i1311.photobucket.com/albums/s674/colormerad1/linkedin_zps8e86b656.png" alt="Connect On LinkedIn"></a><<!-->
-<!--<div id="NavBar"> <a href="http://taylorrose.github.io/#/1">Multivariate Tests</a> | <a href="http://taylorrose.github.io/#/2">Google Charts</a> | <a href="http://taylorrose.github.io/#/3">Some Code</a><div> !-->
-		<div class="reveal"> 
+    #cta {
+      margin-top: 25px;
+    }
 
-			<div class="slides">
-			
-				<section>
+    #hero {
+      background: url(/images/bg3.jpg);
+    }
 
-					<h2>Taylor Rose</h2>
-					<h3>Testing and Optimization</h3>
-					<p>taylor.rose1@vivint.com | 801.900.1456 </p>
-					<!--<br><br>
-					<a style="margin:1.5%; border: 2px #268bd2 solid; padding:1.5%;" href="https://dl.dropboxusercontent.com/u/5280476/Taylor_Rose_TestingAndOptimization.pdf" target="blank">Download Resume </a> <a target="blank" style="margin:1.5%; border: 2px #268bd2 solid; padding:1.5%;" href="/presentations/case-studies.html">View Case Studies Deck</a></p>!-->
-                    <br>
-                    <a href="https://www.linkedin.com/in/taylorrose" target="blank"><div class="ui linkedin button">
-                    <i class="linkedin icon"></i>
-                    LinkedIn
-                    </div></a>
+    .hidden.menu {
+      display: none;
+    }
 
-				</section>
+    .masthead.segment {
+      min-height: 700px;
+      padding: 1em 0em;
+    }
+    .masthead .logo.item img {
+      margin-right: 1em;
+    }
+    .masthead .ui.menu .ui.button {
+      margin-left: 0.5em;
+    }
+    .masthead h1.ui.header {
+      margin-top: 3em;
+      margin-bottom: 0em;
+      font-size: 4em;
+      font-weight: normal;
+    }
+    .masthead h2 {
+      font-size: 1.7em;
+      font-weight: normal;
+    }
 
-			</div>
+    .ui.vertical.stripe {
+      padding: 8em 0em;
+    }
+    .ui.vertical.stripe h3 {
+      font-size: 2em;
+    }
+    .ui.vertical.stripe .button + h3,
+    .ui.vertical.stripe p + h3 {
+      margin-top: 3em;
+    }
+    .ui.vertical.stripe .floated.image {
+      clear: both;
+    }
+    .ui.vertical.stripe p {
+      font-size: 1.33em;
+    }
+    .ui.vertical.stripe .horizontal.divider {
+      margin: 3em 0em;
+    }
 
-		</div>
+    .quote.stripe.segment {
+      padding: 0em;
+    }
+    .quote.stripe.segment .grid .column {
+      padding-top: 5em;
+      padding-bottom: 5em;
+    }
 
-		<script src="../../js/reveal.min.js"></script>
+    .footer.segment {
+      padding: 5em 0em;
+    }
 
-		<script>
+    .secondary.pointing.menu .toc.item {
+      display: none;
+    }
 
-			Reveal.initialize({
+    @media only screen and (max-width: 700px) {
+      .ui.fixed.menu {
+        display: none !important;
+      }
+      .secondary.pointing.menu .item,
+      .secondary.pointing.menu .menu {
+        display: none;
+      }
+      .secondary.pointing.menu .toc.item {
+        display: block;
+      }
+      .masthead.segment {
+        min-height: 350px;
+      }
+      .masthead h1.ui.header {
+        font-size: 2em;
+        margin-top: 1.5em;
+      }
+      .masthead h2 {
+        margin-top: 0.5em;
+        font-size: 1.5em;
+      }
+    }
+#headline {
 
-    // Display controls in the bottom right corner
-    controls: false,
+  display: none;
+}
+  </style>
 
-    // Display a presentation progress bar
-    progress: false,
+  <script src="assets/library/jquery.min.js"></script>
+  <script src="../dist/components/visibility.js"></script>
+  <script src="../dist/components/sidebar.js"></script>
+  <script src="../dist/components/transition.js"></script>
+  <script>
+  $(document)
+    .ready(function() {
 
-    // Display the page number of the current slide
-    slideNumber: false,
+      // fix menu when passed
+      $('.masthead')
+        .visibility({
+          once: false,
+          onBottomPassed: function() {
+            $('.fixed.menu').transition('fade in');
+          },
+          onBottomPassedReverse: function() {
+            $('.fixed.menu').transition('fade out');
+          }
+        })
+      ;
 
-    // Push each slide change to the browser history
-    history: false,
+      // create sidebar and attach to menu open
+      $('.ui.sidebar')
+        .sidebar('attach events', '.toc.item')
+      ;
 
-    // Enable keyboard shortcuts for navigation
-    keyboard: false,
+    // $('#headline')
+    //   .transition('scale')
+    // ;
+    $('#headline')
+      .transition('scale')
+    ;
+    })
+  ;
+  </script>
+</head>
+<body> 
 
-    // Enable the slide overview mode
-    overview: false,
+<!-- Following Menu -->
+<div class="ui large top fixed hidden menu">
+  <div class="ui container">
+    <a href="#hero" class="active item">Home</a>
+    <a href="#leadGen" class="item">Lead Gen</a>
+    <a class="item">Ecomm</a>
+    <a class="item">Funnel Metrics</a>
+    <div class="right menu">
+      <!-- <div class="item">
+        <a class="ui button">Log in</a>
+      </div> -->
+      <div class="item">
+        <a target="blank" href="https://www.linkedin.com/in/taylorrose"><button class="ui compact linkedin button">
+            <i class="linkedin icon"></i>
+             LinkedIn
+            </button></a>
+      </div>
+    </div>
+  </div>
+</div>
 
-    // Vertical centering of slides
-    center: true,
-
-    // Enables touch navigation on devices with touch input
-    touch: false,
-
-    // Loop the presentation
-    loop: false,
-
-    // Change the presentation direction to be RTL
-    rtl: false,
-
-    // Turns fragments on and off globally
-    fragments: true,
-
-    // Flags if the presentation is running in an embedded mode,
-    // i.e. contained within a limited portion of the screen
-    embedded: false,
-
-    // Number of milliseconds between automatically proceeding to the
-    // next slide, disabled when set to 0, this value can be overwritten
-    // by using a data-autoslide attribute on your slides
-    autoSlide: 0,
-
-    // Stop auto-sliding after user input
-    autoSlideStoppable: true,
-
-    // Enable slide navigation via mouse wheel
-    mouseWheel: false,
-
-    // Hides the address bar on mobile devices
-    hideAddressBar: true,
-
-    // Opens links in an iframe preview overlay
-    previewLinks: false,
-
-    // Transition style
-    transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
-
-    // Transition speed
-    transitionSpeed: 'default', // default/fast/slow
-
-    // Transition style for full page slide backgrounds
-    backgroundTransition: 'default', // default/none/slide/concave/convex/zoom
-
-    // Number of slides away from the current that are visible
-    viewDistance: 3,
-
-    // Parallax background image
-    parallaxBackgroundImage: '', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
-
-    // Parallax background size
-    parallaxBackgroundSize: '' // CSS syntax, e.g. "2100px 900px"
+<!-- Sidebar Menu -->
+<div class="ui vertical inverted sidebar menu">
+  <a class="active item" href="#hero">Home</a>
+  <a href="#leadGen" class="item">Lead Gen</a>
+  <a class="item">Ecomm</a>
+  <a class="item">Funnel Metrics</a>
+  <a class="item">Test</a>
+  <a class="item">Signup</a>
+</div>
 
 
-});
+<!-- Page Contents -->
+<div class="pusher">
+<!-- <button class="compact ui teal button left">
+         Beta
+        </button> -->
 
-		</script>
+  <div id="hero" class="ui inverted vertical masthead center aligned segment">
 
-	</body>
+    <div class="ui container">
+      <div class="ui large secondary inverted pointing menu" style="border:none;">
+        <a class="toc item">
+          <i class="sidebar icon"></i>
+        </a>
+        <a class="active item">Home</a>
+        <a href="#leadGen" class="item">Lead Gen</a>
+        <a class="item">Ecomm</a>
+        <a class="item">Funnel Metrics</a>
+        <div class="right item">
+        <img src="/images/taylor.jpg" class="ui avatar image">
+          <a target="blank" href="https://www.linkedin.com/in/taylorrose"><button class="ui linkedin button">
+            <i class="linkedin icon"></i>
+             LinkedIn
+            </button></a>
+          <!-- <button class="ui circular linkedin icon button">
+          <i class="linkedin icon"></i>
+          </button> -->
+        </div>
+      </div>
+    </div>
+    <div id="headline" class="ui text container">
+      <h1 class="ui inverted header">
+          Conversion Rate IO
+      </h1>
+      <h2>Statistical Analysis Tools for CRO Pros</h2>
+      <a href="/testing-results/5/"><div id = "cta" class="ui huge teal button">BETA Version</div></a>
+    </div>
+  </div>
+
+  <div id="leadGen" class="ui vertical stripe segment">
+    <div class="ui middle aligned stackable grid container">
+      <div class="row">
+        <div class="eight wide column">
+          <h3 class="ui header">Lead Generation</h3>
+          <p>Making the phone ring for your internal call floor can be tricky business. Use these calculators to evaluate which experiences are driving more total business for your call center.</p>
+          <h3 class="ui header">Form Completions vs. Dialed Calls</h3>
+          <p>Many sites just track form completions, but inbound calls are shown to close up to 20% better for sales agents. What types of leads should your website be driving?</p>
+        </div>
+        <div class="six wide right floated column">
+          <a href="/testing-results/5/"><img src="/images/Chart_small.png" class="ui huge bordered rounded image"></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="center aligned column">
+          <a target="blank" href="/testing-results/5/" class="ui huge button">Analysis Tool</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="ui vertical stripe quote segment">
+    <div class="ui equal width stackable internally celled grid">
+      <div class="center aligned row">
+        <div class="column">
+          <h3>Best Practices</h3>
+          <p>from industry leading experts</p>
+          <a href="">See More</a>
+        </div>
+        <div class="column">
+          <h3>Case Studies</h3>
+          <p>
+           examples of successfully executed tests
+          </p>
+          <a href="">See More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui vertical stripe segment">
+    <div class="ui text container">
+      <h3 class="ui header">Eccommerce</h3>
+      <p>Analysis tools to help you understand if the tests your are running are driving users to spend more money on your site.</p>
+      <a class="ui large button">Analysis Tool</a>
+      <h4 class="ui horizontal header divider">
+        <a href="#">Funnel Metrics</a>
+      </h4>
+      <h3 class="ui header">Fallout Analysis</h3>
+      <p>See the weak points of multi-step processess so that you can optimize your funnel and drive more individuals toward your conversion goals.</p>
+      <a class="ui large button">Analysis</a>
+    </div>
+  </div>
+
+
+  <div class="ui inverted vertical footer segment">
+    <div class="ui container">
+      <div class="ui stackable inverted divided equal height stackable grid">
+        <div class="three wide column">
+          <h4 class="ui inverted header">About</h4>
+          <div class="ui inverted link list">
+            <a href="#" class="item">Sitemap</a>
+            <a href="#" class="item">Contact Us</a>
+            <a href="#" class="item">Religious Ceremonies</a>
+            <a href="#" class="item">Gazebo Plans</a>
+          </div>
+        </div>
+        <div class="three wide column">
+          <h4 class="ui inverted header">Services</h4>
+          <div class="ui inverted link list">
+            <a href="#" class="item">Banana Pre-Order</a>
+            <a href="#" class="item">DNA FAQ</a>
+            <a href="#" class="item">How To Access</a>
+            <a href="#" class="item">Favorite X-Men</a>
+          </div>
+        </div>
+        <div class="seven wide column">
+          <h4 class="ui inverted header">Footer Header</h4>
+          <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
 </html>
