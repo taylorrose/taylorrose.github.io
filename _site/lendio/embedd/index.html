@@ -1,141 +1,33 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Significance Calculator</title>
+	<title>Lendio Optimization</title>
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" class="ui" href="/semantic/packaged/css/semantic2.css">
-  <link rel="stylesheet" type="text/css" href="/css/responsive.css">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.0/semantic.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/responsive.css">
 
+    <link rel="stylesheet" type="text/css" href="/testing-results/5/CSS/sigCalc.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.0/semantic.min.js"></script>
   <!--<link rel="stylesheet" type="text/css" class="ui" href="/Semantic-UI-2/dist/semantic.css">
   <script src="/Semantic-UI-2/dist/semantic.js"></script>!-->
-
   <script src="http://code.highcharts.com/highcharts.js"></script>
   <script src="http://code.highcharts.com/highcharts-more.js"></script>
-  <style>
 
- #result{
-  margin:30px;
- text-align:center;
- display: none;
-}
-
-#addRev{
-color: #08A2DF;
-font-size: 40;
-font-weight: bold;
-}
-
-h2#MonthlyRev{
-text-align: center;
-display: block;
-margin-top: 50px;
-}
-#expandOptions{
-  cursor: pointer;
-}
-#closeRates{
-  display: none;
-  
-}
- a.link {
-}
-    
-font-family: arial;
-text-decoration: none;
-color: 666666;
-
-
-}
-i.lab.icon{
-    float:right;
-    margin-left: 7px;
-}
-
-#fConf-check,#fConf-att,#cConf-check,#cConf-att,#tConf-check,#tConf-att{
-    float:left;
-}
-.margins{
-
-    /*width:1043px;
-    margin: 50px 100px 50px 100px;*/
-
-    color:#5F5F5F;
-    font-family:Arial, Helvetica, sans-serif;
-}
-
-body {
-
-  color:#5F5F5F;
-    font-family:Arial, Helvetica, sans-serif;
-}
-table, tr, td, th {
-    text-align: center;
-    border-collapse: collapse;
-    
-}
-
-
-h1, h2, h3, h4 {
-    text-align:center;
-    margin:3px 0px 1px 0px;
-    font-family: arial;
-}
-
-.ci {
-    position:relative;
-    float:right;
-    font-size:14px;
-    color:#666666;
-}
-.highchartsDisplay {
-  display: inline-block;
-  float:right;
-}
-    #linksy , #removeLastExperiece , #resetExperiece, #contributors {
-        display: none;
-    }
-
-
-   .inline {
-    	display:inline-block;
-    }
-
-    .third {
-    	max-width:30%;
-    	margin-left:25px;
-    	vertical-align: top;
-    	margin-top: 30px;
-    	
-    }
-
-    @media screen and (max-width: 900px) {
-    /*.description {
-        display:none;
-    }*/
-    .third{
-    	display:block;
-    	
-    	max-width:450px;
-
-    }
-}
-
-  </style>
 </head>
 
 <body>
-
 <div id="logo"><img src="/images/lendio2.jpg" alt=""></div>
-<div class="ui raised segment">
-<!-- <div class="ui mini green ribbon label">BETA</div>
- -->
+<br>
+<div>Data Updated: <ins id="lastUpdated"></ins></div>
 
-<br><br>
-
-<!-- <div class="ui selection dropdown">
+<div class="ui raised segment" style="max-width=900px;">
+<!-- <div class="ui mini green ribbon label">BETA</div> -->
+<br>
+<br>
+<div class="ui selection dropdown" style="display:none;">
   <input id="percentile" type="hidden" name="Percentile">
   <div class="default text">90% Confidence Interval</div>
   <i class="dropdown icon"></i>
@@ -145,7 +37,7 @@ h1, h2, h3, h4 {
     <div class="item" data-value="3">95% (Adobe Target)</div>
     <div class="item" data-value="4">99%</div>
   </div>
-</div> -->
+</div>
 
 
 
@@ -154,113 +46,80 @@ h1, h2, h3, h4 {
 <div class="margins">
 
 
-    <h2 class="ui header"><div class="ui input"><input type="text" id="test_title" placeholder="Title of Experiment"></div></h2>
+    <h2 class="ui header"><div class="ui input"><ins type="text" id="test_title" placeholder="Title of Experiment"></ins></div></h2>
 
-<!--<<div class="ui icon buttons">
-  <div class="ui active button"><a class="link" href="#">1</a></div>
-  <div class="ui button">2</div>
-  <div class="ui button">3</div>
-  <div class="ui button">4</div>
-  <div class="ui button">5</div>
-  <div class="ui button">6</div>
-</div>
-
--->
-
-
-
-<h3 class="ui header" style="display:inline-block;margin:0px;"><strong>Metrics:</strong></h3>
+<div class="backgroundGradient">
+<h3 class="ui header" style="display:inline-block;margin:0px;"><strong>Metrics</strong></h3>
 
 <table id="myTable" class="ui celled table segment">
     <tr>
         <th>Experience</th>
         <th>Visitors</th>
-        <th>Step 1 Conversions</th>
-        <th>Step 2 Conversions</th>
+        <th>Step 1 Completions</th>
+        <th>Step 2 Completions</th>
     </tr>
   <tr id = "metrics1" class="exp1 metrics">
                 <td>
                     <div class="ui input">
-                        <input type="text" id="exp1-name" class="name" placeholder="Experience A [Control]">
+                       <ins type="text" id="exp1-name" class="name" placeholder="Experience A [Control]"></ins>
                     </div>
                 </td>
                 <td>
                     <div class="ui input">
-                        <input type="text" id="exp1-visitors" class="visitors" placeholder="Visitors">
+                        <ins type="text" id="exp1-visitors" class="visitors" placeholder="Visitors"></ins>
                     </div>
                 </td>
                 <td>
                     <div class="ui input">
-                        <input type="text" id="exp1-forms" class="forms" placeholder="Forms">
+                        <ins type="text" id="exp1-forms" class="forms" placeholder="Forms"></ins>
                     </div>
                 </td>
                 <td>
                     <div class="ui input">
-                        <input type="text" id="exp1-calls" class="calls" placeholder="Calls">
+                        <ins type="text" id="exp1-calls" class="calls" placeholder="Calls"></ins>
                     </div>
                 </td>
             </tr>
     <tr id = "metrics2" class="exp2 metrics">
                 <td>
                     <div class="ui input">
-                        <input type="text" id="exp2-name" class="name" placeholder="Experience B">
+                        <ins type="text" id="exp2-name" class="name" placeholder="Experience B"></ins>
                     </div>
                 </td>
                 <td>
                     <div class="ui input">
-                        <input type="text" id="exp2-visitors"  class="visitors" placeholder="Visitors">
+                        <ins type="text" id="exp2-visitors"  class="visitors" placeholder="Visitors"></ins>
                     </div>
                 </td>
                 <td>
                     <div class="ui input">
-                        <input type="text" id="exp2-forms" class="forms" placeholder="Forms">
+                        <ins type="text" id="exp2-forms" class="forms" placeholder="Forms"></ins>
                     </div>
                 </td>
                 <td>
                     <div class="ui input">
-                        <input type="text" id="exp2-calls" class="calls" placeholder="Calls">
+                        <ins type="text" id="exp2-calls" class="calls" placeholder="Calls"></ins>
                     </div>
                 </td>
             </tr>
 </table>
-<div id="AddExperience" class="mini ui button">
-<i class="plus icon"></i> Add Experience
+<div id="buttons">
+    <div id="AddExperience" class="mini ui button">
+    <i class="plus icon"></i> Add Experience
+    </div>
+    <div id="removeLastExperiece" class="mini ui button">
+    <i class="minus icon"></i> Remove Last Experience
+    </div>
+    <div id="resetExperiece" class="mini ui button">
+    <i class="remove icon"></i> Remove All
+    </div>
 </div>
-<div id="removeLastExperiece" class="mini ui button">
-<i class="minus icon"></i> Remove Last Experience
-</div>
-<div id="resetExperiece" class="mini ui button">
-<i class="remove icon"></i> Remove All
-</div>
-<br>
-<h3 class="ui header" style="display:inline-block; margin-right:25px;">Number of Days In Test:</h3><div class="ui input" style="width:60px"><input type="text" id="daysInTest" placeholder="#"></div>
 
-<br>    
-<h3 class="ui header" style="display:inline-block; margin-right:25px;">Screen Grabs:</h3>
-<h4 class="ui header" style="display:inline-block; margin-right:25px;"><div class="ui input"><input type="text" id="pic1" placeholder="Experience A Image"></div></h4>
-<h4 class="ui header" style="display:inline-block; margin-right:25px;"><div class="ui input"><input type="text" id="pic2" placeholder="Experience B Image"></div></h4>
+<h3 class="ui header" style="display:inline-block; margin-right:25px;">Number of Days In Test</h3><div class="ui input" style="width:60px"><ins type="text" id="daysInTest" placeholder="#"></ins></div>
 
-<br id="addPics">
 <div id="calculate" class="ui blue button">Calculate <i class="fa fa-calculator"></i></div>
 <br>
-<br>
-
-<div class="ui divider"></div>
-<!--<div id="expandOptions"><i class="ui large icon Angle Down"></i><strong> Sales Assumptions (Optional)</strong></div>
-<div id="CloseRates">
-    <h4 class="ui header" style="display:inline-block; margin-right:25px;">Form Close Rate:</h4><div class="ui input" style="width:70px"><input type="text" id="formCloseRate" placeholder="%"></div>
-    <h4 class="ui header" style="display:inline-block;margin-left:25px; margin-right:25px;">Call Close Rate:</h4><div class="ui input" style="width:70px"><input type="text" id="callCloseRate" placeholder="%"></div>
-     <h4 class="ui header" style="display:inline-block;margin-left:25px; margin-right:25px;">Monthly Revenue From An Acquisition:</h4><div class="ui input" style="width:120px"><input type="text" id="installRev" placeholder="$"></div>
 </div>
-<div class="ui divider"></div>!-->
-  <!--*********** Charts ***************!-->
-     <!-- <div style="float:right;"> 
-    
-  
- <div id="containerCum" class="highchartsDisplay" style="min-width: 350px; height: 300px; margin: 0px"></div>
-   <br>
-   <div id="containerRatio" class="highchartsDisplay" style="min-width: 350px; height: 300px; margin: 0px;"></div>
-   </div>   --> 
 
   <!--*********** Reults Table ***************!-->
 <div class="ui backSection">
@@ -269,8 +128,8 @@ h1, h2, h3, h4 {
 <table id="tableForms" class="ui celled table segment">
     <tr>
         <th>Experience</th>
-        <th>Response Rate%</th>
-        <th>Lift % (Conf. Int.)</th>
+        <th><span id="RRLong">Response Rate%</span><span id="RRShort">RR%</span></th>
+        <th>Lift <span class="responsiveHide">% (Conf. Int.)<span></th>
         <th>Confidence</th>
     </tr>
     <tr id = "forms1" class="exp1">
@@ -290,8 +149,8 @@ h1, h2, h3, h4 {
 <table id="tableCalls" class="ui celled table segment">
     <tr>
         <th>Experience</th>
-        <th>Response Rate%</th>
-        <th>Lift % (Conf. Int.)</th>
+        <th><span id="RRLong">Response Rate%</span><span id="RRShort">RR%</span></th>
+        <th>Lift <span class="responsiveHide">% (Conf. Int.)<span></th>
         <th>Confidence</th>
     </tr>
     <tr id = "calls1" class="exp1">
@@ -307,22 +166,55 @@ h1, h2, h3, h4 {
         <td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="cConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive. More data should be collected for this test." id="cConf-att" class="ui orange icon attention"></i><div class="cConf"></div></td>
     </tr>
 </table>
-
+<!-- <h3><strong>Total Leads</strong></h3>
+<table id="tableTotals"class="ui celled table segment">
+    <tr>
+        <th>Experience</th>
+        <th><span id="RRLong">Response Rate%</span><span id="RRShort">RR%</span></th>
+        <th>Lift <span class="responsiveHide">% (Conf. Int.)<span></th>
+        <th>Confidence</th>
+    </tr>
+    <tr id = "total1" class="exp1">
+        <td ><div class="experience"></div></td>
+        <td ><div class="ui tRR"></div></td>
+        <td class="tLift">-</td>
+        <td class="cConf">-</td>
+    </tr>
+    <tr id = "total2" class="exp2">
+        <td ><div class="experience"></div></td>
+        <td ><div class="ui tRR"></div></td>
+        <td ><div class="tLift"></div></td>
+        <td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="tConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive in the test. More data should be collected." id="tConf-att" class="ui orange icon attention"></i><div class="tConf"></div></td>
+    </tr>
+</table> -->
 
 
 
 </div>
+  <!--*********** Charts ***************!-->
+
+   <div id="charts" class="ui backSection" style="float:none; display:block; min-height:680px; max-width:700px; width:100%; margin:auto; margin-top:10px;">
+    
+  
+   <div id="containerCum" class="highchartsDisplay" style="width:100%;  margin-top:20px; height: 300px; border:1px solid #cdcdcd; border-radius:4px;"></div>
+   <br>
+   <div id="containerRatio" class="highchartsDisplay" style="width:100%;  margin-top:20px; height: 300px; border:1px solid #cdcdcd;border-radius:4px;"></div>
+   </div>
+
+
 <br>
 <br>
-<div class="ui backSection">
+<div style="margin-left:20%;">
 <div class="ui labeled input">
   <div class="ui label">
     <a id="shareable" href="#">SHARABLE LINK</a> <i class="linkify icon"></i>
   </div>
   <input id="embedURL" type="text" placeholder="URL">
 </div>
+<a id="updateData" href="#" target="blank">
+<div class="ui icon button">
+<i class="lab icon"></i> Update Data</div></a>
 </div>
-<br>
 <div id="result">
 <!--<div style="font-size:20;">Additional Monthly Revenue</div>
 <div id="addRev"></div>
@@ -339,43 +231,24 @@ h1, h2, h3, h4 {
 
 </div>
 
-<div id="contributors">
-<h3 class="ui header">Contributors</h3>
-
-<div class="third inline">
-<img class="ui small circular image" src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/2/005/026/1c5/2d733b0.jpg">
-<h5 class="ui header">Taylor Rose <span class="description"> - Digital Strategy</span></h5>
-<p class="description">Battle-tested in growing businesses through digital technologies, Taylor works to convert data insights into bottom-line revenue through testing and optimization.</p>
-<a href="https://www.linkedin.com/in/taylorrose" target="blank">
-<div class="ui tiny linkedin button">
-<i class="linkedin small icon"></i>
-LINKEDIN
-</div>
-</a>
-</div>
-<div class="third inline">
-<img class="ui small circular image" src="https://media.licdn.com/mpr/mpr/shrink_200_200/p/1/000/050/193/10be103.jpg">
-<h5 class="ui header">Ian Bell <span class="description">- Marketing Technologist</span></h5>
-<p class="description">Ian loves diving in to identify opportunities, and then architecting and building a solution to maximize the benefit from those opportunities.</p>
-<a href="https://www.linkedin.com/in/enbell" target="blank">
-<div class="ui tiny linkedin button">
-<i class="linkedin small icon"></i>
-LINKEDIN
-</div>
-</a>
-</div>
-<div class="third inline">
-<img class="ui small circular image" src="https://media.licdn.com/mpr/mpr/shrink_200_200/p/3/000/210/1a2/17f8735.jpg">
-<h5 class="ui header">Steve Jones <span class="description">- CRO Specialist </span></h5>
-<p class="description">Steve strategizes, designs, develops, and implements web optimization tests ranging from A/B and Multivariate testing to Behavioral targeting.</p>
-<a href="https://www.linkedin.com/pub/steven-jones/28/b07/68" target="blank">
-<div class="ui tiny linkedin button">
-<i class="linkedin small icon"></i>
-LINKEDIN
-</div>
-</a>
+<div class="ui labeled input" style="margin:auto;display:table;">
+  <div id="imageTitle1" class="ui label">
+    Test Experience A
+  </div>
+<div class="ui segment" style="margin: 0px auto;">
+<div id="test1_image_name"></div><br>
+  <img class="ui centered image" id="test1_image" src="">
 </div>
 
+<div class="ui divider visible"></div>
+
+<div class="ui labeled input" style="margin:auto;display:table;">
+  <div id="imageTitle2" class="ui label">
+    Test Experience B
+  </div>
+<div class="ui segment" style="margin: 0px auto;">
+<div id="test2_image_name"></div><br>
+  <img class="ui centered image" id="test2_image" src="">
 </div>
 
 
@@ -389,6 +262,7 @@ LINKEDIN
 <script type="text/javascript">
 
 
+
 //Convert Query Params into arrays; Pass to variables
     function getParameterByName(name) {
         name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -398,51 +272,38 @@ LINKEDIN
     }
 
 
-    var fillForms = getParameterByName("forms") ==="" ? "" : getParameterByName("forms").split(",").map(function(item) {
+    var fillForms = getParameterByName("forms").split(",").map(function(item) {
         return parseInt(item, 10);
     });
-    var fillCalls = getParameterByName("calls") ==="" ? "" :getParameterByName("calls").split(",").map(function(item) {
+    var fillCalls = getParameterByName("calls").split(",").map(function(item) {
         return parseInt(item, 10);
     });
-    var fillVisitors = getParameterByName("visit") ==="" ? "" : getParameterByName("visit").split(",").map(function(item) {
+    var fillVisitors = getParameterByName("visit").split(",").map(function(item) {
         return parseInt(item, 10);
     });
+
 
     var fillNames = getParameterByName("names").split(",");
+    var fillPics = getParameterByName("pic").split(",");
     var fillExperienceNum = parseInt(getParameterByName("expnum"));
-
-
-    var fillPics = getParameterByName("pic") ==="" ? "" : getParameterByName("pic").split(",");
-
-
-
-    
-
-</script>
-
-
-
-<script type="text/javascript">
 //Show the backsection, which normally is hidden - !! For Troubleshooting only !!
    // $("div.ui.backSection").css("display","inline-block");
 
 
 //Add Experiences Button Click
-var experienceNumber = 2;
+var experienceNumber = fillExperienceNum;
 
-    $('#AddExperience').on('click' , function () {
+    function AddRowExperience () {
             //First Capture the ID of last Row --> 'metrics2'
-            var id_Metrics = $("#myTable tr:last").attr("id");
                 //Pull out the '2' in 'metrics2' using regex
-            var getID_MetricsNum = id_Metrics.match(/(\d+)/);
+            var getID_MetricsNum = experienceNumber;
                 //Make pulled number, e.g., '2', a number and increment. This returns the number of experiences in experiment
-             experienceNumber = parseInt(getID_MetricsNum[1],10) + 1;
                 //An array to convert numbers into letters - to populate later in field placeholder, e.g., [Experience C]
             var LetterArray = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","AA","AB","AC","AD","AE","AF","AG","AH","AI","AJ","AK","AL","AM","AN","AO","AP","AQ","AR","AS","AT","AU","AV","AW","AX","AY","AZ"];
             //Add a row to end of Metrics table
                 //Include a unique ID and placeholder attributes in adding in the number of experiments
                     //Includes a class of 'lastRow' so it can easily be targeted
-            $("#myTable tr:last").after('<tr id = "metrics'+experienceNumber+'" class="exp'+experienceNumber+' metrics lastRow"><td><div class="ui input"><input type="text" id="exp'+experienceNumber+'-name" class="name" placeholder="Experience '+ LetterArray[experienceNumber-1]+'"></div></td><td><div class="ui input"><input type="text" id="exp'+experienceNumber+'-visitors"  class="visitors" placeholder="Visitors"></div></td><td><div class="ui input"><input type="text" id="exp'+experienceNumber+'-forms" class="forms" placeholder="Forms"></div></td><td><div class="ui input"><input type="text" id="exp'+experienceNumber+'-calls" class="calls" placeholder="Calls"></div></td><td ><div class="total"></div></td></tr>');
+            $("#myTable tr:last").after('<tr id = "metrics'+experienceNumber+'" class="exp'+experienceNumber+' metrics lastRow"><td><div class="ui input"><ins type="text" id="exp'+experienceNumber+'-name" class="name" placeholder="Experience '+ LetterArray[experienceNumber-1]+'"></ins></div></td><td><div class="ui input"><ins type="text" id="exp'+experienceNumber+'-visitors"  class="visitors" placeholder="Visitors"></ins></div></td><td><div class="ui input"><ins type="text" id="exp'+experienceNumber+'-forms" class="forms" placeholder="Forms"></ins></div></td><td><div class="ui input"><ins type="text" id="exp'+experienceNumber+'-calls" class="calls" placeholder="Calls"></ins></div></td><td ><div class="total"></div></td></tr>');
             //Added ID to <br> tag (I know...) so that I could place additional picture fields before the 'Calculate' button
                 //Includes a class of 'lastRow' so it can easily be targeted
             $("#addPics").before('<h4 class="ui header lastRow" style="display:inline-block; margin-right:25px;"><div class="ui input"><input type="text" id="pic'+experienceNumber+'" placeholder="Experience '+LetterArray[experienceNumber-1]+' Image"></div></h4>');
@@ -453,87 +314,41 @@ var experienceNumber = 2;
             //Add a row to end of Calls table
                 //Include a unique ID and class attributes in adding in the number of experiments
                     //Includes a class of 'lastRow' so it can easily be targeted
-            $("#tableCalls tr:last").after('<tr id = "calls'+experienceNumber+'" class="exp'+experienceNumber+' lastRow"><td ><div class="experience"></div></td><td ><div class="ui cRR"></div></td><td ><div class="cLift"></div></td><td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="cConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive in the test. More data should be collected." id="cConf-att" class="ui orange icon attention"></i><div class="cConf"></div></td></tr>');
+            $("#tableCalls tr:last").after('<tr id = "calls'+experienceNumber+'" class="exp'+experienceNumber+' lastRow"><td ><div class="experience"></div></td><td ><div class="ui cRR"></div></td><td ><div class="cLift"></div></td><td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false   positive." id="cConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive in the test. More data should be collected." id="cConf-att" class="ui orange icon attention"></i><div class="cConf"></div></td></tr>');
             //Add a row to end of Forms table
                 //Include a unique ID and class attributes in adding in the number of experiments
                     //Includes a class of 'lastRow' so it can easily be targeted
             $("#tableForms tr:last").after('<tr id = "forms'+experienceNumber+'" class="exp'+experienceNumber+' lastRow"><td ><div class="experience"></div></td><td ><div class="ui fRR"></div></td><td ><div class="fLift"></div></td><td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="tConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive in the test. More data should be collected." id="fConf-att" class="ui orange icon attention"></i><div class="fConf"></div></td></tr>');
 
-            //Show the 'Remove Last Experience' button
-            $('#removeLastExperiece').attr("style","display:inline-block");
-            //Show the 'Reset' button
-            $('#resetExperiece').attr("style","display:inline-block");
-    });
+    };
 
 
 
 
 //Populate Open Fields
     for(h=2;h<fillExperienceNum;h++){
-    $( "#AddExperience" ).click ();
+    AddRowExperience();
     }
 
 
     for(n=0;n<fillExperienceNum+1;n++){
         var nameFieldFill = "#exp"+(n+1)+"-name"
-        $(nameFieldFill).attr("value",fillNames[n]);
+        $(nameFieldFill).attr("value",fillNames[n]).html(fillNames[n]);
     }
-
     for(n=2;n<fillExperienceNum+1;n++){
         var nameFieldFill = "#exp"+(n+1)+"-visitors"
-        $(nameFieldFill).attr("value",fillVisitors[n]);
+        $(nameFieldFill).attr("value",fillVisitors[n]).html(fillVisitors[n]);
     }
     for(n=2;n<fillExperienceNum+1;n++){
         var nameFieldFill = "#exp"+(n+1)+"-calls"
-        $(nameFieldFill).attr("value",fillCalls[n]);
+        $(nameFieldFill).attr("value",fillCalls[n]).html(fillCalls[n]);
     }
     for(n=2;n<fillExperienceNum+1;n++){
         var nameFieldFill = "#exp"+(n+1)+"-forms"
-        $(nameFieldFill).attr("value",fillForms[n]);
+        $(nameFieldFill).attr("value",fillForms[n]).html(fillForms[n]);
     }
-
-        for(n=0;n<fillExperienceNum+1;n++){
-            var nameFieldFill = "#pic"+(n+1)
-            $(nameFieldFill).attr("value",fillPics[n]);
-        }
-
     //Remove Experience Button Click
-    $("#removeLastExperiece").on("click", function () {
-        //Remove Last Row of Metrics, Totals, Calls, and Forms tables - Will only remove if class of 'lastRow' is present
-            //Metrics Table
-            $("#myTable tr.lastRow:last").remove();
-            //Totals Table
-            $("#tableTotals tr.lastRow:last").remove();
-            //Calls Table
-            $("#tableCalls tr.lastRow:last").remove();
-            //Forms Table
-            $("#tableForms tr.lastRow:last").remove();
-            //Picture Fields
-            $("#addPics").prev(".lastRow").remove();
-
-
-            var id_Metrics = $("#myTable tr:last").attr("id");
-            var getID_MetricsNum = id_Metrics.match(/(\d+)/);
-             experienceNumber = parseInt(getID_MetricsNum[1],10);
-
-            if(experienceNumber<=3){
-                $('#removeLastExperiece').hide();
-                $('#resetExperiece').hide();
-            };
-    });
-
-    //Reset Button Click
-    $("#resetExperiece").on("click", function () {
-        //Remove all elements with 'lastRow' class
-        $(".lastRow").remove();
-        //Remove 'Remove Last Experience' and 'Reset' Buttons
-        $('#removeLastExperiece').hide();
-        $('#resetExperiece').hide();
-    });
-</script>
-
-<script type="text/javascript">
-//Teporary Story responseRateObj globally for QA purposes
+    //Teporary Story responseRateObj globally for QA purposes
     var calculationsObj = [];
     var calls = [];
     var forms = [];
@@ -562,7 +377,7 @@ $('#calculate').on('click' , function () {
 
     for (var j = 0; j < allMetrics.length; j++) {
         //from each experience, get the elements with an tag name of input
-        var tempArray = allMetrics[j].getElementsByTagName('input');
+        var tempArray = allMetrics[j].getElementsByTagName('ins');
         // temporary object to be pushed into the metrics array
         var tempObj = {};
         
@@ -570,10 +385,10 @@ $('#calculate').on('click' , function () {
         for (var i = 0; i < tempArray.length; i++) {
             //if the input is the experience name (id with 'name' in it), add it to the object with no changes. 
             if (tempArray[i].id.indexOf('name') > -1) {
-                tempObj[tempArray[i].className] = tempArray[i].value;
+                tempObj[tempArray[i].className] = tempArray[i].getAttribute("value");
             // if the input doesn't have 'name' in it, change it to a number, then add to object
             } else {
-                tempObj[tempArray[i].className] = parseInt(tempArray[i].value, 10);
+                tempObj[tempArray[i].className] = parseInt(tempArray[i].getAttribute("value"), 10);
             }  
         }
         tempObj['total'] = tempObj.calls + tempObj.forms;
@@ -679,7 +494,7 @@ $('#calculate').on('click' , function () {
     var percentile = percentilSTN || 2;
 
     //Experiment Title
-    testTitle = $("#test_title").val() || "Test Results";
+    testTitle = $("#test_title").html() || "Test Results";
 
     //////Create Calculations and Range Objects 
     calculationsObj = [];
@@ -782,43 +597,19 @@ $('#calculate').on('click' , function () {
         }
 
     }
-    var picID ="";
-    var picNumber ="";
-    var picArr = [];
-    for(var PICi = 1; PICi<=experienceNumber; PICi++){
-        picID = "#pic"+PICi;
-
-        picNumber = $(picID).val();
-        picArr.push(picNumber);
-
-    }
 
         //Populate URL
-    var daysInTest = $("#daysInTest").val() || 14;
+    var daysInTest = $("#daysInTest").html() || 14;
     var date = new Date();
-    var embeddURL = 
-    "?title="+ encodeURIComponent(testTitle)+
-    "&names=" + encodeURIComponent(names) + 
-    "&expnum=" + experienceNumber + 
-    "&forms=" + forms + 
-    "&calls=" + calls +
-    "&visit=" + visitors +
-    "&days="  + daysInTest +
-    "&pic="  + encodeURIComponent(picArr) +
-   // "&pic2="  + encodeURIComponent(pic2) +
-    "&confint=" + percentile +
-    //"&instrev=" + installRev +
-    //"&formcr=" + formCloseRate * 100 +
-    //"&callcr=" + callCloseRate *100 +
-     "&date="+encodeURIComponent(date.toLocaleString());
-    $("a").attr("href",embeddURL);
-    $("#linksy").show();
+    var embeddURL = document.URL;
+    var embeddQuery = document.location.search;
 
 
     // document.location.replace(embeddURL);
 
-    $("#embedURL").attr("value",document.location.origin + document.location.pathname +"embedd/"+ embeddURL);
-    $("#shareable").attr("href",document.location.origin + document.location.pathname +"embedd/"+ embeddURL)
+    $("#embedURL").attr("value",embeddURL);
+    $("#shareable").attr("href",embeddURL);
+    $("#updateData").attr("href",document.location.origin + "/lendio/" + embeddQuery);
 
     //Identify and Highlight Winners
     function maxArr(arr,stringName) {
@@ -844,7 +635,17 @@ $('#calculate').on('click' , function () {
     }
     return maxIndex;
     }
-
+    function maxArrIndex2(arr) {
+    var max = arr[1];
+    var maxIndex = 1;
+    for (var i = 1; i < arr.length; i++) {
+        if (arr[i] > max) {
+            maxIndex = i;
+            max = arr[i];
+        }
+    }
+    return maxIndex;
+    }
 
     var formsResponseArr = [];
     var callsResponseArr = [];
@@ -857,7 +658,8 @@ $('#calculate').on('click' , function () {
     var formWinner = maxArr(formsResponseArr,"forms");
     var callWinner = maxArr(callsResponseArr,"calls");
     var totalWinner = maxArr(totalResponseArr,"total");
-    var totalWinnerIndex = maxArrIndex(totalResponseArr);
+    var totalWinnerIndex = maxArrIndex2(totalResponseArr);
+
 
     //
     $(formWinner+" > td:nth-child(1) > div").prepend("<i class='trophy small icon' style='color:#666666'></i>");
@@ -877,24 +679,28 @@ $('#calculate').on('click' , function () {
     // $(totalWinner+"> td:nth-child(2) > div > div").css("color","#ff8200");
 
         //*********************************
-        var controlLeads = metrics[0].total;
-        var Temp_daysInTest = $("#daysInTest").val();
-        var monthlyEstimate = (controlLeads / Temp_daysInTest) * 7 * 4.5;
+        var controlLeads = metrics[0].calls;
+        var Temp_daysInTest = getParameterByName("days");
+        var monthlyEstimate = (controlLeads / Temp_daysInTest) * 30.4166667;
         var Temp_exp2RRMin = 0.278952;
         var Temp_ctlRRMin = 0.216493;
         var Temp_exp2RRMax = 0.323952;
         var ctlRRMax = 0.262893;
 
-        var Temp_min = (1+calculationsObj[totalWinnerIndex].total.liftMin) * monthlyEstimate;
-        var Temp_max = (1+calculationsObj[totalWinnerIndex].total.liftMax) * monthlyEstimate;
+        var Temp_min = (calculationsObj[totalWinnerIndex].calls.liftMin) * monthlyEstimate;
 
+
+        var Temp_max = (calculationsObj[totalWinnerIndex].calls.liftMax) * monthlyEstimate;
         var Temp_cumMonLead = [];
+        if(totalWinnerIndex == 0){Temp_cumMonLead =[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]];}else
         for(var vip = 1; vip<=6; vip++){
-            Temp_cumMonLead.push([Temp_min.toFixed(0)*(vip),Temp_max.toFixed(0)*(vip)]);
+            Temp_cumMonLead.push([(Temp_min.toFixed(0)) *(vip),(Temp_max.toFixed(0))*(vip)]);
         }
-
+        // alert(Temp_cumMonLead);
+    var Temp_URLDate= getParameterByName("date");
     var Temp_winningTest = "<em>"+metrics[totalWinnerIndex].name+"</em>";
-    var Temp_today = new Date();
+    var Temp_contolTest = "<em>"+metrics[0].name+"</em>";
+    var Temp_today = new Date(Temp_URLDate.split(",")[0]);
     var Temp_currentMonth = Temp_today.getMonth();
     var Temp_currentYear = parseInt(Temp_today.getFullYear().toString().substring(2));
 
@@ -929,7 +735,7 @@ $('#calculate').on('click' , function () {
             },
 
             title: {
-                text: '<strong>Monthly Lead Increase (Range)</strong>',
+                text: '<strong>Monthly Conversion Increase (Range)</strong>',
                  style: {
                 fontFamily: 'Arial, Helvetica, sans-serif',
                 color: "#808080"
@@ -984,112 +790,135 @@ var Temp_winningCalls = metrics[totalWinnerIndex].calls;
 var Temp_controlForms =metrics[0].forms;
 var Temp_controlCalls =metrics[0].calls;
 var Temp_callRatio = (Temp_winningCalls/(Temp_winningCalls+Temp_winningForms))*100;
+
+var Temp_controlS1 = calculationsObj[0].forms.rr * -100;
+var Temp_controlS2 = calculationsObj[0].calls.rr * -100;
+
+ var Temp_winningS1 = calculationsObj[totalWinnerIndex].forms.rr * 100;
+ var Temp_winningsS2 = calculationsObj[totalWinnerIndex].calls.rr * 100;
 	
 $(function () {
-    $('#containerRatio').highcharts({
-        chart: {
-            type: 'bar'
-
-        },
-        legend: {
-            itemStyle: {
-                color: '#808080'
-            }
-        },
-        title: {
-            text: '<strong>Percent Calls </strong>('+Temp_callRatio.toFixed(0)+"%)",
-            style: {
-                fontFamily: 'Arial, Helvetica, sans-serif',
-                color: '#808080'
-
-            }
-        },
-        xAxis: {
-            categories: ['Control', '<strong>Top Exp.</strong>']
-        },
-        yAxis: {
-            min: 0,
+    var categories = ['Step2','Step1','Visits'];
+    $(document).ready(function () {
+        $('#containerRatio').highcharts({
+            chart: {
+                type: 'bar'
+            },
             title: {
-                text: 'Percent of Leads'
-            }
-        },
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
-            shared: true
-        },
-        plotOptions: {
-            bar: {
-                stacking: 'percent'
-            }
-        },
-        series: [{
-            name: 'Calls',
-            data: [Temp_controlCalls, Temp_winningCalls],
-            color:'#6ECFF5',
-            index:1,
-            legendIndex:0
-        }, {
-            name: 'Forms',
-            data: [Temp_controlForms, Temp_winningForms],
-            color:'#bccdd6',
-            index:0,
-            legendIndex:1
-        }]
+                text: 'Funnel Comparison'
+            },
+            xAxis: [{
+                categories: categories,
+                reversed: false,
+                labels: {
+                    step: 1
+                }
+            }, { // mirror axis on right side
+                opposite: true,
+                reversed: false,
+                categories: categories,
+                linkedTo: 0,
+                labels: {
+                    step: 1
+                }
+            }],
+            yAxis: {
+                title: {
+                    text: null
+                },
+                labels: {
+                    formatter: function () {
+                        return Math.abs(this.value) + '%';
+                    }
+                }
+            },
+
+            plotOptions: {
+                series: {
+                    stacking: 'normal'
+                }
+            },
+
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.series.name + ', age ' + this.point.category + '</b><br/>' +
+                        'Percent Completion: ' + Highcharts.numberFormat(Math.abs(this.point.y), 2) + '%';
+                }
+            },
+
+            series: [{
+                name: Temp_contolTest,
+                data: [Temp_controlS2, Temp_controlS1, -100],
+                color:"#bccdd6"
+            }, {
+                name: Temp_winningTest,
+                data: [Temp_winningsS2, Temp_winningS1, 100],
+                color:"#6ECFF5"
+            }]
+        });
     });
-});
-    $("#highcharts-0 > svg > text:nth-child(15)").hide();
-
-    $("#highcharts-2 > svg > text:nth-child(14)").hide();
-    $("div.ui.backSection").css("display","inline-block");
-    $("html, body").animate({ scrollTop: $(document).height() }, "slow");
 
 });
-</script>
 
-<script>
+    $("div.ui.backSection").css("display","block");
+    // $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+
+});
+
+$( document ).ready(function() {
+$( "#calculate" ).click ();
+    $().ready(function(){
+        $("#highcharts-0 > svg > text:nth-child(15)").hide();
+
+        $().ready(function() {
+        $("#highcharts-2 > svg > text:nth-child(17)").hide();
+        });
+    });
+
+var imageDirectory = "/images/"
+
+$("#test1_image").attr("src",imageDirectory+fillPics[0]);
+$("#test2_image").attr("src",imageDirectory+fillPics[1]);
+
+$("#imageTitle1").html(fillNames[0]);
+$("#imageTitle2").html(fillNames[1]);
+
+});
 
 
-$("#test_title").attr("value",getParameterByName("title"));
+$("#test_title").html(getParameterByName("title"));
+$("#lastUpdated").html(getParameterByName("date"));
 
-$("#exp1-name").attr("value",fillNames[0]);
-$("#exp2-name").attr("value",fillNames[1]);
+$("#exp1-name").attr("value",fillNames[0]).html(fillNames[0]);
+$("#exp2-name").attr("value",fillNames[1]).html(fillNames[1]);
 
-$("#exp1-visitors").attr("value",fillVisitors[0]);
-$("#exp2-visitors").attr("value",fillVisitors[1]);
+$("#exp1-visitors").attr("value",fillVisitors[0]).html(fillVisitors[0]);
+$("#exp2-visitors").attr("value",fillVisitors[1]).html(fillVisitors[1]);
 
-$("#exp1-forms").attr("value",fillForms[0]);
-$("#exp2-forms").attr("value",fillForms[1]);
+$("#exp1-forms").attr("value",fillForms[0]).html(fillForms[0]);
+$("#exp2-forms").attr("value",fillForms[1]).html(fillForms[1]);
 
-$("#exp1-calls").attr("value",fillCalls[0]);
-$("#exp2-calls").attr("value",fillCalls[1]);
+$("#exp1-calls").attr("value",fillCalls[0]).html(fillCalls[0]);
+$("#exp2-calls").attr("value",fillCalls[1]).html(fillCalls[1]);
 
-$("#daysInTest").attr("value",getParameterByName("days"));
+$("#daysInTest").html(getParameterByName("days"));
 
-// $("#pic1").attr("value",getParameterByName("pic1"));
-// $("#pic2").attr("value",getParameterByName("pic2"));
+$("#pic1").attr("value",getParameterByName("pic1"));
+$("#pic2").attr("value",getParameterByName("pic2"));
 
     //Capture Images
     var pic1 = $("#pic1").val();
     var pic2 = $("#pic2").val();
 
     //Populate URL
-    var daysInTest = $("#daysInTest").val() || 14;
+    var daysInTest = $("#daysInTest").html() || 14;
 
 
     
    // $(".highchartsDisplay").css("display","inline-block");
 
 
-    
-
-
-
-
-</script>
-
-<script type="text/javascript">
-
-$('.ui.dropdown')
+    $('.ui.dropdown')
   .dropdown()
 ;
 $("#expandOptions").on("click",function (){
@@ -1098,7 +927,10 @@ $("#expandOptions").removeAttr("Class","Down").toogle();
 
 });
 
+$(".ui.orange.icon.attention").popup();
+$(".ui.green.icon.check").popup();
 
 </script>
+
 
 </html>
