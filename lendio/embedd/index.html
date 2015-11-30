@@ -827,22 +827,35 @@ $(function () {
                     text: null
                 },
                 labels: {
+                    enabled:false,
                     formatter: function () {
                         return Math.abs(this.value) + '%';
                     }
-                }
+                },
+                max: 20,
+                min:-20
             },
+
+            //800-826-9781
+            //
 
             plotOptions: {
                 series: {
-                    stacking: 'normal'
+                    stacking: 'normal',
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                           return Highcharts.numberFormat(Math.abs(this.point.y), 1) + '%';
+                        }
+                    }
                 }
+                
             },
 
             tooltip: {
                 formatter: function () {
                     return '<b>' + this.series.name + ', age ' + this.point.category + '</b><br/>' +
-                        'Percent Completion: ' + Highcharts.numberFormat(Math.abs(this.point.y), 2) + '%';
+                        'Percent Completion: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1) + '%';
                 }
             },
 
