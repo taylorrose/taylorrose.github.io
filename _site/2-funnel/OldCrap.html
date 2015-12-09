@@ -1,141 +1,31 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>2-Step Test</title>
+	<title>Significance Calculator</title>
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css" class="ui" href="/semantic/packaged/css/semantic2.css">
-  <link rel="stylesheet" type="text/css" href="/css/responsive.css">
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.0/semantic.min.js"></script>
-
+  <link rel="stylesheet" type="text/css" class="ui" href="/semantic/packaged/css/semantic.css">
+  <script src="/semantic/packaged/javascript/semantic.js"></script>
   <!--<link rel="stylesheet" type="text/css" class="ui" href="/Semantic-UI-2/dist/semantic.css">
   <script src="/Semantic-UI-2/dist/semantic.js"></script>!-->
-
   <script src="http://code.highcharts.com/highcharts.js"></script>
   <script src="http://code.highcharts.com/highcharts-more.js"></script>
   <style>
-
- #result{
-  margin:30px;
- text-align:center;
- display: none;
-}
-
-#addRev{
-color: #08A2DF;
-font-size: 40;
-font-weight: bold;
-}
-
-h2#MonthlyRev{
-text-align: center;
-display: block;
-margin-top: 50px;
-}
-#expandOptions{
-  cursor: pointer;
-}
-#closeRates{
-  display: none;
-  
-}
- a.link {
-}
-    
-font-family: arial;
-text-decoration: none;
-color: 666666;
-
-
-}
-i.lab.icon{
-    float:right;
-    margin-left: 7px;
-}
-
-#fConf-check,#fConf-att,#cConf-check,#cConf-att,#tConf-check,#tConf-att{
-    float:left;
-}
-.margins{
-
-    /*width:1043px;
-    margin: 50px 100px 50px 100px;*/
-
-    color:#5F5F5F;
-    font-family:Arial, Helvetica, sans-serif;
-}
-
-body {
-
-  color:#5F5F5F;
-    font-family:Arial, Helvetica, sans-serif;
-}
-table, tr, td, th {
-    text-align: center;
-    border-collapse: collapse;
-    
-}
-
-
-h1, h2, h3, h4 {
-    text-align:center;
-    margin:3px 0px 1px 0px;
-    font-family: arial;
-}
-
-.ci {
-    position:relative;
-    float:right;
-    font-size:14px;
-    color:#666666;
-}
-.highchartsDisplay {
-  display: inline-block;
-  float:right;
-}
-    #linksy , #removeLastExperiece , #resetExperiece, #contributors {
+    #linksy , #removeLastExperiece , #resetExperiece {
         display: none;
     }
-
-
-   .inline {
-    	display:inline-block;
-    }
-
-    .third {
-    	max-width:30%;
-    	margin-left:25px;
-    	vertical-align: top;
-    	margin-top: 30px;
-    	
-    }
-
-    @media screen and (max-width: 900px) {
-    /*.description {
-        display:none;
-    }*/
-    .third{
-    	display:block;
-    	
-    	max-width:450px;
-
-    }
-}
 
   </style>
 </head>
 
 <body>
-<h2 class="ui header">2-Step Funnel</h2>
+
 
 <div class="ui raised segment">
-<!-- <div class="ui mini green ribbon label">BETA</div>
- -->
+<div class="ui mini green ribbon label">BETA</div>
 
 <br><br>
-
-<!-- <div class="ui selection dropdown">
+<div class="ui selection dropdown">
   <input id="percentile" type="hidden" name="Percentile">
   <div class="default text">90% Confidence Interval</div>
   <i class="dropdown icon"></i>
@@ -145,7 +35,7 @@ h1, h2, h3, h4 {
     <div class="item" data-value="3">95% (Adobe Target)</div>
     <div class="item" data-value="4">99%</div>
   </div>
-</div> -->
+</div>
 
 
 
@@ -175,8 +65,9 @@ h1, h2, h3, h4 {
     <tr>
         <th>Experience</th>
         <th>Visitors</th>
-        <th>Step 1 Conversions</th>
-        <th>Step 2 Conversions</th>
+        <th>Forms</th>
+        <th>Calls</th>
+        <th>Total Leads</th>
     </tr>
   <tr id = "metrics1" class="exp1 metrics">
                 <td>
@@ -198,6 +89,9 @@ h1, h2, h3, h4 {
                     <div class="ui input">
                         <input type="text" id="exp1-calls" class="calls" placeholder="Calls">
                     </div>
+                </td>
+                <td>
+                    <div class="total"></div>
                 </td>
             </tr>
     <tr id = "metrics2" class="exp2 metrics">
@@ -221,6 +115,9 @@ h1, h2, h3, h4 {
                         <input type="text" id="exp2-calls" class="calls" placeholder="Calls">
                     </div>
                 </td>
+                <td >
+                    <div class="total"></div>
+                </td>
             </tr>
 </table>
 <div id="AddExperience" class="mini ui button">
@@ -230,7 +127,7 @@ h1, h2, h3, h4 {
 <i class="minus icon"></i> Remove Last Experience
 </div>
 <div id="resetExperiece" class="mini ui button">
-<i class="remove icon"></i> Remove All
+<i class="remove icon"></i> Reset
 </div>
 <br>
 <h3 class="ui header" style="display:inline-block; margin-right:25px;">Number of Days In Test:</h3><div class="ui input" style="width:60px"><input type="text" id="daysInTest" placeholder="#"></div>
@@ -241,7 +138,10 @@ h1, h2, h3, h4 {
 <h4 class="ui header" style="display:inline-block; margin-right:25px;"><div class="ui input"><input type="text" id="pic2" placeholder="Experience B Image"></div></h4>
 
 <br id="addPics">
-<div id="calculate" class="ui blue button">Calculate <i class="fa fa-calculator"></i></div>
+<div id="calculate" class="ui blue button">Calculate<i class="lab icon"></i></div>
+
+
+<div id="MetricsLoop" class="ui purple button">Run Metrics Loop<i class="smile icon"></i></div>
 <br>
 <br>
 
@@ -254,17 +154,17 @@ h1, h2, h3, h4 {
 </div>
 <div class="ui divider"></div>!-->
   <!--*********** Charts ***************!-->
-     <!-- <div style="float:right;"> 
+   <div style="float:right;"> 
     
   
- <div id="containerCum" class="highchartsDisplay" style="min-width: 350px; height: 300px; margin: 0px"></div>
+   <div id="containerCum" class="highchartsDisplay" style="min-width: 350px; height: 300px; margin: 0px"></div>
    <br>
-   <div id="containerRatio" class="highchartsDisplay" style="min-width: 350px; height: 300px; margin: 0px;"></div>
-   </div>   --> 
+   <div id="containerRatio" class="highchartsDisplay" style="min-width: 350px; height: 180px; margin: 0px;"></div>
+   </div>
 
   <!--*********** Reults Table ***************!-->
 <div class="ui backSection">
-<h3><strong>Step 1 Completion Rates</strong></h3>
+<h3><strong>Outbound Leads (Forms)</strong></h3>
 
 <table id="tableForms" class="ui celled table segment">
     <tr>
@@ -286,7 +186,7 @@ h1, h2, h3, h4 {
         <td><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="fConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive. More data should be collected for this test." id="fConf-att" class="ui orange icon attention"></i><div class="fConf"></div></td>
     </tr>
 </table>
-<h3><strong>Step 2 Completion Rates</strong></h3>
+<h3><strong>Inbound Leads (Calls)</strong></h3>
 <table id="tableCalls" class="ui celled table segment">
     <tr>
         <th>Experience</th>
@@ -307,20 +207,27 @@ h1, h2, h3, h4 {
         <td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="cConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive. More data should be collected for this test." id="cConf-att" class="ui orange icon attention"></i><div class="cConf"></div></td>
     </tr>
 </table>
-
-
-
-
-</div>
-<br>
-<br>
-<div class="ui backSection">
-<div class="ui labeled input">
-  <div class="ui label">
-    <a id="shareable" href="#">SHARABLE LINK</a> <i class="linkify icon"></i>
-  </div>
-  <input id="embedURL" type="text" placeholder="URL">
-</div>
+<h3><strong>Total Leads</strong></h3>
+<table id="tableTotals"class="ui celled table segment">
+    <tr>
+        <th>Experience</th>
+        <th>Response Rate%</th>
+        <th>Lift % (Conf. Int.)</th>
+        <th>Confidence</th>
+    </tr>
+    <tr id = "total1" class="exp1">
+        <td ><div class="experience"></div></td>
+        <td ><div class="ui tRR"></div></td>
+        <td class="tLift">-</td>
+        <td class="cConf">-</td>
+    </tr>
+    <tr id = "total2" class="exp2">
+        <td ><div class="experience"></div></td>
+        <td ><div class="ui tRR"></div></td>
+        <td ><div class="tLift"></div></td>
+        <td ><i data-content="Confidence level exceeds 95% and is statistically signficant that randomness or noise is unlikely to be causing a false positive." id="tConf-check" class="ui green icon check"></i><i data-content="Confidence levels below 95% are not statistically significant and risk a false positive in the test. More data should be collected." id="tConf-att" class="ui orange icon attention"></i><div class="tConf"></div></td>
+    </tr>
+</table>
 </div>
 <br>
 <div id="result">
@@ -339,92 +246,14 @@ h1, h2, h3, h4 {
 
 </div>
 
-<div id="contributors">
-<h3 class="ui header">Contributors</h3>
-
-<div class="third inline">
-<img class="ui small circular image" src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/2/005/026/1c5/2d733b0.jpg">
-<h5 class="ui header">Taylor Rose <span class="description"> - Digital Strategy</span></h5>
-<p class="description">Battle-tested in growing businesses through digital technologies, Taylor works to convert data insights into bottom-line revenue through testing and optimization.</p>
-<a href="https://www.linkedin.com/in/taylorrose" target="blank">
-<div class="ui tiny linkedin button">
-<i class="linkedin small icon"></i>
-LINKEDIN
-</div>
-</a>
-</div>
-<div class="third inline">
-<img class="ui small circular image" src="https://media.licdn.com/mpr/mpr/shrink_200_200/p/1/000/050/193/10be103.jpg">
-<h5 class="ui header">Ian Bell <span class="description">- Marketing Technologist</span></h5>
-<p class="description">Ian loves diving in to identify opportunities, and then architecting and building a solution to maximize the benefit from those opportunities.</p>
-<a href="https://www.linkedin.com/in/enbell" target="blank">
-<div class="ui tiny linkedin button">
-<i class="linkedin small icon"></i>
-LINKEDIN
-</div>
-</a>
-</div>
-<div class="third inline">
-<img class="ui small circular image" src="https://media.licdn.com/mpr/mpr/shrink_200_200/p/3/000/210/1a2/17f8735.jpg">
-<h5 class="ui header">Steve Jones <span class="description">- CRO Specialist </span></h5>
-<p class="description">Steve strategizes, designs, develops, and implements web optimization tests ranging from A/B and Multivariate testing to Behavioral targeting.</p>
-<a href="https://www.linkedin.com/pub/steven-jones/28/b07/68" target="blank">
-<div class="ui tiny linkedin button">
-<i class="linkedin small icon"></i>
-LINKEDIN
-</div>
-</a>
-</div>
-
-</div>
-
-
-
-
-
 </body>
 
-
-
-<script type="text/javascript">
-
-
-//Convert Query Params into arrays; Pass to variables
-    function getParameterByName(name) {
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(location.search);
-        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-    }
-
-
-    var fillForms = getParameterByName("forms") ==="" ? "" : getParameterByName("forms").split(",").map(function(item) {
-        return parseInt(item, 10);
-    });
-    var fillCalls = getParameterByName("calls") ==="" ? "" :getParameterByName("calls").split(",").map(function(item) {
-        return parseInt(item, 10);
-    });
-    var fillVisitors = getParameterByName("visit") ==="" ? "" : getParameterByName("visit").split(",").map(function(item) {
-        return parseInt(item, 10);
-    });
-
-    var fillNames = getParameterByName("names").split(",");
-    var fillExperienceNum = parseInt(getParameterByName("expnum"));
-
-
-    var fillPics = getParameterByName("pic") ==="" ? "" : getParameterByName("pic").split(",");
-
-
-
-    
-
-</script>
 
 
 
 <script type="text/javascript">
 //Show the backsection, which normally is hidden - !! For Troubleshooting only !!
-   // $("div.ui.backSection").css("display","inline-block");
+    $("div.ui.backSection").css("display","inline-block");
 
 
 //Add Experiences Button Click
@@ -442,7 +271,7 @@ var experienceNumber = 2;
             //Add a row to end of Metrics table
                 //Include a unique ID and placeholder attributes in adding in the number of experiments
                     //Includes a class of 'lastRow' so it can easily be targeted
-            $("#myTable tr:last").after('<tr id = "metrics'+experienceNumber+'" class="exp'+experienceNumber+' metrics lastRow"><td><div class="ui input"><input type="text" id="exp'+experienceNumber+'-name" class="name" placeholder="Experience '+ LetterArray[experienceNumber-1]+'"></div></td><td><div class="ui input"><input type="text" id="exp'+experienceNumber+'-visitors"  class="visitors" placeholder="Visitors"></div></td><td><div class="ui input"><input type="text" id="exp'+experienceNumber+'-forms" class="forms" placeholder="Forms"></div></td><td><div class="ui input"><input type="text" id="exp'+experienceNumber+'-calls" class="calls" placeholder="Calls"></div></td><td ><div class="total"></div></td></tr>');
+            $("#myTable tr:last").after('<tr id = "metrics'+experienceNumber+'" class="exp'+experienceNumber+' metrics lastRow"><td><div class="ui input"><input type="text" id="exp2-name" class="name" placeholder="Experience '+ LetterArray[experienceNumber-1]+'"></div></td><td><div class="ui input"><input type="text" id="exp2-visitors"  class="visitors" placeholder="Visitors"></div></td><td><div class="ui input"><input type="text" id="exp2-forms" class="forms" placeholder="Forms"></div></td><td><div class="ui input"><input type="text" id="exp2-calls" class="calls" placeholder="Calls"></div></td><td ><div class="total"></div></td></tr>');
             //Added ID to <br> tag (I know...) so that I could place additional picture fields before the 'Calculate' button
                 //Includes a class of 'lastRow' so it can easily be targeted
             $("#addPics").before('<h4 class="ui header lastRow" style="display:inline-block; margin-right:25px;"><div class="ui input"><input type="text" id="pic'+experienceNumber+'" placeholder="Experience '+LetterArray[experienceNumber-1]+' Image"></div></h4>');
@@ -465,38 +294,6 @@ var experienceNumber = 2;
             $('#resetExperiece').attr("style","display:inline-block");
     });
 
-
-
-
-//Populate Open Fields
-    for(h=2;h<fillExperienceNum;h++){
-    $( "#AddExperience" ).click ();
-    }
-
-
-    for(n=0;n<fillExperienceNum+1;n++){
-        var nameFieldFill = "#exp"+(n+1)+"-name"
-        $(nameFieldFill).attr("value",fillNames[n]);
-    }
-
-    for(n=2;n<fillExperienceNum+1;n++){
-        var nameFieldFill = "#exp"+(n+1)+"-visitors"
-        $(nameFieldFill).attr("value",fillVisitors[n]);
-    }
-    for(n=2;n<fillExperienceNum+1;n++){
-        var nameFieldFill = "#exp"+(n+1)+"-calls"
-        $(nameFieldFill).attr("value",fillCalls[n]);
-    }
-    for(n=2;n<fillExperienceNum+1;n++){
-        var nameFieldFill = "#exp"+(n+1)+"-forms"
-        $(nameFieldFill).attr("value",fillForms[n]);
-    }
-
-        for(n=0;n<fillExperienceNum+1;n++){
-            var nameFieldFill = "#pic"+(n+1)
-            $(nameFieldFill).attr("value",fillPics[n]);
-        }
-
     //Remove Experience Button Click
     $("#removeLastExperiece").on("click", function () {
         //Remove Last Row of Metrics, Totals, Calls, and Forms tables - Will only remove if class of 'lastRow' is present
@@ -510,16 +307,6 @@ var experienceNumber = 2;
             $("#tableForms tr.lastRow:last").remove();
             //Picture Fields
             $("#addPics").prev(".lastRow").remove();
-
-
-            var id_Metrics = $("#myTable tr:last").attr("id");
-            var getID_MetricsNum = id_Metrics.match(/(\d+)/);
-             experienceNumber = parseInt(getID_MetricsNum[1],10);
-
-            if(experienceNumber<=3){
-                $('#removeLastExperiece').hide();
-                $('#resetExperiece').hide();
-            };
     });
 
     //Reset Button Click
@@ -535,30 +322,13 @@ var experienceNumber = 2;
 <script type="text/javascript">
 //Teporary Story responseRateObj globally for QA purposes
     var calculationsObj = [];
-    var calls = [];
-    var forms = [];
-    var visitors = [];
-    var metrics = [];
-    var names = [];
-    var testTitle = "Test Results";
-
-   // var winnerTest;
-
-$('#calculate').on('click' , function () {
-    calls = [];
-    forms = [];
-    visitors = [];
-    metrics = [];
-    names= [];
-
-    $("tr").css("color","rgba(0, 0, 0, 0.8)");
-    $(".ci").css("color","rgba(0, 0, 0, 0.8)");
+$('#MetricsLoop').on('click' , function () {
 
     //Pre Calculations - Get all data accessible
      
     // get each experience, put in an array.
     var allMetrics = document.getElementsByClassName('metrics');
-
+    var metrics = [];
 
     for (var j = 0; j < allMetrics.length; j++) {
         //from each experience, get the elements with an tag name of input
@@ -624,6 +394,10 @@ $('#calculate').on('click' , function () {
         }
         return standerr * perctl;
     }
+    function ciDisplay(input){
+    var ci = input * 100;
+    return "<div class='ci'>&plusmn"+ci.toFixed(2)+"%</div>";
+    }
 
     function lift (rrControl,rr2){
     var num1_TR = ((rr2 - rrControl) / rrControl);
@@ -679,22 +453,20 @@ $('#calculate').on('click' , function () {
     var percentile = percentilSTN || 2;
 
     //Experiment Title
-    testTitle = $("#test_title").val() || "Test Results";
+    var testTitle = $("#test_title").val() || "Test Results";
+
+    //Populate Names 
+    for (var NAMEi = 1; NAMEi <= experienceNumber; NAMEi++){
+        $(".exp"+NAMEi+" .experience").html(metrics[NAMEi-1].name);
+    }
 
     //////Create Calculations and Range Objects 
     calculationsObj = [];
-    var leadTypes = ["forms","calls","total","f","c","t"];
-    var calcTypes = ["rr","ci","lift","min","max","conf","liftMax","liftMin"];
-
+    var leadTypes = ["forms","calls","total"];
     for(var calculations_i = 1; calculations_i <= experienceNumber; calculations_i++){
         var tempObj2 = {forms:{},calls:{},total:{}};
         calculationsObj.push(tempObj2);
-
-    calls.push(metrics[calculations_i-1].calls);
-    forms.push(metrics[calculations_i-1].forms);
-    visitors.push(metrics[calculations_i-1].visitors);
-    names.push(metrics[calculations_i-1].name);
-
+     
     }
     for (var calcValue_i = 1; calcValue_i<=experienceNumber; calcValue_i++){
 
@@ -706,197 +478,169 @@ $('#calculate').on('click' , function () {
            calculationsObj[calcValue_i-1][leadObject]["ci"]  = confInt(se(metrics[calcValue_i-1][leadObject], metrics[calcValue_i-1].visitors), percentile);
 
         }
+   /* calculationsObj[calcValue_i-1].forms.rr = responseRate(metrics[calcValue_i-1].visitors,metrics[calcValue_i-1].forms);
+    calculationsObj[calcValue_i-1].calls.rr = responseRate(metrics[calcValue_i-1].visitors,metrics[calcValue_i-1].calls);
+    calculationsObj[calcValue_i-1].total.rr = responseRate(metrics[calcValue_i-1].visitors,metrics[calcValue_i-1].total);
+    */
+        //Confidence Intervals
+   /* calculationsObj[calcValue_i-1].forms.ci = confInt(se(metrics[calcValue_i-1].forms, metrics[calcValue_i-1].visitors), percentile);
+    calculationsObj[calcValue_i-1].calls.ci = confInt(se(metrics[calcValue_i-1].calls, metrics[calcValue_i-1].visitors), percentile);
+    calculationsObj[calcValue_i-1].total.ci = confInt(se(metrics[calcValue_i-1].total, metrics[calcValue_i-1].visitors), percentile);
+
+        */
     }
 
     for (var rangeValue_i = 1; rangeValue_i<=experienceNumber; rangeValue_i++){
-        for (var leadTypesR_i =0; leadTypesR_i <3; leadTypesR_i++ ){
-            var leadObject = leadTypes[leadTypesR_i];
-            //lift
-            calculationsObj[rangeValue_i-1][leadObject]["lift"] = lift(calculationsObj[0][leadObject]["rr"],calculationsObj[rangeValue_i-1][leadObject]["rr"]);
-            //min
-            calculationsObj[rangeValue_i-1][leadObject]["min"] = calculationsObj[rangeValue_i-1][leadObject]["rr"] - calculationsObj[rangeValue_i-1][leadObject]["ci"];
-            //max
-            calculationsObj[rangeValue_i-1][leadObject]["max"] = calculationsObj[rangeValue_i-1][leadObject]["rr"] + calculationsObj[rangeValue_i-1][leadObject]["ci"];
-            //conf
-            calculationsObj[rangeValue_i-1][leadObject]["conf"] = cumnormdist(zscore(calculationsObj[rangeValue_i-1][leadObject]["rr"],metrics[rangeValue_i-1].visitors,calculationsObj[0][leadObject]["rr"],metrics[0].visitors));
-        }
-
+        //lift
+        calculationsObj[rangeValue_i-1].forms.lift = lift(calculationsObj[0].forms.rr,calculationsObj[rangeValue_i-1].forms.rr)
+        calculationsObj[rangeValue_i-1].calls.lift = lift(calculationsObj[0].calls.rr,calculationsObj[rangeValue_i-1].calls.rr)
+        calculationsObj[rangeValue_i-1].total.lift = lift(calculationsObj[0].total.rr,calculationsObj[rangeValue_i-1].total.rr)
+        //min
+        calculationsObj[rangeValue_i-1].forms.min = calculationsObj[rangeValue_i-1].forms.rr - calculationsObj[rangeValue_i-1].forms.ci;
+        calculationsObj[rangeValue_i-1].calls.min = calculationsObj[rangeValue_i-1].calls.rr - calculationsObj[rangeValue_i-1].calls.ci;
+        calculationsObj[rangeValue_i-1].total.min = calculationsObj[rangeValue_i-1].total.rr - calculationsObj[rangeValue_i-1].total.ci;
+        //max
+        calculationsObj[rangeValue_i-1].forms.max = calculationsObj[rangeValue_i-1].forms.rr + calculationsObj[rangeValue_i-1].forms.ci;
+        calculationsObj[rangeValue_i-1].calls.max = calculationsObj[rangeValue_i-1].calls.rr + calculationsObj[rangeValue_i-1].calls.ci;
+        calculationsObj[rangeValue_i-1].total.max = calculationsObj[rangeValue_i-1].total.rr + calculationsObj[rangeValue_i-1].total.ci;
+        //conf
+        calculationsObj[rangeValue_i-1].forms.conf = cumnormdist(zscore(calculationsObj[rangeValue_i-1].forms.rr,metrics[rangeValue_i-1].visitors,calculationsObj[0].forms.rr,metrics[0].visitors));
+        calculationsObj[rangeValue_i-1].calls.conf = cumnormdist(zscore(calculationsObj[rangeValue_i-1].calls.rr,metrics[rangeValue_i-1].visitors,calculationsObj[0].calls.rr,metrics[0].visitors));
+        calculationsObj[rangeValue_i-1].total.conf = cumnormdist(zscore(calculationsObj[rangeValue_i-1].total.rr,metrics[rangeValue_i-1].visitors,calculationsObj[0].total.rr,metrics[0].visitors));
     }
     for (var final_i = 1; final_i<=experienceNumber; final_i++){
-        for (var leadTypesF_i =0; leadTypesF_i <3; leadTypesF_i++ ){
-        var leadObject = leadTypes[leadTypesF_i];
         //min Lift
-        calculationsObj[final_i-1][leadObject]["liftMin"] = lift(calculationsObj[0][leadObject]["max"],calculationsObj[final_i-1][leadObject]["min"]);
+        calculationsObj[final_i-1].forms.liftMin = lift(calculationsObj[0].forms.max,calculationsObj[final_i-1].forms.min);
+        calculationsObj[final_i-1].calls.liftMin = lift(calculationsObj[0].calls.max,calculationsObj[final_i-1].calls.min);
+        calculationsObj[final_i-1].total.liftMin = lift(calculationsObj[0].total.max,calculationsObj[final_i-1].total.min);
         //max Lift
-        calculationsObj[final_i-1][leadObject]["liftMax"] = lift(calculationsObj[0][leadObject]["min"],calculationsObj[final_i-1][leadObject]["max"]);
-        }
+        calculationsObj[final_i-1].forms.liftMax = lift(calculationsObj[0].forms.min,calculationsObj[final_i-1].forms.max);
+         calculationsObj[final_i-1].calls.liftMax = lift(calculationsObj[0].calls.min,calculationsObj[final_i-1].calls.max);
+          calculationsObj[final_i-1].total.liftMax = lift(calculationsObj[0].total.min,calculationsObj[final_i-1].total.max);
     }
 
-    $("i").show();
-    //Populate Results Table
-    for (var popRR_i = 1; popRR_i <= experienceNumber; popRR_i++){
-        //Populate Experience Column
-        var nameHTML = metrics[popRR_i-1].name || "Test"+popRR_i;
-        $(".exp"+popRR_i+" .experience").html(nameHTML);
-        //Populate RR, Lift, and Confidence Columns
-        for (var popRR_ii = 0; popRR_ii <= 2; popRR_ii++){
-            var rrCSSID2 = leadTypes[popRR_ii+3]+"RR";
-            var rrCSSID = "#"+leadTypes[popRR_ii]+popRR_i+" div."+rrCSSID2;
-            var rrHTML = toPercent(calculationsObj[popRR_i-1][leadTypes[popRR_ii]]["rr"],2)+"<div class='ci'>&plusmn;"+toPercent(calculationsObj[popRR_i-1][leadTypes[popRR_ii]]["ci"],2)+"</div>"
+});
+</script>
 
-            var liftCSSID2 = leadTypes[popRR_ii+3]+"Lift";
-            var liftCSSID = "#"+leadTypes[popRR_ii]+popRR_i+" div."+liftCSSID2;
-            var liftHTML = toPercent( calculationsObj[popRR_i-1][leadTypes[popRR_ii]]["lift"],2 ) +"<div class='ci'>&nbsp;("+ toPercent(calculationsObj[popRR_i-1][leadTypes[popRR_ii]]["liftMin"],1)+" to "+toPercent(calculationsObj[popRR_i-1][leadTypes[popRR_ii]]["liftMax"],1) +")</div>";
+<script>
 
-            var confCSSID2 = leadTypes[popRR_ii+3]+"Conf";
-            var confCSSID = "#"+leadTypes[popRR_ii]+popRR_i+" div."+confCSSID2;
-            var confindenceDecimal = calculationsObj[popRR_i-1][leadTypes[popRR_ii]]["conf"];
-
-            var confHTML = toPercent(confindenceDecimal,1 );
+//Get Param Function
+    function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 
 
-            $(rrCSSID).html(rrHTML);
-            $(liftCSSID).html(liftHTML);
-            $(confCSSID).html(confHTML);
+    //Capture Images
+    var pic1 = $("#pic1").val();
+    var pic2 = $("#pic2").val();
 
-            var iconCSSID = ".exp"+popRR_i+" i#"+leadTypes[popRR_ii+3]+"Conf-";
-            var iconCSSID2="att";
-            var iconCSSID3="check";
-            if (confindenceDecimal >0.95){
-                iconCSSID2 = "att";
-                iconCSSID3 =iconCSSID+iconCSSID2;
-                $(iconCSSID3).hide();
-
-            }else if (confindenceDecimal<0.90){
-                iconCSSID2 = "check";
-                iconCSSID3 =iconCSSID+iconCSSID2;
-                $(iconCSSID3).hide();
-            }else {
-                var iconNone1 =iconCSSID+iconCSSID2;
-                var iconNone2 = iconCSSID+iconCSSID3;
-                $(iconNone1).hide();
-                $(iconNone2).hide();
-
-            };
-
-        }
-
-    }
-    var picID ="";
-    var picNumber ="";
-    var picArr = [];
-    for(var PICi = 1; PICi<=experienceNumber; PICi++){
-        picID = "#pic"+PICi;
-
-        picNumber = $(picID).val();
-        picArr.push(picNumber);
-
-    }
-
-        //Populate URL
+    //Populate URL
     var daysInTest = $("#daysInTest").val() || 14;
     var date = new Date();
     var embeddURL = 
-    "?title="+ encodeURIComponent(testTitle)+
-    "&names=" + encodeURIComponent(names) + 
-    "&expnum=" + experienceNumber + 
-    "&forms=" + forms + 
-    "&calls=" + calls +
-    "&visit=" + visitors +
+    "/testing-results/embedd/1/?title="+ encodeURIComponent(testTitle)+
+    "&name1=" + encodeURIComponent(exp1Name) + 
+    "&name2=" + encodeURIComponent(exp2Name) + 
+    "&visit1=" + exp1Visitors +
+    "&visit2=" + exp2Visitors +
+    "&form1=" + exp1Forms +
+    "&form2=" + exp2Forms +
+    "&call1=" + exp1Calls +
+    "&call2=" + exp2Calls +
     "&days="  + daysInTest +
-    "&pic="  + encodeURIComponent(picArr) +
-   // "&pic2="  + encodeURIComponent(pic2) +
+    "&pic1="  + encodeURIComponent(pic1) +
+    "&pic2="  + encodeURIComponent(pic2) +
     "&confint=" + percentile +
-    //"&instrev=" + installRev +
-    //"&formcr=" + formCloseRate * 100 +
-    //"&callcr=" + callCloseRate *100 +
+    "&instrev=" + installRev +
+    "&formcr=" + formCloseRate * 100 +
+    "&callcr=" + callCloseRate *100 +
      "&date="+encodeURIComponent(date.toLocaleString());
     $("a").attr("href",embeddURL);
     $("#linksy").show();
 
+    var fConfidence = cumnormdist(zscore(exp2fRR,exp2Visitors,exp1fRR,exp1Visitors));
+    var cConfidence = cumnormdist(zscore(exp2cRR,exp2Visitors,exp1cRR,exp1Visitors));
+    var tConfidence = cumnormdist(zscore(exp2tRR,exp2Visitors,exp1tRR,exp1Visitors));
 
-    // document.location.replace(embeddURL);
+    if(fConfidence >= 0.95) {
+     $("#fConf-check").show();
+     $("#fConf-att").hide();
 
-    $("#embedURL").attr("value",document.location.origin + document.location.pathname +"embedd/"+ embeddURL);
-    $("#shareable").attr("href",document.location.origin + document.location.pathname +"embedd/"+ embeddURL)
+    } else if (fConfidence <=0.85) {
+         $("#fConf-check").hide();
+        $("#fConf-att").show();
 
-    //Identify and Highlight Winners
-    function maxArr(arr,stringName) {
-    var max = arr[0];
-    var maxIndex = 0;
-    for (var i = 1; i < arr.length; i++) {
-        if (arr[i] > max) {
-            maxIndex = i;
-            max = arr[i];
-        }
+    } else {
+     $("#fConf-check").hide();
+     $("#fConf-att").hide();
+
+    };
+
+    if(cConfidence >= 0.95) {
+     $("#cConf-check").show();
+     $("#cConf-att").hide();
+
+    } else if (cConfidence <=0.85) {
+         $("#cConf-check").hide();
+        $("#cConf-att").show();
+
+    } else {
+     $("#cConf-check").hide();
+     $("#cConf-att").hide();
+
+    };
+
+    if(tConfidence >= 0.95) {
+     $("#tConf-check").show();
+     $("#tConf-att").hide();
+
+    } else if (tConfidence <=0.85) {
+         $("#tConf-check").hide();
+        $("#tConf-att").show();
+    } else {
+     $("#tConf-check").hide();
+     $("#tConf-att").hide();
+    };
+
+    if (!(percentile >= 0)){
+    $(".ui.selection.dropdown").addClass("error");
+    }else{
+    $(".ui.selection.dropdown").removeClass("error");
     }
-    return "#"+stringName + (maxIndex + 1);
-    }
-
-    function maxArrIndex(arr) {
-    var max = arr[0];
-    var maxIndex = 0;
-    for (var i = 1; i < arr.length; i++) {
-        if (arr[i] > max) {
-            maxIndex = i;
-            max = arr[i];
-        }
-    }
-    return maxIndex;
-    }
 
 
-    var formsResponseArr = [];
-    var callsResponseArr = [];
-    var totalResponseArr = [];
-    for (var q = 0; q < calculationsObj.length; q++){
-        formsResponseArr.push(calculationsObj[q].forms.rr);
-        callsResponseArr.push(calculationsObj[q].calls.rr);
-        totalResponseArr.push(calculationsObj[q].total.rr);
-    }
-    var formWinner = maxArr(formsResponseArr,"forms");
-    var callWinner = maxArr(callsResponseArr,"calls");
-    var totalWinner = maxArr(totalResponseArr,"total");
-    var totalWinnerIndex = maxArrIndex(totalResponseArr);
+    $("div.ui.backSection").css("display","inline-block");
+    $(".highchartsDisplay").css("display","inline-block");
 
-    //
-    $(formWinner+" > td:nth-child(1) > div").prepend("<i class='trophy small icon' style='color:#666666'></i>");
-    $(callWinner+" > td:nth-child(1) > div").prepend("<i class='trophy small icon' style='color:#666666'></i>");
-    $(totalWinner+" > td:nth-child(1) > div").prepend("<i class='trophy small icon' style='color:#666666'></i>");
-    //
-    $(formWinner).css("background-color","#d9f5ff");
-    $(callWinner).css("background-color","#d9f5ff");
-    $(totalWinner).css("background-color","#d9f5ff");
-    //
-    // $(formWinner+" > td:nth-child(3) > div > div").css("color","#ff8200");
-    // $(callWinner+" > td:nth-child(3) > div > div").css("color","#ff8200");
-    // $(totalWinner+" > td:nth-child(3) > div > div").css("color","#ff8200");
-    // //
-    // $(formWinner+"> td:nth-child(2) > div > div").css("color","#ff8200");
-    // $(callWinner+"> td:nth-child(2) > div > div").css("color","#ff8200");
-    // $(totalWinner+"> td:nth-child(2) > div > div").css("color","#ff8200");
 
-        //*********************************
-        var controlLeads = metrics[0].total;
-        var Temp_daysInTest = $("#daysInTest").val();
-        var monthlyEstimate = (controlLeads / Temp_daysInTest) * 7 * 4.5;
-        var Temp_exp2RRMin = 0.278952;
-        var Temp_ctlRRMin = 0.216493;
-        var Temp_exp2RRMax = 0.323952;
-        var ctlRRMax = 0.262893;
+    var visitsInTest = parseInt($("#exp1-visitors").val()) + parseInt($("#exp2-visitors").val()) || 2000;
+    var monthlyEstimate = (visitsInTest / daysInTest) * 7 * 4.33333334;
+    var test1Min = exp2Min_t;
+    var ctl1Min = exp1Min_t;
+    var test1Max = exp2Max_t;
+    var ctlRRMax = exp1Max_t;
 
-        var Temp_min = (1+calculationsObj[totalWinnerIndex].total.liftMin) * monthlyEstimate;
-        var Temp_max = (1+calculationsObj[totalWinnerIndex].total.liftMax) * monthlyEstimate;
 
-        var Temp_cumMonLead = [];
-        for(var vip = 1; vip<=6; vip++){
-            Temp_cumMonLead.push([Temp_min.toFixed(0)*(vip),Temp_max.toFixed(0)*(vip)]);
-        }
+    var minMaxArr = [Math.round((test1Min * monthlyEstimate) - (ctlRRMax * monthlyEstimate)),Math.round((test1Max * monthlyEstimate) - (ctl1Min * monthlyEstimate))];
 
-    var Temp_winningTest = "<em>"+metrics[totalWinnerIndex].name+"</em>";
-    var Temp_today = new Date();
-    var Temp_currentMonth = Temp_today.getMonth();
-    var Temp_currentYear = parseInt(Temp_today.getFullYear().toString().substring(2));
+    var cumMonLead =[
+        [minMaxArr[0]*(1),minMaxArr[1]*(1)],
+        [minMaxArr[0]*(2),minMaxArr[1]*(2)],
+        [minMaxArr[0]*(3),minMaxArr[1]*(3)],
+        [minMaxArr[0]*(4),minMaxArr[1]*(4)],
+        [minMaxArr[0]*(5),minMaxArr[1]*(5)],
+        [minMaxArr[0]*(6),minMaxArr[1]*(6)]
+    ];
+    
+
+    //*********************************
+    var winningTest = "<em>"+exp2Name+"</em>";
+    var today = new Date();
+    var currentMonth = today.getMonth();
+    var currentYear = parseInt(today.getFullYear().toString().substring(2));
 
 
     function monthStr(month, addition) {
@@ -904,17 +648,21 @@ $('#calculate').on('click' , function () {
         var addMonth = month + addition;
         var monthadj = addMonth - 12;
         if (addMonth > 11) {
-            return montharr[monthadj]+" '"+(Temp_currentYear+1);
+            return montharr[monthadj]+" '"+(currentYear+1);
         } else {
-            return montharr[addMonth]+" '"+(Temp_currentYear+0);
+            return montharr[addMonth]+" '"+(currentYear+0);
         }
     }
 
-    var Temp_nextSixMonths = [];
+    var nextSixMonths = [];
 
     for (i = 1; i < 7; i++) {
-        Temp_nextSixMonths.push( monthStr(Temp_currentMonth, i));
-    }
+        nextSixMonths.push( monthStr(currentMonth, i));
+    };
+
+    /**************************************************
+    ***************************************************
+    ***************************************************/
 
     $(function () {
 
@@ -923,31 +671,40 @@ $('#calculate').on('click' , function () {
             chart: {
                 type: 'columnrange',
                 inverted: false,
-                 style: {
+                  style: {
                 fontFamily: 'Arial, Helvetica, sans-serif'
+
             }
             },
 
             title: {
-                text: '<strong>Monthly Lead Increase (Range)</strong>',
-                 style: {
-                fontFamily: 'Arial, Helvetica, sans-serif',
-                color: "#808080"
-            }
+                text: '<strong>Monthly Lead Increase (Range)</strong>'
             },
 
             subtitle: {
-                text: 'Exp: '+Temp_winningTest
+                text: 'Experience: '+winningTest
             },
 
             xAxis: {
-                categories: Temp_nextSixMonths
+                categories: nextSixMonths
+                
             },
 
             yAxis: {
                 title: {
-                    text: 'Additional Leads'
-                }
+                   text: 'Additional Leads'
+                },
+                gridLineWidth: 1,
+                tickLength: 8,
+            tickWidth: 1,
+            tickPosition: 'outside',
+             /*plotLines : [{
+                        value : -13,
+                        color : 'red',
+                        dashStyle : 'shortdash',
+                        width : 1,
+                        
+                    }]*/
             },
 
             tooltip: {
@@ -971,118 +728,106 @@ $('#calculate').on('click' , function () {
 
             series: [{
                 name: 'Leads',
-                data: Temp_cumMonLead,
-                color:"#6ECFF5"
+                data: cumMonLead,
+                color:"#A1CF64"
             }]
 
         });
 
     });
+    var TRtest1Calls = parseInt(exp1Calls);
+    var TRtest2Calls = parseInt(exp2Calls);
+    var TRtest1Forms = parseInt(exp1Forms);
+    var TRtest2Forms = parseInt(exp2Forms);
+    $(function () {
+        $('#containerRatio').highcharts({
+            chart: {
+                type: 'column',
+                inverted: true,
+                style:{
+                    fontFamily:'Arial, Helvetica, sans-serif'
 
-var Temp_winningForms = metrics[totalWinnerIndex].forms;
-var Temp_winningCalls = metrics[totalWinnerIndex].calls;
-var Temp_controlForms =metrics[0].forms;
-var Temp_controlCalls =metrics[0].calls;
-var Temp_callRatio = (Temp_winningCalls/(Temp_winningCalls+Temp_winningForms))*100;
-	
-$(function () {
-    $('#containerRatio').highcharts({
-        chart: {
-            type: 'bar'
+                }
+            },
+            legend:'none',
+            title: {text:"<strong>Calls vs. Forms (% Total)</strong>"},
+            xAxis: {
+                categories: [exp1Name, exp2Name],
+                tickLength:0
+            },
+            yAxis: {
+                min: 0,
+                title: 'none'
+            },
+            tooltip: {
+                pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+                shared: true
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'percent',
 
-        },
-        legend: {
-            itemStyle: {
-                color: '#808080'
-            }
-        },
-        title: {
-            text: '<strong>Percent Calls </strong>('+Temp_callRatio.toFixed(0)+"%)",
-            style: {
-                fontFamily: 'Arial, Helvetica, sans-serif',
-                color: '#808080'
-
-            }
-        },
-        xAxis: {
-            categories: ['Control', '<strong>Top Exp.</strong>']
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: 'Percent of Leads'
-            }
-        },
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
-            shared: true
-        },
-        plotOptions: {
-            bar: {
-                stacking: 'percent'
-            }
-        },
-        series: [{
-            name: 'Calls',
-            data: [Temp_controlCalls, Temp_winningCalls],
-            color:'#6ECFF5',
-            index:1,
-            legendIndex:0
-        }, {
-            name: 'Forms',
-            data: [Temp_controlForms, Temp_winningForms],
-            color:'#bccdd6',
-            index:0,
-            legendIndex:1
-        }]
+                }
+            },
+            series: [{
+                name: 'Forms',
+                data: [TRtest1Forms, TRtest2Forms],
+                
+                color:'#F05940'
+            }, {
+                name: 'Calls',
+                data: [TRtest1Calls, TRtest2Calls],
+                color:'#6ECFF5'
+            }]
+        });
     });
-});
-    $("#highcharts-0 > svg > text:nth-child(15)").hide();
 
-    $("#highcharts-2 > svg > text:nth-child(14)").hide();
-    $("div.ui.backSection").css("display","inline-block");
-    $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+var minaddRev = Math.round( 
+    (
+      (installRev*formCloseRate*monthlyEstimate*exp2Min)+(installRev*callCloseRate*monthlyEstimate*exp2Min_c)//Minimum Experience 2 Rev
+    ) - (
+      (installRev*formCloseRate*monthlyEstimate*exp1Max)+(installRev*callCloseRate*monthlyEstimate*exp1Max_c)//Minus Maximum Experience 1 Rev
+        ) 
+    );
 
-});
-</script>
+var maxaddRev = Math.round(
+    (
+        (installRev*formCloseRate*monthlyEstimate*exp2Max)+(installRev*callCloseRate*monthlyEstimate*exp2Max_c)//Maximum Experience 2 Rev
+    ) - (
+        (installRev*formCloseRate*monthlyEstimate*exp1Min)+(installRev*callCloseRate*monthlyEstimate*exp1Min_c)//Minus Minimum Experience 1 Rev
+        )
+    );
+var revSymbol1 = "";
+var revSymbol2 = "";
 
-<script>
+if (minaddRev<0) {
+   revSymbol1 = "-$";
+}else{
+    revSymbol1="$";
+};
 
+if (maxaddRev<0) {
+   revSymbol2 = "-$";
+}else{
+    revSymbol2="$";
+};
 
-$("#test_title").attr("value",getParameterByName("title"));
+    $("#addRev").html(
+        revSymbol1+Math.abs(minaddRev).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+" <span style='font-size:28px;'>to</span> "+
+        revSymbol2+Math.abs(maxaddRev).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+            );
 
-$("#exp1-name").attr("value",fillNames[0]);
-$("#exp2-name").attr("value",fillNames[1]);
+    $( document ).ready(function() {
+        $( "text:contains('Highcharts.com')" ).hide();
+    });
 
-$("#exp1-visitors").attr("value",fillVisitors[0]);
-$("#exp2-visitors").attr("value",fillVisitors[1]);
-
-$("#exp1-forms").attr("value",fillForms[0]);
-$("#exp2-forms").attr("value",fillForms[1]);
-
-$("#exp1-calls").attr("value",fillCalls[0]);
-$("#exp2-calls").attr("value",fillCalls[1]);
-
-$("#daysInTest").attr("value",getParameterByName("days"));
-
-// $("#pic1").attr("value",getParameterByName("pic1"));
-// $("#pic2").attr("value",getParameterByName("pic2"));
-
-    //Capture Images
-    var pic1 = $("#pic1").val();
-    var pic2 = $("#pic2").val();
-
-    //Populate URL
-    var daysInTest = $("#daysInTest").val() || 14;
-
-
-    
-   // $(".highchartsDisplay").css("display","inline-block");
-
-
-    
-
-
+    $('.ui')
+  .popup({
+    position: 'left center',
+    delay:0
+  });
+$("#result").show();
+$("html, body").animate({ scrollTop: $(document).height() }, "slow");
 
 
 </script>
