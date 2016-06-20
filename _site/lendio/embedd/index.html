@@ -854,7 +854,7 @@ $(function () {
 
             tooltip: {
                 formatter: function () {
-                    return '<b>' + this.series.name + ', age ' + this.point.category + '</b><br/>' +
+                    return '<b>' + this.series.name + this.point.category + '</b><br/>' +
                         'Percent Completion: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1) + '%';
                 }
             },
