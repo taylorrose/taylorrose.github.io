@@ -5,30 +5,26 @@
 	<title>Body Movin</title>
 	<script src="/bodymovin-master/build/player/bodymovin.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,700">
 	<style>
 		body, html{
 		  margin:0;
 		  width:100%;
 		  height:100%;
-		  background-color:#EEE;
 		  overflow: hidden;
-		
-		    background: red; /* For browsers that do not support gradients */    
-		    background: -webkit-linear-gradient(top left, #777, #444);
-		    background: -o-linear-gradient(top left, #777, #444);
-		    background: linear-gradient(to bottom right, #777, #444); /* For Safari 5.1 to 6.0 */ /* For Opera 11.1 to 12.0 */ /* For Firefox 3.6 to 15 */ /* Standard syntax (must be last) */
-		}
-		#container{
-		  width: 100%;
-		  height:100%;
-		  overflow: hidden;
+		  background: #444; /* For browsers that do not support gradients */    
+		  background: -webkit-linear-gradient(top left, #777, #444);
+		  background: -o-linear-gradient(top left, #777, #444);
+		  background: linear-gradient(to bottom right, #777, #444); /* For Safari 5.1 to 6.0 */ /* For Opera 11.1 to 12.0 */ /* For Firefox 3.6 to 15 */ /* Standard syntax (must be last) */
 		}
 		div{
-		  font-size:0px;
+		font-family: 'Raleway', sans-serif;
+		font-size:42px;
 		}
 	</style>
 </head>
 <body>
+	<div>Rapid Creation</div>
 	<div id='container'></div>
 </body>
 <script>
@@ -39,8 +35,7 @@
         autoplay: true,
         path: '/bodymovin-master/data.json'
     };
-    var anim = bodymovin.loadAnimation(animData);;
-window.onresize = anim.resize.bind(anim);
+    bodymovin.loadAnimation(animData);;
 
 
 </script>
