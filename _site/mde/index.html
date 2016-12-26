@@ -14,6 +14,9 @@
   <!--<link rel="stylesheet" type="text/css" class="ui" href="/Semantic-UI-2/dist/semantic.css">
   <script src="/Semantic-UI-2/dist/semantic.js"></script>!-->
 <style>
+body{
+    min-width:770px;
+}
 	div{
 		display:inline;
 	}
@@ -22,9 +25,13 @@
 	}
 
 	.big_blue{
-				font-size:40px;
-		color:#6ECFF5;
-		display: none;
+			font-size:40px;
+            color:#6ECFF5;
+            width: 700px;
+            margin: auto;
+            display: none;
+            
+
 	}
 
 #fthis {
@@ -202,7 +209,7 @@ $("#mde_result").html((min_effect*100).toFixed(1));
 $("#visitors").html(n.toFixed(0));
 $("#new_MDE").html(two_week_visitors);
 $("#new_Sample").html((conversion_rate*100).toFixed(1));
-$(".big_blue").show();
+$(".big_blue").css("display","block");
 		
 	});
 </script>
